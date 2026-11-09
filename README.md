@@ -1,4 +1,4 @@
-# Boom Closet — Golden Soul Circus
+# Boomcloset — Golden Soul Circus
 
 Public site for Golden Soul Circus, Nashville.
 
