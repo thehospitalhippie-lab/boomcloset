@@ -184,7 +184,7 @@
   }
   .act-gift b{font-family:'IBM Plex Mono', monospace; font-size:.68rem; font-weight:500; letter-spacing:.1em; color:var(--text-soft); margin-right:4px;}
   .act-body{max-height:0; overflow:hidden; visibility:hidden; transition:max-height .35s ease, visibility 0s linear .35s;}
-  .act-card.open .act-body{max-height:420px; visibility:visible; transition:max-height .35s ease, visibility 0s;}
+  .act-card.open .act-body{max-height:640px; visibility:visible; transition:max-height .35s ease, visibility 0s;}
   .act-body-inner{padding-top:12px; font-size:.95rem; line-height:1.58; color:var(--text-soft);}
 
   /* ---------- quote band ---------- */
@@ -331,7 +331,7 @@
 
 <div class="stripe" aria-hidden="true"></div>
 <nav class="site-nav" aria-label="Main">
-  <a class="mark" href="#pitch" aria-label="Golden Soul Circus, back to top">
+  <a class="mark" href="../" aria-label="Golden Soul Circus home">
     <span class="dots" aria-hidden="true"><i style="background:var(--amber)"></i><i style="background:var(--brick)"></i><i style="background:var(--blue)"></i></span>
     <span class="long" aria-hidden="true">GOLDEN SOUL CIRCUS</span><span class="short" aria-hidden="true">GSC</span>
   </a>
@@ -401,7 +401,7 @@
       <p class="act-gift"><b>THE GIFT</b> Being truly seen, before it's too late to receive it.</p>
       <div class="act-body" id="act-1-body"><div class="act-body-inner">
         "Give Your Flowers While You Live." Go around the room. Share an intrinsic quality you might not feel free to say while they're still "in the room."
-      </div></div>
+      <div class="act-funnel"><a class="btn" href="#book">Book a Mock (ur) Funeral</a><button type="button" class="btn ghost js-close-act">Close &times;</button></div></div></div>
     </div>
 
     <div class="act-card" style="--accent:var(--brick); --on-accent:#fff; --tint:rgba(208,0,0,.08);">
@@ -411,7 +411,7 @@
       <p class="act-gift"><b>THE GIFT</b> Being challenged by people who love you enough to bother.</p>
       <div class="act-body" id="act-2-body"><div class="act-body-inner">
         "Hold Cold Feet to the Fire" (bless your heart — forget the rest). Accountability-buddies hold space for the honest, loving challenge.
-      </div></div>
+      <div class="act-funnel"><a class="btn" href="#book">Book a Mock (ur) Funeral</a><button type="button" class="btn ghost js-close-act">Close &times;</button></div></div></div>
     </div>
 
     <div class="act-card" style="--accent:var(--blue); --on-accent:var(--navy); --tint:rgba(67,146,241,.14);">
@@ -421,7 +421,7 @@
       <p class="act-gift"><b>THE GIFT</b> Saying the unsayable, while there's still time.</p>
       <div class="act-body" id="act-3-body"><div class="act-body-inner">
         "Rip Sleeves off Grief." Say the last thing, while there's still time. Let your heart break — to save your soul.
-      </div></div>
+      <div class="act-funnel"><a class="btn" href="#book">Book a Mock (ur) Funeral</a><button type="button" class="btn ghost js-close-act">Close &times;</button></div></div></div>
     </div>
   </section>
 
@@ -528,11 +528,11 @@
       </form>
 
       <div class="sent" id="sentPanel">
-        <h3 id="sentTitle" tabindex="-1">Almost there.</h3>
-        <p class="form-note" style="margin:0;">Tap below to send this from your email app to <b>hello@goldensoulcircus.com</b>.</p>
+        <h3 id="sentTitle" tabindex="-1">Sending…</h3>
+<p class="form-note" id="sentNote" style="margin:0;" role="status" aria-live="polite">One moment while we send your request.</p>
         <pre id="sentSummary" aria-label="Your request details"></pre>
         <div class="btn-row">
-          <a class="btn" id="mailLink" href="#">Open in Email</a>
+          <a class="btn" id="mailLink" href="#book" hidden>Try again</a>
           <button type="button" class="btn ghost" id="copyBtn">Copy Details</button>
         </div>
         <p class="copy-status" id="copyStatus" role="status"></p>
@@ -546,21 +546,12 @@
     <p class="eyebrow-label">FOLLOW</p>
     <h2 class="section-title" id="connect-title">Follow the circus</h2>
     <p class="section-sub">Behind-the-scenes, ceremony clips, and the next place we're setting up the tent.</p>
-    <p class="handle-line"><b>@goldensoulcircus</b> everywhere</p>
+    <p class="handle-line"><b>@goldensoulcircus</b> on Instagram</p>
     <ul class="social-grid">
       <li><a class="social-card" href="https://instagram.com/goldensoulcircus" target="_blank" rel="noopener" style="--c:var(--rouge); --on-c:var(--navy);">
         <span class="social-badge" aria-hidden="true">IG</span><span class="platform">Instagram</span><span class="sr-only"> (opens in new tab)</span>
       </a></li>
-      <li><a class="social-card" href="https://facebook.com/goldensoulcircus" target="_blank" rel="noopener" style="--c:var(--blue); --on-c:var(--navy);">
-        <span class="social-badge" aria-hidden="true">FB</span><span class="platform">Facebook</span><span class="sr-only"> (opens in new tab)</span>
-      </a></li>
-      <li><a class="social-card" href="https://tiktok.com/@goldensoulcircus" target="_blank" rel="noopener" style="--c:var(--amber); --on-c:var(--navy);">
-        <span class="social-badge" aria-hidden="true">TT</span><span class="platform">TikTok</span><span class="sr-only"> (opens in new tab)</span>
-      </a></li>
-      <li><a class="social-card" href="https://youtube.com/@goldensoulcircus" target="_blank" rel="noopener" style="--c:var(--text); --on-c:var(--bg);">
-        <span class="social-badge" aria-hidden="true">YT</span><span class="platform">YouTube</span><span class="sr-only"> (opens in new tab)</span>
-      </a></li>
-    </ul>
+      </ul>
   </section>
 
   <!-- ================= GIVE ================= -->
@@ -622,7 +613,7 @@
   const summaryEl = document.getElementById('sentSummary');
   const mailLink = document.getElementById('mailLink');
   const copyStatus = document.getElementById('copyStatus');
-  const TO = 'hello@goldensoulcircus.com';
+  const TO = 'the Golden Soul Circus team';
 
   function clearErrors(){
     [form.name, form.email].forEach(f => { f.removeAttribute('aria-invalid'); f.removeAttribute('aria-describedby'); });
@@ -669,10 +660,21 @@
     const body = lines.join('\n') + (msg ? '\n\n' + msg : '');
     summaryEl.textContent = body;
     const subject = (topic.indexOf('sponsor') > -1 ? 'Sponsoring a family — ' : 'Booking inquiry — ') + name;
-    mailLink.href = 'mailto:' + TO + '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
     copyStatus.textContent = '';
     form.style.display = 'none';
     sentPanel.classList.add('show');
+    document.getElementById('sentTitle').textContent = 'Sending…';
+    document.getElementById('sentNote').textContent = 'One moment while we send your request.';
+    mailLink.hidden = true;
+    const fields = {}; lines.forEach(l => { const k = l.indexOf(': '); if(k > 0) fields[l.slice(0,k)] = l.slice(k+2); });
+    if(msg) fields['Message'] = msg;
+    gscSend(subject, fields, email).then(() => {
+      document.getElementById('sentTitle').textContent = 'Request sent.';
+      document.getElementById('sentNote').textContent = 'It\'s in our inbox. We\'ll reply to ' + email + ' within two days.';
+    }).catch(() => {
+      document.getElementById('sentTitle').textContent = 'Not sent yet.';
+      document.getElementById('sentNote').textContent = 'We couldn\'t send that just now. Check your connection, then tap Edit request and send it again.';
+    });
     document.getElementById('sentTitle').focus();
   });
 
@@ -682,7 +684,7 @@
     const text = 'To: ' + TO + '\n\n' + summaryEl.textContent;
     try{
       await navigator.clipboard.writeText(text);
-      copyStatus.textContent = 'Copied — paste it into an email to ' + TO + '.';
+      copyStatus.textContent = 'Copied.';
     }catch(err){
       copyStatus.textContent = 'Couldn\u2019t copy automatically — press and hold the details above to copy them.';
     }
@@ -738,6 +740,26 @@
   dlg.addEventListener('close', () => { if(opener) opener.focus(); });
 })();
 </script>
+<script>
+/* Golden Soul Circus: send form requests to the team inbox */
+window.GSC_FORM = 'https://formsubmit.co/ajax/2ff9aa39e687d276987638ffab98fb0f';
+window.gscSend = function(subject, data, replyTo){
+  var payload = Object.assign({_subject: subject, _template: 'table', _captcha: 'false'}, data);
+  if(replyTo) payload._replyto = replyTo;
+  return fetch(window.GSC_FORM, {method:'POST', headers:{'Content-Type':'application/json','Accept':'application/json'}, body: JSON.stringify(payload)})
+    .then(function(r){ return r.json().catch(function(){ return {}; }); })
+    .then(function(j){ if(String(j.success) !== 'true') throw new Error(j.message || 'Not sent'); return j; });
+};
+
+document.querySelectorAll('.js-close-act').forEach(function(b){
+  b.addEventListener('click', function(){
+    var tg = b.closest('.act-card').querySelector('.act-toggle');
+    if(tg.getAttribute('aria-expanded') === 'true') tg.click();
+    tg.focus();
+  });
+});
+</script>
+<style>.act-funnel{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}.act-funnel .btn{flex:1 1 180px;justify-content:center}</style>
 </body>
 </html>
 

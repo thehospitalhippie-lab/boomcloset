@@ -1,4 +1,14 @@
-<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style><style>
+.panel-funnel{margin:20px 0 4px;padding:16px;border:2px dashed currentColor;border-radius:14px;display:flex;flex-direction:column;gap:12px}
+.panel-funnel__lead{margin:0;font-weight:600}
+.panel-funnel__actions{display:flex;flex-wrap:wrap;gap:10px}
+.panel-funnel__actions .btn{flex:1 1 200px;text-align:center;justify-content:center}
+.panel-close{align-self:flex-end;min-height:44px;padding:0 14px;border-radius:999px;border:1.5px solid currentColor;background:transparent;color:inherit;font:inherit;font-weight:600;cursor:pointer}
+.panel-close:hover{background:rgba(20,33,61,.08)}
+.request-status{margin:12px 0 0;font-weight:600}
+.request-status.is-sent{color:#1d6b3a}.request-status.is-error{color:#B02E5E}
+</style>
+</head><body>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -947,7 +957,7 @@
       <p class="script">Life gives us grief. We can give grace.</p>
       <p>If you have ever nursed a wound, a loved one, or yourself back to health, you have nursed. Being registered never replaces permission to care.</p>
       <p>We're hospice nurses that left ICU for you. We show you how to celebrate living with Time- not tolerate waiting for Death.</p>
-    </div>
+    <div class="panel-funnel"><p class="panel-funnel__lead">Ready when you are. Start with a free kit, or talk with a nurse.</p><div class="panel-funnel__actions"><button type="button" class="btn btn--primary js-reserve" >Book a session</button><a class="btn btn--outline" href="take-me-seriously-kit/" >Get the free kit</a></div><button type="button" class="panel-close js-close-panel" aria-label="Close this section">Close <span aria-hidden="true">&times;</span></button></div></div>
     <svg class="hero-duo" viewBox="0 0 320 210" fill="none" role="img" aria-label="A smiling Father Time in a party hat waves while holding an hourglass, as a friendly cartoon Death in a hooded cloak offers him a flower.">
       <g transform="translate(320 0) scale(-1 1)">
         <!-- ground -->
@@ -1061,7 +1071,7 @@
       </div>
       <p class="onward"><a href="#mission">Read our mission &rarr;</a></p>
       <p class="onward onward--tight"><a href="#deck">Start The Talk at your own table: pre-order the deck &rarr;</a></p>
-    </div>
+    <div class="panel-funnel"><p class="panel-funnel__lead">Have The Talk with hospice nurses in the room.</p><div class="panel-funnel__actions"><button type="button" class="btn btn--primary js-book" data-program="Mock UR Funeral">Book a Mock UR Funeral</button><a class="btn btn--outline js-deck" href="#deck" >Pre-order the deck</a></div><button type="button" class="panel-close js-close-panel" aria-label="Close this section">Close <span aria-hidden="true">&times;</span></button></div></div>
    </div>
   </div>
 </section>
@@ -1081,7 +1091,7 @@
     <div class="accordion-panel" id="foundersMore" aria-hidden="true">
       <p class="founders-bio" id="foundersBio">Golden Soul Circus was founded by hospice nurses who've sat with hundreds of deaths — the beautiful ones and the devastating ones. A decade in Med-Surg, ICU, float pool, and covid units taught what none of those units had time for: that the dying, and everyone who loves them, deserve to rehearse the goodbye, not just survive it.</p>
       <p class="onward"><a href="#about">Meet the founders &rarr;</a></p>
-    </div>
+    <div class="panel-funnel"><p class="panel-funnel__lead">Work with Brad and Cass directly.</p><div class="panel-funnel__actions"><button type="button" class="btn btn--primary js-reserve" >Book a session</button><a class="btn btn--outline" href="#about" >Read their story</a></div><button type="button" class="panel-close js-close-panel" aria-label="Close this section">Close <span aria-hidden="true">&times;</span></button></div></div>
   </div>
 </section>
 
@@ -1113,7 +1123,7 @@
             <p>Answer a few quick questions on your phone and get a one-page summary to show your doctor: when it started, what it's stopping you from doing, and the one thing you need today.</p>
             <p>It also gives you calm, word-for-word replies for the classic brush-offs, and a buddy card for the person coming with you. Your answers stay on your phone.</p>
             <p class="ticket-next">Once you're heard about your health, the next talk is about your wishes. <a href="#deck">That's what The Talk Starter Deck is for &rarr;</a></p>
-          </div>
+          <div class="panel-funnel"><p class="panel-funnel__lead">Free. No sign-up. About 5 minutes.</p><div class="panel-funnel__actions"><a class="btn btn--primary" href="take-me-seriously-kit/" >Get the free kit</a><a class="btn btn--outline" href="kit-n-kaboodle/" >See what's inside</a></div><button type="button" class="panel-close js-close-panel" aria-label="Close this section">Close <span aria-hidden="true">&times;</span></button></div></div>
         </div>
       </article>
 
@@ -1139,7 +1149,7 @@
             <p>Fifteen hand-painted, handwritten question cards in four element suits: Earth, Water, Fire and Air. Draw one when you're ready to listen deeply, laugh gently, or lean into life's mysteries.</p>
             <p>Answer for yourself, ask someone else, or just sit with it. Small enough to actually use: try one suit a night.</p>
             <p class="script script--sm">For hospital rooms, family dinners, street retreats, grief circles and porch swings.</p>
-          </div>
+          <div class="panel-funnel"><p class="panel-funnel__lead">Save your deck now. Pay when it ships.</p><div class="panel-funnel__actions"><a class="btn btn--primary js-deck" href="#deck" >Pre-order my deck</a><button type="button" class="btn btn--outline js-reserve" >Or book a session</button></div><button type="button" class="panel-close js-close-panel" aria-label="Close this section">Close <span aria-hidden="true">&times;</span></button></div></div>
         </div>
       </article>
 
@@ -1162,7 +1172,7 @@
           <div class="accordion-panel" id="funeralMore" aria-hidden="true">
             <p>A facilitated, three-act experience — Toast, Roast, and Prost — sixty minutes to say what you've been waiting to say, and hear what you've needed to hear.</p>
             <p><a href="mock-ur-funeral/" target="_top">See the full Mock UR Funeral page →</a></p>
-          </div>
+          <div class="panel-funnel"><p class="panel-funnel__lead">Sixty minutes. Three acts. Led by hospice nurses.</p><div class="panel-funnel__actions"><button type="button" class="btn btn--primary js-book" data-program="Mock UR Funeral">Book a Mock UR Funeral</button><a class="btn btn--outline" href="mock-ur-funeral/" >See the full show</a></div><button type="button" class="panel-close js-close-panel" aria-label="Close this section">Close <span aria-hidden="true">&times;</span></button></div></div>
         </div>
       </article>
 
@@ -1187,7 +1197,7 @@
             <p>A gentle in-home visit to clear the air in the rooms where care happens — the bedroom, the recliner, the kitchen table where the hard news got shared. Reiki, sound bowls, and a little sacred housekeeping.</p>
             <p>Clean what's been seen and unseen. Dry what's been soaked through. Re-apply what keeps you well.</p>
             <p class="script script--sm">The only solution to pollution is dilution.</p>
-          </div>
+          <div class="panel-funnel"><p class="panel-funnel__lead">A gentle in-home visit, sliding-scale pricing.</p><div class="panel-funnel__actions"><button type="button" class="btn btn--primary js-book" data-program="Home Reiki Cleansing">Book a Home Reiki Cleansing</button></div><button type="button" class="panel-close js-close-panel" aria-label="Close this section">Close <span aria-hidden="true">&times;</span></button></div></div>
         </div>
       </article>
 
@@ -1222,7 +1232,7 @@
             <p>Sliding-scale pricing, with free seats for family caregivers in need.</p>
             <p class="script script--sm">Together, we are a nurse.</p>
             <p class="note note--fine">This is caregiver education. It isn't medical advice, a nursing license, or a professional certification, and it doesn't replace hands-on training from your person's care team.</p>
-          </div>
+          <div class="panel-funnel"><p class="panel-funnel__lead">Be first in line when the course opens.</p><div class="panel-funnel__actions"><a class="btn btn--primary js-deck" href="#deck" data-interest="course">Get notified when it opens</a><button type="button" class="btn btn--outline js-reserve" >Ask us a question</button></div><button type="button" class="panel-close js-close-panel" aria-label="Close this section">Close <span aria-hidden="true">&times;</span></button></div></div>
         </div>
       </article>
 
@@ -1242,7 +1252,7 @@
           </div>
           <div class="accordion-panel" id="sidequestMore" aria-hidden="true">
             <p>A vendor tent built around earth, water, fire, and air — grounding, releasing, unhinging, and reclaiming power, one conversation at a time. No sign-up required, just a place to set the heavy stuff down.</p>
-          </div>
+          <div class="panel-funnel"><p class="panel-funnel__lead">Bring the tent to your festival or event.</p><div class="panel-funnel__actions"><button type="button" class="btn btn--primary js-book" data-program="Event or festival">Book us for your event</button></div><button type="button" class="panel-close js-close-panel" aria-label="Close this section">Close <span aria-hidden="true">&times;</span></button></div></div>
         </div>
       </article>
 
@@ -1262,7 +1272,7 @@
           </div>
           <div class="accordion-panel" id="mixersMore" aria-hidden="true">
             <p>Crack Yolks open mic nights and Twerkshop somatic dance — sacred and silly ways to practice what your body and your family actually need to know.</p>
-          </div>
+          <div class="panel-funnel"><p class="panel-funnel__lead">Host an open mic or Twerkshop with us.</p><div class="panel-funnel__actions"><button type="button" class="btn btn--primary js-book" data-program="Event or festival">Book a mixer</button></div><button type="button" class="panel-close js-close-panel" aria-label="Close this section">Close <span aria-hidden="true">&times;</span></button></div></div>
         </div>
       </article>
 
@@ -1285,7 +1295,7 @@
           <p><strong>2. Roast</strong> — A gentle, honest nudge. What do the people who love you most wish you'd do?</p>
           <p><strong>3. Prost</strong> — The last word. What would you say if you knew it was your last chance?</p>
           <p class="flavor">Bring a photo of the old version of you that you're ready to lay to rest. We'll give it a proper send-off.</p>
-        </div>
+        <div class="panel-funnel"><p class="panel-funnel__lead">Give your people this hour.</p><div class="panel-funnel__actions"><button type="button" class="btn btn--primary js-book" data-program="Mock UR Funeral">Book a Mock UR Funeral</button><a class="btn btn--outline" href="mock-ur-funeral/" >See the full show</a></div><button type="button" class="panel-close js-close-panel" aria-label="Close this section">Close <span aria-hidden="true">&times;</span></button></div></div>
       </div>
       <div class="talk-item">
         <button class="accordion-toggle accordion-row" type="button" aria-expanded="false" aria-controls="reikiHowMore"><span class="accordion-row-label">What happens at a Home Reiki Cleansing</span><span class="accordion-row-icon" aria-hidden="true"><span class="accordion-bar accordion-bar--h"></span><span class="accordion-bar accordion-bar--v"></span></span></button>
@@ -1306,7 +1316,7 @@
           <p class="fine-print">Reiki is complementary care. It does not replace medical treatment.</p>
           <p class="flavor">Ready to clear the air at home?</p>
           <p class="talk-links"><button class="talk-cta js-book" type="button" data-program="Home Reiki Cleansing">Book a Home Reiki Cleansing</button></p>
-        </div>
+        <div class="panel-funnel"><button type="button" class="panel-close js-close-panel" aria-label="Close this section">Close <span aria-hidden="true">&times;</span></button></div></div>
       </div>
       <div class="talk-item">
         <button class="accordion-toggle accordion-row" type="button" aria-expanded="false" aria-controls="talkMore"><span class="accordion-row-label">Why &ldquo;The Talk&rdquo; keeps getting put off</span><span class="accordion-row-icon" aria-hidden="true"><span class="accordion-bar accordion-bar--h"></span><span class="accordion-bar accordion-bar--v"></span></span></button>
@@ -1315,7 +1325,7 @@
           <p>Most of us were raised to keep the peace. So we say &ldquo;I'm fine,&rdquo; don't want to be a burden, and save the hard stuff for later. Later keeps getting shorter.</p>
           <p>Doctors often won't bring it up first. That leaves it to you, and it's easier with someone in the room who's done this hundreds of times.</p>
           <p class="flavor">We call the &ldquo;keep-everyone-happy&rdquo; habit the &ldquo;People-Pleasedome.&rdquo; You're welcome to leave anytime.</p>
-        </div>
+        <div class="panel-funnel"><p class="panel-funnel__lead">You don't have to start it alone.</p><div class="panel-funnel__actions"><button type="button" class="btn btn--primary js-book" data-program="Mock UR Funeral">Book a guided Talk</button><a class="btn btn--outline js-deck" href="#deck" >Pre-order the deck</a></div><button type="button" class="panel-close js-close-panel" aria-label="Close this section">Close <span aria-hidden="true">&times;</span></button></div></div>
       </div>
       <div class="talk-item">
         <button class="accordion-toggle accordion-row" type="button" aria-expanded="false" aria-controls="lighterMore"><span class="accordion-row-label">Not ready for all that?</span><span class="accordion-row-icon" aria-hidden="true"><span class="accordion-bar accordion-bar--h"></span><span class="accordion-bar accordion-bar--v"></span></span></button>
@@ -1323,7 +1333,7 @@
           <p>Start lighter. A sound bath, a comedy night about life and death, or a talk on what the dying process actually looks like.</p>
           <p class="flavor">No forced sharing anywhere. Showing up counts.</p>
           <p class="talk-links"><a href="take-me-seriously-kit/" target="_blank" rel="noopener">Start with the free Take Me Seriously Kit</a> · <a href="#deck">Then The Talk Starter Deck</a></p>
-        </div>
+        <div class="panel-funnel"><p class="panel-funnel__lead">Want to try a lighter event?</p><div class="panel-funnel__actions"><button type="button" class="btn btn--outline js-book" data-program="Event or festival">Ask about lighter events</button></div><button type="button" class="panel-close js-close-panel" aria-label="Close this section">Close <span aria-hidden="true">&times;</span></button></div></div>
       </div>
     </div>
 
@@ -1426,7 +1436,7 @@
       <div class="request-line" id="requestNote"></div>
       <!-- Response time below is a placeholder: set it to what the team can keep at two sessions a week -->
       <p class="request-next">A nurse from our team will reach out within two days to talk it through. You can change your mind at any point, no explanation needed.</p>
-      <div class="request-note">Preview only. Once this button is connected to your scheduler or inbox, this becomes a real request.</div>
+      <p class="request-status" id="requestStatus" role="status" aria-live="polite"></p>
     </div>
   </div>
 </section>
@@ -1497,7 +1507,7 @@
       <div class="deck-thanks" id="deckThanks" hidden>
         <h3 class="title title--card" id="deckThanksHeading" tabindex="-1"></h3>
         <p id="deckThanksText"></p>
-        <p class="note note--fine">Preview only. Once this form is connected to your email service, this becomes a real pre-order list.</p>
+        <p class="note note--fine" id="deckStatus" role="status" aria-live="polite"></p>
       </div>
     </div>
 
@@ -1749,7 +1759,7 @@
     if(!src) return;
     const nodes = src.classList.contains('accordion-panel') ? [...src.children] : [src];
     nodes.forEach(n => {
-      if(n.classList && n.classList.contains('onward')) return;   /* skip the "→" link back to this page */
+      if(n.classList && (n.classList.contains('onward') || n.classList.contains('panel-funnel'))) return;   /* skip the "→" link back to this page */
       const c = n.cloneNode(true); c.removeAttribute('id'); slot.appendChild(c);
     });
   });
@@ -1967,6 +1977,21 @@
     document.getElementById('requestWho').textContent = 'Who: ' + cName.value.trim() + ' · ' + cEmail.value.trim() + (cPhone.value.trim() ? ' · ' + cPhone.value.trim() : '');
     const note = cNote.value.trim();
     document.getElementById('requestNote').textContent = note ? 'Note: ' + note : '';
+    const statusEl = document.getElementById('requestStatus');
+    statusEl.className = 'request-status is-sending'; statusEl.textContent = 'Sending your request…';
+    reserveBtn.disabled = true;
+    gscSend('Booking request: ' + selectedValue('programRow') + ' — ' + cName.value.trim(), {
+      'Program': selectedValue('programRow'), 'For': who || '', 'Feeling': feel || '',
+      'Where': selectedValue('formatRow') || 'Not chosen', 'Rate': rateNeeded() ? selectedValue('rateRow') : 'Talk it through',
+      'Preferred date': date ? date + (time ? ' at ' + time : '') : 'Flexible',
+      'Name': cName.value.trim(), 'Email': cEmail.value.trim(), 'Phone': cPhone.value.trim(), 'Note': note
+    }, cEmail.value.trim()).then(() => {
+      statusEl.className = 'request-status is-sent';
+      statusEl.textContent = 'Sent. Your request is in our inbox, and we\'ll reply to ' + cEmail.value.trim() + '.';
+    }).catch(() => {
+      statusEl.className = 'request-status is-error';
+      statusEl.textContent = 'We couldn\'t send that just now. Please check your connection and tap "Book this session" again.';
+    }).finally(() => { reserveBtn.disabled = false; });
     requestCard.hidden = false;
     requestCard.scrollIntoView({behavior: reduceMotion ? 'auto' : 'smooth', block:'nearest'});
     document.getElementById('requestHeading').focus({preventScroll:true});
@@ -2010,6 +2035,20 @@
     document.getElementById('deckThanksText').textContent =
       "We've saved " + what + ". When The Talk Starter Deck is ready to ship, we'll email " + email +
       " a link to finish your order." + (extras.length ? " We'll also write " + (extras.length > 1 ? extras.slice(0,-1).join(', ') + ' and ' + extras[extras.length-1] : extras[0]) + "." : '');
+    const deckBtn = document.getElementById('deckBtn');
+    deckBtn.disabled = true; deckHint.textContent = 'Saving your spot…';
+    gscSend('Deck pre-order — ' + (dName.value.trim() || email), {
+      'Name': dName.value.trim(), 'Email': email, 'Decks': qty, 'Also interested in': extras.join('; ') || 'None'
+    }, email).then(() => {
+      deckHint.textContent = '';
+      document.getElementById('deckStatus').textContent = 'Saved. Your pre-order is in our inbox.';
+      deckForm.hidden = true;
+      document.getElementById('deckThanks').hidden = false;
+      document.getElementById('deckThanksHeading').focus();
+    }).catch(() => {
+      deckHint.textContent = 'We couldn\'t save that just now. Please check your connection and try again.';
+    }).finally(() => { deckBtn.disabled = false; });
+    return;
     deckForm.hidden = true;
     const thanks = document.getElementById('deckThanks');
     thanks.hidden = false;
@@ -2202,6 +2241,26 @@
   });
   dlg.addEventListener('close', () => { if(opener) opener.focus(); });
 })();
+</script>
+<script>
+/* Golden Soul Circus: send form requests to the team inbox */
+window.GSC_FORM = 'https://formsubmit.co/ajax/2ff9aa39e687d276987638ffab98fb0f';
+window.gscSend = function(subject, data, replyTo){
+  var payload = Object.assign({_subject: subject, _template: 'table', _captcha: 'false'}, data);
+  if(replyTo) payload._replyto = replyTo;
+  return fetch(window.GSC_FORM, {method:'POST', headers:{'Content-Type':'application/json','Accept':'application/json'}, body: JSON.stringify(payload)})
+    .then(function(r){ return r.json().catch(function(){ return {}; }); })
+    .then(function(j){ if(String(j.success) !== 'true') throw new Error(j.message || 'Not sent'); return j; });
+};
+
+document.querySelectorAll('.js-close-panel').forEach(function(b){
+  b.addEventListener('click', function(){
+    var p = b.closest('.accordion-panel'); if(!p) return;
+    var tg = document.querySelector('[aria-controls="' + p.id + '"]');
+    if(tg && tg.getAttribute('aria-expanded') === 'true'){ tg.click(); }
+    if(tg){ tg.focus({preventScroll:true}); var r = tg.getBoundingClientRect(); if(r.top < 80 || r.top > innerHeight) tg.scrollIntoView({block:'center'}); }
+  });
+});
 </script>
 </body>
 </html>

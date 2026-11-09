@@ -35,7 +35,7 @@ a{color:#B02E5E}a:hover{color:#14213D}
 
 <header style="background: #D5F9DE; border-bottom: 1px solid rgba(20,33,61,.18); padding: 12px 24px">
 <div style="max-width: 780px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 12px; min-height: 32px">
-<p class="wordmark" style="margin: 0">Golden Soul <span>Circus</span></p>
+<a class="wordmark" href="../" aria-label="Golden Soul Circus home" style="margin: 0; display:block; color:inherit; text-decoration:none">Golden Soul <span>Circus</span></a>
 <div class="cup-dots cup-dots--sm" aria-hidden="true"><span></span><span></span><span></span></div>
 </div>
 </header>
@@ -90,7 +90,7 @@ a{color:#B02E5E}a:hover{color:#14213D}
 </div>
 <div class="accordion-panel" id="kit-panel-summary" aria-hidden="true" style="max-height: 0px">
 <p>Get your whole story heard before the clock runs out: when it started, what it’s stopping you from doing, and the one thing you need today.</p>
-</div>
+<div class="panel-funnel" style="display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin:14px 0 6px"><p style="margin:0;flex:1 1 100%;font-weight:600">Build yours in about 5 minutes.</p><a class="btn btn--primary" href="../take-me-seriously-kit/" style="flex:1 1 180px;text-align:center">Take Me Seriously</a><button type="button" class="btn js-close-panel" style="flex:0 0 auto;min-height:44px;padding:0 16px;border-radius:999px;border:1.5px solid currentColor;background:transparent;color:inherit;font:inherit;font-weight:600;cursor:pointer">Close &times;</button></div></div>
 </div>
 </article>
 
@@ -105,7 +105,7 @@ a{color:#B02E5E}a:hover{color:#14213D}
 </div>
 <div class="accordion-panel" id="kit-panel-comebacks" aria-hidden="true" style="max-height: 0px">
 <p>Know exactly what to say when you’re brushed off. Replies to “your labs are normal,” “it’s probably anxiety,” and “you don’t need that test,” written to sound curious, not combative.</p>
-</div>
+<div class="panel-funnel" style="display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin:14px 0 6px"><p style="margin:0;flex:1 1 100%;font-weight:600">Get every comeback, free.</p><a class="btn btn--primary" href="../take-me-seriously-kit/" style="flex:1 1 180px;text-align:center">Take Me Seriously</a><button type="button" class="btn js-close-panel" style="flex:0 0 auto;min-height:44px;padding:0 16px;border-radius:999px;border:1.5px solid currentColor;background:transparent;color:inherit;font:inherit;font-weight:600;cursor:pointer">Close &times;</button></div></div>
 </div>
 </article>
 
@@ -120,7 +120,7 @@ a{color:#B02E5E}a:hover{color:#14213D}
 </div>
 <div class="accordion-panel" id="kit-panel-buddy" aria-hidden="true" style="max-height: 0px">
 <p>Bring backup that knows the plan: what to listen for, what to write down, and when to speak up.</p>
-</div>
+<div class="panel-funnel" style="display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin:14px 0 6px"><p style="margin:0;flex:1 1 100%;font-weight:600">Make a buddy card for your person.</p><a class="btn btn--primary" href="../take-me-seriously-kit/" style="flex:1 1 180px;text-align:center">Take Me Seriously</a><button type="button" class="btn js-close-panel" style="flex:0 0 auto;min-height:44px;padding:0 16px;border-radius:999px;border:1.5px solid currentColor;background:transparent;color:inherit;font:inherit;font-weight:600;cursor:pointer">Close &times;</button></div></div>
 </div>
 </article>
 
@@ -179,9 +179,10 @@ a{color:#B02E5E}a:hover{color:#14213D}
       var open=b.getAttribute('aria-expanded')!=='true';
       b.setAttribute('aria-expanded',open?'true':'false');
       panel.setAttribute('aria-hidden',open?'false':'true');
-      panel.style.maxHeight=open?'320px':'0px';
+      panel.style.maxHeight=open?(panel.scrollHeight+40)+'px':'0px';
     });
   });
+  document.querySelectorAll('.js-close-panel').forEach(function(c){c.addEventListener('click',function(){var p=c.closest('.accordion-panel');var tg=document.querySelector('[aria-controls="'+p.id+'"]');if(tg.getAttribute('aria-expanded')==='true')tg.click();tg.focus();});});
   var dlg=document.getElementById('privacy'),trig=document.getElementById('privacy-trigger');
   function openP(){dlg.hidden=false;var h=document.getElementById('privacy-title');if(h)h.focus();}
   function closeP(){dlg.hidden=true;if(trig)trig.focus();}
