@@ -1,0 +1,449 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Take Me Seriously Kit</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Work+Sans:wght@400;500;600;700&family=Lilita+One&display=swap">
+<style>
+/* Layout: one narrow column, one question per screen, big tap targets, sticky bottom bar for Back / Next */
+:root{
+  --page:#D5F9DE; --surface:#FFFFFF; --ink:#14213D; --soft:#3D4A66; --line:rgba(20,33,61,.22);
+  --cta-bg:#14213D; --cta-fg:#F5B700; --pick-bg:#14213D; --pick-fg:#FFFFFF;
+  --accent:#B02E5E; --amber:#F5B700; --blue:#4392F1; --chip:#FFFFFF; --warn-bg:#FFF4D1;
+  --display:"Fraunces", Georgia, "Times New Roman", serif;
+  --body:"Work Sans", -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+  --r:16px;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --page:#0F1A31; --surface:#18264A; --ink:#EAF8EE; --soft:#B9C6DD; --line:rgba(234,248,238,.22);
+  --cta-bg:#F5B700; --cta-fg:#14213D; --pick-bg:#F5B700; --pick-fg:#14213D;
+  --accent:#F4A3BE; --chip:#18264A; --warn-bg:#2C2A1A; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --page:#0F1A31; --surface:#18264A; --ink:#EAF8EE; --soft:#B9C6DD; --line:rgba(234,248,238,.22);
+  --cta-bg:#F5B700; --cta-fg:#14213D; --pick-bg:#F5B700; --pick-fg:#14213D;
+  --accent:#F4A3BE; --chip:#18264A; --warn-bg:#2C2A1A; color-scheme:dark}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{background:var(--page);color:var(--ink);font-family:var(--body);font-size:20px;line-height:1.5}
+.wrap{max-width:620px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:20px 140px;display:flex;flex-direction:column;gap:24px}
+header.top{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.mark{font-family:var(--display);font-weight:600;font-size:18px;margin:0}
+.mark span{color:var(--accent)}
+h1,h2{font-family:var(--display);font-weight:600;text-wrap:balance;margin:0;line-height:1.15}
+h1{font-size:clamp(34px,8vw,44px)}
+h2{font-size:30px}
+p{margin:0}
+.lede{font-size:21px;color:var(--soft)}
+button,a.btn{font:inherit;cursor:pointer}
+:focus-visible{outline:3px solid var(--blue);outline-offset:3px}
+.big{display:flex;align-items:center;gap:16px;width:100%;min-height:84px;padding:16px 20px;border-radius:var(--r);border:2px solid var(--ink);background:var(--surface);color:var(--ink);text-align:left;font-size:21px;font-weight:600}
+.big .num{flex:0 0 44px;height:44px;border-radius:50%;display:grid;place-items:center;background:var(--amber);color:#14213D;font-weight:700}
+.big small{display:block;font-weight:400;font-size:17px;color:var(--soft)}
+.big.primary{background:var(--cta-bg);color:var(--cta-fg);border-color:var(--cta-bg)}
+.big.primary small{color:inherit;opacity:.85}
+.stack{display:flex;flex-direction:column;gap:14px}
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:60px;padding:0 24px;border-radius:999px;border:2px solid var(--ink);background:var(--surface);color:var(--ink);font-weight:600;font-size:20px;text-decoration:none}
+.btn.go{background:var(--cta-bg);color:var(--cta-fg);border-color:var(--cta-bg)}
+.btn.full{width:100%}
+.link{background:none;border:0;color:var(--accent);text-decoration:underline;font-weight:600;font-size:19px;padding:10px 0;min-height:48px}
+.bar{position:fixed;left:0;right:0;bottom:0;background:var(--page);border-top:1px solid var(--line);padding:12px max(16px,env(safe-area-inset-right,0px)) calc(12px + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px));z-index:5}
+.bar .in{max-width:620px;margin:0 auto;display:grid;grid-template-columns:1fr 2fr;gap:12px}
+.progress{display:flex;flex-direction:column;gap:8px}
+.progress .lbl{font-size:17px;font-weight:600;color:var(--soft)}
+.track{height:12px;border-radius:99px;background:var(--line);overflow:hidden}
+.fill{height:100%;background:var(--accent);border-radius:99px;transition:width .3s}
+.hint{font-size:18px;color:var(--soft)}
+.chips{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,240px),1fr));gap:12px}
+.chip{min-height:64px;padding:12px 18px;border-radius:14px;border:2px solid var(--line);background:var(--chip);color:var(--ink);font-size:20px;font-weight:500;text-align:left;display:flex;align-items:center;gap:12px}
+.chip .tick{flex:0 0 28px;height:28px;border-radius:8px;border:2px solid var(--soft);display:grid;place-items:center}
+.chip.single .tick{border-radius:50%}
+.chip[aria-pressed="true"]{background:var(--pick-bg);color:var(--pick-fg);border-color:var(--pick-bg)}
+.chip[aria-pressed="true"] .tick{border-color:currentColor;background:currentColor}
+.chip[aria-pressed="true"] .tick svg{stroke:var(--pick-bg)}
+.tick svg{width:18px;height:18px;fill:none;stroke:transparent;stroke-width:3;stroke-linecap:round;stroke-linejoin:round}
+.scale{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.scale .chip{justify-content:center;font-size:24px;font-weight:700;min-height:68px;text-align:center}
+.scale-ends{display:flex;justify-content:space-between;font-size:17px;color:var(--soft)}
+label.f{display:flex;flex-direction:column;gap:8px;font-weight:600;font-size:19px}
+input.t,textarea.t{font:inherit;font-size:20px;padding:14px 16px;min-height:60px;border-radius:12px;border:2px solid var(--soft);background:var(--surface);color:var(--ink);width:100%}
+textarea.t{min-height:120px;resize:vertical}
+.card{background:var(--surface);border:2px solid var(--ink);border-radius:var(--r);padding:22px 20px;display:flex;flex-direction:column;gap:16px}
+.row{display:flex;flex-direction:column;gap:2px;padding-bottom:14px;border-bottom:1px solid var(--line)}
+.row:last-child{border-bottom:0;padding-bottom:0}
+.row dt{font-size:15px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--accent)}
+.row dd{margin:0;font-size:21px}
+.row.need{background:var(--warn-bg);margin:0 -20px;padding:14px 20px;border-bottom:0}
+.row.need dd{font-weight:700;font-size:23px}
+.empty{color:var(--soft);font-style:italic}
+dl{margin:0;display:flex;flex-direction:column;gap:14px}
+.showmode .card{font-size:26px}
+.showmode .row dd{font-size:27px;line-height:1.35}
+.showmode .row.need dd{font-size:30px}
+.btns{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr));gap:12px}
+.note{font-size:18px;color:var(--soft)}
+.toast{font-weight:600;color:var(--accent);min-height:28px}
+.confirm{background:var(--warn-bg);border-radius:var(--r);padding:18px;display:flex;flex-direction:column;gap:12px}
+details.cb{background:var(--surface);border:2px solid var(--ink);border-radius:var(--r);overflow:hidden}
+details.cb summary{list-style:none;cursor:pointer;padding:18px 20px;min-height:72px;display:flex;align-items:center;justify-content:space-between;gap:12px;font-weight:600;font-size:21px}
+details.cb summary::-webkit-details-marker{display:none}
+details.cb summary .q{font-family:var(--display);font-size:23px}
+details.cb summary .pl{flex:0 0 36px;height:36px;border-radius:50%;background:var(--amber);color:#14213D;display:grid;place-items:center;font-size:26px;line-height:1;transition:transform .2s}
+details.cb[open] summary .pl{transform:rotate(45deg)}
+details.cb .say{padding:0 20px 20px;display:flex;flex-direction:column;gap:12px}
+.say .tag{font-size:15px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--accent)}
+.say blockquote{margin:0;padding:16px 18px;border-radius:12px;background:var(--page);font-size:22px;line-height:1.45}
+.check{display:flex;gap:14px;align-items:flex-start;min-height:56px;padding:12px 4px;font-size:20px;cursor:pointer}
+.check input{width:30px;height:30px;flex:0 0 30px;margin-top:2px;accent-color:var(--accent)}
+.sec{display:flex;flex-direction:column;gap:6px}
+.sec h3{font-size:16px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--accent);margin:8px 0 0}
+.safety{border:2px solid var(--accent);border-radius:var(--r);padding:16px 18px;font-size:19px}
+footer.fine{font-size:15px;line-height:1.5;color:var(--soft);display:flex;flex-direction:column;gap:8px}
+.power{margin:0;font-family:"Lilita One","Arial Rounded MT Bold","Trebuchet MS",sans-serif;font-weight:400;line-height:1.12;letter-spacing:.01em;color:var(--ink);text-wrap:balance;display:flex;flex-direction:column;gap:6px;transform:rotate(-1.5deg);transform-origin:left center}
+.power .k{font-size:clamp(26px,6.4vw,34px);color:var(--accent)}
+.power .e{font-size:clamp(28px,7vw,38px)}
+.batt{display:inline-flex;position:relative;vertical-align:middle;padding:3px;margin:4px 14px 4px 2px;border:4px solid var(--ink);border-radius:12px;background:var(--surface);transform:rotate(1.5deg)}
+.batt::after{content:"";position:absolute;right:-12px;top:50%;width:8px;height:42%;transform:translateY(-50%);background:var(--ink);border-radius:0 5px 5px 0}
+.batt .cell{display:block;padding:1px .3em 0;border-radius:6px;color:#14213D;letter-spacing:.05em;background:repeating-linear-gradient(90deg,transparent 0 calc(25% - 3px),rgba(20,33,61,.22) calc(25% - 3px) 25%),linear-gradient(#F5B700,#F5B700) no-repeat left/100% 100%;animation:charge 1.6s ease-out .3s both}
+@keyframes charge{0%{background-size:auto,10% 100%}100%{background-size:auto,100% 100%}}
+@media (prefers-reduced-motion:reduce){.batt .cell{animation:none}}
+.gold{background:var(--amber);color:#14213D;border:2px solid #14213D;border-radius:var(--r);padding:20px;display:flex;flex-direction:column;gap:12px;box-shadow:4px 4px 0 var(--ink)}
+.gold h3{margin:0;font-family:"Lilita One","Arial Rounded MT Bold","Trebuchet MS",sans-serif;font-weight:400;font-size:28px;line-height:1.15}
+.gold p{font-size:19px}
+.gold a.btn{background:#14213D;color:#F5B700;border-color:#14213D}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+
+<div class="wrap" id="app">
+  <header class="top">
+    <p class="mark">Golden Soul <span>Circus</span></p>
+    <button class="link" id="homeBtn" type="button" hidden>Home</button>
+  </header>
+
+  <!-- HOME -->
+  <section id="v-home" class="stack" style="gap:24px">
+    <div class="stack" style="gap:12px">
+      <h1>Take Me Seriously Kit</h1>
+      <p class="lede">You know your body. Answer a few quick questions, and you’ll have a one-page summary to show your doctor.</p>
+    </div>
+    <p class="power"><span class="k">Knowledge is power,</span><span class="e">and we are here to <span class="batt"><span class="cell">EMPOWER</span></span> you.</span></p>
+    <div class="stack">
+      <button class="big primary" type="button" data-go="start"><span class="num">1</span><span><span id="startLabel">Fill in my summary</span><small id="startSub">About 5 minutes. Just tap your answers.</small></span></button>
+      <button class="big" type="button" data-go="comebacks"><span class="num">2</span><span>What to say if I’m brushed off<small>Calm words for the classic brush-offs</small></span></button>
+      <button class="big" type="button" data-go="buddy"><span class="num">3</span><span>Buddy card<small>For the person coming with you</small></span></button>
+    </div>
+    <p class="note">Your answers stay on this phone. Nothing is sent anywhere.</p>
+  </section>
+
+  <!-- WIZARD -->
+  <section id="v-step" class="stack" hidden>
+    <div class="progress">
+      <span class="lbl" id="stepLbl">Question 1 of 9</span>
+      <div class="track"><div class="fill" id="stepFill" style="width:10%"></div></div>
+    </div>
+    <h2 id="stepQ" tabindex="-1"></h2>
+    <p class="hint" id="stepHint"></p>
+    <div id="stepBody" class="stack"></div>
+  </section>
+
+  <!-- SUMMARY -->
+  <section id="v-summary" class="stack" hidden>
+    <div class="stack" style="gap:8px">
+      <h2 tabindex="-1" id="sumTitle">Your one-page summary</h2>
+      <p class="hint" id="sumHint">Hand your phone to the doctor, or read it out loud at the start of the visit.</p>
+    </div>
+    <div id="sumWrap"><div class="card"><dl id="sumList"></dl></div></div>
+    <button class="btn go full" type="button" id="pdfBtn" hidden>Download my kit (PDF)</button>
+    <p class="note" id="pdfNote" hidden>Your PDF has your summary, what to say if you’re brushed off, and the buddy card. Print it or keep it on your phone.</p>
+    <div class="btns">
+      <button class="btn" type="button" id="showBtn">Make text bigger</button>
+      <button class="btn" type="button" id="copyBtn">Copy summary</button>
+    </div>
+    <p class="toast" id="toast" role="status"></p>
+    <div class="gold" id="goldCard" hidden>
+      <h3>You found your gold!</h3>
+      <p>One more tap helps us count every soul we reach. It takes 10 seconds, and it’s optional.</p>
+      <a class="btn full" id="goldLink" href="#" target="_blank" rel="noopener">Count me in</a>
+    </div>
+    <div class="card next-step">
+      <p class="tag" style="font-size:15px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--accent)">Your next step</p>
+      <h3 style="margin:0;font-family:var(--display);font-weight:600;font-size:26px;line-height:1.2">The Talk Starter Deck</h3>
+      <p>Once you’re heard about your health, the next talk is about your wishes. Fifteen hand-painted question cards help you start The Talk at home, one suit a night.</p>
+      <p><strong>Send us the word DECK on Instagram</strong> and we’ll send you 3 cards, free.</p>
+    </div>
+    <textarea class="t" id="copyBox" readonly hidden aria-label="Summary text to copy"></textarea>
+    <div class="btns">
+      <button class="btn" type="button" id="editBtn">Change an answer</button>
+      <button class="btn" type="button" data-go="comebacks">What to say if brushed off</button>
+    </div>
+    <button class="link" type="button" id="clearAsk">Start over with a blank form</button>
+    <div class="confirm" id="clearBox" hidden>
+      <p><strong>Erase all your answers?</strong> This can’t be undone.</p>
+      <div class="btns"><button class="btn go" type="button" id="clearYes">Yes, erase</button><button class="btn" type="button" id="clearNo">Keep my answers</button></div>
+    </div>
+  </section>
+
+  <!-- COMEBACKS -->
+  <section id="v-comebacks" class="stack" hidden>
+    <div class="stack" style="gap:8px">
+      <h2 tabindex="-1">What to say if I’m brushed off</h2>
+      <p class="hint">Tap the one you hear. Read the words as written. Calm and curious works better than angry.</p>
+    </div>
+    <div class="stack" id="cbList"></div>
+    <p class="note">Tip: it’s fine to read straight from your phone. Doctors see notes all day.</p>
+  </section>
+
+  <!-- BUDDY -->
+  <section id="v-buddy" class="stack" hidden>
+    <div class="stack" style="gap:8px">
+      <h2 tabindex="-1">Buddy card</h2>
+      <p class="hint">For the person beside you. Your job is to listen, write things down and speak up if needed. Tap each one as you go.</p>
+    </div>
+    <div class="card" id="buddyList"></div>
+    <label class="f" for="buddyNotes">Notes from the visit
+      <textarea class="t" id="buddyNotes" placeholder="Write what the doctor said, in plain words"></textarea>
+    </label>
+  </section>
+
+  <div class="safety"><strong>Chest pain, trouble breathing, or sudden weakness or confusion?</strong> Don’t wait for an appointment. Call 911.</div>
+
+  <footer class="fine">
+    <p>Founded by Nashville hospice nurses Brad &amp; Cass Burns. Not medical advice. Just the words to help you get the advice you came for.</p>
+    <p>Our views are our own. We are unaffiliated with any institution. We advocate for all Patients of Earth, inside and outside all big and small buildings. The information provided is for educational and informational purposes only. I am a licensed nurse; however, I am not offering medical advice, diagnosis or treatment in this capacity, and I am not practicing under my nursing license for this content. It is not a substitute for consultation with qualified healthcare professionals. Always seek the guidance of your physician or other licensed healthcare provider for specific medical questions, especially before making any changes to your health regimen.</p>
+  </footer>
+</div>
+
+<nav class="bar" id="bar" hidden>
+  <div class="in">
+    <button class="btn" type="button" id="backBtn">Back</button>
+    <button class="btn go" type="button" id="nextBtn">Next</button>
+  </div>
+</nav>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script>
+(function(){
+var KEY='tmsk-v1';
+var S={a:{},step:0,buddy:{},notes:''};
+try{var raw=localStorage.getItem(KEY);if(raw){var p=JSON.parse(raw);if(p&&typeof p==='object'){S.a=p.a||{};S.buddy=p.buddy||{};S.notes=p.notes||''}}}catch(e){}
+function save(){try{localStorage.setItem(KEY,JSON.stringify({a:S.a,buddy:S.buddy,notes:S.notes}))}catch(e){}}
+var $=function(id){return document.getElementById(id)};
+
+var STEPS=[
+ {id:'who',q:'Let’s start with you',hint:'Both are optional. Tap Next to skip.',type:'fields',fields:[{k:'name',label:'Your first name',ph:'e.g. Linda'},{k:'doctor',label:'Who are you seeing?',ph:'e.g. Dr. Patel, family doctor'}]},
+ {id:'main',q:'What’s bothering you most?',hint:'Pick one, or type your own below.',type:'single',other:true,opts:['Pain','Tired all the time','Dizziness','Trouble breathing','Stomach or digestion','Trouble sleeping','Memory or thinking','Mood or worry','Heart racing or pounding','Swelling']},
+ {id:'started',q:'When did it start?',type:'single',opts:['In the last few days','A few weeks ago','A few months ago','About a year ago','More than a year ago']},
+ {id:'pattern',q:'How is it changing?',type:'single',opts:['Getting worse','About the same','Getting better','Comes and goes']},
+ {id:'score',q:'How bad is it on a typical day?',hint:'0 means no trouble at all. 10 is the worst you can imagine.',type:'scale'},
+ {id:'stopping',q:'What is it stopping you from doing?',hint:'Tap all that fit.',type:'multi',other:true,opts:['Working','Sleeping','Walking or stairs','Driving','Caring for family','Cooking or chores','Exercise','Time with friends','Hobbies I love']},
+ {id:'tried',q:'What have you already tried?',hint:'Tap all that fit.',type:'multi',other:true,opts:['Rest','Over-the-counter medicine','Prescription medicine','Changing what I eat','Heat or ice','Seen another doctor','Gone to urgent care or the ER','Nothing yet']},
+ {id:'worry',q:'What worries you most about it?',hint:'Tap all that fit.',type:'multi',other:true,opts:['That it’s something serious','That it will keep getting worse','That no one will find the cause','That I can’t keep working','The cost']},
+ {id:'need',q:'What’s the one thing you need today?',hint:'This goes at the top of your summary. Tap all that fit.',type:'multi',other:true,opts:['A test to find the cause','A referral to a specialist','An explanation of what’s going on','A treatment plan','A change to my medicine','To be taken seriously']},
+ {id:'meds',q:'Medicines and allergies',hint:'Optional. A quick list helps the doctor. You can also show them your pill bottles.',type:'fields',fields:[{k:'meds',label:'Medicines I take',ph:'e.g. lisinopril, vitamin D',area:true},{k:'allergies',label:'Allergies',ph:'e.g. penicillin'}]}
+];
+var CHECK='<span class="tick" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>';
+
+function esc(s){return String(s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+
+var views=['home','step','summary','comebacks','buddy'];
+var cur='home';
+function show(v){
+  cur=v;
+  views.forEach(function(n){$('v-'+n).hidden=(n!==v)});
+  $('bar').hidden=(v!=='step');
+  $('homeBtn').hidden=(v==='home');
+  if(v==='home')renderHome();
+  if(v==='step')renderStep();
+  if(v==='summary')renderSummary();
+  if(v==='comebacks')renderComebacks();
+  if(v==='buddy')renderBuddy();
+  window.scrollTo(0,0);
+  var h=document.querySelector('#v-'+v+' h2');if(h&&v!=='home')try{h.focus({preventScroll:true})}catch(e){}
+}
+
+function answered(){return Object.keys(S.a).some(function(k){var x=S.a[k];return Array.isArray(x)?x.length:(x!==''&&x!=null)})}
+function renderHome(){
+  if(answered()){$('startLabel').textContent='See or finish my summary';$('startSub').textContent='Your answers are saved on this phone.'}
+  else{$('startLabel').textContent='Fill in my summary';$('startSub').textContent='About 5 minutes. Just tap your answers.'}
+}
+
+function renderStep(){
+  var st=STEPS[S.step],n=STEPS.length;
+  $('stepLbl').textContent='Question '+(S.step+1)+' of '+n;
+  $('stepFill').style.width=Math.round((S.step+1)/n*100)+'%';
+  $('stepQ').textContent=st.q;
+  $('stepHint').textContent=st.hint||'';$('stepHint').hidden=!st.hint;
+  $('backBtn').textContent=S.step===0?'Home':'Back';
+  $('nextBtn').textContent=S.step===n-1?'See my summary':'Next';
+  var b=$('stepBody'),h='';
+  if(st.type==='fields'){
+    st.fields.forEach(function(f){
+      var v=esc(S.a[f.k]||'');
+      h+='<label class="f" for="f-'+f.k+'">'+esc(f.label)+(f.area?'<textarea class="t" id="f-'+f.k+'" data-k="'+f.k+'" placeholder="'+esc(f.ph)+'">'+v+'</textarea>':'<input class="t" id="f-'+f.k+'" data-k="'+f.k+'" placeholder="'+esc(f.ph)+'" value="'+v+'" autocomplete="off">')+'</label>';
+    });
+  }else if(st.type==='scale'){
+    h+='<div class="scale" role="group" aria-label="0 to 10">';
+    for(var i=0;i<=10;i++){h+='<button type="button" class="chip single" data-v="'+i+'" aria-pressed="'+(S.a.score===i)+'">'+i+'</button>'}
+    h+='</div><div class="scale-ends"><span>0 = no trouble</span><span>10 = worst</span></div>';
+  }else{
+    var sel=S.a[st.id];
+    h+='<div class="chips" role="group" aria-label="'+esc(st.q)+'">';
+    st.opts.forEach(function(o){
+      var on=st.type==='single'?sel===o:(Array.isArray(sel)&&sel.indexOf(o)>-1);
+      h+='<button type="button" class="chip'+(st.type==='single'?' single':'')+'" data-v="'+esc(o)+'" aria-pressed="'+on+'">'+CHECK+'<span>'+esc(o)+'</span></button>';
+    });
+    h+='</div>';
+    if(st.other){h+='<label class="f" for="o-'+st.id+'">Or say it in your own words<input class="t" id="o-'+st.id+'" data-k="'+st.id+'_other" value="'+esc(S.a[st.id+'_other']||'')+'" placeholder="Type here (optional)" autocomplete="off"></label>'}
+  }
+  b.innerHTML=h;
+}
+
+$('stepBody').addEventListener('click',function(e){
+  var c=e.target.closest('.chip');if(!c)return;
+  var st=STEPS[S.step],v=c.getAttribute('data-v');
+  if(st.type==='scale'){S.a.score=(S.a.score===+v)?null:+v}
+  else if(st.type==='single'){S.a[st.id]=(S.a[st.id]===v)?'':v}
+  else{var arr=Array.isArray(S.a[st.id])?S.a[st.id].slice():[];var i=arr.indexOf(v);if(i>-1)arr.splice(i,1);else arr.push(v);S.a[st.id]=arr}
+  save();
+  var y=window.scrollY;renderStep();window.scrollTo(0,y);
+  var again=$('stepBody').querySelector('.chip[data-v="'+(window.CSS&&CSS.escape?CSS.escape(v):v)+'"]');if(again)again.focus();
+});
+$('stepBody').addEventListener('input',function(e){var k=e.target.getAttribute('data-k');if(k){S.a[k]=e.target.value;save()}});
+$('nextBtn').addEventListener('click',function(){if(S.step<STEPS.length-1){S.step++;show('step')}else show('summary')});
+$('backBtn').addEventListener('click',function(){if(S.step>0){S.step--;show('step')}else show('home')});
+
+function list(arr,other){var x=(Array.isArray(arr)?arr.slice():[]);if(other&&other.trim())x.push(other.trim());return x}
+function one(v,other){return (other&&other.trim())?((v?v+'. ':'')+other.trim()):(v||'')}
+function joinNice(x){if(x.length<2)return x.join('');return x.slice(0,-1).join(', ')+' and '+x[x.length-1].toLowerCase()}
+function rows(){
+  var a=S.a,R=[];
+  var need=list(a.need,a.need_other);
+  R.push({k:'What I need today',v:need.length?joinNice(need):'',need:true});
+  R.push({k:'My main concern',v:one(a.main,a.main_other)});
+  var when=[a.started,a.pattern?a.pattern.toLowerCase():''].filter(Boolean).join(', ');
+  R.push({k:'When it started',v:when});
+  R.push({k:'How bad (0 to 10)',v:(a.score!=null&&a.score!=='')?(a.score+' out of 10 on a typical day'):''});
+  R.push({k:'It’s stopping me from',v:joinNice(list(a.stopping,a.stopping_other))});
+  R.push({k:'What I’ve tried',v:joinNice(list(a.tried,a.tried_other))});
+  R.push({k:'What worries me most',v:joinNice(list(a.worry,a.worry_other))});
+  if((a.meds||'').trim())R.push({k:'My medicines',v:a.meds.trim()});
+  if((a.allergies||'').trim())R.push({k:'Allergies',v:a.allergies.trim()});
+  return R;
+}
+var big=false;
+function renderSummary(){
+  var a=S.a,t='Summary';
+  if((a.name||'').trim())t=a.name.trim()+'’s summary';
+  if((a.doctor||'').trim())t+=' for '+a.doctor.trim();
+  $('sumTitle').textContent=t;
+  $('sumList').innerHTML=rows().map(function(r){return '<div class="row'+(r.need?' need':'')+'"><dt>'+esc(r.k)+'</dt><dd>'+(r.v?esc(r.v):'<span class="empty">Not answered</span>')+'</dd></div>'}).join('');
+  $('sumWrap').classList.toggle('showmode',big);
+  $('showBtn').textContent=big?'Make text smaller':'Make text bigger';
+  $('toast').textContent='';$('copyBox').hidden=true;$('clearBox').hidden=true;
+}
+function plain(){var a=S.a,h=($('sumTitle').textContent||'Summary').toUpperCase();return h+'\n\n'+rows().filter(function(r){return r.v}).map(function(r){return r.k+': '+r.v}).join('\n')}
+$('showBtn').addEventListener('click',function(){big=!big;renderSummary()});
+$('copyBtn').addEventListener('click',function(){
+  var txt=plain();
+  function fallback(){var b=$('copyBox');b.value=txt;b.hidden=false;b.focus();b.select();$('toast').textContent='Press and hold the text below, then choose Copy.'}
+  try{navigator.clipboard.writeText(txt).then(function(){$('toast').textContent='Copied. You can paste it into a text or email.'},fallback)}catch(e){fallback()}
+});
+var FORM_URL='https://tally.so/r/WJ9Q2J?source=kit';
+if(FORM_URL)$('goldLink').href=FORM_URL;
+$('goldLink').addEventListener('click',function(){var t=$('goldCard');setTimeout(function(){t.querySelector('h3').textContent='Thank you for being counted!';t.querySelector('p').textContent='Welcome to the circus. Take good care of yourself.';$('goldLink').hidden=true},400)});
+var DL=null;
+try{if(window.claude&&claude.use){claude.use('downloads').then(function(d){DL=d;if(d&&window.jspdf){$('pdfBtn').hidden=false;$('pdfNote').hidden=false}}).catch(function(){})}}catch(e){}
+if(!(window.claude&&window.claude.use)){DL={save:function(o){var u=URL.createObjectURL(o.data),a=document.createElement('a');a.href=u;a.download=o.filename;document.body.appendChild(a);a.click();a.remove();setTimeout(function(){URL.revokeObjectURL(u)},4000);return Promise.resolve()}};if(window.jspdf){$('pdfBtn').hidden=false;$('pdfNote').hidden=false}}
+function buildPdf(){
+  var J=window.jspdf.jsPDF,doc=new J({unit:'pt',format:'letter'});
+  var W=612,H=792,M=54,y=0,TW=W-M*2;
+  var INK=[20,33,61],ROUGE=[176,46,94],AMBER=[245,183,0],SOFT=[70,80,105];
+  function page(){doc.addPage();y=M}
+  function need(h){if(y+h>H-M)page()}
+  function para(t,size,opt){opt=opt||{};doc.setFont('helvetica',opt.bold?'bold':'normal');doc.setFontSize(size);doc.setTextColor.apply(doc,opt.color||INK);var lines=doc.splitTextToSize(t,TW-(opt.indent||0));var lh=size*1.35;lines.forEach(function(l){need(lh);doc.text(l,M+(opt.indent||0),y+size);y+=lh});y+=opt.after==null?6:opt.after}
+  function label(t){need(40);y+=6;para(t.toUpperCase(),11,{bold:true,color:ROUGE,after:2})}
+  function header(t){need(60);y+=10;doc.setFillColor.apply(doc,AMBER);doc.rect(M,y+4,6,22,'F');doc.setFont('helvetica','bold');doc.setFontSize(20);doc.setTextColor.apply(doc,INK);doc.text(t,M+16,y+22);y+=40}
+  doc.setFillColor.apply(doc,INK);doc.rect(0,0,W,96,'F');
+  doc.setFont('helvetica','bold');doc.setFontSize(26);doc.setTextColor.apply(doc,AMBER);doc.text('Take Me Seriously Kit',M,50);
+  doc.setFont('helvetica','normal');doc.setFontSize(13);doc.setTextColor(255,255,255);doc.text('Golden Soul Circus  |  Be a patient, not a pushover.',M,74);
+  y=124;
+  var a=S.a,title='My one-page summary';
+  if((a.name||'').trim())title=a.name.trim()+'’s one-page summary';
+  para(title,22,{bold:true,after:2});
+  var sub=[];if((a.doctor||'').trim())sub.push('For: '+a.doctor.trim());sub.push('Date: '+new Date().toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'}));
+  para(sub.join('    '),13,{color:SOFT,after:10});
+  rows().forEach(function(r){
+    if(r.need){need(70);var lines=doc.splitTextToSize(r.v||'Not answered',TW-24);var bh=lines.length*20+44;doc.setFillColor(255,244,209);doc.rect(M,y,TW,bh,'F');y+=12;doc.setFont('helvetica','bold');doc.setFontSize(11);doc.setTextColor.apply(doc,ROUGE);doc.text('THE ONE THING I NEED TODAY',M+12,y+11);y+=22;doc.setFontSize(16);doc.setTextColor.apply(doc,INK);lines.forEach(function(l){doc.text(l,M+12,y+15);y+=20});y+=18;return}
+    label(r.k);para(r.v||'(not answered)',14,{color:r.v?INK:SOFT,after:8});
+  });
+  header('If I get brushed off, I can say');
+  CB.forEach(function(c){para('If I hear: '+c.q,14,{bold:true,after:2});c.say.forEach(function(s){para(fillCB(s),13,{indent:14,after:3})});y+=8});
+  header('Buddy card');
+  para('For the person coming with me. Your job: listen, write things down, and speak up if needed.',13,{color:SOFT,after:8});
+  BUDDY.forEach(function(sec){label(sec.h);sec.items.forEach(function(it){need(22);doc.setDrawColor.apply(doc,INK);doc.setLineWidth(1.2);doc.rect(M+2,y+3,12,12);para(it,13,{indent:24,after:4})})});
+  label('Notes from the visit');
+  if((S.notes||'').trim()){para(S.notes.trim(),13)}else{for(var i=0;i<6;i++){need(28);y+=24;doc.setDrawColor(180,186,200);doc.setLineWidth(.8);doc.line(M,y,W-M,y)}y+=10}
+  y+=10;para('Chest pain, trouble breathing, or sudden weakness or confusion? Don’t wait for an appointment. Call 911.',12,{bold:true,color:ROUGE,after:10});
+  para('Founded by Nashville hospice nurses Brad & Cass Burns. Not medical advice. Just the words to help you get the advice you came for. Our views are our own. We are unaffiliated with any institution. We advocate for all Patients of Earth, inside and outside all big and small buildings. The information provided is for educational and informational purposes only. I am a licensed nurse; however, I am not offering medical advice, diagnosis or treatment in this capacity, and I am not practicing under my nursing license for this content. It is not a substitute for consultation with qualified healthcare professionals. Always seek the guidance of your physician or other licensed healthcare provider for specific medical questions, especially before making any changes to your health regimen.',9,{color:SOFT});
+  var n=doc.getNumberOfPages();for(var p=1;p<=n;p++){doc.setPage(p);doc.setFont('helvetica','normal');doc.setFontSize(10);doc.setTextColor.apply(doc,SOFT);doc.text('Page '+p+' of '+n,W-M,H-24,{align:'right'})}
+  return doc.output('blob');
+}
+$('pdfBtn').addEventListener('click',function(){
+  if(!DL||!window.jspdf){$('toast').textContent='Download isn’t available here. Use Copy summary instead.';return}
+  var b=$('pdfBtn');b.disabled=true;b.textContent='Making your PDF…';
+  var nm=(S.a.name||'').trim().replace(/[^A-Za-z0-9 -]/g,'').replace(/\s+/g,'-');
+  var fn='Take-Me-Seriously-Kit'+(nm?'-'+nm:'')+'.pdf';
+  var blob;try{blob=buildPdf()}catch(e){b.disabled=false;b.textContent='Download my kit (PDF)';$('toast').textContent='Something went wrong making the PDF. Try again.';return}
+  DL.save({filename:fn,data:blob}).then(function(){$('toast').textContent='Saved. Look for '+fn+' in your Downloads or Files.';if(FORM_URL){$('goldCard').hidden=false;try{$('goldCard').scrollIntoView({behavior:'smooth',block:'center'})}catch(e){}}},function(err){var c=err&&err.code;$('toast').textContent=c==='declined'?'Download canceled. Tap the button to try again.':(c==='rate_limited'?'One moment, then tap again.':'Download isn’t available here. Use Copy summary instead.')}).then(function(){b.disabled=false;b.textContent='Download my kit (PDF)'});
+});
+$('editBtn').addEventListener('click',function(){S.step=1;show('step')});
+$('clearAsk').addEventListener('click',function(){$('clearBox').hidden=false;$('clearYes').focus()});
+$('clearNo').addEventListener('click',function(){$('clearBox').hidden=true});
+$('clearYes').addEventListener('click',function(){S.a={};S.step=0;save();show('step')});
+
+var CB=[
+ {q:'“Your labs are normal.”',say:['I’m glad the labs look normal. The symptoms are still real, and they’re stopping me from {stop}.','What else could explain them, and what’s our next step?']},
+ {q:'“It’s probably anxiety” or “It’s stress.”',say:['Stress could be part of it. Before we settle on that, which physical causes have we ruled out, and how?','If it is anxiety, what’s the plan to treat it?']},
+ {q:'“You don’t need that test.”',say:['Can you help me understand why not?','If we decide not to do it, would you please note in my chart that I asked for it and why it wasn’t ordered?']},
+ {q:'“Let’s wait and see.”',say:['How long should I wait?','Which signs mean I should come back sooner, and who do I call if they happen?']},
+ {q:'You run out of time.',say:['Before you go, I came in for one thing: {need}.','Can we settle that today, or book the next step before I leave?']}
+];
+function fillCB(s){
+  var st=list(S.a.stopping,S.a.stopping_other),nd=list(S.a.need,S.a.need_other);
+  return s.replace('{stop}',st.length?joinNice(st).toLowerCase():'living my normal life').replace('{need}',nd.length?joinNice(nd).toLowerCase():'to understand what’s going on');
+}
+function renderComebacks(){
+  $('cbList').innerHTML=CB.map(function(c,i){
+    return '<details class="cb" id="cb-'+i+'"><summary><span><span class="tag" style="display:block;font-size:15px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--accent)">If you hear</span><span class="q">'+esc(c.q)+'</span></span><span class="pl" aria-hidden="true">+</span></summary><div class="say"><span class="tag">You can say</span>'+c.say.map(function(s){return '<blockquote>'+esc(fillCB(s))+'</blockquote>'}).join('')+'</div></details>';
+  }).join('');
+}
+
+var BUDDY=[
+ {h:'Before the visit',items:['Read the one-page summary together','Agree on the one thing we need today']},
+ {h:'Listen for',items:['The name of any diagnosis','Any new medicine, and what it’s for','Tests ordered, and when results come back','When to follow up']},
+ {h:'Speak up if',items:['They’re cut off before saying the one thing they need','They say “I’m fine” but you know they’re not','The visit is ending with no next step']},
+ {h:'Before you leave, ask',items:['“What’s the plan?”','“What should we watch for?”','“Who do we call, and at what number?”']}
+];
+function renderBuddy(){
+  var h='',n=0;
+  BUDDY.forEach(function(sec){
+    h+='<div class="sec"><h3>'+esc(sec.h)+'</h3>';
+    sec.items.forEach(function(it){var id='b'+(n++);h+='<label class="check" for="'+id+'"><input type="checkbox" id="'+id+'"'+(S.buddy[id]?' checked':'')+'><span>'+esc(it)+'</span></label>'});
+    h+='</div>';
+  });
+  $('buddyList').innerHTML=h;
+  $('buddyNotes').value=S.notes||'';
+}
+$('buddyList').addEventListener('change',function(e){if(e.target.type==='checkbox'){S.buddy[e.target.id]=e.target.checked;save()}});
+$('buddyNotes').addEventListener('input',function(e){S.notes=e.target.value;save()});
+
+document.addEventListener('click',function(e){
+  var g=e.target.closest('[data-go]');if(!g)return;
+  var to=g.getAttribute('data-go');
+  if(to==='start'){if(answered())show('summary');else{S.step=0;show('step')}}
+  else show(to);
+});
+$('homeBtn').addEventListener('click',function(){show('home')});
+show('home');
+})();
+</script>
+
+</body></html>
