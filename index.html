@@ -1439,7 +1439,7 @@
       <!-- Response time below is a placeholder: set it to what the team can keep at two sessions a week -->
       <p class="request-next">A nurse from our team will reach out within two days to talk it through. You can change your mind at any point, no explanation needed.</p>
       <p class="request-status" id="requestStatus" role="status" aria-live="polite"></p>
-<div class="request-package" id="requestPackage" hidden><p class="request-package__title">Your prep package is ready</p><p>Find Your Words helps you and each guest write what you want to say in the Toast, Roast and Prost. We also emailed you this link to share with your guests.</p><a class="btn btn--primary" href="find-your-words/">Open Find Your Words</a></div>
+<div class="request-package" id="requestPackage" hidden><p class="request-package__title">Your prep package is ready</p><p>Find Your Words helps you and each guest write what you want to say in the Toast, Roast and Prost. Save this link and share it with your guests. We&#39;ll include it in our reply, too.</p><a class="btn btn--primary" href="find-your-words/">Open Find Your Words</a></div>
     </div>
   </div>
 </section>
@@ -1980,17 +1980,17 @@
     document.getElementById('requestWho').textContent = 'Who: ' + cName.value.trim() + ' · ' + cEmail.value.trim() + (cPhone.value.trim() ? ' · ' + cPhone.value.trim() : '');
     const note = cNote.value.trim();
     document.getElementById('requestNote').textContent = note ? 'Note: ' + note : '';
-    const statusEl = document.getElementById('requestStatus'); document.getElementById('requestPackage').hidden = true;
+    const statusEl = document.getElementById('requestStatus'); document.getElementById('requestPackage').hidden = selectedValue('programRow') !== 'Mock UR Funeral';
     statusEl.className = 'request-status is-sending'; statusEl.textContent = 'Sending your request…';
     reserveBtn.disabled = true;
     gscSend('Booking request: ' + selectedValue('programRow') + ' — ' + cName.value.trim(), {
       'Program': selectedValue('programRow'), 'For': who || '', 'Feeling': feel || '',
       'Where': selectedValue('formatRow') || 'Not chosen', 'Rate': rateNeeded() ? selectedValue('rateRow') : 'Talk it through',
       'Preferred date': date ? date + (time ? ' at ' + time : '') : 'Flexible',
-      'Name': cName.value.trim(), 'email': cEmail.value.trim(), 'Phone': cPhone.value.trim(), 'Note': note
-    }, cEmail.value.trim(), selectedValue('programRow') === 'Mock UR Funeral' ? window.GSC_AUTO : null).then(() => {
+      'Name': cName.value.trim(), 'email': cEmail.value.trim(), 'Phone': cPhone.value.trim(), 'Note': note,
+      'Prep package to send': selectedValue('programRow') === 'Mock UR Funeral' ? 'https://goldensoulcircus.org/find-your-words/' : ''
+    }, cEmail.value.trim()).then(() => {
       statusEl.className = 'request-status is-sent';
-      document.getElementById('requestPackage').hidden = selectedValue('programRow') !== 'Mock UR Funeral';
       statusEl.textContent = 'Sent. Your request is in our inbox, and we\'ll reply to ' + cEmail.value.trim() + '.';
     }).catch(() => {
       statusEl.className = 'request-status is-error';

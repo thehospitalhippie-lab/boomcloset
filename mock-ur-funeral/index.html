@@ -532,7 +532,7 @@
       <div class="sent" id="sentPanel">
         <h3 id="sentTitle" tabindex="-1">Sending…</h3>
 <p class="form-note" id="sentNote" style="margin:0;" role="status" aria-live="polite">One moment while we send your request.</p>
-        <div class="prep-package" id="prepPackage" hidden><p class="prep-package__title">Your prep package is ready</p><p>Find Your Words helps you and each guest write what you want to say in the Toast, Roast and Prost. We also emailed you this link to share with your guests.</p><a class="btn" href="../find-your-words/">Open Find Your Words</a></div>
+        <div class="prep-package" id="prepPackage" hidden><p class="prep-package__title">Your prep package is ready</p><p>Find Your Words helps you and each guest write what you want to say in the Toast, Roast and Prost. Save this link and share it with your guests. We&#39;ll include it in our reply, too.</p><a class="btn" href="../find-your-words/">Open Find Your Words</a></div>
 <pre id="sentSummary" aria-label="Your request details"></pre>
         <div class="btn-row">
           <a class="btn" id="mailLink" href="#book" hidden>Try again</a>
@@ -669,12 +669,12 @@
     document.getElementById('sentTitle').textContent = 'Sending…';
     document.getElementById('sentNote').textContent = 'One moment while we send your request.';
     mailLink.hidden = true;
-    const isSponsor = topic.indexOf('sponsor') > -1; document.getElementById('prepPackage').hidden = true;
+    const isSponsor = topic.indexOf('sponsor') > -1; document.getElementById('prepPackage').hidden = isSponsor;
     const fields = {}; lines.forEach(l => { const k = l.indexOf(': '); if(k > 0) fields[l.slice(0,k)] = l.slice(k+2); });
     if(msg) fields['Message'] = msg;
     if(fields['Email']){ fields['email'] = fields['Email']; delete fields['Email']; }
-    gscSend(subject, fields, email, isSponsor ? null : window.GSC_AUTO).then(() => {
-      document.getElementById('prepPackage').hidden = isSponsor;
+    if(!isSponsor) fields['Prep package to send'] = 'https://goldensoulcircus.org/find-your-words/';
+    gscSend(subject, fields, email).then(() => {
       document.getElementById('sentTitle').textContent = 'Request sent.';
       document.getElementById('sentNote').textContent = 'It\'s in our inbox. We\'ll reply to ' + email + ' within two days.';
     }).catch(() => {
