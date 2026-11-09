@@ -8,6 +8,7 @@
 .request-status{margin:12px 0 0;font-weight:600}
 .request-status.is-sent{color:#1d6b3a}.request-status.is-error{color:#B02E5E}
 </style>
+<style>.ticket-included,.included-line{margin:6px 0 0;font-weight:600}.request-package,.prep-package{margin-top:14px;padding:14px;border:2px solid currentColor;border-radius:14px}.request-package__title,.prep-package__title{margin:0 0 6px;font-weight:700;font-size:1.1em}.request-package .btn,.prep-package .btn{margin-top:8px}</style>
 </head><body>
 <!DOCTYPE html>
 <html lang="en">
@@ -1165,12 +1166,13 @@
           <span class="tag tag--brick">FLAGSHIP</span>
           <h3 class="title title--card">Mock UR Funeral</h3>
           <p class="ticket-audience">For families &amp; patients ready to say it</p>
+<p class="ticket-included"><span aria-hidden="true">&#10003;</span> Includes the <b>Find Your Words</b> prep guide</p>
           <div class="ticket-actions">
             <button class="accordion-toggle" type="button" aria-expanded="false" aria-controls="funeralMore" aria-label="More about Mock UR Funeral"><span class="accordion-bar accordion-bar--h"></span><span class="accordion-bar accordion-bar--v"></span></button>
             <button class="btn btn--outline js-book" type="button" data-program="Mock UR Funeral" aria-label="Book this: Mock UR Funeral">Book this</button>
           </div>
           <div class="accordion-panel" id="funeralMore" aria-hidden="true">
-            <p>A facilitated, three-act experience — Toast, Roast, and Prost — sixty minutes to say what you've been waiting to say, and hear what you've needed to hear.</p>
+            <p>A facilitated, three-act experience — Toast, Roast, and Prost — sixty minutes to say what you've been waiting to say, and hear what you've needed to hear. Every booking includes <b>Find Your Words</b>, a guided prep page that helps each guest write their Toast, Roast and Prost before the day. We send it as soon as you book.</p>
             <p><a href="mock-ur-funeral/" target="_top">See the full Mock UR Funeral page →</a></p>
           <div class="panel-funnel"><p class="panel-funnel__lead">Sixty minutes. Three acts. Led by hospice nurses.</p><div class="panel-funnel__actions"><button type="button" class="btn btn--primary js-book" data-program="Mock UR Funeral">Book a Mock UR Funeral</button><a class="btn btn--outline" href="mock-ur-funeral/" >See the full show</a></div><button type="button" class="panel-close js-close-panel" aria-label="Close this section">Close <span aria-hidden="true">&times;</span></button></div></div>
         </div>
@@ -1437,6 +1439,7 @@
       <!-- Response time below is a placeholder: set it to what the team can keep at two sessions a week -->
       <p class="request-next">A nurse from our team will reach out within two days to talk it through. You can change your mind at any point, no explanation needed.</p>
       <p class="request-status" id="requestStatus" role="status" aria-live="polite"></p>
+<div class="request-package" id="requestPackage" hidden><p class="request-package__title">Your prep package is ready</p><p>Find Your Words helps you and each guest write what you want to say in the Toast, Roast and Prost. We also emailed you this link to share with your guests.</p><a class="btn btn--primary" href="find-your-words/">Open Find Your Words</a></div>
     </div>
   </div>
 </section>
@@ -1977,16 +1980,17 @@
     document.getElementById('requestWho').textContent = 'Who: ' + cName.value.trim() + ' · ' + cEmail.value.trim() + (cPhone.value.trim() ? ' · ' + cPhone.value.trim() : '');
     const note = cNote.value.trim();
     document.getElementById('requestNote').textContent = note ? 'Note: ' + note : '';
-    const statusEl = document.getElementById('requestStatus');
+    const statusEl = document.getElementById('requestStatus'); document.getElementById('requestPackage').hidden = true;
     statusEl.className = 'request-status is-sending'; statusEl.textContent = 'Sending your request…';
     reserveBtn.disabled = true;
     gscSend('Booking request: ' + selectedValue('programRow') + ' — ' + cName.value.trim(), {
       'Program': selectedValue('programRow'), 'For': who || '', 'Feeling': feel || '',
       'Where': selectedValue('formatRow') || 'Not chosen', 'Rate': rateNeeded() ? selectedValue('rateRow') : 'Talk it through',
       'Preferred date': date ? date + (time ? ' at ' + time : '') : 'Flexible',
-      'Name': cName.value.trim(), 'Email': cEmail.value.trim(), 'Phone': cPhone.value.trim(), 'Note': note
-    }, cEmail.value.trim()).then(() => {
+      'Name': cName.value.trim(), 'email': cEmail.value.trim(), 'Phone': cPhone.value.trim(), 'Note': note
+    }, cEmail.value.trim(), selectedValue('programRow') === 'Mock UR Funeral' ? window.GSC_AUTO : null).then(() => {
       statusEl.className = 'request-status is-sent';
+      document.getElementById('requestPackage').hidden = selectedValue('programRow') !== 'Mock UR Funeral';
       statusEl.textContent = 'Sent. Your request is in our inbox, and we\'ll reply to ' + cEmail.value.trim() + '.';
     }).catch(() => {
       statusEl.className = 'request-status is-error';
@@ -2038,7 +2042,7 @@
     const deckBtn = document.getElementById('deckBtn');
     deckBtn.disabled = true; deckHint.textContent = 'Saving your spot…';
     gscSend('Deck pre-order — ' + (dName.value.trim() || email), {
-      'Name': dName.value.trim(), 'Email': email, 'Decks': qty, 'Also interested in': extras.join('; ') || 'None'
+      'Name': dName.value.trim(), 'email': email, 'Decks': qty, 'Also interested in': extras.join('; ') || 'None'
     }, email).then(() => {
       deckHint.textContent = '';
       document.getElementById('deckStatus').textContent = 'Saved. Your pre-order is in our inbox.';
@@ -2245,9 +2249,11 @@
 <script>
 /* Golden Soul Circus: send form requests to the team inbox */
 window.GSC_FORM = 'https://formsubmit.co/ajax/2ff9aa39e687d276987638ffab98fb0f';
-window.gscSend = function(subject, data, replyTo){
+window.GSC_AUTO = 'Thank you for booking a Mock (ur) Funeral with Golden Soul Circus. Brad or Cass will reach out within two days to set your date. Your prep package is ready now: Find Your Words helps you and each guest write what you want to say in the Toast, Roast and Prost. Open it here and share the link with your guests: https://goldensoulcircus.org/find-your-words/  Your answers stay on your own phone. See you under the tent.';
+window.gscSend = function(subject, data, replyTo, autoresponse){
   var payload = Object.assign({_subject: subject, _template: 'table', _captcha: 'false'}, data);
   if(replyTo) payload._replyto = replyTo;
+  if(autoresponse) payload._autoresponse = autoresponse;
   return fetch(window.GSC_FORM, {method:'POST', headers:{'Content-Type':'application/json','Accept':'application/json'}, body: JSON.stringify(payload)})
     .then(function(r){ return r.json().catch(function(){ return {}; }); })
     .then(function(j){ if(String(j.success) !== 'true') throw new Error(j.message || 'Not sent'); return j; });
