@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Golden Soul Circus Catalog</title>
+<meta name="description" content="Every Golden Soul Circus offering in one place: ceremonies, talks, festivals, advocacy tools, decks, courses and ways to help. Hospice nurses making palliative care more palatable.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,500;0,600;1,500&family=Work+Sans:wght@400;500;600&family=Caveat:wght@600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* Golden Soul Circus palette v2 ("stacking cups"). Layout: one 820px column; a blue hero band with a scalloped tent hem,
+   then three levels of accordions: category (bold colored ticket) > shelf (dashed row) > offering (white card). */
+:root{
+  --blue:#4392F1; --amber:#F5B700; --brick:#D00000; --mint:#D5F9DE; --rouge:#E87EA1; --rouge-deep:#B02E5E; --aqua:#5BC5CB; --ink:#14213D; --white:#FFFFFF;
+  --page:var(--mint); --surface:var(--white); --surface-2:#F3FDF5; --text:var(--ink); --text-soft:rgba(20,33,61,.74); --line:rgba(20,33,61,.2);
+  --accent-text:var(--rouge-deep); --focus:var(--ink); --btn-bg:var(--ink); --btn-fg:var(--amber);
+  --shadow:0 1px 0 rgba(20,33,61,.16), 0 10px 26px -18px rgba(20,33,61,.5);
+  --f-display:Fraunces, Georgia, serif; --f-body:"Work Sans", -apple-system, "Segoe UI", sans-serif; --f-script:Caveat, cursive; --f-mono:"IBM Plex Mono", ui-monospace, monospace;
+  --r:14px; --r-sm:10px; --pill:999px;
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --page:#101B2E; --surface:#1A2842; --surface-2:#15223A; --text:#E4F8E9; --text-soft:rgba(228,248,233,.78); --line:rgba(228,248,233,.22);
+    --accent-text:#F4A3BE; --focus:var(--amber); --btn-bg:#E4F8E9; --btn-fg:#101B2E;
+    --shadow:0 1px 0 rgba(228,248,233,.18), 0 10px 26px -18px rgba(0,0,0,.6); color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --page:#101B2E; --surface:#1A2842; --surface-2:#15223A; --text:#E4F8E9; --text-soft:rgba(228,248,233,.78); --line:rgba(228,248,233,.22);
+  --accent-text:#F4A3BE; --focus:var(--amber); --btn-bg:#E4F8E9; --btn-fg:#101B2E;
+  --shadow:0 1px 0 rgba(228,248,233,.18), 0 10px 26px -18px rgba(0,0,0,.6); color-scheme:dark;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--page); color:var(--text); font-family:var(--f-body); font-size:17px; line-height:1.55}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--focus); outline-offset:3px; border-radius:6px}
+@media (prefers-reduced-motion: reduce){*{transition:none!important; animation:none!important}}
+.wrap{max-width:820px; margin:0 auto; padding:0 16px}
+@media (min-width:600px){.wrap{padding:0 24px}}
+h1,h2,h3,h4{font-family:var(--f-display); font-weight:500; line-height:1.15; margin:0; text-wrap:balance}
+p{margin:0 0 .8em; max-width:62ch}
+.eyebrow{font-family:var(--f-mono); font-size:.78rem; letter-spacing:.05em; text-transform:uppercase; margin:0 0 10px}
+.script{font-family:var(--f-script); font-size:1.5rem; line-height:1.2; color:var(--accent-text)}
+.soft{color:var(--text-soft)}
+.small{font-size:.92rem}
+
+/* hero */
+.hero{background:var(--blue); color:var(--ink); position:relative; padding:56px 0 44px}
+.hero::after{content:""; position:absolute; left:0; right:0; top:100%; height:14px; background:radial-gradient(circle at 14px 0, var(--blue) 13.5px, transparent 14px) 0 0/28px 14px repeat-x}
+.hero h1{font-size:clamp(2rem,6vw,3.1rem); font-style:italic; max-width:16ch; margin-bottom:12px}
+.hero .lede{font-weight:500; max-width:54ch}
+.hero .script{color:var(--ink)}
+.hero-actions{display:flex; flex-wrap:wrap; gap:10px; margin-top:18px}
+.btn{display:inline-flex; align-items:center; justify-content:center; gap:8px; min-height:44px; padding:10px 18px; border-radius:var(--pill); border:1.5px solid transparent; font:600 .92rem/1.2 var(--f-body); text-decoration:none; cursor:pointer; transition:background .16s, color .16s, border-color .16s}
+.btn--primary{background:var(--btn-bg); color:var(--btn-fg); border-color:var(--btn-bg)}
+.btn--primary:hover{background:var(--amber); color:var(--ink); border-color:var(--amber)}
+.btn--outline{background:transparent; color:var(--text); border-color:currentColor}
+.btn--outline:hover{background:var(--btn-bg); color:var(--btn-fg); border-color:var(--btn-bg)}
+.hero .btn--primary{background:var(--ink); color:var(--amber); border-color:var(--ink)}
+.hero .btn--outline{color:var(--ink)}
+.hero .btn--outline:hover{background:var(--ink); color:var(--amber)}
+.btn--sm{min-height:38px; padding:7px 14px; font-size:.85rem}
+
+/* toolbar */
+.tools{display:flex; flex-wrap:wrap; gap:10px; align-items:center; margin:36px 0 18px}
+.search{flex:1 1 240px; min-height:44px; padding:10px 14px; border-radius:var(--r-sm); border:1.5px solid var(--line); background:var(--surface); color:var(--text); font:400 1rem var(--f-body)}
+.search::placeholder{color:var(--text-soft)}
+.legend{display:flex; flex-wrap:wrap; gap:8px; margin:0 0 24px; padding:0; list-style:none}
+.chip{display:inline-flex; align-items:center; gap:6px; font-family:var(--f-mono); font-size:.74rem; letter-spacing:.04em; text-transform:uppercase; padding:3px 10px; border-radius:var(--pill); white-space:nowrap; border:1.5px solid transparent}
+.chip::before{content:""; width:8px; height:8px; border-radius:50%; background:currentColor}
+.st-open{background:#E6F7EA; color:#11643A; border-color:#11643A}
+.st-book{background:#E7F0FD; color:#1D4E9E; border-color:#1D4E9E}
+.st-preview{background:#FDF3D6; color:#7A5600; border-color:#7A5600}
+.st-soon{background:#FBE7EE; color:var(--rouge-deep); border-color:var(--rouge-deep)}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .chip{background:transparent}
+  :root:not([data-theme="light"]) .st-open{color:#7FE0A6} :root:not([data-theme="light"]) .st-book{color:#9DC3FF}
+  :root:not([data-theme="light"]) .st-preview{color:#FFD66B} :root:not([data-theme="light"]) .st-soon{color:#F4A3BE}}
+
+/* level 1: category */
+details{margin:0}
+summary{list-style:none; cursor:pointer}
+summary::-webkit-details-marker{display:none}
+.cat{background:var(--surface); border-radius:var(--r); box-shadow:var(--shadow); margin-bottom:16px; overflow:hidden}
+.cat > summary{display:grid; grid-template-columns:auto 1fr auto; gap:14px; align-items:center; padding:16px 18px; border-left:10px solid var(--c)}
+.cat-ico{width:44px; height:44px; border-radius:50%; background:var(--c); display:grid; place-items:center; flex:0 0 auto}
+.cat-ico svg{width:24px; height:24px}
+.cat h2{font-size:clamp(1.25rem,3.4vw,1.55rem)}
+.cat .sub{font-size:.92rem; color:var(--text-soft); margin:2px 0 0}
+.count{font-family:var(--f-mono); font-size:.75rem; color:var(--text-soft); white-space:nowrap}
+.plus{position:relative; width:30px; height:30px; border-radius:50%; border:1.5px dashed var(--text); flex:0 0 auto; transition:background .16s}
+.plus::before,.plus::after{content:""; position:absolute; top:50%; left:50%; width:12px; height:2.5px; background:var(--text); transform:translate(-50%,-50%); border-radius:2px; transition:transform .25s}
+.plus::after{transform:translate(-50%,-50%) rotate(90deg)}
+details[open] > summary .plus{background:var(--amber); border:1.5px solid var(--amber)}
+details[open] > summary .plus::before, details[open] > summary .plus::after{background:var(--ink)}
+details[open] > summary .plus::after{transform:translate(-50%,-50%) rotate(0)}
+.cat-right{display:flex; align-items:center; gap:10px}
+@media (max-width:520px){.cat > summary{grid-template-columns:auto 1fr; } .cat-right{grid-column:2; justify-content:space-between} .cat-ico{width:36px;height:36px}}
+.cat-body{padding:4px 18px 18px; border-top:1.5px dashed var(--line)}
+
+/* level 2: shelf */
+.shelf{border-bottom:1.5px dashed var(--line)}
+.shelf:last-child{border-bottom:0}
+.shelf > summary{display:flex; align-items:center; gap:12px; padding:14px 2px; min-height:52px}
+.shelf h3{font-size:1.1rem; font-weight:600; flex:1}
+.shelf .plus{width:26px; height:26px}
+.shelf-body{padding:0 0 16px; display:flex; flex-direction:column; gap:10px}
+.shelf-note{font-size:.9rem; color:var(--text-soft); margin:0 0 4px}
+
+/* level 3: offering */
+.offer{background:var(--surface-2); border:1.5px solid var(--line); border-radius:var(--r-sm)}
+.offer > summary{display:grid; grid-template-columns:1fr auto; gap:6px 12px; align-items:center; padding:12px 14px}
+.offer h4{font-size:1.05rem; font-weight:600; font-family:var(--f-body)}
+.offer .line{grid-column:1 / -1; font-size:.92rem; color:var(--text-soft); margin:0}
+.offer[open]{border-color:var(--text)}
+.offer-body{padding:0 14px 14px}
+.offer-body ul{margin:0 0 12px; padding-left:1.2em}
+.offer-body li{margin-bottom:4px; font-size:.95rem}
+.offer-body .facts{display:flex; flex-wrap:wrap; gap:6px 16px; font-family:var(--f-mono); font-size:.78rem; color:var(--text-soft); margin:0 0 12px; padding:0; list-style:none}
+.actions{display:flex; flex-wrap:wrap; gap:8px; align-items:center}
+.how{font-size:.88rem; color:var(--text-soft); margin:10px 0 0}
+.hidden{display:none!important}
+.empty{padding:16px; text-align:center; color:var(--text-soft)}
+
+/* list band */
+.band{background:var(--rouge); color:var(--ink); margin-top:40px; padding:40px 0 56px; position:relative}
+.band::before{content:""; position:absolute; left:0; right:0; bottom:100%; height:14px; background:radial-gradient(circle at 14px 14px, var(--rouge) 13.5px, transparent 14px) 0 0/28px 14px repeat-x}
+.band h2{font-size:clamp(1.6rem,4.4vw,2.2rem); font-style:italic; margin-bottom:10px}
+.band .btn--primary{background:var(--ink); color:var(--amber); border-color:var(--ink)}
+.fine{font-size:.82rem; font-style:italic; margin-top:20px; max-width:66ch}
+.wordmark{font-family:var(--f-display); font-weight:600}
+
+/* team-only */
+.team{border:2px dashed var(--text); border-radius:var(--r); padding:0; margin:28px 0 0; background:transparent}
+.team > summary{padding:14px 18px; display:flex; gap:12px; align-items:center}
+.team h2{font-size:1.2rem; flex:1}
+.team-body{padding:0 18px 18px}
+.team-body h3{font-size:1.05rem; font-weight:600; margin:16px 0 8px}
+.team-body ol,.team-body ul{padding-left:1.2em; margin:0 0 10px}
+.team-body li{margin-bottom:5px; font-size:.95rem}
+table{border-collapse:collapse; width:100%; font-size:.85rem}
+th,td{text-align:left; padding:6px 8px; border-bottom:1px solid var(--line); vertical-align:top}
+th{font-family:var(--f-mono); font-weight:500; font-size:.74rem; text-transform:uppercase; letter-spacing:.04em}
+.tablewrap{overflow-x:auto}
+code{font-family:var(--f-mono); font-size:.85em}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <p class="eyebrow">Golden Soul Circus · The full catalog</p>
+    <h1>A circus with a purpose.</h1>
+    <p class="lede">Two hospice nurses making palliative care more palatable with mock funerals, sound baths, grief-relief workshops, advocacy tools and more. Open a tent below to see what's inside.</p>
+    <p class="script">Give your flowers while you live.</p>
+    <div class="hero-actions">
+      <a class="btn btn--primary" href="#catalog">Browse the catalog</a>
+      <a class="btn btn--outline" id="heroList" href="#">Get word when things open</a>
+    </div>
+  </div>
+</header>
+
+<main class="wrap" id="catalog">
+  <div class="tools">
+    <label class="sr" for="q" style="position:absolute;left:-9999px">Search offerings</label>
+    <input class="search" id="q" type="search" placeholder="Search: funeral, caregiver, deck, free…" autocomplete="off">
+    <button class="btn btn--outline btn--sm" type="button" id="openAll">Open all</button>
+    <button class="btn btn--outline btn--sm" type="button" id="closeAll">Close all</button>
+  </div>
+  <ul class="legend" aria-label="What the labels mean">
+    <li><span class="chip st-open">Open now</span></li>
+    <li><span class="chip st-book">Bookable</span></li>
+    <li><span class="chip st-preview">Preview</span></li>
+    <li><span class="chip st-soon">Coming soon</span></li>
+  </ul>
+  <p class="small soft" style="margin-top:-12px">Anything not open yet has a <strong>Get it by email</strong> button. Tell us what you're waiting for and we'll write when it's ready.</p>
+
+  <div id="cats"></div>
+  <p class="empty hidden" id="empty">Nothing matches that yet. Try another word, or <a id="emptyList" href="#">ask us by email</a>.</p>
+
+  <div id="team"></div>
+</main>
+
+<section class="band" id="list">
+  <div class="wrap">
+    <p class="eyebrow">The email list</p>
+    <h2>Waiting on something? We'll write.</h2>
+    <p>Pick the offerings you care about and we'll send word when they open. No sales-pitch blasts, and you can leave anytime.</p>
+    <a class="btn btn--primary" id="bandList" href="#">Join the list</a>
+    <p class="fine">Golden Soul Circus is a Tennessee nonprofit in formation; gifts aren't tax-deductible until our 501(c)(3) is approved. Our offerings are education, ceremony and play, not medical or legal advice, and we don't practice under our nursing licenses in them. If you're in crisis, call or text 988.</p>
+    <p class="wordmark">Golden Soul Circus · Nashville</p>
+  </div>
+</section>
+
+<script>
+/* ============================================================
+   SETTINGS — the only part to edit when the catalog moves.
+   MODE "preview": links point at the claude.ai pages (work for you, and for anyone you've shared them with).
+   MODE "site":    links point at the repo paths in `site`; anything without a site path falls back to the email list.
+   ============================================================ */
+var SETTINGS = {
+  mode: "site",
+  emailList: "https://tally.so/r/je6qB4",   // Tally form "Golden Soul Circus — Get it when it's ready"
+  siteBase: "../",                            // where repo paths start, relative to this catalog file
+  live: ["mock-ur-funeral/","find-your-words/","take-me-seriously-kit/","kit-n-kaboodle/","advocates-act/","rowd-map/","rowd-map/book/","palliative-pal/","palliative-pal/companion/","root-breath-atlas/","7-magic-secrets/"],                             // site mode: only these paths get links; anything else uses the email list
+  showTeamNotes: false                      // the "Before GitHub" checklist; false on the public site
+};
+var A = "https://claude.ai/artifact/";
+
+/* status: open | book | soon.  preview: claude.ai id.  site: path in the repo once copied there.
+   extra: more buttons [label, url].  facts: short specs.  points: bullets. */
+var CATALOG = [
+ { id:"ceremonies", name:"Ceremonies & celebrations", sub:"Book us for the moments that matter, the sad ones and the silly ones.", color:"var(--rouge)", icon:"balloon",
+   shelves:[
+   { name:"Rituals", items:[
+     { id:"mock-funeral", name:"Mock (ur) Funeral", status:"book", book:"https://tally.so/r/GexGO2", preview:"X5rs3H4QYmNwZCAK4zz6sw", site:"mock-ur-funeral/",
+       line:"A three-act ceremony, equal parts sacred and silly, for saying what matters while there's still time.",
+       facts:["60 minutes","$250","Framed photo included"],
+       points:["Act I, Toast: give your flowers while you live.","Act II, Roast: hold cold feet to the fire, lovingly.","Act III, Prost: what would you say if it were the last thing you'd say?","For graduations, breakups, new babies, milestone birthdays, or saying goodbye to an old version of yourself.","Ceremony, not therapy. No one is forced to speak."] },
+     { id:"find-your-words", name:"Find Your Words", status:"preview", book:"https://tally.so/r/GexGO2", preview:"5p1GAj3e2K19cENQsZ1d9s", site:"find-your-words/",
+       line:"A guided page that helps guests write their Toast, Roast and Prost, then read it aloud.",
+       facts:["Free preview: the Toast","Full version comes with every Mock (ur) Funeral booking"] }
+   ]},
+   { name:"Parties & telegrams", note:"Ask about our storytelling discount: share your story with us, with your permission, and save on your booking.", items:[
+     { id:"singing-telegram", name:"Existential Singing Telegram", status:"book", line:"A 30-minute traveling show for work teams: songs, balloons, a Slinky, and a lot of thank-yous.", facts:["30 minutes","$77","For workplaces"] },
+     { id:"house-party", name:"Existential House Party", status:"book", line:"Improv games and show-and-tell for families and friends, led by two ICU-turned-hospice nurses.", facts:["45 minutes, $222","90 minutes, $444","For families and friend groups"], points:["Walk away with confidence and a plan for directing care for yourself and your family.","Joy shared is doubled; misery shared is shred."] },
+     { id:"grief-telegram", name:"Grief Relief Singing Telegram Party", status:"soon", line:"Silly singsongs, ecstatic dance and a closing sound bath for a family after a recent loss." }
+   ]},
+   { name:"Sound & movement", note:"Ask about our storytelling discount: share your story with us, with your permission, and save on your booking.", items:[
+     { id:"sound-bath", name:"Grief Relief Sound Bath", status:"book", line:"Mama Cass on quartz-crystal singing bowls for deep rest.", facts:["Private, 1–4 people, 60 min: $177","In-home group, up to 12: $333","Public drop-in: $25, or pay what you can from $10"] },
+     { id:"twerkshop", name:"Sacred & Silly Twerkshop", status:"soon", line:"Move grief, manage stress, make your own fun. No dance training needed; twerkability guaranteed.", points:["Consent crash course first: ask, listen, respect.","Five arcs, from loosening up to an animal-themed finale.","Every pause is a Pause for the Cause: wiggle, hydrate, jiggle."] },
+     { id:"crack-yolks", name:"Crack Yolks: Life's 1 Big Yolk", status:"soon", line:"A rhythm, humming and movement ceremony that ends in rest. Sober space, juice on the altar.", facts:["55–80 minutes"] },
+     { id:"groove-grow", name:"Groove and Grow Retreat", status:"soon", line:"A two-hour retreat: a head-to-toe body sequence, a Twerkshop, and a Talk Deck circle to close.", facts:["2 hours"] }
+   ]},
+   { name:"Talks", items:[
+     { id:"rowd-map", name:"Soul Nature Row'd Map", status:"book", book:"https://tally.so/r/xVXq8J", preview:"2s9FfEAysXp1B6ZARNykzU", site:"rowd-map/",
+       line:"Learning the signs on the way to the gate, because Dr. Said-So doesn't always know. Earth, water, fire, air.",
+       facts:["40 minutes plus questions","From $350"], extra:[["About the talk", A+"PrrtBeisqN9fxTvYDLineR", "rowd-map/book/"]] },
+     { id:"abc-talk", name:"Harm Redux & Soul Retrieval: the ABC talk", status:"soon", line:"Attunement, buoyancy, clarity. Turn your baggage into balloons." }
+   ]}
+ ]},
+ { id:"advocacy", name:"Patient & caregiver advocacy", sub:"Know it, own it, say no. Tools for the people in the hospital gown and the chair beside it.", color:"var(--blue)", icon:"megaphone",
+   shelves:[
+   { name:"Free tools", items:[
+     { id:"advocates-act", name:"The Advocate's Act", status:"open", preview:"J5feZKh1dCxNH1L1svZmqn", site:"advocates-act/",
+       line:"A step-by-step guide for Tennessee patients and caregivers who need to complain about medical care, from the bedside all the way to a lawyer.",
+       facts:["Free","Tennessee","Works on a phone"],
+       points:["Six acts: paper trail, bedside, grievance, insurance, state referees, lawyer.","A one-minute breathing break before you go in.","A grievance-letter builder you can copy into an email.","A lawsuit-clock calculator and who to call in Tennessee.","Caregiver education, not legal or medical advice."] },
+     { id:"rights-card", name:"Patients, Right? RIGHTS card", status:"open", preview:"TWdwry1nJMGUzBVss2pWoa", site:"patients-right/card/", line:"Your eight patient rights, Hospital Hippie style, on one card: Know It, Own It, Say No, Speak Up, Feel Safe, Find Relief, Demand Better, Call Backup." },
+     { id:"rights-carousel", name:"Patients, Right? carousel", status:"open", preview:"5jme1beH3MqtFfryCcovRw", site:"patients-right/carousel/", line:"The same eight rights as a swipeable post to share." }
+   ]},
+   { name:"Palliative PAL: Home Caregiver Training", note:"For families caring at home with zero healthcare experience. We're all nurses; just some of us are registered.", items:[
+     { id:"palliative-pal", name:"Palliative PAL: Home Caregiver Training", status:"preview", preview:"Xr5qFyQ9e9iTzWFfSkRExs", site:"palliative-pal/", line:"Six modules, from Empowered Care Essentials to the Soul Nature Row'd Map.", facts:["Online course","Opening soon"] },
+     { id:"pal-companion", name:"Palliative PAL Companion", status:"preview", preview:"DRqVmEaTqobuYDa1PMp54J", site:"palliative-pal/companion/", line:"The companion that walks beside the course." },
+     { id:"love-fluency", name:"Palliative Pals Love Fluency", status:"preview", preview:"GhoQ5WpJ87Esu5QiyqNEWd", site:"palliative-pal/love-fluency/", line:"Finding the words and gestures your person can receive." },
+     { id:"care-essentials", name:"Empowered Care Essentials", status:"preview", preview:"K4AE3ESFkDifw5oUd3u1W4", site:"palliative-pal/essentials/", line:"Module 1 at a glance: \"Together, we are a nurse.\"" },
+     { id:"harm-redux-pamphlet", name:"Harm Redux course pamphlet", status:"preview", preview:"9x8hngprzEMsUzAxHz6DbL", site:"palliative-pal/pamphlet/", line:"The take-home pamphlet for the course." }
+   ]},
+   { name:"To keep in your bag", items:[
+     { id:"tuck-box", name:"Know It, Own It, Say No tuck box", status:"soon", preview:"Jo5sCHkoSHzfwqdhJmKa5a", line:"A pocket deck of patient-rights cards in a tuck box. Coming to the shop." }
+   ]}
+ ]},
+ { id:"community", name:"Community, festivals & street retreats", sub:"Do something strange for peace and change. Pull up, show up, light up.", color:"var(--amber)", icon:"tent",
+   shelves:[
+   { name:"Festivals", items:[
+     { id:"sidequest", name:"Solve 4 D: The Ultimate Sidequest", status:"book", preview:"PDB5VRynm6yvM9AxTj1BDG", site:"sidequest/", line:"Our grief and stress relief booth, one station per element: bubbles, drums, write-and-release, baggage to balloons.", facts:["For festivals and street days"] },
+     { id:"daylight", name:"Community Boosting Daylight Festival", status:"soon", line:"Breathe, share, dance and get silly together in the park. Come vibe with all tribes." }
+   ]},
+   { name:"Retreats", items:[
+     { id:"hum-drum", name:"Hum Drum Lil Sum Sum Street Retreat", status:"soon", line:"Step off the grind and tap into the vibe: storytelling, humming, improv movement, ecstatic dance.", facts:["Free"] },
+     { id:"save-music-city", name:"Save Music City Retreat", status:"soon", line:"Three days of light and shadow work: awakening, deep healing, celebration.", facts:["3 days","Nashville"] }
+   ]},
+   { name:"Circles & kindness", items:[
+     { id:"feels-club", name:"Feels Club & DeTrash Nash", status:"soon", line:"Two programs for men: one picks up litter, one picks up feelings. Rule one: DO talk about Feels Club." },
+     { id:"blessgram", name:"BlessGram", status:"soon", line:"Fetch your flowers while you live: a kindness feed and street ministry. Nice-Time beats Mean-Time." }
+   ]}
+ ]},
+ { id:"decks", name:"Decks, kits & keepsakes", sub:"Start The Talk at the kitchen table, the porch swing or the hospital room.", color:"var(--aqua)", icon:"cards",
+   shelves:[
+   { name:"Kits", items:[
+     { id:"tmsk", name:"Take Me Seriously Kit", status:"open", preview:"HaQ5NMsZqFR4WZhC6NAtAx", site:"take-me-seriously-kit/", line:"A kit for getting your wishes taken seriously, before anyone has to guess.", extra:[["Kit n Kaboodle (landing page)", A+"H1imJd5nBcubbJf2ksgS98", "kit-n-kaboodle/"]] }
+   ]},
+   { name:"Card decks", items:[
+     { id:"talk-deck", name:"The Talk Deck", status:"soon", line:"Fifteen heart-opening questions in four element suits. Solve for d.", facts:["15 cards","Printable"] },
+     { id:"openers", name:"HH Openers & Flip Side cards", status:"soon", line:"Light questions to open a room, and two-sided cards that go one layer deeper. Also a wall calendar." }
+   ]}
+ ]},
+ { id:"learn", name:"Learn, play & listen", sub:"Courses, interactive explorers and shows. Patient education disguised as a good time.", color:"var(--rouge)", icon:"star",
+   shelves:[
+   { name:"Interactive explorers", items:[
+     { id:"root-breath", name:"Root Breath Atlas", status:"open", preview:"WQeLjftCuCgK4G9hC7AxQ4", site:"root-breath-atlas/", line:"A golden balloon to breathe along with." },
+     { id:"reverse-age", name:"re:Verse r Age", status:"open", preview:"2H79YXDXuhuq4Cfni73jPb", site:"reverse-r-age/", line:"AGEs, zombie cells, fascia, pandiculation and the heart's field, told in tap-to-reveal verses." },
+     { id:"magic-secrets", name:"7 Magic Secrets", status:"open", preview:"Aez1C3YshppUnrGc9239ps", site:"7-magic-secrets/", line:"Seven circus tickets, each with a short line and a tiny game." },
+     { id:"swagger-trail", name:"The Swagger Trail: Head-to-Toe Map", status:"open", preview:"77uRe1nS3kwACLhxJFzA1Q", site:"swagger-trail/", line:"Change your walk, change your life, one body part at a time." }
+   ]},
+   { name:"Courses & books", items:[
+     { id:"easy-keys", name:"Hospital Hippie's Secret Easy Keys (Udemy)", status:"soon", line:"Five short lessons on taking back your healthcare: ask, write, and be human." },
+     { id:"habits", name:"Happy Hippie Habits: 30-Day Habit Farming", status:"soon", line:"One healing habit in, three ailing habits out. Thirty days to plant." },
+     { id:"swagger-book", name:"American Swagger book & workbook", status:"soon", line:"A suburban country boy's lessons from Music City, plus 82 agency-boosting exercises." }
+   ]},
+   { name:"Shows & series", items:[
+     { id:"q-word", name:"Q Word Out Loud podcast & newsletter", status:"soon", line:"A Hospital Hippie interviews people patient-ed by the sick-care system." },
+     { id:"urn-your-burn", name:"Urn Your Burn", status:"soon", line:"The Ten Commandments read beside ten festival principles, one essay a week." },
+     { id:"smackdown", name:"Palliative Pals Smackdown", status:"soon", line:"Comedy skits where the patient's needs win every match. Stay groovy, stay human." }
+   ]}
+ ]},
+ { id:"directories", name:"Helpful resources", sub:"Free, independent finders we think you'll find useful.", color:"var(--blue)", icon:"compass",
+   shelves:[
+   { name:"Find it near you", note:"These sites are run independently by one of our founders and are not programs of Golden Soul Circus. The nonprofit receives no money from them; the founder may earn referral income.", items:[
+     { id:"closet-compass", name:"Closet Compass", status:"preview", preview:"61fA3E7amPCHa43FHSrLnJ", site:"closet-compass/", line:"Medical equipment loan closets: borrow or donate wheelchairs, walkers and more. Tennessee first.", facts:["Free"], extra:[["Suggest a closet or a fix","https://tally.so/r/1WkL5W"]] },
+     { id:"curbwise", name:"Curbwise", status:"preview", publicSite:false, preview:"VMvEnaC26dQJjDrRoUQQ7u", site:"curbwise/", line:"City-by-city guide to getting rid of junk the right way.", facts:["Free"], extra:[["Suggest a fix or a city","https://tally.so/r/vXrlpQ"]] },
+     { id:"dumpcheck", name:"DumpCheck", status:"preview", publicSite:false, preview:"XW3bFJU9tccGffv6TcZNX3", site:"dumpcheck/", line:"RV dump stations you can count on.", facts:["Free"], extra:[["Report a station","https://tally.so/r/LDzey1"]] }
+   ]}
+ ]},
+ { id:"support", name:"Support the circus", sub:"Fund a circus with a purpose for those who can't afford the truth in this economy.", color:"var(--amber)", icon:"heart",
+   shelves:[
+   { name:"Ways to help", items:[
+     { id:"donate", name:"Donate", status:"soon", line:"Our $50,000 founding campaign roots free grief circles, sober dance nights and DeTrash Nash days in a permanent home.", points:["Tiers from $22 (The Spark) to $5,000+ (The Founding Flame).","Not tax-deductible until our 501(c)(3) is approved."] },
+     { id:"sponsor", name:"Sponsor or partner", status:"soon", line:"Hospices, studios, festivals and local businesses: let's build something sacred and silly together." },
+     { id:"volunteer", name:"Volunteer", status:"soon", line:"Hold balloons, pass out water, keep the booth humming." }
+   ]}
+ ]}
+];
+
+var ICONS = {
+  balloon:'<ellipse cx="12" cy="9" rx="6" ry="7"/><path d="M12 16l-1.5 2h3zM12 18c0 2-2 2-2 4"/>',
+  megaphone:'<path d="M3 10v4h4l9 5V5L7 10z"/><path d="M19 9c1.5 1.5 1.5 4.5 0 6"/>',
+  tent:'<path d="M2 20L12 4l10 16z"/><path d="M12 4v16M9 20l3-5 3 5"/>',
+  cards:'<rect x="4" y="6" width="11" height="15" rx="2"/><path d="M9 3h9a2 2 0 0 1 2 2v13"/>',
+  star:'<path d="M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1-4.4-4.3 6.1-.9z"/>',
+  compass:'<circle cx="12" cy="12" r="9"/><path d="M15.5 8.5l-2 5-5 2 2-5z"/>',
+  heart:'<path d="M12 20s-8-5-8-11a4.5 4.5 0 0 1 8-2.5A4.5 4.5 0 0 1 20 9c0 6-8 11-8 11z"/>'
+};
+var STATUS = { open:["st-open","Open now"], book:["st-book","Bookable"], preview:["st-preview","Preview"], soon:["st-soon","Coming soon"] };
+
+function esc(s){ return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;"); }
+function listUrl(id){ return SETTINGS.emailList + "?interest=" + encodeURIComponent(id || "general") + "&source=catalog"; }
+function linkFor(path, previewId, fullPreview){
+  if (SETTINGS.mode === "site") return (path && SETTINGS.live.indexOf(path) > -1) ? SETTINGS.siteBase + path : null;
+  if (fullPreview) return fullPreview;
+  return previewId ? A + previewId : null;
+}
+function ext(url){ return /^https?:/.test(url) && url.indexOf("claude.ai") === -1; }
+
+function actionsFor(it){
+  var out = [], main = linkFor(it.site, it.preview);
+  var openLabel = (it.status === "preview" && it.book) ? "Try the preview" : it.status === "book" ? "See details" : it.status === "open" ? "Open it" : "Take a peek";
+  if (main && it.status !== "soon") out.push('<a class="btn '+(it.book?'btn--outline':'btn--primary')+' btn--sm" href="'+esc(main)+'">'+openLabel+'</a>');
+  (it.extra || []).forEach(function(x){
+    var u = ext(x[1]) ? x[1] : linkFor(x[2], null, x[1]);
+    if (u) out.push('<a class="btn btn--outline btn--sm" href="'+esc(u)+'">'+esc(x[0])+'</a>');
+  });
+  if (it.book) out.unshift('<a class="btn btn--primary btn--sm" href="'+esc(it.book+"?source=catalog")+'">Book now</a>');
+  else if (it.status === "book") out.push('<a class="btn '+(main?'btn--outline':'btn--primary')+' btn--sm" href="'+esc(listUrl("book-"+it.id))+'">Ask about dates</a>');
+  else if (it.status !== "open" || !main) out.push('<a class="btn '+(main && it.status!=="soon"?'btn--outline':'btn--primary')+' btn--sm" href="'+esc(listUrl(it.id))+'">Get it by email</a>');
+  else out.push('<a class="btn btn--outline btn--sm" href="'+esc(listUrl(it.id))+'">Get updates by email</a>');
+  return out.join("");
+}
+function howFor(it){
+  var main = linkFor(it.site, it.preview);
+  if (it.status === "soon") return "Still in the oven. Get it by email and we'll write when it opens.";
+  if (it.status === "preview" && it.book) return "Try the Toast free. Book a Mock (ur) Funeral and we'll send your private link to the full version.";
+  if (it.status === "preview") return main ? "A preview while we finish it. Join the email list to hear when the full version opens." : "Get it by email and we'll write when it opens.";
+  if (it.status === "book") return it.book ? "Book now opens a three-minute request form. We'll write back to plan it together." : "Leave your email under Ask about dates and we'll write to find a date.";
+  return main ? "" : "Get it by email and we'll send the link.";
+}
+
+function render(){
+  var html = "";
+  if (SETTINGS.mode === "site") CATALOG.forEach(function(c){ c.shelves.forEach(function(s){
+    s.items = s.items.filter(function(it){ return it.publicSite !== false; });
+    s.items.forEach(function(it){ if ((it.status === "open" || it.status === "preview") && !linkFor(it.site, it.preview)) it.status = "soon"; });
+  }); });
+  CATALOG.forEach(function(c){
+    var n = c.shelves.reduce(function(a,s){ return a + s.items.length; }, 0);
+    html += '<details class="cat" id="'+c.id+'" style="--c:'+c.color+'"><summary>'+
+      '<span class="cat-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="#14213D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">'+ICONS[c.icon]+'</svg></span>'+
+      '<span><h2>'+esc(c.name)+'</h2><p class="sub">'+esc(c.sub)+'</p></span>'+
+      '<span class="cat-right"><span class="count">'+n+' offering'+(n>1?'s':'')+'</span><span class="plus" aria-hidden="true"></span></span></summary><div class="cat-body">';
+    c.shelves.forEach(function(s){
+      html += '<details class="shelf"><summary><h3>'+esc(s.name)+'</h3><span class="count">'+s.items.length+'</span><span class="plus" aria-hidden="true"></span></summary><div class="shelf-body">';
+      if (s.note) html += '<p class="shelf-note">'+esc(s.note)+'</p>';
+      s.items.forEach(function(it){
+        var st = STATUS[it.status], how = howFor(it);
+        var text = [it.name, it.line, (it.facts||[]).join(" "), (it.points||[]).join(" "), c.name, s.name, st[1]].join(" ").toLowerCase();
+        html += '<details class="offer" id="'+it.id+'" data-text="'+esc(text)+'"><summary><h4>'+esc(it.name)+'</h4><span class="chip '+st[0]+'">'+st[1]+'</span><p class="line">'+esc(it.line)+'</p></summary><div class="offer-body">'+
+          (it.facts ? '<ul class="facts">'+it.facts.map(function(f){return '<li>'+esc(f)+'</li>';}).join("")+'</ul>' : '')+
+          (it.points ? '<ul>'+it.points.map(function(p){return '<li>'+esc(p)+'</li>';}).join("")+'</ul>' : '')+
+          '<div class="actions">'+actionsFor(it)+'</div>'+(how ? '<p class="how">'+esc(how)+'</p>' : '')+'</div></details>';
+      });
+      html += '</div></details>';
+    });
+    html += '</div></details>';
+  });
+  document.getElementById("cats").innerHTML = html;
+}
+render();
+
+["heroList","bandList","emptyList"].forEach(function(id){ document.getElementById(id).href = listUrl("general"); });
+
+/* search: filters offerings, opens the tents that hold matches */
+var q = document.getElementById("q"), saved = null;
+q.addEventListener("input", function(){
+  var v = q.value.trim().toLowerCase(), any = false;
+  document.querySelectorAll(".cat").forEach(function(cat){
+    var catHit = false;
+    cat.querySelectorAll(".shelf").forEach(function(sh){
+      var shHit = false;
+      sh.querySelectorAll(".offer").forEach(function(o){
+        var hit = !v || o.dataset.text.indexOf(v) > -1;
+        o.classList.toggle("hidden", !hit); if (hit) shHit = true;
+      });
+      sh.classList.toggle("hidden", !shHit); if (v) sh.open = shHit; if (shHit) catHit = true;
+    });
+    cat.classList.toggle("hidden", !catHit); if (v) cat.open = catHit; if (catHit) any = true;
+  });
+  document.getElementById("empty").classList.toggle("hidden", any);
+});
+function setAll(open){ document.querySelectorAll(".cat, .shelf").forEach(function(d){ d.open = open; }); }
+document.getElementById("openAll").addEventListener("click", function(){ setAll(true); });
+document.getElementById("closeAll").addEventListener("click", function(){ setAll(false); });
+
+/* open a deep link like #advocates-act */
+function openHash(){
+  var id = location.hash.slice(1); if (!id) return;
+  var el = document.getElementById(id); if (!el || el.tagName !== "DETAILS") return;
+  for (var d = el; d; d = d.parentElement && d.parentElement.closest("details")) d.open = true;
+  el.scrollIntoView({block:"start"});
+}
+window.addEventListener("hashchange", openHash); openHash();
+
+/* team-only checklist */
+if (SETTINGS.showTeamNotes){
+  var rows = [];
+  CATALOG.forEach(function(c){ c.shelves.forEach(function(s){ s.items.forEach(function(it){
+    if (it.preview || it.site) rows.push('<tr><td>'+esc(it.name)+'</td><td>'+(it.preview?'<a href="'+A+it.preview+'">'+it.preview+'</a>':'—')+'</td><td><code>'+esc(it.site||'(stays on email list)')+'</code></td></tr>');
+  }); }); });
+  document.getElementById("team").innerHTML =
+  '<details class="team"><summary><h2>Before it goes to GitHub (team only)</h2><span class="plus" aria-hidden="true"></span></summary><div class="team-body">'+
+  '<p class="small">This box only shows while <code>showTeamNotes</code> is true. The GitHub copy has it switched off.</p>'+
+  '<h3>Done</h3><ul>'+
+  '<li>Email list live at <a href="'+SETTINGS.emailList+'">tally.so/r/je6qB4</a>, with signup emails to you turned on.</li>'+
+  '<li>Booking forms published with signup emails on: <a href="https://tally.so/r/GexGO2">Mock (ur) Funeral</a> and <a href="https://tally.so/r/xVXq8J">Row\'d Map talk</a>. Both are wired to Book now.</li>'+
+  '<li>Telegram priced at $77.</li></ul>'+
+  '<h3>Your final say on prices</h3><div class="tablewrap"><table><thead><tr><th>Offering</th><th>Range</th><th>Suggested</th></tr></thead><tbody>'+
+  '<tr><td>House party, 45 min</td><td>$177–$250</td><td>$222</td></tr>'+
+  '<tr><td>House party, 90 min</td><td>$333–$475</td><td>$444</td></tr>'+
+  '<tr><td>Sound bath, private (1–4 people, 60 min)</td><td>$150–$225</td><td>$177</td></tr>'+
+  '<tr><td>Sound bath, in-home group (up to 12)</td><td>$250–$400</td><td>$333</td></tr>'+
+  '<tr><td>Sound bath, public drop-in</td><td>$20–$35 a person</td><td>$25, pay-what-you-can floor $10</td></tr>'+
+  '</tbody></table></div>'+
+  '<h3>Still to do</h3><ol>'+
+  '<li>Approve the prices above.</li>'+
+  '<li>Upload the repo bundle and match folder names to pages already on the site.</li>'+
+  '<li>Export the Design pages (RIGHTS card, carousel, Sidequest, Empowered Care Essentials, pamphlet, Swagger Trail, tuck box, Kit n Kaboodle) as PDF or PNG.</li>'+
+  '<li>Add the Udemy, Q Word Out Loud, YouTube and Instagram links.</li>'+
+  '<li>Board vote under the conflict-of-interest policy before linking Closet Compass from the nonprofit site.</li></ol>'+
+  '<h3>Link map</h3><div class="tablewrap"><table><thead><tr><th>Offering</th><th>Today (claude.ai)</th><th>Repo path</th></tr></thead><tbody>'+rows.join("")+'</tbody></table></div>'+
+  '</div></details>';
+}
+</script>
+</body>
+</html>
