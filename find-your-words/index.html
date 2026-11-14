@@ -285,7 +285,7 @@ const STOPS = [
   {id:'prost', label:'PROST', c:'var(--blue)'},
   {id:'words', label:'YOUR WORDS', c:'var(--rouge)'}
 ];
-const BOOK_URL = 'https://claude.ai/code/artifact/f39fdd27-cd9a-4ca1-a291-7b2deb764396';
+const BOOK_URL = 'https://tally.so/r/GexGO2?source=find-your-words';
 const EXTRINSIC = /\b(money|rich|salary|paid|paycheck|income|job|career|title|promotion|boss|ceo|house|houses|car|cars|truck|boat|degree|grades|gpa|weight|pounds|followers|likes|trophy|trophies|award|awards|bought|buys|dollars?|millionaire|net worth)\b|\$\s?\d/i;
 const WPM = 130;
 
@@ -576,4 +576,33 @@ if(!(st.step>=0 && st.step<STOPS.length)) st.step=0;
 render();
 </script>
 
+
+<style>
+.lockcard{text-align:left}
+.lockcard .btns{display:flex;flex-wrap:wrap;gap:var(--space-3);margin-top:var(--space-4)}
+.preview-flag{display:inline-block;font-family:var(--font-mono);font-size:var(--fs-xs);letter-spacing:.06em;padding:3px 10px;border-radius:999px;background:var(--ink);color:var(--mint);margin-left:8px}
+</style>
+<script>
+/* Preview gate: the Toast is open to everyone. The Roast, the Prost and the read-aloud open with a booking. */
+(function(){
+  var BOOK = "https://tally.so/r/GexGO2?source=find-your-words-preview";
+  var LIST = "https://tally.so/r/je6qB4?interest=find-your-words&source=find-your-words-preview";
+  var LOCK = '<div class="stack"><div class="card lockcard">'+
+    '<p class="eyebrow">PREVIEW · ACTS II AND III</p>'+
+    '<h2 class="title title--display" tabindex="-1">The rest of the show opens with your booking</h2>'+
+    '<p class="lede lede--soft">You just tried the Toast. When you book a Mock (ur) Funeral, you get the full Find Your Words: the loving Roast, the Prost, and a full-screen reader for saying it all aloud.</p>'+
+    '<p class="care">Already booked? Your private link is in your confirmation email. Your answers here will be waiting for you there on this device.</p>'+
+    '<div class="btns"><a class="btn btn--primary btn--lg" href="'+BOOK+'">Book a Mock (ur) Funeral</a>'+
+    '<a class="btn btn--outline" href="'+LIST+'">Get updates by email</a>'+
+    '<button type="button" class="btn btn--outline" data-go="1">← Back to the Toast</button></div>'+
+    '</div></div>';
+  var full = render;
+  render = function(){
+    if (st.step >= 2){ renderRibbon(); screen.innerHTML = LOCK; $('live').textContent = 'Preview'; return; }
+    full();
+  };
+  var t = document.querySelector('.top .title'); if (t) t.insertAdjacentHTML('beforeend','<span class="preview-flag">PREVIEW</span>');
+  render();
+})();
+</script>
 </body></html>
