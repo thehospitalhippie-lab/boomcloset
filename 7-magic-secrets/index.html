@@ -1,0 +1,896 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>7 Magic Secrets</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,500;0,600;1,500;1,600&family=Work+Sans:wght@400;500;600&family=Caveat:wght@500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one left-aligned column. Blue hero band with a hanging valance, a sticky progress strip,
+   then a stack of circus tickets joined by a dashed tear line. Each ticket opens a bottom sheet
+   with a bright header band, one short line (read aloud), a tiny game on a dashed "stage", and a keep button.
+   Built from the Golden Soul Circus design system (palette v2). */
+:root{
+  /* palette */
+  --blue:#4392F1; --amber:#F5B700; --mint:#D5F9DE; --rouge:#E87EA1; --rouge-deep:#B02E5E; --aqua:#5BC5CB;
+  --ink:#14213D; --white:#FFFFFF;
+  --ink-18:rgba(20,33,61,.18); --ink-70:rgba(20,33,61,.70); --ink-75:rgba(20,33,61,.75);
+  --white-28:rgba(255,255,255,.28); --white-50:rgba(255,255,255,.50); --white-55:rgba(255,255,255,.55);
+  /* theme roles */
+  --page:#D5F9DE; --surface:#FFFFFF; --text:#14213D; --text-soft:rgba(20,33,61,.74);
+  --line:rgba(20,33,61,.18); --accent-text:#B02E5E; --focus:#14213D;
+  --btn-bg:#14213D; --btn-fg:#F5B700;
+  --shadow-card:0 1px 0 rgba(20,33,61,.18), 0 10px 26px -18px rgba(20,33,61,.5);
+  --scrim:rgba(20,33,61,.62);
+  /* type */
+  --font-display:Fraunces, Georgia, "Times New Roman", serif;
+  --font-body:"Work Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-script:Caveat, "Comic Sans MS", cursive;
+  --font-mono:"IBM Plex Mono", ui-monospace, monospace;
+  --fs-xs:.8rem; --fs-sm:.92rem; --fs-base:1.06rem; --fs-md:1.25rem;
+  --fs-lg:clamp(1.3rem, 3.5vw, 1.65rem); --fs-xl:clamp(1.8rem, 4.4vw, 2.4rem); --fs-2xl:clamp(2rem, 5.5vw, 3.1rem);
+  --fs-script:1.55rem; --fs-script-sm:1.35rem;
+  --lh-tight:1.15; --lh-snug:1.3; --lh-body:1.55; --fw-medium:500; --fw-bold:600;
+  /* space, shape */
+  --space-1:4px; --space-2:8px; --space-3:12px; --space-4:16px; --space-5:24px; --space-6:32px; --space-7:48px; --space-8:64px;
+  --section-y-tight:56px; --content-max:780px; --gutter:24px;
+  --r-xs:2px; --r-sm:10px; --r-md:14px; --r-pill:999px; --r-round:50%;
+  --bw-hair:1px; --bw:1.5px; --bw-strong:2px;
+  --ease:ease; --dur-fast:160ms; --dur-med:320ms;
+  --accordion-ring:var(--text); --accordion-bar:var(--text); --accordion-fill:var(--amber); --accordion-bar-on:var(--ink);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --page:#101B2E; --surface:#1A2842; --text:#E4F8E9; --text-soft:rgba(228,248,233,.78);
+    --line:rgba(228,248,233,.2); --accent-text:#F4A3BE; --focus:#F5B700;
+    --btn-bg:#E4F8E9; --btn-fg:#101B2E;
+    --shadow-card:0 1px 0 rgba(228,248,233,.2), 0 10px 26px -18px rgba(0,0,0,.6);
+    --scrim:rgba(5,10,20,.75);
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --page:#101B2E; --surface:#1A2842; --text:#E4F8E9; --text-soft:rgba(228,248,233,.78);
+  --line:rgba(228,248,233,.2); --accent-text:#F4A3BE; --focus:#F5B700;
+  --btn-bg:#E4F8E9; --btn-fg:#101B2E;
+  --shadow-card:0 1px 0 rgba(228,248,233,.2), 0 10px 26px -18px rgba(0,0,0,.6);
+  --scrim:rgba(5,10,20,.75);
+  color-scheme:dark;
+}
+
+*,*::before,*::after{box-sizing:border-box}
+[hidden]{display:none !important}
+body{margin:0; background:var(--page); color:var(--text); font-family:var(--font-body); font-size:17px; line-height:var(--lh-body);}
+body::before{content:""; position:fixed; inset:0 0 auto; height:env(safe-area-inset-top,0px); z-index:30; background:var(--page);}
+:focus-visible{outline:3px solid var(--focus); outline-offset:3px;}
+@media (prefers-reduced-motion: reduce){ *,*::before,*::after{animation:none !important; transition:none !important;} }
+html.is-locked{overflow:hidden}
+.sr-only{position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap}
+
+.wrap{width:100%; max-width:calc(var(--content-max) + 2 * var(--gutter)); margin-inline:auto;
+  padding-left:max(var(--gutter), env(safe-area-inset-left,0px)); padding-right:max(var(--gutter), env(safe-area-inset-right,0px));}
+
+/* Type (design system) */
+.title{font-family:var(--font-display); font-weight:var(--fw-medium); line-height:var(--lh-tight); letter-spacing:-.01em; font-size:var(--fs-xl); margin:0 0 .5em; text-wrap:balance;}
+.title--display{font-size:var(--fs-2xl); font-style:italic; max-width:14ch;}
+.title--quiet{font-size:var(--fs-lg); line-height:var(--lh-snug); margin-bottom:.4em;}
+.title--card{font-size:var(--fs-md); margin-bottom:var(--space-1);}
+.lede{font-size:var(--fs-base); font-weight:var(--fw-medium); margin:0 0 1em;}
+.lede--soft{color:var(--text-soft); font-weight:400;}
+.lede--display{font-family:var(--font-display); font-weight:var(--fw-bold); font-size:var(--fs-lg); line-height:1.25;}
+.script{font-family:var(--font-script); font-size:var(--fs-script); line-height:1.25; color:var(--accent-text); margin:0 0 1em;}
+.eyebrow{font-family:var(--font-mono); font-size:var(--fs-xs); letter-spacing:.04em; margin:0 0 var(--space-3);}
+.note{font-size:var(--fs-sm); font-weight:var(--fw-medium);}
+.wordmark{font-family:var(--font-display); font-weight:var(--fw-bold); font-size:var(--fs-base); color:var(--text); margin:0;}
+.wordmark span{color:var(--accent-text);}
+
+/* Bright bands + valance */
+.on-bright{color:var(--ink); --focus:var(--ink); --btn-bg:var(--ink); --btn-fg:var(--amber); --accent-text:var(--rouge-deep);
+  --accordion-ring:var(--ink); --accordion-bar:var(--ink); --accordion-fill:var(--ink); --accordion-bar-on:var(--amber);}
+.band{padding:var(--section-y-tight) var(--gutter);}
+.band--blue{--valance:var(--blue); background:var(--blue);}
+.band--amber{--valance:var(--amber); background:var(--amber);}
+.band--rouge{--valance:var(--rouge); background:var(--rouge);}
+.band--aqua{--valance:var(--aqua); background:var(--aqua);}
+.valance{position:relative; z-index:1;}
+.valance::after{content:""; position:absolute; left:0; right:0; top:100%; height:14px; pointer-events:none;
+  background:radial-gradient(circle at 14px 0, var(--valance) 13.5px, transparent 14px) 0 0/28px 14px repeat-x;}
+
+/* Buttons, pills, tags */
+.btn{position:relative; display:inline-flex; align-items:center; justify-content:center; gap:var(--space-2); min-height:44px; padding:10px 18px;
+  border:var(--bw) solid transparent; border-radius:var(--r-pill); font-family:var(--font-body); font-size:var(--fs-sm); font-weight:var(--fw-bold); line-height:1.2;
+  text-decoration:none; cursor:pointer;
+  transition:background var(--dur-fast) var(--ease), color var(--dur-fast) var(--ease), border-color var(--dur-fast) var(--ease), transform var(--dur-fast) var(--ease), opacity var(--dur-fast) var(--ease);}
+.btn--primary{background:var(--btn-bg); color:var(--btn-fg); border-color:var(--btn-bg);}
+.btn--primary:hover{background:var(--amber); color:var(--ink); border-color:var(--amber);}
+.btn--outline{background:transparent; color:var(--text); border-color:var(--text);}
+.on-bright .btn--outline{color:var(--ink); border-color:var(--ink);}
+.btn--outline:hover{background:var(--btn-bg); color:var(--btn-fg); border-color:var(--btn-bg);}
+.btn--lg{padding:15px 28px; font-size:var(--fs-base);}
+.btn-ic{width:22px; height:22px; fill:none; stroke:currentColor; stroke-width:2.2; stroke-linecap:round; stroke-linejoin:round; flex:none;}
+.pill{min-height:44px; padding:10px 17px; background:var(--white-28); color:var(--ink); border:var(--bw) solid var(--ink-70); border-radius:var(--r-pill);
+  font-family:var(--font-body); font-size:var(--fs-sm); font-weight:var(--fw-medium); cursor:pointer;
+  transition:background var(--dur-fast) var(--ease), border-color var(--dur-fast) var(--ease), color var(--dur-fast) var(--ease);}
+.pill:hover{border-color:var(--ink); background:var(--white-50);}
+.pill[aria-pressed="true"]{background:var(--ink); border-color:var(--ink); color:var(--mint); font-weight:var(--fw-bold);}
+.tag{display:inline-block; font-family:var(--font-mono); font-size:.875rem; letter-spacing:.06em; padding:3px 9px; border-radius:var(--r-pill);}
+.tag--play{background:var(--btn-bg); color:var(--btn-fg);}
+
+/* Accordion (design system) */
+.accordion-toggle{position:relative; display:inline-flex; align-items:center; justify-content:center; flex:0 0 auto; width:40px; height:40px; padding:0; background:transparent;
+  color:var(--text); border:var(--bw) dashed var(--accordion-ring); border-radius:var(--r-round); cursor:pointer;
+  transition:background var(--dur-fast) var(--ease), border-color var(--dur-fast) var(--ease), transform var(--dur-fast) var(--ease);}
+.accordion-toggle::after{content:""; position:absolute; inset:-5px; border-radius:var(--r-round);}
+.accordion-toggle:hover{transform:scale(1.06);}
+.accordion-bar{position:absolute; top:50%; left:50%; background:var(--accordion-bar); border-radius:var(--r-xs); transition:transform 260ms var(--ease), background var(--dur-fast) var(--ease);}
+.accordion-bar--h{width:14px; height:2.5px; transform:translate(-50%,-50%);}
+.accordion-bar--v{width:2.5px; height:14px; transform:translate(-50%,-50%);}
+.accordion-toggle[aria-expanded="true"] .accordion-bar--v{transform:translate(-50%,-50%) rotate(90deg);}
+.accordion-toggle:hover, .accordion-toggle[aria-expanded="true"]{background:var(--accordion-fill); border-color:var(--accordion-fill); border-style:solid;}
+.accordion-toggle:hover .accordion-bar, .accordion-toggle[aria-expanded="true"] .accordion-bar{background:var(--accordion-bar-on);}
+.accordion-panel{overflow:hidden; max-height:0; transition:max-height var(--dur-med) var(--ease);}
+.accordion-panel > :first-child{margin-top:18px;}
+.accordion-panel > :last-child{margin-bottom:0;}
+
+/* Ticket (design system) */
+.ticket{--stub-w:78px; position:relative; display:grid; grid-template-columns:var(--stub-w) 1fr; background:var(--surface); border-radius:var(--r-md); box-shadow:var(--shadow-card);}
+.ticket::before,.ticket::after{content:""; position:absolute; left:calc(var(--stub-w) - 10px); width:20px; height:20px; border-radius:var(--r-round); background:var(--page); z-index:2;}
+.ticket::before{top:-10px;}
+.ticket::after{bottom:-10px;}
+.ticket-stub{background:var(--stub); color:var(--ink); border-radius:var(--r-md) 0 0 var(--r-md); display:flex; justify-content:center; align-items:center;}
+.ticket-stub svg{width:40px; height:40px; transform:rotate(-6deg);}
+.ticket-body{min-width:0; padding:20px 64px 20px var(--space-5); border-left:var(--bw-strong) dashed var(--line);}
+.ticket--blue{--stub:var(--blue);} .ticket--amber{--stub:var(--amber);} .ticket--rouge{--stub:var(--rouge);} .ticket--aqua{--stub:var(--aqua);}
+@media (max-width:440px){ .ticket{--stub-w:64px;} .ticket-stub svg{width:34px; height:34px;} .ticket-body{padding:18px 56px 18px 18px;} }
+
+/* Request card = the dashed play stage */
+.request-card{background:var(--white); color:var(--ink); border:var(--bw-strong) dashed var(--ink); border-radius:var(--r-md); padding:22px var(--space-5);}
+
+/* ---------- Page ---------- */
+.topbar{padding-block:var(--space-4);}
+.band.hero{padding-block:36px 52px; padding-inline:0;}
+.hero-in{display:grid; grid-template-columns:minmax(0,1fr) auto; column-gap:var(--space-4); align-items:center;}
+.hero-in > .eyebrow, .hero-in > .title{grid-column:1; margin-bottom:var(--space-3);}
+.hero-in > .title{margin-bottom:var(--space-2);}
+.hero-sun{grid-column:2; grid-row:1 / span 2; width:104px; height:104px; max-width:none; margin:0; animation:bob 2.4s ease-in-out 2;}
+.hero-in > .lede{grid-column:1 / -1; margin:var(--space-3) 0 var(--space-4);}
+.hero-actions{grid-column:1 / -1; display:flex; flex-wrap:wrap; gap:var(--space-3);}
+
+.play{padding-top:34px; padding-bottom:var(--space-6);}
+.progress{position:sticky; top:env(safe-area-inset-top,0px); z-index:20; display:flex; align-items:center; justify-content:space-between; gap:var(--space-3);
+  padding-block:var(--space-3); background:var(--page); border-bottom:var(--bw-strong) dashed var(--line); margin-bottom:var(--space-5);}
+.progress-label{font-weight:var(--fw-bold); font-size:var(--fs-sm); margin:0;}
+.dots{display:flex; gap:var(--space-2);}
+.dot{width:16px; height:16px; border-radius:var(--r-round); border:var(--bw) solid var(--text); background:transparent; transition:background var(--dur-med) var(--ease);}
+.dot.is-kept{background:var(--c);}
+
+.stops{list-style:none; margin:0; padding:0; max-width:600px; display:flex; flex-direction:column; gap:var(--space-5);}
+.stop{position:relative;}
+.stop:not(:last-child)::after{content:""; position:absolute; left:31px; top:100%; height:var(--space-5); border-left:var(--bw-strong) dashed var(--line);}
+@media (max-width:440px){ .stop:not(:last-child)::after{left:31px;} }
+.stop .ticket{width:100%; min-height:104px; padding:0; border:0; font:inherit; color:var(--text); text-align:left; cursor:pointer; transition:transform var(--dur-fast) var(--ease);}
+.stop .ticket:hover{transform:translateY(-2px);}
+.ticket-body{display:flex; flex-direction:column; align-items:flex-start; justify-content:center; gap:2px;}
+.ticket-body .tag{margin-bottom:var(--space-1);}
+.ticket-body .title{margin:0;}
+.stop-state{font-size:var(--fs-sm); font-weight:var(--fw-medium); color:var(--text-soft);}
+.ticket-check{position:absolute; right:16px; top:50%; width:34px; height:34px; margin-top:-17px; border-radius:var(--r-round); background:var(--amber); border:var(--bw) solid var(--ink); display:none; align-items:center; justify-content:center;}
+.ticket-check svg{width:22px; height:22px; fill:none; stroke:var(--ink); stroke-width:3; stroke-linecap:round; stroke-linejoin:round;}
+.ticket.is-kept .ticket-check{display:flex;}
+.ticket.is-next{animation:bob 2.4s ease-in-out 2;}
+
+.again{display:flex; flex-wrap:wrap; gap:var(--space-3); margin-top:var(--space-6);}
+.foot{padding-block:var(--space-5) var(--space-7); display:flex; flex-direction:column; gap:var(--space-1); border-top:var(--bw-strong) dashed var(--line);}
+.foot .note{margin:0; color:var(--text-soft);}
+
+/* ---------- Sheets ---------- */
+.scrim{position:fixed; inset:0; z-index:40; background:var(--scrim);}
+.sheet{position:fixed; inset:0; z-index:41; display:flex; align-items:flex-end; justify-content:center;
+  padding-top:env(safe-area-inset-top,0px); padding-left:env(safe-area-inset-left,0px); padding-right:env(safe-area-inset-right,0px);}
+.sheet-card{position:relative; width:100%; max-width:560px; max-height:94%; display:flex; flex-direction:column; background:var(--surface); color:var(--text);
+  border-radius:var(--r-md) var(--r-md) 0 0; overflow:hidden; outline:none;}
+.sheet .band{flex:none; padding:18px var(--gutter) 24px; z-index:2;}
+.head-row{display:flex; align-items:flex-start; justify-content:space-between; gap:var(--space-3);}
+.head-row .eyebrow{margin:6px 0 var(--space-2); font-size:.875rem;}
+.sheet .band .title{margin:0;}
+.close{flex:none; width:48px; height:48px; padding:0; display:inline-flex; align-items:center; justify-content:center; border-radius:var(--r-round);
+  background:var(--white-28); color:var(--ink); border:var(--bw) solid var(--ink); cursor:pointer; transition:background var(--dur-fast) var(--ease);}
+.close:hover{background:var(--white-50);}
+.close svg{width:24px; height:24px; fill:none; stroke:currentColor; stroke-width:2.6; stroke-linecap:round;}
+.card-scroll{flex:1 1 auto; min-height:0; overflow-y:auto; overscroll-behavior:contain;}
+.sheet-body{display:grid; gap:var(--space-4); padding:34px var(--gutter) calc(var(--space-5) + env(safe-area-inset-bottom,0px));}
+.sheet-body > *{margin:0; min-width:0;}
+.sheet-body .lede--display{margin:0;}
+.hear{justify-self:start;}
+.voice-row{display:flex; flex-wrap:wrap; gap:var(--space-3);}
+.voice-toggle{display:inline-flex; align-items:center; gap:var(--space-2);}
+.voice-toggle[aria-pressed="true"] .vt-off, .voice-toggle[aria-pressed="false"] .vt-on{display:none;}
+.btn.voice-toggle[aria-pressed="true"]{background:var(--btn-bg); color:var(--btn-fg); border-color:var(--btn-bg);}
+.stage{display:grid; gap:var(--space-4); padding:var(--space-4);}
+.feedback{font-family:var(--font-script); font-size:var(--fs-script); line-height:1.25; color:var(--accent-text); min-height:2.5em;}
+.keep{width:100%;}
+.keep[aria-disabled="true"]{cursor:pointer;}
+.keep.bob{animation:bob 2.4s ease-in-out 2;}
+@media (min-width:640px){
+  .sheet{align-items:center; padding:var(--space-5);}
+  .sheet-card{border-radius:var(--r-md); max-height:min(92%, 820px);}
+}
+
+.act-row{display:flex; flex-wrap:wrap; justify-content:center; gap:var(--space-3);}
+
+/* Art */
+.art{display:block; width:100%; max-width:280px; height:auto; margin:0 auto;}
+.art .o{stroke:var(--ink); stroke-width:3; stroke-linejoin:round; stroke-linecap:round;}
+.art .nf{fill:none;}
+.art .f-blue{fill:var(--blue);} .art .f-amber{fill:var(--amber);} .art .f-rouge{fill:var(--rouge);} .art .f-aqua{fill:var(--aqua);}
+.art .f-mint{fill:var(--mint);} .art .f-white{fill:var(--white);} .art .f-ink{fill:var(--ink);}
+.art .eye{fill:var(--ink); stroke:none;}
+.art .cheek{fill:var(--rouge); stroke:none;}
+.art .outU{fill:var(--ink); stroke:var(--ink); stroke-width:6; stroke-linejoin:round;}
+.art .inU{fill:var(--white); stroke:none;}
+.art .inU--rouge{fill:var(--rouge);}
+
+#art-sky .cloudG{transition:transform .7s ease;}
+#art-sky[data-mood="grumpy"] .cloudG{transform:translate(120px,84px) scale(1.45);}
+#art-sky[data-mood="happy"] .cloudG{transform:translate(198px,36px) scale(.5);}
+#art-sky[data-mood="grumpy"] .face-happy, #art-sky[data-mood="happy"] .face-grumpy{display:none;}
+
+.match{display:grid; gap:var(--space-3); justify-items:center;}
+.match .eyebrow{margin:0 0 var(--space-1); text-align:center;}
+.shape{width:56px; height:54px;}
+.match-big{display:flex; flex-wrap:wrap; justify-content:center; gap:var(--space-3);}
+.shape-btn{width:88px; height:88px; padding:0; display:inline-flex; align-items:center; justify-content:center; background:var(--white-28); border:var(--bw) solid var(--ink-70); border-radius:var(--r-md); cursor:pointer; transition:border-color var(--dur-fast) var(--ease), background var(--dur-fast) var(--ease);}
+.shape-btn:hover{border-color:var(--ink); background:var(--white-50);}
+.shape-btn svg{width:60px; height:58px;}
+.shape-btn.is-right{border:3px solid var(--ink); background:var(--mint);}
+.shape-btn.is-wrong{animation:nope .4s ease;}
+.shape .o, .shape-btn .o{stroke:var(--ink); stroke-width:3; stroke-linejoin:round;}
+
+#art-blob .blobG{transform-origin:120px 150px; transition:transform .14s ease-in-out;}
+#art-blob[data-wig="L"] .blobG{transform:rotate(-7deg);}
+#art-blob[data-wig="R"] .blobG{transform:rotate(7deg);}
+#art-blob .shake-lines{display:none;}
+#art-blob.is-wiggling .shake-lines{display:inline;}
+
+#art-thermo .fillcol{fill:var(--amber); transform-box:fill-box; transform-origin:50% 100%; transform:scaleY(.62); transition:transform .7s ease, fill .4s ease;}
+#art-thermo[data-temp="hot"] .fillcol{fill:var(--rouge); transform:scaleY(.93);}
+#art-thermo[data-temp="cold"] .fillcol{fill:var(--blue); transform:scaleY(.4);}
+
+#art-swing .swingG{transform-origin:120px 20px; transition:transform .9s cubic-bezier(.45,0,.55,1);}
+#art-swing[data-pos="L"] .swingG{transform:rotate(26deg);}
+#art-swing[data-pos="R"] .swingG{transform:rotate(-26deg);}
+
+#art-bulb .bulbBody{fill:var(--white); transition:fill .2s ease;}
+#art-bulb[data-on="true"] .bulbBody{fill:var(--amber);}
+#art-bulb .rays, #art-bulb .face-on{display:none;}
+#art-bulb[data-on="true"] .rays, #art-bulb[data-on="true"] .face-on{display:inline;}
+#art-bulb[data-on="true"] .face-off{display:none;}
+
+#art-grow .g-sprout, #art-grow .g-spark, #art-grow .g-drops, #art-grow .g-flower{display:none;}
+#art-grow[data-spark="1"] .g-spark, #art-grow[data-care="1"] .g-drops{display:inline;}
+#art-grow[data-spark="1"] .g-sprout, #art-grow[data-care="1"] .g-sprout{display:inline;}
+#art-grow[data-spark="1"][data-care="1"] :is(.g-seed,.g-sprout,.g-spark,.g-drops){display:none;}
+#art-grow[data-spark="1"][data-care="1"] .g-flower{display:inline; transform-origin:120px 136px; animation:bloom .6s ease;}
+
+.icon{display:block; width:100%; height:100%; fill:none; stroke:var(--ink); stroke-width:2.4; stroke-linecap:round; stroke-linejoin:round;}
+
+.recap{display:flex; flex-wrap:wrap; gap:var(--space-2);}
+.chip{width:48px; height:48px; padding:9px; border-radius:var(--r-round); background:var(--c); border:var(--bw-strong) solid var(--ink);}
+.slip .title{margin:0 0 var(--space-2);}
+.slip ul{margin:0; padding-left:1.2em; display:grid; gap:var(--space-1); font-size:var(--fs-base); font-weight:var(--fw-medium);}
+.gu-head{display:flex; align-items:center; justify-content:space-between; gap:var(--space-3);}
+.gu-head .title{margin:0;}
+.grownups .lede{margin:var(--space-1) 0 0;}
+.grownups .accordion-panel p{margin:0 0 .8em; font-size:var(--fs-sm); color:var(--text-soft);}
+
+@keyframes bob{0%,100%{transform:translateY(0)} 50%{transform:translateY(-6px)}}
+@keyframes nope{0%,100%{transform:translateX(0)} 25%{transform:translateX(-6px)} 75%{transform:translateX(6px)}}
+@keyframes bloom{from{transform:scale(.3)} to{transform:scale(1)}}
+</style>
+
+<div id="page">
+  <header>
+  <div class="topbar wrap"><p class="wordmark">Golden Soul <span>Circus</span></p></div>
+
+  <div class="band band--blue valance on-bright hero">
+    <div class="wrap hero-in">
+      <p class="eyebrow">A GAME FOR LITTLE CIRCUS KIDS</p>
+      <h1 class="title title--display">7 Magic Secrets</h1>
+      <div class="hero-sun" id="heroSun" aria-hidden="true"></div>
+      <p class="lede lede--display">Tap a ticket. Play a tiny game. Keep the secret.</p>
+      <div class="hero-actions">
+        <button class="btn btn--outline" id="heroHear" type="button" hidden>
+          <svg class="btn-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 9 H7 L12 5 V19 L7 15 H3 Z"/><path d="M15.5 9 Q18 12 15.5 15"/><path d="M18.5 6.5 Q23 12 18.5 17.5"/></svg>
+          <span class="hear-label">Hear it</span>
+        </button>
+        <button class="pill voice-toggle" id="voiceToggle" type="button" aria-pressed="true" hidden><svg class="btn-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 9 H7 L12 5 V19 L7 15 H3 Z"/><path class="vt-on" d="M15.5 9 Q18 12 15.5 15 M18.5 6.5 Q23 12 18.5 17.5"/><path class="vt-off" d="M16 9 L22 15 M22 9 L16 15"/></svg>Voice</button>
+      </div>
+    </div>
+  </div>
+  </header>
+
+  <main class="play wrap">
+    <div class="progress">
+      <p class="progress-label" id="progressLabel">0 of 7 secrets kept</p>
+      <div class="dots" id="dots" aria-hidden="true"></div>
+    </div>
+    <ol class="stops" id="stops"></ol>
+    <div class="again" id="again" hidden>
+      <button class="btn btn--primary" id="againSlip" type="button">Open the permission slip</button>
+      <button class="btn btn--outline" id="againPlay" type="button">Play again</button>
+    </div>
+  </main>
+
+  <footer class="foot wrap">
+    <p class="wordmark">Golden Soul <span>Circus</span></p>
+    <p class="note">A circus with a purpose.</p>
+  </footer>
+</div>
+
+<p class="sr-only" id="announce" role="status" aria-live="polite"></p>
+<div class="scrim" id="scrim" hidden></div>
+
+<div class="sheet" id="sheet" role="dialog" aria-modal="true" aria-labelledby="sheetTitle" aria-describedby="sheetLine" hidden>
+  <div class="sheet-card" tabindex="-1" data-autofocus>
+    <header class="band valance on-bright" id="sheetHead">
+      <div class="head-row">
+        <div>
+          <p class="eyebrow" id="sheetEyebrow"></p>
+          <h2 class="title title--quiet" id="sheetTitle"></h2>
+        </div>
+        <button class="close" type="button" data-close aria-label="Close">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 5 L19 19 M19 5 L5 19"/></svg>
+        </button>
+      </div>
+    </header>
+    <div class="card-scroll">
+      <div class="sheet-body">
+        <p class="lede lede--display" id="sheetLine"></p>
+        <div class="voice-row" id="sheetVoice" hidden>
+        <button class="btn btn--outline hear" id="hearBtn" type="button">
+          <svg class="btn-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 9 H7 L12 5 V19 L7 15 H3 Z"/><path d="M15.5 9 Q18 12 15.5 15"/><path d="M18.5 6.5 Q23 12 18.5 17.5"/></svg>
+          <span class="hear-label">Hear it</span>
+        </button>
+        <button class="btn btn--outline voice-toggle" type="button" aria-pressed="true"><svg class="btn-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 9 H7 L12 5 V19 L7 15 H3 Z"/><path class="vt-on" d="M15.5 9 Q18 12 15.5 15 M18.5 6.5 Q23 12 18.5 17.5"/><path class="vt-off" d="M16 9 L22 15 M22 9 L16 15"/></svg>Voice</button>
+        </div>
+        <div class="stage request-card on-bright" id="stage"></div>
+        <p class="feedback" id="feedback" role="status" aria-live="polite"></p>
+        <button class="btn btn--lg keep btn--outline" id="keepBtn" type="button" aria-disabled="true">Keep this secret</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="sheet" id="finale" role="dialog" aria-modal="true" aria-labelledby="finTitle" hidden>
+  <div class="sheet-card" tabindex="-1" data-autofocus>
+    <header class="band band--rouge valance on-bright">
+      <div class="head-row">
+        <div>
+          <p class="eyebrow">ALL 7 SECRETS KEPT</p>
+          <h2 class="title title--quiet" id="finTitle">You kept them all!</h2>
+        </div>
+        <button class="close" type="button" data-close aria-label="Close">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 5 L19 19 M19 5 L5 19"/></svg>
+        </button>
+      </div>
+    </header>
+    <div class="card-scroll">
+      <div class="sheet-body">
+        <div class="recap" id="recap" aria-hidden="true"></div>
+        <article class="request-card on-bright slip">
+          <p class="eyebrow">PERMISSION SLIP</p>
+          <h3 class="title title--card">You may:</h3>
+          <ul>
+            <li>Wiggle and swing.</li>
+            <li>Flip the switch and see what happens.</li>
+            <li>Grow something new.</li>
+            <li>Feel your feelings, big and small.</li>
+          </ul>
+        </article>
+        <p class="script">Signed, the Circus.</p>
+        <button class="btn btn--outline hear" id="finHear" type="button" hidden>
+          <svg class="btn-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 9 H7 L12 5 V19 L7 15 H3 Z"/><path d="M15.5 9 Q18 12 15.5 15"/><path d="M18.5 6.5 Q23 12 18.5 17.5"/></svg>
+          <span class="hear-label">Hear it</span>
+        </button>
+        <div class="act-row" style="justify-content:flex-start">
+          <button class="btn btn--primary" id="finAgain" type="button">Play again</button>
+          <button class="btn btn--outline" type="button" data-close>Back to the tickets</button>
+        </div>
+        <section class="grownups">
+          <div class="gu-head">
+            <h3 class="title title--quiet">For grown-ups</h3>
+            <button class="accordion-toggle" id="guToggle" type="button" aria-expanded="false" aria-controls="guPanel" aria-label="Show the grown-up note">
+              <span class="accordion-bar accordion-bar--h"></span><span class="accordion-bar accordion-bar--v"></span>
+            </button>
+          </div>
+          <p class="lede lede--soft">A circus with a purpose: families practicing hard talks with play.</p>
+          <div class="accordion-panel" id="guPanel">
+            <p>Each secret is a small door to a bigger talk. Thoughts shape moods. Everything moves in seasons. What we do changes what happens next.</p>
+            <p>Ask your child which secret they liked best, then ask why. Golden Soul Circus helps families practice talks like these with ceremony and play.</p>
+            <p>The seven ideas come from The Kybalion (1908), retold for little ones.</p>
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  'use strict';
+  var $ = function(s, r){ return (r || document).querySelector(s); };
+  var $$ = function(s, r){ return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
+  var REDUCED = !!(window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches);
+  var CAN_SPEAK = ('speechSynthesis' in window) && typeof SpeechSynthesisUtterance !== 'undefined';
+  var voiceOn = true;
+
+  /* ---------- data ---------- */
+  var SECRETS = [
+    {id:1, name:'Magic Thoughts', color:'blue', icon:'thought', line:'Your thoughts paint your day. Tap one!'},
+    {id:2, name:'Match the Shape', color:'amber', icon:'heart', line:'Little and big can match. Find the match!'},
+    {id:3, name:'Everybody Wiggles', color:'rouge', icon:'wiggle', line:'Everything wiggles, even when it looks still. Tap to wiggle!'},
+    {id:4, name:'Opposite Friends', color:'aqua', icon:'thermo', line:'Hot and cold live on one thermometer. Try both!'},
+    {id:5, name:'Swing Up, Swing Down', color:'blue', icon:'swing', line:'Up, down, up, down. Give the swing a push!'},
+    {id:6, name:'Flip It and See', color:'amber', icon:'bulb', line:'You do a thing, and a thing happens. Flip the switch!'},
+    {id:7, name:'Grow Something New', color:'rouge', icon:'sprout', line:'A new thing needs a spark and some care. Give both!'}
+  ];
+  var ICONS = {
+    thought:'<ellipse cx="21" cy="15" rx="14" ry="9"/><circle cx="10" cy="29" r="3.2"/><circle cx="5.5" cy="35" r="1.8"/>',
+    heart:'<path d="M20 34 C8 26 5 17 11 12 C15 9 19 11 20 14 C21 11 25 9 29 12 C35 17 32 26 20 34 Z"/>',
+    wiggle:'<path d="M4 12 q4-8 8 0 t8 0 t8 0 t8 0"/><path d="M4 22 q4-8 8 0 t8 0 t8 0 t8 0"/><path d="M4 32 q4-8 8 0 t8 0 t8 0 t8 0"/>',
+    thermo:'<path d="M16 9 A4 4 0 0 1 24 9 V22.5 A7 7 0 1 1 16 22.5 Z"/><path d="M20 14 V27"/>',
+    swing:'<path d="M6 6 H34 M10 6 L6 36 M30 6 L34 36 M16 6 V25 M24 6 V25 M12 25 H28"/>',
+    bulb:'<path d="M20 5 C13 5 9 10 9 16 C9 21 12 24 14 27 V30 H26 V27 C28 24 31 21 31 16 C31 10 27 5 20 5 Z M15 34 H25"/>',
+    sprout:'<path d="M20 36 V18 M20 24 C12 24 8 19 8 12 C15 12 20 16 20 24 M20 19 C20 13 25 9 32 9 C32 15 28 19 20 19"/>',
+    check:'<path d="M9 21 L17 29 L31 12"/>'
+  };
+  function icon(n){ return '<svg class="icon" viewBox="0 0 40 40" aria-hidden="true" focusable="false">' + ICONS[n] + '</svg>'; }
+
+  /* ---------- state ---------- */
+  var kept = {};            /* id -> true */
+  function keptCount(){ return Object.keys(kept).length; }
+  function nextId(){ for (var i = 1; i <= 7; i++) if (!kept[i]) return i; return 0; }
+
+  /* ---------- voice ---------- */
+  var speaking = false, activeU = null;
+  function setSpeaking(on){
+    speaking = on;
+    $$('.hear-label').forEach(function(l){ l.textContent = on ? 'Stop' : 'Hear it'; });
+  }
+  function stopSpeech(){ activeU = null; setSpeaking(false); if (CAN_SPEAK) { try { speechSynthesis.cancel(); } catch (e) {} } }
+  function speak(text, force){
+    if (!CAN_SPEAK || (!voiceOn && !force)) return;
+    try {
+      speechSynthesis.cancel();
+      var u = new SpeechSynthesisUtterance(text);
+      u.lang = 'en-US'; u.rate = 0.88; u.pitch = 1.12;
+      u.onstart = function(){ if (activeU === u) setSpeaking(true); };
+      u.onend = u.onerror = function(){ if (activeU === u) { activeU = null; setSpeaking(false); } };
+      activeU = u;
+      setTimeout(function(){ if (activeU === u) speechSynthesis.speak(u); }, 30);
+    } catch (e) {}
+  }
+  function setVoice(on){
+    voiceOn = on;
+    $$('.voice-toggle').forEach(function(t){ t.setAttribute('aria-pressed', on ? 'true' : 'false'); });
+    if (!on) stopSpeech();
+    try { localStorage.setItem('gsc7-voice', on ? '1' : '0'); } catch (e) {}
+  }
+  function hearOr(text){ if (speaking) { stopSpeech(); return; } speak(text, true); }
+  function announce(t){ var a = $('#announce'); a.textContent = ''; setTimeout(function(){ a.textContent = t; }, 30); }
+
+  /* ---------- art helpers ---------- */
+  function rays(n, r1, r2, tx, ty){
+    var s = '';
+    for (var i = 0; i < n; i++) s += '<line x1="0" y1="' + (-r1) + '" x2="0" y2="' + (-r2) + '" transform="translate(' + tx + ' ' + ty + ') rotate(' + (i * 360 / n) + ')"/>';
+    return s;
+  }
+  function sunHero(){
+    return '<svg class="art hero-sun-svg" viewBox="-66 -66 132 132" focusable="false" style="width:100%;height:100%;max-width:none">' +
+      '<g class="o nf">' + rays(8, 42, 56, 0, 0) + '</g>' +
+      '<circle r="32" class="o f-amber"/>' +
+      '<circle class="eye" cx="-11" cy="-4" r="3.4"/><circle class="eye" cx="11" cy="-4" r="3.4"/>' +
+      '<path class="o nf" d="M-13 9 Q0 22 13 9"/>' +
+      '<circle class="cheek" cx="-20" cy="8" r="6"/><circle class="cheek" cx="20" cy="8" r="6"/></svg>';
+  }
+  var HEART = 'M30 52 C4 34 2 14 16 8 C24 5 29 10 30 15 C31 10 36 5 44 8 C58 14 56 34 30 52 Z';
+  var STAR = 'M30 4 L36.47 21.1 L54.73 21.97 L40.46 33.4 L45.28 51.03 L30 41 L14.72 51.03 L19.54 33.4 L5.27 21.97 L23.53 21.1 Z';
+  function shapeSVG(kind){
+    var body = kind === 'heart' ? '<path d="' + HEART + '" class="o f-rouge"/>' :
+               kind === 'star' ? '<path d="' + STAR + '" class="o f-amber"/>' :
+               '<circle cx="30" cy="29" r="24" class="o f-blue"/>';
+    return '<svg viewBox="-2 -2 64 62" aria-hidden="true" focusable="false">' + body + '</svg>';
+  }
+
+  /* ---------- the seven tiny games ---------- */
+  var cleanups = [];
+  function clearCleanups(){ while (cleanups.length) { try { cleanups.pop()(); } catch (e) {} } }
+
+  var BUILD = {
+    1: function(st, ctx){
+      st.innerHTML =
+        '<svg class="art" id="art-sky" viewBox="0 0 240 160" role="img" aria-label="A sun hiding behind a grumpy cloud" data-mood="grumpy">' +
+          '<defs><g id="cloudShape"><circle cx="-26" cy="8" r="17"/><circle cx="-6" cy="-6" r="22"/><circle cx="20" cy="-2" r="19"/><circle cx="36" cy="10" r="14"/><rect x="-42" y="6" width="90" height="20" rx="10"/></g></defs>' +
+          '<rect x="8" y="8" width="224" height="144" rx="14" class="o f-blue"/>' +
+          '<g transform="translate(120 84)">' +
+            '<g class="o nf">' + rays(8, 42, 54, 0, 0) + '</g>' +
+            '<circle r="34" class="o f-amber"/>' +
+            '<circle class="eye" cx="-12" cy="-4" r="3.5"/><circle class="eye" cx="12" cy="-4" r="3.5"/>' +
+            '<path class="o nf" d="M-14 10 Q0 24 14 10"/>' +
+            '<circle class="cheek" cx="-22" cy="9" r="6"/><circle class="cheek" cx="22" cy="9" r="6"/>' +
+          '</g>' +
+          '<g class="cloudG">' +
+            '<use href="#cloudShape" class="outU"/><use href="#cloudShape" class="inU"/>' +
+            '<g class="face-grumpy"><circle class="eye" cx="-14" cy="3" r="3"/><circle class="eye" cx="14" cy="3" r="3"/><path class="o nf" d="M-12 20 Q0 10 12 20"/></g>' +
+            '<g class="face-happy"><circle class="eye" cx="-14" cy="3" r="3"/><circle class="eye" cx="14" cy="3" r="3"/><path class="o nf" d="M-12 13 Q0 24 12 13"/></g>' +
+          '</g>' +
+        '</svg>' +
+        '<div class="act-row">' +
+          '<button class="btn btn--outline btn--lg" type="button" data-mood="grumpy">Grumpy thought</button>' +
+          '<button class="btn btn--primary btn--lg" type="button" data-mood="happy">Happy thought</button>' +
+        '</div>';
+      var art = $('#art-sky', st);
+      $$('button', st).forEach(function(b){
+        b.addEventListener('click', function(){
+          var m = b.getAttribute('data-mood');
+          art.setAttribute('data-mood', m);
+          if (m === 'happy') { art.setAttribute('aria-label', 'A smiling sun with a small happy cloud'); ctx.say('A happy thought! Out comes the sun!', true); }
+          else { art.setAttribute('aria-label', 'A sun hiding behind a grumpy cloud'); ctx.say('A grumpy thought makes a grumpy cloud.'); }
+        });
+      });
+    },
+
+    2: function(st, ctx){
+      var order = ['star', 'circle', 'heart'];
+      for (var i = order.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)); var t = order[i]; order[i] = order[j]; order[j] = t; }
+      var names = {star:'Star', circle:'Circle', heart:'Heart'};
+      st.innerHTML =
+        '<div class="match">' +
+          '<div><p class="eyebrow">SMALL</p><div class="shape art" style="margin:0 auto;width:56px;height:54px">' + shapeSVG('heart') + '<span class="sr-only">A small heart.</span></div></div>' +
+          '<div><p class="eyebrow">FIND THE BIG ONE THAT MATCHES</p>' +
+          '<div class="match-big" role="group" aria-label="Big shapes">' +
+            order.map(function(k){ return '<button class="shape-btn art" type="button" data-shape="' + k + '" aria-label="' + names[k] + '">' + shapeSVG(k) + '</button>'; }).join('') +
+          '</div></div>' +
+        '</div>';
+      $$('.shape-btn', st).forEach(function(b){
+        b.addEventListener('click', function(){
+          if (b.getAttribute('data-shape') === 'heart') {
+            b.classList.add('is-right');
+            ctx.say('Heart matches heart! You found it.', true);
+          } else {
+            b.classList.remove('is-wrong'); void b.offsetWidth; b.classList.add('is-wrong');
+            ctx.say('Not this one. Try another!');
+          }
+        });
+      });
+    },
+
+    3: function(st, ctx){
+      st.innerHTML =
+        '<svg class="art" id="art-blob" viewBox="0 0 240 160" role="img" aria-label="A friendly round jelly" data-wig="0">' +
+          '<g class="shake-lines o nf"><path d="M34 84 q-10 12 0 26"/><path d="M24 78 q-14 18 0 38"/><path d="M206 84 q10 12 0 26"/><path d="M216 78 q14 18 0 38"/></g>' +
+          '<g class="blobG">' +
+            '<path class="o f-aqua" d="M120 28 C166 26 198 62 194 102 C191 134 160 150 120 150 C80 150 49 134 46 102 C42 62 74 30 120 28 Z"/>' +
+            '<circle class="eye" cx="98" cy="84" r="4.5"/><circle class="eye" cx="142" cy="84" r="4.5"/>' +
+            '<path class="o nf" d="M102 104 Q120 122 138 104"/>' +
+            '<circle class="cheek" cx="84" cy="102" r="8"/><circle class="cheek" cx="156" cy="102" r="8"/>' +
+          '</g>' +
+        '</svg>' +
+        '<div class="act-row"><button class="btn btn--primary btn--lg" type="button" id="wigBtn">Tap to wiggle</button></div>';
+      var art = $('#art-blob', st), timer = null;
+      cleanups.push(function(){ clearInterval(timer); });
+      $('#wigBtn', st).addEventListener('click', function(){
+        clearInterval(timer);
+        var n = 0, total = REDUCED ? 4 : 26, gap = REDUCED ? 700 : 150;
+        art.classList.add('is-wiggling'); art.setAttribute('data-wig', 'L');
+        timer = setInterval(function(){
+          n++;
+          art.setAttribute('data-wig', n % 2 ? 'R' : 'L');
+          if (n >= total) { clearInterval(timer); art.setAttribute('data-wig', '0'); art.classList.remove('is-wiggling'); }
+        }, gap);
+        ctx.say('Wiggle, wiggle, wiggle!', true);
+      });
+    },
+
+    4: function(st, ctx){
+      st.innerHTML =
+        '<svg class="art" id="art-thermo" viewBox="0 0 240 160" role="img" aria-label="A thermometer, warm" data-temp="warm">' +
+          '<defs><g id="thermoShape"><rect x="100" y="8" width="40" height="124" rx="20"/><circle cx="120" cy="132" r="25"/></g>' +
+          '<clipPath id="thermoClip"><rect x="107" y="15" width="26" height="110" rx="13"/><circle cx="120" cy="132" r="18"/></clipPath></defs>' +
+          '<path class="o nf" d="M78 30 H92 M78 52 H92 M78 74 H92 M78 96 H92 M78 118 H92"/>' +
+          '<use href="#thermoShape" class="outU"/><use href="#thermoShape" class="inU"/>' +
+          '<g clip-path="url(#thermoClip)"><rect class="fillcol" x="96" y="10" width="48" height="150"/></g>' +
+          '<g transform="translate(180 34)"><g class="o nf">' + rays(8, 14, 21, 0, 0) + '</g><circle r="10" class="o f-amber"/></g>' +
+          '<g class="o nf">' +
+            '<line x1="167" y1="126" x2="193" y2="126"/><line x1="167" y1="126" x2="193" y2="126" transform="rotate(60 180 126)"/><line x1="167" y1="126" x2="193" y2="126" transform="rotate(120 180 126)"/>' +
+          '</g>' +
+        '</svg>' +
+        '<div class="act-row">' +
+          '<button class="btn btn--primary btn--lg" type="button" data-temp="hot">Hot</button>' +
+          '<button class="btn btn--primary btn--lg" type="button" data-temp="cold">Cold</button>' +
+        '</div>';
+      var art = $('#art-thermo', st), seen = {};
+      $$('button', st).forEach(function(b){
+        b.addEventListener('click', function(){
+          var t = b.getAttribute('data-temp');
+          art.setAttribute('data-temp', t); seen[t] = true;
+          art.setAttribute('aria-label', t === 'hot' ? 'A thermometer, hot' : 'A thermometer, cold');
+          var both = seen.hot && seen.cold;
+          if (both) ctx.say('Hot and cold are friends on one thermometer.', true);
+          else ctx.say(t === 'hot' ? 'Hot! The thermometer goes up. Now try cold.' : 'Cold! The thermometer goes down. Now try hot.');
+        });
+      });
+    },
+
+    5: function(st, ctx){
+      st.innerHTML =
+        '<svg class="art" id="art-swing" viewBox="0 0 240 160" role="img" aria-label="A child on a swing" data-pos="0">' +
+          '<path class="o nf" d="M44 20 L24 152 M196 20 L216 152"/>' +
+          '<rect x="20" y="8" width="200" height="12" rx="6" class="o f-amber"/>' +
+          '<path class="o nf" d="M8 153 H232"/>' +
+          '<g class="swingG">' +
+            '<path class="o nf" d="M108 20 V104 M132 20 V104"/>' +
+            '<rect x="108" y="108" width="9" height="20" rx="4.5" class="o f-blue"/><rect x="123" y="108" width="9" height="20" rx="4.5" class="o f-blue"/>' +
+            '<rect x="108" y="76" width="24" height="30" rx="9" class="o f-aqua"/>' +
+            '<rect x="98" y="102" width="44" height="9" rx="4.5" class="o f-rouge"/>' +
+            '<circle cx="120" cy="62" r="13" class="o f-mint"/>' +
+            '<circle class="eye" cx="115" cy="60" r="2.2"/><circle class="eye" cx="125" cy="60" r="2.2"/>' +
+            '<path class="o nf" d="M115 67 Q120 72 125 67" style="stroke-width:2.2"/>' +
+            '<circle class="cheek" cx="110" cy="66" r="3.2"/><circle class="cheek" cx="130" cy="66" r="3.2"/>' +
+          '</g>' +
+        '</svg>' +
+        '<div class="act-row"><button class="btn btn--primary btn--lg" type="button" id="pushBtn">Push the swing</button></div>';
+      var art = $('#art-swing', st), timer = null;
+      cleanups.push(function(){ clearInterval(timer); });
+      $('#pushBtn', st).addEventListener('click', function(){
+        clearInterval(timer);
+        var seq = ['L', 'R', 'L', 'R', '0'], i = 1;
+        art.setAttribute('data-pos', seq[0]);
+        timer = setInterval(function(){
+          art.setAttribute('data-pos', seq[i]); i++;
+          if (i >= seq.length) clearInterval(timer);
+        }, 900);
+        ctx.say('Up, down, up, down. The swing always comes back.', true);
+      });
+    },
+
+    6: function(st, ctx){
+      st.innerHTML =
+        '<svg class="art" id="art-bulb" viewBox="0 0 240 160" role="img" aria-label="A light bulb, off" data-on="false">' +
+          '<g class="rays o nf">' + [-120, -80, -40, 0, 40, 80, 120].map(function(a){ return '<line x1="120" y1="6" x2="120" y2="16" transform="rotate(' + a + ' 120 62)"/>'; }).join('') + '</g>' +
+          '<path class="o bulbBody" d="M120 22 C96 22 80 40 80 62 C80 80 92 90 100 102 L100 108 L140 108 L140 102 C148 90 160 80 160 62 C160 40 144 22 120 22 Z"/>' +
+          '<rect x="98" y="108" width="44" height="11" rx="3" class="o f-white"/><rect x="102" y="119" width="36" height="11" rx="3" class="o f-white"/>' +
+          '<g class="face-off"><path class="o nf" d="M104 58 Q110 64 116 58 M124 58 Q130 64 136 58" style="stroke-width:2.4"/><path class="o nf" d="M114 76 Q120 80 126 76" style="stroke-width:2.4"/></g>' +
+          '<g class="face-on"><circle class="eye" cx="110" cy="56" r="3.6"/><circle class="eye" cx="130" cy="56" r="3.6"/><path class="o nf" d="M108 70 Q120 84 132 70"/><circle class="cheek" cx="99" cy="68" r="6"/><circle class="cheek" cx="141" cy="68" r="6"/></g>' +
+        '</svg>' +
+        '<div class="act-row"><button class="btn btn--primary btn--lg" type="button" role="switch" aria-checked="false" id="flipBtn">Flip the switch</button></div>';
+      var art = $('#art-bulb', st), btn = $('#flipBtn', st), on = false;
+      btn.addEventListener('click', function(){
+        on = !on;
+        art.setAttribute('data-on', on ? 'true' : 'false');
+        art.setAttribute('aria-label', on ? 'A light bulb, on' : 'A light bulb, off');
+        btn.setAttribute('aria-checked', on ? 'true' : 'false');
+        if (on) ctx.say('Click! The light is on.', true); else ctx.say('Click! The light is off.');
+      });
+    },
+
+    7: function(st, ctx){
+      var petals = [[140,50],[130,67.3],[110,67.3],[100,50],[110,32.7],[130,32.7]].map(function(p){ return '<circle cx="' + p[0] + '" cy="' + p[1] + '" r="13"/>'; }).join('');
+      st.innerHTML =
+        '<svg class="art" id="art-grow" viewBox="0 0 240 160" role="img" aria-label="A seed in the soil" data-spark="0" data-care="0">' +
+          '<defs><g id="petalShape">' + petals + '</g></defs>' +
+          '<g class="g-flower">' +
+            '<path class="o nf" d="M120 136 V66" style="stroke-width:4"/>' +
+            '<path class="o f-aqua" d="M120 118 C106 118 98 110 98 100 C110 100 120 106 120 118 Z"/>' +
+            '<path class="o f-aqua" d="M120 104 C120 94 128 88 140 88 C140 100 132 104 120 104 Z"/>' +
+            '<use href="#petalShape" class="outU"/><use href="#petalShape" class="inU inU--rouge"/>' +
+            '<circle cx="120" cy="50" r="14" class="o f-amber"/>' +
+            '<circle class="eye" cx="114" cy="47" r="2.2"/><circle class="eye" cx="126" cy="47" r="2.2"/>' +
+            '<path class="o nf" d="M113 54 Q120 60 127 54" style="stroke-width:2.2"/>' +
+            '<circle class="cheek" cx="108" cy="53" r="3.2"/><circle class="cheek" cx="132" cy="53" r="3.2"/>' +
+          '</g>' +
+          '<path d="M16 156 Q120 112 224 156 Z" class="o f-ink"/>' +
+          '<g class="g-seed"><ellipse cx="120" cy="134" rx="9" ry="6" class="o f-amber"/></g>' +
+          '<g class="g-sprout"><path class="o nf" d="M120 130 V108" style="stroke-width:4"/>' +
+            '<path class="o f-aqua" d="M120 118 C108 118 102 110 102 102 C112 102 120 108 120 118 Z"/>' +
+            '<path class="o f-aqua" d="M120 112 C120 104 126 98 136 98 C136 108 130 112 120 112 Z"/></g>' +
+          '<g class="g-spark">' +
+            '<path class="o f-amber" transform="translate(160 100)" d="M0 -11 L3 -3 L11 0 L3 3 L0 11 L-3 3 L-11 0 L-3 -3 Z"/>' +
+            '<path class="o f-amber" transform="translate(80 92) scale(.85)" d="M0 -11 L3 -3 L11 0 L3 3 L0 11 L-3 3 L-11 0 L-3 -3 Z"/></g>' +
+          '<g class="g-drops">' +
+            '<path class="o f-blue" transform="translate(90 40)" d="M0 -12 C6 -3 9 1 9 5 A9 9 0 0 1 -9 5 C-9 1 -6 -3 0 -12 Z"/>' +
+            '<path class="o f-blue" transform="translate(126 20)" d="M0 -12 C6 -3 9 1 9 5 A9 9 0 0 1 -9 5 C-9 1 -6 -3 0 -12 Z"/>' +
+            '<path class="o f-blue" transform="translate(154 56)" d="M0 -12 C6 -3 9 1 9 5 A9 9 0 0 1 -9 5 C-9 1 -6 -3 0 -12 Z"/></g>' +
+        '</svg>' +
+        '<div class="act-row">' +
+          '<button class="btn btn--primary btn--lg" type="button" data-give="spark">Give a spark</button>' +
+          '<button class="btn btn--primary btn--lg" type="button" data-give="care">Give some care</button>' +
+        '</div>';
+      var art = $('#art-grow', st), got = {spark:false, care:false};
+      $$('button', st).forEach(function(b){
+        b.addEventListener('click', function(){
+          var k = b.getAttribute('data-give');
+          got[k] = true; art.setAttribute('data-' + k, '1');
+          b.textContent = k === 'spark' ? 'Spark given' : 'Care given'; b.classList.remove('btn--primary'); b.classList.add('btn--outline');
+          if (got.spark && got.care) { art.setAttribute('aria-label', 'A smiling flower'); ctx.say('A spark and some care grow a flower!', true); }
+          else if (got.spark) { art.setAttribute('aria-label', 'A seed with a spark'); ctx.say('A spark! Now it needs some care.'); }
+          else { art.setAttribute('aria-label', 'A seed with water drops'); ctx.say('Some care! Now it needs a spark.'); }
+        });
+      });
+    }
+  };
+
+  /* ---------- tickets + progress ---------- */
+  var stopsEl = $('#stops');
+  SECRETS.forEach(function(s){
+    var li = document.createElement('li');
+    li.className = 'stop';
+    li.innerHTML =
+      '<button type="button" class="ticket ticket--' + s.color + '" data-id="' + s.id + '">' +
+        '<span class="ticket-stub">' + icon(s.icon) + '</span>' +
+        '<span class="ticket-body">' +
+          '<span class="tag tag--play">SECRET ' + s.id + '</span>' +
+          '<span class="title title--card">' + s.name + '</span>' +
+          '<span class="stop-state"></span>' +
+        '</span>' +
+        '<span class="ticket-check" aria-hidden="true">' + icon('check') + '</span>' +
+      '</button>';
+    stopsEl.appendChild(li);
+    $('.ticket', li).addEventListener('click', function(){ openSecret(s.id); });
+  });
+  var colorVar = { blue:'var(--blue)', amber:'var(--amber)', rouge:'var(--rouge)', aqua:'var(--aqua)' };
+  var dotsEl = $('#dots');
+  SECRETS.forEach(function(s){ var d = document.createElement('span'); d.className = 'dot'; d.style.setProperty('--c', colorVar[s.color]); dotsEl.appendChild(d); });
+
+  function renderAll(bob){
+    var nx = nextId();
+    SECRETS.forEach(function(s, i){
+      var b = $('.ticket[data-id="' + s.id + '"]');
+      var isKept = !!kept[s.id];
+      b.classList.toggle('is-kept', isKept);
+      b.classList.remove('is-next');
+      $('.stop-state', b).textContent = isKept ? 'Secret kept' : (s.id === nx ? 'Play this one next' : 'Tap to play');
+      dotsEl.children[i].classList.toggle('is-kept', isKept);
+    });
+    var n = keptCount();
+    $('#progressLabel').textContent = n === 7 ? 'All 7 secrets kept' : n + ' of 7 secrets kept';
+    $('#again').hidden = n < 7;
+    if (nx && bob) { var nb = $('.ticket[data-id="' + nx + '"]'); void nb.offsetWidth; nb.classList.add('is-next'); }
+  }
+
+  /* ---------- dialogs ---------- */
+  var page = $('#page'), scrim = $('#scrim'), sheet = $('#sheet'), finale = $('#finale');
+  var openEl = null, lastFocus = null;
+  function openDialog(el){
+    lastFocus = document.activeElement; openEl = el;
+    scrim.hidden = false; el.hidden = false;
+    page.inert = true; page.setAttribute('aria-hidden', 'true');
+    document.documentElement.classList.add('is-locked');
+    $('.card-scroll', el).scrollTop = 0;
+    $('[data-autofocus]', el).focus({preventScroll: true});
+  }
+  function closeDialog(){
+    if (!openEl) return;
+    stopSpeech(); clearCleanups();
+    openEl.hidden = true; scrim.hidden = true; openEl = null;
+    page.inert = false; page.removeAttribute('aria-hidden');
+    document.documentElement.classList.remove('is-locked');
+    if (lastFocus && document.contains(lastFocus)) lastFocus.focus({preventScroll: true});
+  }
+  document.addEventListener('keydown', function(e){
+    if (!openEl) return;
+    if (e.key === 'Escape') { e.preventDefault(); closeDialog(); return; }
+    if (e.key === 'Tab') {
+      var f = $$('button:not([hidden]), [href], [tabindex]:not([tabindex="-1"])', openEl).filter(function(x){ return x.offsetParent !== null; });
+      if (!f.length) return;
+      var first = f[0], last = f[f.length - 1], a = document.activeElement;
+      if (e.shiftKey && (a === first || a === $('[data-autofocus]', openEl))) { e.preventDefault(); last.focus(); }
+      else if (!e.shiftKey && a === last) { e.preventDefault(); first.focus(); }
+    }
+  });
+  scrim.addEventListener('click', closeDialog);
+  $$('[data-close]').forEach(function(b){ b.addEventListener('click', closeDialog); });
+
+  /* ---------- a secret ---------- */
+  var current = 0, ready = false;
+  var keepBtn = $('#keepBtn'), feedback = $('#feedback');
+  function setKeep(isReady, bob){
+    ready = isReady;
+    var already = !!kept[current];
+    keepBtn.textContent = already ? 'Back to the tickets' : 'Keep this secret';
+    keepBtn.classList.toggle('btn--primary', isReady);
+    keepBtn.classList.toggle('btn--outline', !isReady);
+    keepBtn.setAttribute('aria-disabled', isReady ? 'false' : 'true');
+    keepBtn.classList.remove('bob');
+    if (bob) { void keepBtn.offsetWidth; keepBtn.classList.add('bob'); }
+  }
+  var ctx = {
+    say: function(text, done){
+      var finish = done && !ready;
+      var full = text + (finish ? ' Now keep the secret!' : '');
+      feedback.textContent = full;
+      speak(full);
+      if (finish) setKeep(true, true);
+    }
+  };
+  function openSecret(id){
+    var s = SECRETS[id - 1];
+    current = id;
+    $('#sheetHead').className = 'band band--' + s.color + ' valance on-bright';
+    $('#sheetEyebrow').textContent = 'SECRET ' + id + ' OF 7';
+    $('#sheetTitle').textContent = s.name;
+    $('#sheetLine').textContent = s.line;
+    feedback.textContent = '';
+    clearCleanups();
+    BUILD[id]($('#stage'), ctx);
+    setKeep(!!kept[id], false);
+    openDialog(sheet);
+    speak(s.name + '. ' + s.line);
+  }
+  keepBtn.addEventListener('click', function(){
+    if (!ready) {
+      var t = 'Play the little game first, then keep the secret.';
+      feedback.textContent = t; speak(t);
+      return;
+    }
+    if (kept[current]) { closeDialog(); return; }
+    kept[current] = true;
+    var n = keptCount(), name = SECRETS[current - 1].name;
+    closeDialog();
+    renderAll(true);
+    announce('Secret kept: ' + name + '. ' + n + ' of 7.');
+    if (n === 7) { setTimeout(openFinale, 350); return; }
+    var nx = nextId(), nb = $('.ticket[data-id="' + nx + '"]');
+    if (nb) { nb.focus({preventScroll: true}); nb.scrollIntoView({block: 'center', behavior: REDUCED ? 'auto' : 'smooth'}); }
+  });
+  $('#hearBtn').addEventListener('click', function(){ var s = SECRETS[current - 1]; hearOr(s.name + '. ' + s.line); });
+
+  /* ---------- finale ---------- */
+  var FIN_TEXT = 'You kept all seven secrets! You may wiggle and swing. You may flip the switch and see what happens. You may grow something new. You may feel your feelings, big and small.';
+  function openFinale(){
+    $('#recap').innerHTML = SECRETS.map(function(s){ return '<span class="chip" style="--c:' + colorVar[s.color] + '">' + icon(s.icon) + '</span>'; }).join('');
+    openDialog(finale);
+    speak(FIN_TEXT);
+  }
+  function playAgain(){
+    kept = {};
+    if (openEl) closeDialog();
+    renderAll(true);
+    window.scrollTo({top: 0, behavior: REDUCED ? 'auto' : 'smooth'});
+    announce('Starting over. 0 of 7 secrets kept.');
+  }
+  $('#finAgain').addEventListener('click', playAgain);
+  $('#againPlay').addEventListener('click', playAgain);
+  $('#againSlip').addEventListener('click', openFinale);
+  $('#finHear').addEventListener('click', function(){ hearOr(FIN_TEXT); });
+
+  /* grown-ups accordion */
+  var guT = $('#guToggle'), guP = $('#guPanel');
+  guP.addEventListener('transitionend', function(){ if (guT.getAttribute('aria-expanded') === 'true') guP.style.maxHeight = 'none'; });
+  guT.addEventListener('click', function(){
+    var open = guT.getAttribute('aria-expanded') === 'true';
+    guT.setAttribute('aria-expanded', open ? 'false' : 'true');
+    if (open) { guP.style.maxHeight = guP.scrollHeight + 'px'; void guP.offsetHeight; guP.style.maxHeight = '0px'; }
+    else { guP.style.maxHeight = REDUCED ? 'none' : guP.scrollHeight + 'px'; }
+    guT.setAttribute('aria-label', open ? 'Show the grown-up note' : 'Hide the grown-up note');
+  });
+
+  /* ---------- voice controls ---------- */
+  if (CAN_SPEAK) {
+    $('#heroHear').hidden = false; $('#voiceToggle').hidden = false;
+    $('#hearBtn').hidden = false; $('#finHear').hidden = false;
+    $('#heroHear').addEventListener('click', function(){ hearOr('Seven magic secrets. Tap a ticket. Play a tiny game. Keep the secret.'); });
+    $$('.voice-toggle').forEach(function(t){ t.addEventListener('click', function(){ setVoice(!voiceOn); }); });
+    $('#sheetVoice').hidden = false;
+    try { if (localStorage.getItem('gsc7-voice') === '0') setVoice(false); } catch (e) {}
+    window.addEventListener('pagehide', stopSpeech);
+  }
+
+  /* ---------- boot ---------- */
+  document.documentElement.lang = 'en';
+  $('#heroSun').innerHTML = sunHero();
+  renderAll(true);
+})();
+</script>
+
+<aside id="gsc-next" style="margin:40px auto 0;max-width:780px;padding:20px 16px 28px;font:500 16px/1.5 'Work Sans',-apple-system,'Segoe UI',sans-serif;color:#14213D;background:#D5F9DE;border-top:2px dashed rgba(20,33,61,.3);display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between"><span>Want word when something new opens, or to book us?</span><span style="display:flex;flex-wrap:wrap;gap:8px"><a href="https://tally.so/r/je6qB4?interest=7-magic-secrets&amp;source=page" style="display:inline-block;padding:10px 18px;border-radius:999px;background:#14213D;color:#F5B700;text-decoration:none;font-weight:600">Join the email list</a><a href="../catalog/" style="display:inline-block;padding:10px 18px;border-radius:999px;border:1.5px solid #14213D;color:#14213D;text-decoration:none;font-weight:600">See everything we offer</a></span></aside>
+</body></html>
