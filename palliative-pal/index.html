@@ -1,0 +1,521 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Palliative PAL: Home Caregiver Training</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Shrikhand&family=Comic+Neue:wght@700&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,700;1,9..40,400&display=swap">
+<script>document.documentElement.lang="en";</script>
+<style>
+/* Layout: a mint header band, then one readable column of course text; Red Balloons as labeled boxes, notes as dashed tinted boxes. */
+:root {
+  --bg: #F3FAF5;
+  --surface: #FFFFFF;
+  --band: #D5F9DE;
+  --ink: #141B3C;
+  --ink-soft: #3B4468;
+  --line: #141B3C;
+  --rule: #B9CBC0;
+  --blue: #4392F1;
+  --amber: #F5B700;
+  --rouge: #E87EA1;
+  --brick: #D00000;
+  --on-brick: #FFFFFF;
+  --note: #FEF0BF;
+  --tint: #DCEAFD;
+  --link: #1A4FA0;
+  --focus: #D00000;
+  --font-display: 'Shrikhand', 'Cooper Black', Georgia, serif;
+  --font-body: 'DM Sans', 'Helvetica Neue', Arial, sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0E1330; --surface: #171E45; --band: #1C2A57; --ink: #EAFBEF; --ink-soft: #BAC5E0; --line: #AEB9DD; --rule: #34406E;
+    --note: #3A3116; --tint: #1F3468; --link: #9CC4FF; --focus: #F5B700; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0E1330; --surface: #171E45; --band: #1C2A57; --ink: #EAFBEF; --ink-soft: #BAC5E0; --line: #AEB9DD; --rule: #34406E;
+  --note: #3A3116; --tint: #1F3468; --link: #9CC4FF; --focus: #F5B700; color-scheme: dark;
+}
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-padding-top: 16px; }
+body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--font-body); font-size: 1.0625rem; line-height: 1.65; }
+.wrap { max-width: 760px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+a { color: var(--link); text-underline-offset: 3px; }
+:focus-visible { outline: 3px solid var(--focus); outline-offset: 3px; border-radius: 4px; }
+main:focus { outline: none; }
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+.skip { position: absolute; left: max(16px, env(safe-area-inset-left, 0px)); top: -100px; z-index: 20; background: var(--amber); color: #141B3C; font-weight: 700; padding: 12px 18px; border: 2px solid #141B3C; border-radius: 12px; }
+.skip:focus { top: 12px; }
+
+.band { background: var(--band); border-bottom: 2px solid var(--line); }
+.band .wrap { padding-block: 36px 30px; display: flex; flex-direction: column; gap: 8px; }
+.eyebrow { margin: 0; font-size: 0.85rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-soft); }
+h1 { margin: 0; font-family: var(--font-display); font-weight: 400; font-size: clamp(2.1rem, 6vw, 3.1rem); line-height: 1.08; text-wrap: balance; text-shadow: 3px 3px 0 var(--rouge); }
+.subtitle { margin: 4px 0 0; font-size: 1.2rem; font-weight: 700; }
+.lede { margin: 0; font-size: 1.12rem; font-style: italic; max-width: 60ch; }
+
+main .wrap { padding-block: 32px 48px; display: flex; flex-direction: column; gap: 14px; }
+.prose > * { min-width: 0; }
+.prose > * { margin: 0; }
+h2 { margin: 36px 0 0; font-family: var(--font-display); font-weight: 400; font-size: clamp(1.6rem, 4vw, 2.05rem); line-height: 1.15; text-wrap: balance; padding-top: 18px; border-top: 2px solid var(--line); }
+h3 { margin: 22px 0 0; font-size: 1.3rem; line-height: 1.25; text-wrap: balance; }
+h4 { margin: 16px 0 0; font-size: 1.1rem; line-height: 1.3; text-wrap: balance; }
+p { margin: 0; }
+ul, ol { margin: 0; padding-left: 1.4em; display: flex; flex-direction: column; gap: 8px; }
+li > ul, li > ol { margin-top: 8px; }
+li > p { margin: 0; }
+ol.opts { list-style-type: lower-alpha; gap: 2px; margin-top: 4px; }
+ol.quiz { gap: 14px; }
+.meta { font-weight: 700; color: var(--ink-soft); }
+.tagline { font-style: italic; font-size: 1.12rem; border-left: 4px solid var(--amber); padding-left: 14px; }
+.watch { margin-top: 2px; }
+
+.toc { background: var(--surface); border: 2px solid var(--line); border-radius: 16px; padding: 18px 20px 20px; }
+.toc h2 { margin: 0; padding: 0; border: 0; font-family: var(--font-body); font-weight: 700; font-size: 0.9rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-soft); }
+.toc ol { margin-top: 10px; gap: 4px; }
+.toc a { display: inline-block; padding-block: 6px; font-weight: 500; }
+.totop { font-size: 0.95rem; margin-top: 8px; }
+
+.balloon { border: 2px solid var(--brick); border-radius: 14px; overflow: hidden; background: var(--surface); }
+.balloon .balloon-label { background: var(--brick); color: var(--on-brick); font-weight: 700; padding: 6px 14px; }
+.balloon p:last-child { padding: 10px 14px 12px; }
+.cnote { background: var(--note); border: 2px dashed var(--line); border-radius: 14px; padding: 10px 14px; }
+.disclaimer { background: var(--surface); border: 2px solid var(--line); border-radius: 14px; padding: 12px 16px 14px; display: flex; flex-direction: column; gap: 4px; }
+.disclaimer-label { font-weight: 700; }
+.companion { background: var(--tint); border-radius: 14px; padding: 12px 16px; font-weight: 500; }
+
+.tablewrap { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; font-size: 0.98rem; min-width: 520px; }
+th, td { text-align: left; vertical-align: top; padding: 8px 10px; border-bottom: 1px solid var(--rule); }
+thead th { font-size: 0.85rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-soft); border-bottom: 2px solid var(--line); }
+td.num { font-variant-numeric: tabular-nums; white-space: nowrap; }
+.sw { display: inline-block; width: 14px; height: 14px; border: 1.5px solid var(--line); border-radius: 4px; margin-right: 8px; vertical-align: -2px; }
+
+.foot { border-top: 2px solid var(--line); background: var(--surface); }
+.foot .wrap { padding-block: 22px 32px; }
+.footnote { margin: 0; font-size: 0.95rem; line-height: 1.6; }
+
+@media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+
+
+.clown { background: #FADDE8; border: 2px dashed var(--line); border-radius: 14px; padding: 4px 18px 18px; }
+.clown h3 { margin-top: 12px; color: #141B3C; }
+.clown ul { list-style: none; padding: 0; margin-top: 12px; gap: 14px; }
+.clown li { position: relative; padding-left: 34px; font-family: 'Comic Neue', 'Comic Sans MS', 'Chalkboard SE', var(--font-body); font-weight: 700; font-size: 1.2rem; line-height: 1.4; color: #141B3C; }
+.clown li::before { content: ""; position: absolute; left: 0; top: 0.28em; width: 20px; height: 20px; border-radius: 999px; background: var(--brick); border: 2px solid #141B3C; }
+.rntip { border: 2px solid var(--line); border-radius: 14px; overflow: hidden; background: var(--tint); box-shadow: 4px 4px 0 var(--blue); }
+.rntip-label { background: var(--blue); color: #141B3C; font-weight: 700; padding: 7px 14px; border-bottom: 2px solid var(--line); }
+.rntip-body { padding: 14px 16px 16px; display: flex; flex-direction: column; gap: 10px; }
+.rights { list-style: none; padding: 0; gap: 10px; counter-reset: right; }
+.rights li { counter-increment: right; display: grid; grid-template-columns: 2rem minmax(9.5rem, max-content) minmax(0, 1fr); gap: 4px 10px; align-items: start; }
+.rights li::before { content: counter(right); width: 2rem; height: 2rem; border-radius: 999px; border: 2px solid var(--line); background: var(--surface); display: flex; align-items: center; justify-content: center; font-weight: 700; }
+.right-name { background: var(--blue); color: #141B3C; border: 2px solid #141B3C; border-radius: 999px; padding: 2px 12px; font-weight: 700; text-align: center; white-space: nowrap; }
+@media (max-width: 560px) { .rights li { grid-template-columns: 2rem minmax(0, 1fr); } .rights li > span:last-child { grid-column: 2; } .right-name { justify-self: start; } }
+.toc ol { gap: 0; }
+@media (min-width: 640px) { .toc ol { display: block; columns: 2; column-gap: 36px; } .toc li { break-inside: avoid; margin-bottom: 4px; } }
+.toc a { display: inline; padding-block: 0; } .toc li { padding-block: 4px; }
+.band .companion-link { margin: 6px 0 0; font-weight: 700; }
+</style>
+<a class="skip" href="#main">Skip to the content</a>
+<header class="band"><div class="wrap"><p class="eyebrow">Golden Soul Circus · Harm Redux</p><h1>Palliative PAL: Home Caregiver Training</h1><p class="subtitle">An online caregiver course by Golden Soul Circus</p><p class="lede">Real hospice skills. Sacred-clown delivery. Everybody dies — let's learn to care first.</p><p class="companion-link">Practice along with the <a href="companion/">Palliative PAL Companion</a>.</p></div></header>
+<main id="main" tabindex="-1"><div class="wrap prose"><nav class="toc" aria-labelledby="contents"><h2 id="contents">Contents</h2><ol><li><a href="#course-at-a-glance">Course at a Glance</a></li><li><a href="#how-every-module-works">How Every Module Works</a></li><li><a href="#module-0-welcome-to-the-big-top">Module 0: Welcome to the Big Top</a></li><li><a href="#module-1-empowered-essentials">Module 1: Empowered Essentials</a></li><li><a href="#module-2-mindful-medicine">Module 2: Mindful Medicine</a></li><li><a href="#module-3-vital-signs-and-vibes">Module 3: Vital Signs and Vibes</a></li><li><a href="#module-4-sacred-space-and-heavenly-hygiene">Module 4: Sacred Space and Heavenly Hygiene</a></li><li><a href="#module-5-soul-care-as-self-care">Module 5: Soul Care as Self-Care</a></li><li><a href="#module-6-walking-each-other-home">Module 6: Walking Each Other Home</a></li></ol></nav>
+
+<h2 id="course-at-a-glance">Course at a Glance</h2>
+<p><strong>Who it's for:</strong> Family caregivers, friends, volunteers, death doulas, and anyone caring for someone who is seriously ill or near the end of life. No medical background needed.</p>
+<p><strong>How it works:</strong> Self-paced and online. Seven modules of short videos, printable pocket cards, at-home practice, and an optional community space.</p>
+<p><strong>Time:</strong> About 6½ hours in total. Every lesson is under 10 minutes, so you can go a few minutes at a time.</p>
+<p><strong>What you need:</strong> A pillow or stuffed animal to practice on (your own &quot;Doris&quot;), a towel, a bowl, a notebook, and a phone with a timer.</p>
+<p><strong>What you'll finish with:</strong> Your own Care Binder, a full set of pocket cards, and a Palliative PAL Certificate of Completion.</p>
+<h3>What This Course Is — and Isn't</h3>
+<p>This course was created by hospice nurses to teach caregiving skills. It is not medical advice, a nursing license, or a professional certification, and it doesn't replace hands-on training from your person's own care team.</p>
+<div class="disclaimer" role="note"><p class="disclaimer-label">Disclaimer</p><p>Our views are our own, and we're unaffiliated with any institution. We advocate for all Patients of Earth. This is educational information only. We're licensed nurses, but this is not medical advice, diagnosis, or treatment, and we're not practicing under our nursing licenses here. Always ask your own healthcare provider. The certificate is not a professional certification.</p></div>
+<p>Two phrases you'll see throughout:</p>
+<ul>
+<li><strong>Your person</strong> means whoever you're caring for.</li>
+<li><strong>The care team</strong> means the professionals who look after them: their doctor, nurse, hospice, home health, or pharmacist.</li>
+</ul>
+<p>Whenever a lesson teaches a hands-on skill, ask the care team to show you in person too. Asking is what great caregivers do.</p>
+<h3>What You'll Be Able to Do</h3>
+<ol>
+<li>Move, reposition, bathe, and feed your person safely, while protecting your own body and their dignity.</li>
+<li>Ask the right questions about every medicine, keep an accurate medicine list, and spot problems early.</li>
+<li>Take a pulse and breathing rate, use home devices, and read the &quot;vibe&quot; — the comfort and changes that numbers miss.</li>
+<li>Keep hands, skin, and the room clean, and make the room feel calm and personal.</li>
+<li>Notice the signs of caregiver burnout and refill your own well with quick, repeatable rituals.</li>
+<li>Know exactly who to call, and when.</li>
+</ol>
+
+<p class="totop"><a href="#contents">Back to contents</a></p><h2 id="how-every-module-works">How Every Module Works</h2>
+<h3>The Three Rings</h3>
+<p>Every module has the same three parts, in the same order.</p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>Ring</th>
+<th>What you do</th>
+<th>Time</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Ring 1: The Moment</strong></td>
+<td>Watch a Harm Redux episode (under 1 minute) and answer a warm-up question.</td>
+<td>About 5 min</td>
+</tr>
+<tr>
+<td><strong>Ring 2: The Action</strong></td>
+<td>Watch 3 to 6 short lessons. Each has a transcript and a one-page summary.</td>
+<td>30–50 min</td>
+</tr>
+<tr>
+<td><strong>Ring 3: The Payoff</strong></td>
+<td>Practice, reflect, grab your pocket card, and take the Flower Check.</td>
+<td>15–20 min</td>
+</tr>
+</tbody>
+</table></div>
+<h3>Features You'll See</h3>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>Feature</th>
+<th>What it means</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Red Balloon</strong></td>
+<td>When to call for help. Red Balloons are always in a box with a written label, like <em>Call the care team</em> or <em>Get support now</em>.</td>
+</tr>
+<tr>
+<td><strong>Clown Car</strong></td>
+<td>The common mistakes that pile out when caregivers rush. Funny on purpose, so they stick.</td>
+</tr>
+<tr>
+<td><strong>Doris Drill</strong></td>
+<td>Hands-on practice — with your Doris, or on yourself.</td>
+</tr>
+<tr>
+<td><strong>Tent Talk</strong></td>
+<td>An optional question for the community space.</td>
+</tr>
+<tr>
+<td><strong>Pocket Card</strong></td>
+<td>A one-page summary to print or save to your phone. Comes in a designed version and a large-print version.</td>
+</tr>
+<tr>
+<td><strong>Flower Check</strong></td>
+<td>Five untimed questions. Retake them as often as you like.</td>
+</tr>
+<tr>
+<td><strong>Petals</strong></td>
+<td>Module 0 gives you the stem. Modules 1 through 6 each add a petal. Six petals complete your flower and unlock your certificate.</td>
+</tr>
+<tr>
+<td><strong>Content note</strong></td>
+<td>A heads-up before a lesson about death, dying, or grief. You can skip, pause, or come back later.</td>
+</tr>
+</tbody>
+</table></div>
+<h3>Order</h3>
+<p>Start with Module 0. After that, take Modules 1 through 5 in any order. Module 6 opens when you've finished the other five. Your progress saves automatically.</p><p class="companion">Practice along with the <a href="companion/">Palliative PAL Companion</a>: Flower Checks, Doris Drill timers, and your Care Binder in one place.</p>
+
+<p class="totop"><a href="#contents">Back to contents</a></p><h2 id="module-0-welcome-to-the-big-top">Module 0: Welcome to the Big Top</h2><p class="meta">Orientation · About 30 minutes · Earns: your flower stem</p>
+<h3>Ring 1: The Moment</h3>
+<p class="watch"><strong>Watch:</strong> Episode 0, &quot;Solve for D&quot;</p><p><strong>Warm-up:</strong> What made you sign up? Who are you caring for, or getting ready to care for? <em>(Private journal — not shared.)</em></p>
+<h3>Ring 2: The Action</h3>
+<h4 id="lesson-01">Lesson 0.1 — How This Course Works</h4><p>A quick tour of the Three Rings, the features, and every accessibility setting: captions, transcripts, playback speed, text size, and audio-only versions.</p>
+<h4 id="lesson-02">Lesson 0.2 — Your Role and the Care Team</h4><p>What caregivers do, what the care team does, and why &quot;I'm not sure, let me call&quot; is always a correct answer.</p>
+<h4 id="lesson-03">Lesson 0.3 — Build Your &quot;Know Your Team&quot; Page</h4><p>This is page 1 of your Care Binder. Write down:</p>
+<ul>
+<li>Your person's main doctor</li>
+<li>The hospice or home health 24/7 number, if they have one</li>
+<li>Their pharmacy</li>
+<li>An emergency contact</li>
+<li>What their care plan says to do in an emergency</li>
+</ul>
+<div class="balloon" role="note"><p class="balloon-label">Red Balloon · Call the care team</p><p>If your person is on hospice, ask the hospice team today who to call in an emergency. Many hospice plans ask families to call the hospice line first instead of 911. Write their answer on your Know Your Team page.</p></div>
+<h4 id="lesson-04">Lesson 0.4 — Set Up Your Care Corner</h4><p>Clear walkways, good lighting, a chair beside the bed, and supplies within reach.</p>
+<h4 id="lesson-05">Lesson 0.5 — Community Agreements</h4><p>Share only what you want to. Protect your person's privacy: no faces, names, or identifying details in photos or posts. Don't give each other medical advice. Be kind, always.</p>
+<h3>Ring 3: The Payoff</h3>
+<ul>
+<li><strong>Doris Drill:</strong> Choose your Doris and give them a name. (Really. Practice is easier with a name.)</li>
+<li><strong>Reflect:</strong> What are you most nervous about? Write it down. You'll come back to it in Module 6.</li>
+<li><strong>Pocket Card:</strong> Know Your Team (fill-in-the-blank)</li>
+</ul>
+
+<p class="totop"><a href="#contents">Back to contents</a></p><h2 id="module-1-empowered-essentials">Module 1: Empowered Essentials</h2><p class="meta">Bathing, feeding, and moving · About 75 minutes · Earns: Petal 1</p>
+<p class="tagline">&quot;Together, we are a nurse.&quot; Fast is slow, slow is fast.</p>
+<h3>Ring 1: The Moment</h3>
+<p class="watch"><strong>Watch:</strong> Episode 1, &quot;Fast Is Slow&quot;</p><p><strong>Warm-up:</strong> Think of a time you rushed and something went wrong. What would slow have looked like?</p>
+<h3>Ring 2: The Action</h3>
+<h4 id="lesson-11">Lesson 1.1 — Protect Your Own Body First</h4>
+<ul>
+<li>Stand with your feet wide, knees bent, and back straight. Keep your person close to your body.</li>
+<li>Turn by moving your feet, not by twisting your back.</li>
+<li>Use help or equipment — a draw sheet, slide sheet, or gait belt — whenever you can. Never lift your person's full weight alone.</li>
+<li>Tell your person what you're about to do, then count out loud together so you move at the same time.</li>
+</ul>
+<h4 id="lesson-12">Lesson 1.2 — Repositioning and Protecting Skin</h4>
+<ul>
+<li>If your person spends most of the day in bed, help them change position regularly — often about every 2 hours, or as the care team recommends.</li>
+<li>Put pillows between their knees and behind their back. Rest their calves on a pillow so their heels float off the mattress.</li>
+<li>Check the bony spots: tailbone, hips, heels, elbows, shoulder blades, and the backs of the ears.</li>
+</ul>
+<div class="balloon" role="note"><p class="balloon-label">Red Balloon · Call the care team</p><p>Redness that doesn't fade after pressure has been off for a few minutes, or any open skin or blister.</p></div>
+<h4 id="lesson-13">Lesson 1.3 — Bathing with Dignity</h4>
+<ul>
+<li>Gather everything first. Warm the room. Test the water on the inside of your wrist.</li>
+<li>Uncover only the part you're washing. Keep the rest covered with a towel.</li>
+<li>Wash from the cleanest areas to the less clean ones. Pat dry, especially in skin folds and between the toes.</li>
+<li>Offer choices: &quot;Would you like to wash your face yourself?&quot;</li>
+<li>Care for the mouth too: a soft toothbrush or a moist mouth swab, and lip balm for dry lips.</li>
+</ul>
+<h4 id="lesson-14">Lesson 1.4 — Feeding and Fluids</h4><p class="cnote"><strong>Content note:</strong> This lesson mentions changes in eating near the end of life.</p>
+<ul>
+<li>Help your person sit as upright as possible, and keep them upright for about 30 minutes after eating.</li>
+<li>Sit at eye level. Offer small bites and sips. Let them set the pace.</li>
+<li>Near the end of life, appetite and thirst naturally fade as the body slows down. This is normal, and it isn't anyone's failure. Offer favorite tastes and mouth comfort instead of full meals, and follow the care team's guidance.</li>
+</ul>
+<div class="balloon" role="note"><p class="balloon-label">Red Balloon · Call the care team</p><p>Coughing or choking while eating, a wet or gurgly voice after swallowing, or food staying in the mouth.</p></div>
+<h4 id="lesson-15">Lesson 1.5 — Transfers: Bed to Chair</h4>
+<ul>
+<li>Explain the plan. Help your person sit at the edge of the bed with their feet flat on the floor.</li>
+<li>Use a gait belt if the care team has given you one. Count together, stand, pivot on your feet, and sit.</li>
+<li><strong>If they start to fall:</strong> don't try to catch them. Keep them close, bend your knees, and guide them slowly to the floor while protecting their head. Then get help.</li>
+</ul>
+<div class="balloon" role="note"><p class="balloon-label">Red Balloon · Call the care team</p><p>After any fall, even if your person seems fine.</p></div>
+<div class="clown"><h3>Clown Car: What Piles Out When You Rush</h3><ul role="list"><li>Lifting with your back.</li><li>Pulling on arms or under the armpits.</li><li>Feeding someone who's lying flat.</li><li>Uncovering the whole body at once.</li><li>Trying to catch a fall.</li></ul></div>
+<h3>Ring 3: The Payoff</h3>
+<ul>
+<li><strong>Doris Drill:</strong> Lay your Doris on a bed or couch and practice a draw-sheet slide, counting out loud. Then practice a towel bath, uncovering one section at a time.
+<ul>
+<li><em>Seated version:</em> Practice the draw-sheet grip and count at a table.</li>
+<li><em>Watch-only version:</em> Watch the demo twice and say each step out loud.</li>
+</ul>
+</li>
+<li><strong>Reflect:</strong> Which of these skills feels most natural? Which one will you ask the care team to show you in person?</li>
+<li><strong>Tent Talk:</strong> Share one trick that makes bath time or mealtime easier.</li>
+<li><strong>Pocket Card:</strong> Safe Moves</li>
+<li><strong>Flower Check:</strong><ol class="quiz">
+<li><p>When you help someone move, how should you turn?</p><ol type="a" class="opts"><li>Twist at the waist</li><li>Move your feet</li><li>Lean forward</li></ol></li>
+<li><p>After eating, how long should your person stay sitting upright?</p><ol type="a" class="opts"><li>About 2 minutes</li><li>About 30 minutes</li><li>It doesn't matter</li></ol></li>
+<li><p>Your person's voice sounds wet and gurgly after swallowing. What do you do?</p><ol type="a" class="opts"><li>Offer more water</li><li>Keep going slowly</li><li>Stop and call the care team</li></ol></li>
+<li><p>Your person starts to fall while standing. What do you do?</p><ol type="a" class="opts"><li>Catch them under the arms</li><li>Guide them slowly to the floor, protecting their head</li><li>Step back</li></ol></li>
+<li><p>Eating and drinking less near the end of life is:</p><ol type="a" class="opts"><li>A normal part of the body slowing down</li><li>Always an emergency</li><li>A sign you're doing something wrong</li></ol></li>
+</ol>
+</li>
+</ul>
+
+<p class="totop"><a href="#contents">Back to contents</a></p><h2 id="module-2-mindful-medicine">Module 2: Mindful Medicine</h2><p class="meta">Timing, purpose, and watching · About 60 minutes · Earns: Petal 2</p>
+<p class="tagline">&quot;Laughter is the best medicine. Why? Because if you had to pick one for life, which one would it be?&quot;</p>
+<p class="cnote"><strong>Scope note:</strong> This module teaches you how to organize, track, and ask questions about medicines. It never gives dosing advice. Always follow the prescriber and the pharmacist.</p>
+<h3>Ring 1: The Moment</h3>
+<p class="watch"><strong>Watch:</strong> Episode 2, &quot;Stop Freestyling&quot;</p><p><strong>Warm-up:</strong> How many medicines does your person take? Could you name what each one is for?</p>
+<h3>Ring 2: The Action</h3>
+<h4 id="lesson-21">Lesson 2.1 — The Three Questions</h4><p>Before you give any medicine, know the answers to:</p>
+<ol>
+<li><strong>What's it for?</strong></li>
+<li><strong>When, and how much?</strong></li>
+<li><strong>What do I watch for afterward?</strong></li>
+</ol>
+<p>Ask again whenever a medicine is new or changed. Pharmacists and nurses are glad you asked.</p>
+<h4 id="lesson-22">Lesson 2.2 — Build Your Med Map</h4><p>This is page 2 of your Care Binder: one up-to-date list with each medicine's name, what it's for, how much, when, how it's taken, and who prescribed it. Include over-the-counter medicines, whether taken daily or just now and then (pain relievers, sleep aids, antacids, laxatives, allergy pills), plus vitamins, supplements, creams, patches, and inhalers. Bring it to every appointment, and update it the same day anything changes.</p>
+<h4 id="lesson-23">Lesson 2.3 — The Five Rights</h4><div class="rntip" role="note"><p class="rntip-label">Nurse’s Tip · Registered nursing standard</p><div class="rntip-body"><p><strong>The Five Rights of medication safety.</strong> Registered nurses check all five every single time they give a medicine. Check them too.</p><ol class="rights" role="list"><li><span class="right-name">Right person</span><span>The medicine is for your person, by name on the label.</span></li><li><span class="right-name">Right medicine</span><span>The name on the label matches your Med Map.</span></li><li><span class="right-name">Right amount</span><span>Exactly the dose on the label, measured with the cup or syringe that came with it.</span></li><li><span class="right-name">Right time</span><span>When it's due, as the label or the care team says.</span></li><li><span class="right-name">Right way</span><span>By mouth, patch, under the tongue, or however it's prescribed.</span></li></ol></div></div>
+<ul>
+<li>Fill a weekly pill organizer at the same time each week, with your Med Map in front of you.</li>
+<li>Never crush, split, or open a pill without asking the pharmacist first. Some are made to release slowly.</li>
+</ul>
+<h4 id="lesson-24">Lesson 2.4 — Watching, Tracking, and Comfort Medicines</h4>
+<ul>
+<li>Keep a simple log: what you gave, when, and anything you noticed afterward. If more than one person gives medicines, everyone uses the same log.</li>
+<li>For pain, ask your person to rate it from 0 to 10, or point to a face on a faces scale. If they can't speak, watch for grimacing, moaning, restlessness, or protecting one part of the body.</li>
+<li>Hospice teams often provide a comfort kit for symptoms like pain or breathlessness. Use it only as the hospice nurse instructs.</li>
+</ul>
+<div class="balloon" role="note"><p class="balloon-label">Red Balloon · Call the care team</p><p>A missed or doubled dose, a new rash, unusual sleepiness or confusion, or pain that isn't under control.</p></div>
+<h4 id="lesson-25">Lesson 2.5 — Safe Storage and Disposal</h4><p>Keep medicines in their original labeled containers, out of reach of children, pets, and visitors, and locked up if possible. Ask the pharmacy or hospice how to safely get rid of medicines that are no longer needed.</p>
+<div class="clown"><h3>Clown Car: What Piles Out When You Rush</h3><ul role="list"><li>&quot;About&quot; doses.</li><li>Guessing what a pill is for.</li><li>Crushing without asking.</li><li>Two people giving the same dose because nobody wrote it down.</li><li>A Med Map that's three changes out of date.</li></ul></div>
+<h3>Ring 3: The Payoff</h3>
+<ul>
+<li><strong>Doris Drill:</strong> Make a practice day map with four cards: morning, noon, evening, and bedtime. Give each card a color, a shape, and a word, so it works for everyone.</li>
+<li><strong>Reflect:</strong> Which of the Three Questions can't you answer yet for your person's medicines? Who will you ask?</li>
+<li><strong>Letting-go ritual (optional):</strong> Write one medicine worry on a slip of paper and drop it in a bowl. Take that question to the pharmacist this week.</li>
+<li><strong>Pocket Card:</strong> The Three Questions + The Five Rights</li>
+<li><strong>Flower Check:</strong><ol class="quiz">
+<li><p>Which is one of the Three Questions?</p><ol type="a" class="opts"><li>What brand is it?</li><li>What's it for?</li><li>Is it expensive?</li></ol></li>
+<li><p>Before crushing or splitting a pill, you should:</p><ol type="a" class="opts"><li>Ask the pharmacist</li><li>Make sure it's small</li><li>Only do it at night</li></ol></li>
+<li><p>Your Med Map should include:</p><ol type="a" class="opts"><li>Prescriptions only</li><li>Prescriptions, over-the-counter medicines, vitamins, supplements, creams, and patches</li><li>Only new medicines</li></ol></li>
+<li><p>Your person can't speak. Which could be a sign of pain?</p><ol type="a" class="opts"><li>Grimacing or restlessness</li><li>A relaxed face</li><li>Steady, calm sleep</li></ol></li>
+<li><p>Hospice comfort-kit medicines are used:</p><ol type="a" class="opts"><li>Whenever you think best</li><li>As the hospice nurse instructs</li><li>Only on weekends</li></ol></li>
+</ol>
+</li>
+</ul>
+
+<p class="totop"><a href="#contents">Back to contents</a></p><h2 id="module-3-vital-signs-and-vibes">Module 3: Vital Signs and Vibes</h2><p class="meta">Numbers and the read · About 60 minutes · Earns: Petal 3</p>
+<p class="tagline">&quot;Treat the soul — numbers make us numb-er. We are human be-ings, not human do-ings.&quot;</p>
+<h3>Ring 1: The Moment</h3>
+<p class="watch"><strong>Watch:</strong> Episode 3, &quot;Take the Pulse, Read the Room&quot;</p><p><strong>Warm-up:</strong> Without looking at a number, how can you tell someone you love isn't feeling well?</p>
+<h3>Ring 2: The Action</h3>
+<h4 id="lesson-31">Lesson 3.1 — Taking a Pulse</h4>
+<ul>
+<li>Place two fingers on the thumb side of the inner wrist. Don't use your thumb — it has a pulse of its own.</li>
+<li>Count the beats for 30 seconds, then double it. A typical resting adult pulse is about 60 to 100 beats per minute.</li>
+<li>Notice whether it feels steady or uneven.</li>
+</ul>
+<h4 id="lesson-32">Lesson 3.2 — Counting Breaths</h4>
+<ul>
+<li>Count each rise of the chest for 30 seconds, then double it. A typical resting adult rate is about 12 to 20 breaths per minute.</li>
+<li>Count quietly, while your fingers are still on the wrist. People breathe differently when they know they're being watched.</li>
+</ul>
+<h4 id="lesson-33">Lesson 3.3 — Home Devices</h4><p>Always follow the instructions that came with the device.</p>
+<ul>
+<li><strong>Thermometer:</strong> Use the same thermometer and the same method each time, so readings are easy to compare.</li>
+<li><strong>Blood pressure cuff:</strong> Have your person sit and rest for 5 minutes first, feet flat, arm supported at heart level, no talking.</li>
+<li><strong>Pulse oximeter</strong> (the fingertip clip that shows oxygen): Warm hands, a still hand, and no dark nail polish give the best reading. These devices can be less accurate on darker skin, so never rely on the number alone — the vibe check matters too.</li>
+</ul>
+<p>Ask the care team which numbers they want to hear about for your person. Targets are different for everyone.</p>
+<h4 id="lesson-34">Lesson 3.4 — Reading the Vibe</h4>
+<ul>
+<li>Use the 1 to 5 comfort scale on your pocket card. It has faces and words.</li>
+<li>Notice four things: <strong>face</strong> (relaxed or tense), <strong>breathing</strong> (easy or hard work), <strong>movement</strong> (calm or restless), and <strong>connection</strong> (like themselves, or different today).</li>
+<li>The number tells you <em>what</em>. The vibe tells you <em>who</em>.</li>
+</ul>
+<h4 id="lesson-35">Lesson 3.5 — Normal Changes Near the End of Life</h4><p class="cnote"><strong>Content note:</strong> This lesson describes the physical changes that often happen as death approaches.</p>
+<p>As the body slows down, it's common to see more sleep, less eating and drinking, changes in breathing (including pauses or noisy breathing), cooler hands and feet, and blotchy color on the legs. These changes are expected, and the hospice team can guide you through each one. Knowing about them ahead of time can make them less frightening.</p>
+<div class="balloon" role="note"><p class="balloon-label">Red Balloon · Call the care team</p><p>Sudden changes, trouble breathing, chest pain, a fall, or not being able to wake your person. If your person is on hospice, follow the emergency plan on your Know Your Team page.</p></div>
+<h4 id="lesson-36">Lesson 3.6 — Your Vitals and Vibes Log</h4><p>This is page 3 of your Care Binder: date, time, pulse, breaths, any device readings, comfort score, and one line about the vibe.</p>
+<div class="clown"><h3>Clown Car: What Piles Out When You Rush</h3><ul role="list"><li>A thumb on the pulse.</li><li>Counting breaths out loud.</li><li>Chasing a &quot;perfect&quot; number.</li><li>Ignoring the vibe because the numbers look fine.</li><li>Panicking over an expected change instead of calling the team.</li></ul></div>
+<h3>Ring 3: The Payoff</h3>
+<ul>
+<li><strong>Doris Drill:</strong> Take your <em>own</em> pulse and breathing rate three times today and write them in your log. Then give yourself a vibe check on the 1 to 5 scale.
+<ul>
+<li><em>Alternate version:</em> If finding a wrist pulse is hard for you, use a pulse oximeter or a fitness watch for the pulse, and practice the breath count and vibe check.</li>
+</ul>
+</li>
+<li><strong>Reflect:</strong> What does &quot;comfortable&quot; look like for your person, specifically?</li>
+<li><strong>Tent Talk:</strong> Share one vibe sign you've learned to notice in someone you care for.</li>
+<li><strong>Pocket Card:</strong> Vitals and Vibes (includes the 1 to 5 comfort scale)</li>
+<li><strong>Flower Check:</strong><ol class="quiz">
+<li><p>What do you use to feel for a pulse?</p><ol type="a" class="opts"><li>Your thumb</li><li>Two fingers</li><li>Your palm</li></ol></li>
+<li><p>A typical resting adult breathing rate is about:</p><ol type="a" class="opts"><li>12 to 20 breaths per minute</li><li>40 to 60</li><li>2 to 5</li></ol></li>
+<li><p>Why count breaths without announcing it?</p><ol type="a" class="opts"><li>It's faster</li><li>People breathe differently when they're watched</li><li>It's more polite</li></ol></li>
+<li><p>Cooler hands and feet near the end of life can be:</p><ol type="a" class="opts"><li>An expected change</li><li>Always an emergency</li><li>Only caused by a cold room</li></ol></li>
+<li><p>Who decides which blood pressure numbers matter for your person?</p><ol type="a" class="opts"><li>An internet search</li><li>Their care team</li><li>The device</li></ol></li>
+</ol>
+</li>
+</ul>
+
+<p class="totop"><a href="#contents">Back to contents</a></p><h2 id="module-4-sacred-space-and-heavenly-hygiene">Module 4: Sacred Space and Heavenly Hygiene</h2><p class="meta">Clean, dry, re-apply · About 60 minutes · Earns: Petal 4</p>
+<p class="tagline">&quot;The only solution to pollution is dilution.&quot;</p>
+<h3>Ring 1: The Moment</h3>
+<p class="watch"><strong>Watch:</strong> Episode 4, &quot;The Portal&quot;</p><p><strong>Warm-up:</strong> What's one thing that makes a room feel peaceful to you?</p>
+<h3>Ring 2: The Action</h3>
+<h4 id="lesson-41">Lesson 4.1 — The Four Hand-Washing Moments</h4><p>Wash your hands <strong>before entering, before touching, after touching,</strong> and <strong>after taking off gloves.</strong></p>
+<ul>
+<li>Use soap and water for at least 20 seconds. Sing the chant twice: <em>&quot;Palms, backs, thumbs, tips — wrists and in-betweens, that's it!&quot;</em></li>
+<li>Hand sanitizer works when your hands don't look dirty. Use soap and water whenever hands look dirty, and always after helping with the toilet or cleaning up diarrhea.</li>
+</ul>
+<h4 id="lesson-42">Lesson 4.2 — Gloves</h4><p>Wear gloves when you might touch body fluids, broken skin, or during toilet and incontinence care. Take them off by pulling from the wrist so they turn inside out, then wash your hands. Gloves never replace hand washing.</p>
+<h4 id="lesson-43">Lesson 4.3 — Cleaning the Care Space</h4>
+<ul>
+<li>Wipe the high-touch spots every day: bed rails, remotes, phones, doorknobs, and light switches.</li>
+<li>Carry dirty linens away from your body. Don't shake them. Wash them in warm water.</li>
+<li>For spills of body fluids: gloves on, clean it up, then disinfect.</li>
+</ul>
+<h4 id="lesson-44">Lesson 4.4 — Skin Care: Clean, Dry, Re-Apply</h4>
+<ul>
+<li><strong>Clean</strong> gently with mild soap or a no-rinse cleanser. Pat, don't rub.</li>
+<li><strong>Dry</strong> thoroughly, especially in skin folds.</li>
+<li><strong>Re-apply</strong> moisturizer, plus barrier cream on skin exposed to moisture if the care team recommends it. Moisturize your own hands too — cracked skin lets germs in.</li>
+</ul>
+<h4 id="lesson-45">Lesson 4.5 — Making the Room a Sacred Space</h4><p>Soft lighting, familiar photos and objects, favorite music played softly, fresh air, and fewer beeping distractions. Go easy on strong scents; illness can make smells overwhelming. Most of all, ask your person what <em>they</em> want in the room.</p>
+<p><strong>Oxygen safety:</strong> If oxygen is used in the room, no candles, smoking, or open flames — ever. Use battery candles for the glow.</p>
+<h4 id="lesson-46">Lesson 4.6 — The Threshold Ritual</h4><p>Before you walk into the care room, pause at the doorway. Take one breath. Leave the rest of your day outside. On the way out, pause again. <em>(Optional: one ceremonial sweep of a broom. Hospital Hippie insists.)</em></p>
+<div class="balloon" role="note"><p class="balloon-label">Red Balloon · Call the care team</p><p>A fever, skin that's red, warm, swollen, or draining, or a new rash.</p></div>
+<div class="clown"><h3>Clown Car: What Piles Out When You Rush</h3><ul role="list"><li>The quick &quot;rinse.&quot;</li><li>Shaking out dirty sheets.</li><li>Wearing the same gloves from room to room.</li><li>Designing a &quot;sacred space&quot; without asking the person who lives in it.</li></ul></div>
+<h3>Ring 3: The Payoff</h3>
+<ul>
+<li><strong>Doris Drill:</strong> Wash your hands with the chant. Then practice taking off gloves inside out (dish gloves work fine).
+<ul>
+<li><em>One-handed version:</em> Practice the chant with sanitizer, and watch the glove demo.</li>
+</ul>
+</li>
+<li><strong>Reflect:</strong> Design your person's sacred space. What would they want to see, hear, and hold?</li>
+<li><strong>Tent Talk:</strong> Describe a small touch that made a room feel like home. If you share a photo, leave out faces and personal details.</li>
+<li><strong>Pocket Card:</strong> The Four Moments + Clean, Dry, Re-Apply</li>
+<li><strong>Flower Check:</strong><ol class="quiz">
+<li><p>Which is one of the four hand-washing moments?</p><ol type="a" class="opts"><li>Before touching your person</li><li>Only at mealtimes</li><li>Once a day</li></ol></li>
+<li><p>Wash with soap and water for at least:</p><ol type="a" class="opts"><li>5 seconds</li><li>20 seconds</li><li>2 minutes</li></ol></li>
+<li><p>Right after you take off gloves, you should:</p><ol type="a" class="opts"><li>Put on new gloves</li><li>Wash your hands</li><li>Nothing — gloves kept your hands clean</li></ol></li>
+<li><p>Dirty linens should be:</p><ol type="a" class="opts"><li>Shaken out first</li><li>Carried away from your body</li><li>Held close so nothing drops</li></ol></li>
+<li><p>In a room where oxygen is in use:</p><ol type="a" class="opts"><li>Small candles are fine</li><li>No candles, smoking, or open flames</li><li>Only scented candles</li></ol></li>
+</ol>
+</li>
+</ul>
+
+<p class="totop"><a href="#contents">Back to contents</a></p><h2 id="module-5-soul-care-as-self-care">Module 5: Soul Care as Self-Care</h2><p class="meta">Filling the well · About 60 minutes · Earns: Petal 5</p>
+<p class="tagline">&quot;Remember what you like to remember what you are like.&quot;</p>
+<p class="cnote"><strong>Content note:</strong> This module talks about grief and caregiver stress. Every ritual is optional. Skip, pause, or come back any time.</p>
+<h3>Ring 1: The Moment</h3>
+<p class="watch"><strong>Watch:</strong> Episode 5, &quot;The Empty Watering Can&quot;</p><p><strong>Warm-up:</strong> When did you last do something just because you liked it?</p>
+<h3>Ring 2: The Action</h3>
+<h4 id="lesson-51">Lesson 5.1 — Recognizing Burnout</h4><p>Watch for tiredness that sleep doesn't fix, a short temper, pulling away from people, getting sick more often, feeling numb, or losing interest in things you used to love. Burnout isn't weakness. It's a sign the well needs refilling.</p>
+<h4 id="lesson-52">Lesson 5.2 — The 3-S Check</h4><p>Once a week, rate each from 1 to 5: <strong>Sleep, Support, and Spark.</strong> Anything under 3 gets your attention this week, not someday.</p>
+<h4 id="lesson-53">Lesson 5.3 — The 60-Second Reset</h4>
+<ol>
+<li><strong>Breathe:</strong> in for 4, out for 6, three times.</li>
+<li><strong>Shake:</strong> hands, shoulders, then your whole body.</li>
+<li><strong>Heart:</strong> hand on your heart. Name one thing you like.</li>
+</ol>
+<p>More micro-rituals to choose from: one minute of looking at the sky, one song you love, one text to a friend, one stretch in a doorway.</p>
+<h4 id="lesson-54">Lesson 5.4 — Building Your Care Circle</h4><p>This is page 4 of your Care Binder. List the people who can help, and match each one to a <em>specific</em> ask: a meal on Tuesdays, an hour of sitting with your person, a prescription pickup. Specific asks get yeses. Many hospices also offer volunteers and short breaks for caregivers (called respite care) — ask what's available.</p>
+<h4 id="lesson-55">Lesson 5.5 — Grief Before and After</h4><p>Grieving while your person is still alive is called anticipatory grief, and it's normal. Many hospice programs offer grief support to families for about a year after a death. Find out what yours offers now, while you have the energy to ask.</p>
+<div class="balloon" role="note"><p class="balloon-label">Red Balloon · Get support now</p><p>If you feel hopeless, overwhelmed, or unsafe, reach out to someone today. In the U.S., call or text <strong>988</strong> to reach the Suicide &amp; Crisis Lifeline. Outside the U.S., look up your local crisis line and add it to your Know Your Team page.</p></div>
+<div class="clown"><h3>Clown Car: What Piles Out When You Rush</h3><ul role="list"><li>&quot;I'll rest when this is over.&quot;</li><li>Saying &quot;Let me know if you need anything&quot; instead of making a specific ask.</li><li>Skipping meals.</li><li>Believing good caregivers never need a break.</li></ul></div>
+<h3>Ring 3: The Payoff</h3>
+<ul>
+<li><strong>Doris Drill:</strong> Do the 60-Second Reset now, along with the video. Then do it once more today, on your own.
+<ul>
+<li><em>Seated version:</em> Shake out just your hands and shoulders.</li>
+</ul>
+</li>
+<li><strong>Reflect:</strong> Write your Soul Care Plan — page 6 of your Care Binder: two micro-rituals you'll use every day, and one person you'll ask for help this week.</li>
+<li><strong>Tent Talk:</strong> Share one thing you like. Our moderators read every answer.</li>
+<li><strong>Pocket Card:</strong> The 3-S Check + The 60-Second Reset</li>
+<li><strong>Flower Check:</strong><ol class="quiz">
+<li><p>What are the three S's?</p><ol type="a" class="opts"><li>Sleep, Support, Spark</li><li>Salt, Sugar, Snacks</li><li>Sit, Stand, Stretch</li></ol></li>
+<li><p>When one of your scores is under 3, you should:</p><ol type="a" class="opts"><li>Wait until caregiving is over</li><li>Give it attention this week</li><li>Ignore it</li></ol></li>
+<li><p>Which ask is most likely to get a yes?</p><ol type="a" class="opts"><li>&quot;Let me know if you need anything.&quot;</li><li>&quot;Can you bring dinner on Tuesday?&quot;</li><li>&quot;Help me out sometime.&quot;</li></ol></li>
+<li><p>Grieving while your person is still alive is:</p><ol type="a" class="opts"><li>Normal</li><li>A sign you've given up</li><li>Very rare</li></ol></li>
+<li><p>What are the three steps of the 60-Second Reset?</p><ol type="a" class="opts"><li>Breathe, shake, hand on heart</li><li>Run, rest, repeat</li><li>Call, text, email</li></ol></li>
+</ol>
+</li>
+</ul>
+
+<p class="totop"><a href="#contents">Back to contents</a></p><h2 id="module-6-walking-each-other-home">Module 6: Walking Each Other Home</h2><p class="meta">Capstone · About 45 minutes · Earns: Petal 6 and your certificate</p>
+<p class="tagline">&quot;We're all walking each other home.&quot;</p>
+<p class="cnote"><strong>Content note:</strong> The walkthrough in this module includes end-of-life care.</p>
+<h3>Ring 1: The Moment</h3>
+<p class="watch"><strong>Watch:</strong> Episode 6, &quot;Walking Each Other Home&quot;</p><p><strong>Warm-up:</strong> Look back at what you wrote in Module 0 about what made you nervous. How does it feel now?</p>
+<h3>Ring 2: The Action</h3>
+<h4 id="lesson-61">Lesson 6.1 — A Day in Care</h4><p>A walkthrough of one full caregiving day that brings everything together: the threshold ritual, a vibe check, medicines by the Med Map, repositioning, a bed bath, lunch sitting upright, a Red Balloon moment and the phone call that follows, and a 60-Second Reset to close the day.</p>
+<h4 id="lesson-62">Lesson 6.2 — Complete Your Care Binder</h4><p>Printable and fillable templates for all six pages:</p>
+<ol>
+<li>Know Your Team <em>(Module 0)</em></li>
+<li>Med Map <em>(Module 2)</em></li>
+<li>Vitals and Vibes Log <em>(Module 3)</em></li>
+<li>Care Circle <em>(Module 5)</em></li>
+<li>Comfort Plan — what comfort looks like for your person, plus their sacred-space wishes <em>(Modules 3 and 4)</em></li>
+<li>Soul Care Plan <em>(Module 5)</em></li>
+</ol>
+<h4 id="lesson-63">Lesson 6.3 — Talking with the Care Team</h4><p>Share what you notice in three short parts: <em>what you saw, when it started,</em> and <em>what you've already tried.</em></p>
+<h3>Ring 3: The Payoff</h3>
+<ul>
+<li><strong>Final Flower Check:</strong> 15 questions from every module. Untimed, and you can retake it as often as you like.</li>
+<li><strong>Reflect:</strong> What's one thing you'll do differently tomorrow because of this course?</li>
+<li><strong>Gratitude ritual:</strong> Give your flowers while they're alive. Write a thank-you note to someone in your Care Circle, or to your person.</li>
+<li><strong>Certificate:</strong> Palliative PAL: Home Caregiver Training — Certificate of Completion, with your name and all six petals.</li>
+</ul><p class="totop"><a href="#contents">Back to contents</a></p></div></main>
+<footer class="foot"><div class="wrap"><p class="footnote"><strong>Disclaimer.</strong> Our views are our own, and we're unaffiliated with any institution. We advocate for all Patients of Earth. This is educational information only. We're licensed nurses, but this is not medical advice, diagnosis, or treatment, and we're not practicing under our nursing licenses here. Always ask your own healthcare provider. The certificate is not a professional certification.</p></div></footer>
+
+<aside id="gsc-next" style="margin:40px auto 0;max-width:780px;padding:20px 16px 28px;font:500 16px/1.5 'Work Sans',-apple-system,'Segoe UI',sans-serif;color:#14213D;background:#D5F9DE;border-top:2px dashed rgba(20,33,61,.3);display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between"><span>Want word when something new opens, or to book us?</span><span style="display:flex;flex-wrap:wrap;gap:8px"><a href="https://tally.so/r/je6qB4?interest=palliative-pal&amp;source=page" style="display:inline-block;padding:10px 18px;border-radius:999px;background:#14213D;color:#F5B700;text-decoration:none;font-weight:600">Join the email list</a><a href="../catalog/" style="display:inline-block;padding:10px 18px;border-radius:999px;border:1.5px solid #14213D;color:#14213D;text-decoration:none;font-weight:600">See everything we offer</a></span></aside>
+</body></html>
