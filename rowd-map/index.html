@@ -1,0 +1,622 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Soul Nature Row'd Map</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Shrikhand&family=Work+Sans:wght@400;500;600;700&family=Caveat:wght@600;700&display=swap">
+<style>
+/* Layout: a take-home poster that reads top to bottom on a phone — hero, the four-stop map, the five gates, a balloon you let go, The Talk, ways to bring the circus home. Chunky outlined "stacking cup" pieces in the brand colors. */
+:root{
+  --bg:#effbf2;          /* pale Frosted Mint ground */
+  --surface:#ffffff;
+  --ink:#1c1a33;         /* outline + text */
+  --ink-soft:#4a4766;
+  --line:#1c1a33;
+  --mint:#d5f9de;        /* Frosted Mint  — Earth */
+  --blue:#4392f1;        /* Blue Energy   — Water */
+  --ember:#d00000;       /* Brick Ember   — Fire  */
+  --amber:#f5b700;       /* Amber Flame   — Air   */
+  --rouge:#e87ea1;       /* Petal Rouge   — flowers */
+  --on-fill:#1c1a33;     /* text on mint/blue/amber/rouge fills */
+  --on-ember:#ffffff;
+  --link:#1b5bb0;
+  --shadow:4px 4px 0 var(--line);
+  --display:"Shrikhand", "Cooper Black", "Georgia", serif;
+  --body:"Work Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --hand:"Caveat", "Segoe Print", "Bradley Hand", cursive;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#16172c; --surface:#212344; --ink:#f4f2ff; --ink-soft:#c3c0e0; --line:#f4f2ff;
+    --link:#8ec1ff; --shadow:4px 4px 0 #000; color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#16172c; --surface:#212344; --ink:#f4f2ff; --ink-soft:#c3c0e0; --line:#f4f2ff;
+  --link:#8ec1ff; --shadow:4px 4px 0 #000; color-scheme:dark;
+}
+
+*{box-sizing:border-box;}
+body{
+  background:var(--bg);
+  color:var(--ink);
+  font-family:var(--body);
+  font-size:17px;
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{
+  max-width:760px;
+  margin:0 auto;
+  padding-left:max(16px, env(safe-area-inset-left, 0px));
+  padding-right:max(16px, env(safe-area-inset-right, 0px));
+  padding-block:28px 56px;
+  display:flex;
+  flex-direction:column;
+  gap:56px;
+}
+a{color:var(--link);text-underline-offset:3px;}
+h1,h2,h3{margin:0;text-wrap:balance;}
+h2{
+  font-family:var(--display);
+  font-weight:400;
+  font-size:clamp(30px, 7vw, 40px);
+  line-height:1.1;
+}
+p{margin:0;}
+.lede{color:var(--ink-soft);max-width:60ch;}
+.hand{font-family:var(--hand);font-weight:700;}
+section{display:flex;flex-direction:column;gap:18px;}
+:focus-visible{outline:3px solid var(--ink);outline-offset:3px;border-radius:6px;}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;}
+
+/* ---------- hero ---------- */
+.hero{
+  position:relative;
+  display:grid;
+  grid-template-columns:1fr auto;
+  gap:8px 20px;
+  align-items:end;
+  padding-top:6px;
+}
+.presents{
+  grid-column:1 / -1;
+  font-weight:600;
+  font-size:14px;
+  letter-spacing:0.08em;
+  text-transform:uppercase;
+  color:var(--ink-soft);
+}
+.hero h1{
+  font-family:var(--display);
+  font-weight:400;
+  font-size:clamp(46px, 13vw, 84px);
+  line-height:0.95;
+  letter-spacing:-0.01em;
+  color:var(--ink);
+}
+.hero h1 .cup{display:inline-block;padding:0 0.08em;}
+.hero h1 .c1{color:var(--ember);}
+.hero h1 .c2{color:var(--link);}
+.hero-balloon{width:96px;height:auto;align-self:start;transform:rotate(6deg);}
+.tagline{
+  grid-column:1 / -1;
+  font-family:var(--hand);
+  font-size:clamp(24px, 5.6vw, 30px);
+  line-height:1.2;
+  color:var(--ink);
+  margin-top:6px;
+}
+.hero .lede{grid-column:1 / -1;margin-top:10px;}
+
+/* ---------- the map (four stops) ---------- */
+.route{
+  position:relative;
+  display:grid;
+  grid-template-columns:repeat(4, minmax(0,1fr));
+  gap:12px;
+}
+.route::before{
+  content:"";
+  position:absolute;
+  left:8%; right:8%; top:50%;
+  border-top:3px dashed var(--line);
+  z-index:0;
+}
+.stop{
+  position:relative;
+  z-index:1;
+  font:inherit;
+  cursor:pointer;
+  border:2.5px solid var(--line);
+  border-radius:16px 16px 26px 26px;
+  box-shadow:var(--shadow);
+  padding:12px 6px 10px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:2px;
+  color:var(--on-fill);
+  transition:transform .12s ease, box-shadow .12s ease;
+  min-height:96px;
+}
+.stop svg{width:30px;height:30px;}
+.stop .el{font-family:var(--display);font-size:clamp(17px,4.6vw,22px);line-height:1.1;}
+.stop .step{font-size:12px;font-weight:600;}
+.stop[data-el="earth"]{background:var(--mint);}
+.stop[data-el="water"]{background:var(--blue);}
+.stop[data-el="fire"]{background:var(--ember);color:var(--on-ember);}
+.stop[data-el="air"]{background:var(--amber);}
+.stop[aria-selected="true"]{transform:translate(-2px,-4px);box-shadow:6px 8px 0 var(--line);}
+.stop[aria-selected="false"]{filter:saturate(0.75);}
+.stop:hover{transform:translate(-1px,-2px);}
+
+.panel{
+  background:var(--surface);
+  border:2.5px solid var(--line);
+  border-radius:20px;
+  box-shadow:var(--shadow);
+  padding:22px 22px 20px;
+  display:flex;
+  flex-direction:column;
+  gap:16px;
+}
+.panel-head{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;}
+.panel-head h3{font-family:var(--display);font-weight:400;font-size:28px;line-height:1.1;}
+.panel-head .nick{font-family:var(--hand);font-size:24px;color:var(--ink-soft);}
+.panel .quote{
+  font-family:var(--hand);
+  font-size:25px;
+  line-height:1.25;
+  padding:10px 16px;
+  border-radius:14px;
+  border:2px dashed var(--line);
+}
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:18px;}
+.cols > div{min-width:0;}
+.cols h4{
+  margin:0 0 6px;
+  font-size:13px;
+  font-weight:700;
+  letter-spacing:0.07em;
+  text-transform:uppercase;
+  color:var(--ink-soft);
+}
+.cols ul{margin:0;padding-left:1.1em;display:flex;flex-direction:column;gap:6px;}
+.note{font-size:14px;color:var(--ink-soft);}
+
+/* ---------- five gates ---------- */
+.gates{display:grid;grid-template-columns:repeat(auto-fit, minmax(200px,1fr));gap:14px;}
+.gate{
+  border:2.5px solid var(--line);
+  border-radius:60px 60px 16px 16px;   /* an arched doorway */
+  background:var(--surface);
+  padding:22px 18px 18px;
+  display:flex;
+  flex-direction:column;
+  gap:6px;
+}
+.gate .num{font-family:var(--display);font-size:24px;line-height:1;color:var(--ink);}
+.gate h3{font-size:19px;font-weight:700;}
+.gate p{color:var(--ink-soft);font-size:15.5px;}
+.gate .ask{font-family:var(--hand);font-size:21px;line-height:1.2;color:var(--ink);margin-top:auto;padding-top:6px;}
+
+/* ---------- baggage to balloons ---------- */
+.balloon-yard{
+  position:relative;
+  background:var(--mint);
+  color:var(--on-fill);
+  border:2.5px solid var(--line);
+  border-radius:24px;
+  box-shadow:var(--shadow);
+  padding:22px;
+  display:grid;
+  grid-template-columns:1fr 150px;
+  gap:18px;
+  align-items:center;
+  overflow:hidden;
+  min-height:230px;
+}
+.balloon-yard h2{color:var(--on-fill);}
+.balloon-form{display:flex;flex-direction:column;gap:10px;}
+.balloon-form label{font-weight:600;}
+.row{display:flex;gap:10px;flex-wrap:wrap;}
+.row input{
+  flex:1 1 160px;
+  min-width:0;
+  font:inherit;
+  font-size:18px;
+  padding:12px 14px;
+  min-height:48px;
+  border:2.5px solid #1c1a33;
+  border-radius:14px;
+  background:#ffffff;
+  color:#1c1a33;
+}
+.btn{
+  font:inherit;
+  font-weight:700;
+  cursor:pointer;
+  min-height:48px;
+  padding:10px 20px;
+  border:2.5px solid #1c1a33;
+  border-radius:999px;
+  background:var(--amber);
+  color:#1c1a33;
+  box-shadow:3px 3px 0 #1c1a33;
+}
+.btn:active{transform:translate(2px,2px);box-shadow:1px 1px 0 #1c1a33;}
+.btn.ghost{background:var(--surface);color:var(--ink);border-color:var(--line);box-shadow:3px 3px 0 var(--line);}
+.small{font-size:14px;}
+.balloon-yard .small{color:#3b3a55;}
+.sky{position:relative;height:190px;}
+.balloon{
+  position:absolute;
+  left:50%; bottom:0;
+  width:120px;
+  transform:translateX(-50%);
+  transform-origin:50% 100%;
+}
+.balloon text{font-family:var(--hand);font-weight:700;}
+.balloon.flying{animation:rise 3.6s cubic-bezier(.35,.05,.55,1) forwards;}
+@keyframes rise{
+  0%  {transform:translate(-50%,0) rotate(0deg);opacity:1;}
+  30% {transform:translate(-42%,-70px) rotate(5deg);}
+  60% {transform:translate(-60%,-170px) rotate(-6deg);opacity:1;}
+  100%{transform:translate(-48%,-340px) rotate(4deg);opacity:0;}
+}
+.released{min-height:1.6em;font-family:var(--hand);font-size:22px;}
+
+/* ---------- the talk ---------- */
+.talk-card{
+  background:var(--surface);
+  border:2.5px solid var(--line);
+  border-radius:20px;
+  box-shadow:var(--shadow);
+  padding:22px;
+  display:flex;
+  flex-direction:column;
+  gap:16px;
+}
+.questions{margin:0;padding-left:1.4em;display:flex;flex-direction:column;gap:10px;font-size:18px;}
+.questions li::marker{font-family:var(--display);color:var(--ember);}
+.copy-row{display:flex;gap:12px;align-items:center;flex-wrap:wrap;}
+.tn{
+  border-top:2px dashed var(--line);
+  padding-top:14px;
+  display:flex;
+  flex-direction:column;
+  gap:6px;
+}
+.tn strong{font-weight:700;}
+
+/* ---------- offerings ---------- */
+.offers{display:grid;grid-template-columns:repeat(auto-fit, minmax(220px,1fr));gap:14px;}
+.offer{
+  border:2.5px solid var(--line);
+  border-radius:18px;
+  padding:18px;
+  display:flex;
+  flex-direction:column;
+  gap:6px;
+  color:var(--on-fill);
+}
+.offer h3{font-family:var(--display);font-weight:400;font-size:22px;line-height:1.15;}
+.offer p{font-size:15.5px;}
+.offer .tag{font-family:var(--hand);font-size:20px;line-height:1.2;margin-top:auto;padding-top:4px;}
+.o1{background:var(--rouge);} .o2{background:var(--blue);} .o3{background:var(--mint);}
+.o4{background:var(--amber);} .o5{background:var(--surface);color:var(--ink);} .o6{background:var(--surface);color:var(--ink);}
+
+/* ---------- footer ---------- */
+footer{
+  border-top:2.5px solid var(--line);
+  padding-top:22px;
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+}
+footer .sign{font-family:var(--display);font-size:26px;line-height:1.1;}
+footer .sign span{color:var(--ember);}
+footer p{font-size:15px;color:var(--ink-soft);max-width:62ch;}
+
+@media (max-width:560px){
+  body{font-size:16.5px;}
+  .route{grid-template-columns:repeat(2, minmax(0,1fr));}
+  .route::before{display:none;}
+  .cols{grid-template-columns:1fr;}
+  .balloon-yard{grid-template-columns:1fr;}
+  .sky{height:170px;}
+  .hero-balloon{width:72px;}
+}
+@media (prefers-reduced-motion: reduce){
+  .stop{transition:none;}
+  .balloon.flying{animation:fade 1s ease forwards;}
+  @keyframes fade{to{opacity:0;}}
+}
+</style>
+
+<main class="wrap">
+
+  <header class="hero">
+    <div class="presents">Golden Soul Circus presents</div>
+    <h1>Soul Nature <span class="cup c1">Row'd</span> <span class="cup c2">Map</span></h1>
+    <svg class="hero-balloon" viewBox="0 0 100 150" aria-hidden="true">
+      <path d="M50 108 C 46 120, 56 128, 48 146" fill="none" stroke="var(--line)" stroke-width="2.5" stroke-linecap="round"/>
+      <ellipse cx="50" cy="52" rx="38" ry="48" fill="var(--rouge)" stroke="var(--line)" stroke-width="3"/>
+      <path d="M44 100 L56 100 L50 108 Z" fill="var(--rouge)" stroke="var(--line)" stroke-width="2.5" stroke-linejoin="round"/>
+      <path d="M30 32 C 34 22, 42 18, 48 17" fill="none" stroke="#ffffff" stroke-width="5" stroke-linecap="round"/>
+    </svg>
+    <p class="tagline">Where we're going, we need no row. It could help to have a map.</p>
+    <p class="lede">You just spent the hour with a hospice nurse talking about dying, and you laughed, and maybe you cried. Both count. Here's the map to take home: the four stops most of us pass through at the end of life, what helps along the way, and how to start The Talk with the people you love.</p>
+  </header>
+
+  <!-- THE MAP -->
+  <section aria-labelledby="map-h">
+    <h2 id="map-h">The four stops</h2>
+    <p class="lede">Earth, Water, Fire, Air. Every body takes its own route and its own time, and some stops blur together. Tap a stop.</p>
+
+    <div class="route" role="tablist" aria-label="Stops on the map">
+      <button class="stop" role="tab" id="tab-earth" data-el="earth" aria-controls="panel" aria-selected="true">
+        <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M3 26 L13 9 L19 18 L22 14 L29 26 Z" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round"/></svg>
+        <span class="el">Earth</span> <span class="step">Stop 1</span>
+      </button>
+      <button class="stop" role="tab" id="tab-water" data-el="water" aria-controls="panel" aria-selected="false" tabindex="-1">
+        <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 4 C 16 4, 7 15, 7 20 a9 9 0 0 0 18 0 C 25 15, 16 4, 16 4 Z" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round"/></svg>
+        <span class="el">Water</span> <span class="step">Stop 2</span>
+      </button>
+      <button class="stop" role="tab" id="tab-fire" data-el="fire" aria-controls="panel" aria-selected="false" tabindex="-1">
+        <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 3 C 18 10, 25 12, 24 20 a8 8 0 0 1 -16 0 C 8 15, 12 13, 12 9 C 14 12, 15 13, 16 13 C 15 9, 16 6, 16 3 Z" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round"/></svg>
+        <span class="el">Fire</span> <span class="step">Stop 3</span>
+      </button>
+      <button class="stop" role="tab" id="tab-air" data-el="air" aria-controls="panel" aria-selected="false" tabindex="-1">
+        <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M4 12 H20 a4 4 0 1 0 -4 -4 M4 18 H25 a4 4 0 1 1 -4 4 M4 24 H13" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg>
+        <span class="el">Air</span> <span class="step">Stop 4</span>
+      </button>
+    </div>
+
+    <div class="panel" id="panel" role="tabpanel" aria-labelledby="tab-earth" tabindex="0">
+      <div class="panel-head">
+        <h3 id="p-title">Earth</h3>
+        <span class="nick" id="p-nick">ready to go</span>
+      </div>
+      <p class="quote" id="p-quote">The first obstacle isn't fear. It's accepting help.</p>
+      <div class="cols">
+        <div>
+          <h4>What you might notice</h4>
+          <ul id="p-notice"></ul>
+        </div>
+        <div>
+          <h4>What helps</h4>
+          <ul id="p-helps"></ul>
+        </div>
+      </div>
+    </div>
+    <p class="note">Everyone's path is different. Bring what you notice to the hospice or care team; that's what they're there for.</p>
+  </section>
+
+  <!-- FIVE GATES -->
+  <section aria-labelledby="gates-h">
+    <h2 id="gates-h">Five gates of grief</h2>
+    <p class="lede">Gates, not stages. You don't have to finish one to stand at another, and there's no wrong door. There's no right or wrong way to grieve, only right here, right now.</p>
+    <div class="gates">
+      <article class="gate"><span class="num">1</span><h3>Loss</h3><p>Everything we love, we will lose.</p><p class="ask">Who or what are you missing already?</p></article>
+      <article class="gate"><span class="num">2</span><h3>The unloved parts</h3><p>The pieces of us love never quite reached.</p><p class="ask">What part of you is waiting to be held?</p></article>
+      <article class="gate"><span class="num">3</span><h3>World sorrow</h3><p>Everyone feels pain. Many suffer. We carry some of it.</p><p class="ask">Whose pain are you holding that isn't yours?</p></article>
+      <article class="gate"><span class="num">4</span><h3>Unrequited</h3><p>What we expected and never received.</p><p class="ask">What can you give yourself instead?</p></article>
+      <article class="gate"><span class="num">5</span><h3>Ancestral</h3><p>Grief older than us, handed down the line.</p><p class="ask">What are you ready to stop passing on?</p></article>
+    </div>
+  </section>
+
+  <!-- BAGGAGE TO BALLOONS -->
+  <section class="balloon-yard" aria-labelledby="balloon-h">
+    <div class="balloon-form">
+      <h2 id="balloon-h">Baggage to balloons</h2>
+      <p>One word for the thing you're ready to stop carrying. Put it on a balloon and let it go.</p>
+      <form id="balloonForm" class="balloon-form" autocomplete="off">
+        <label for="baggage">Your word</label>
+        <div class="row">
+          <input id="baggage" name="baggage" maxlength="14" placeholder="should" aria-describedby="privacy">
+          <button class="btn" type="submit">Let it go</button>
+        </div>
+        <p class="small" id="privacy">Nothing you type leaves your phone. It isn't saved or sent anywhere.</p>
+        <p class="released" id="released" aria-live="polite"></p>
+      </form>
+    </div>
+    <div class="sky" id="sky" aria-hidden="true"></div>
+  </section>
+
+  <!-- THE TALK -->
+  <section aria-labelledby="talk-h">
+    <h2 id="talk-h">Have The Talk</h2>
+    <p class="lede">Most of us put it off until later, and later turns into an emergency room. Pick a calm day. Bring snacks. You don't need every answer in one sitting. Start with these.</p>
+    <div class="talk-card">
+      <ol class="questions" id="questions">
+        <li>What matters most to you when things get hard?</li>
+        <li>Who do you want speaking for you if you can't speak for yourself?</li>
+        <li>Where do you want to be at the end, and who do you want there?</li>
+        <li>What scares you about dying? What doesn't?</li>
+        <li>What do you want to hear from us while you can still hear it?</li>
+      </ol>
+      <div class="copy-row">
+        <button class="btn" id="copyQs" type="button">Copy the questions</button>
+        <span class="small" id="copyMsg" aria-live="polite"></span>
+      </div>
+      <div class="tn">
+        <p><strong>In Tennessee</strong>, two papers put The Talk in writing: an <strong>advance directive</strong>, where you name who speaks for you and what you want, and a <strong>POST form</strong> (Physician Orders for Scope of Treatment), which you fill out with your doctor when you're seriously ill.</p>
+        <p><a href="https://www.tn.gov/health/healthyaging/healthcare-decisions.html" target="_blank" rel="noopener">Tennessee's healthcare decisions page<span class="sr-only"> (opens in a new tab)</span></a> has the free forms.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- OFFERINGS -->
+  <section aria-labelledby="offers-h">
+    <h2 id="offers-h">Bring the circus home</h2>
+    <p class="lede">Golden Soul Circus is two Nashville hospice nurses making palliative care more palatable. Sacred and silly, both, always.</p>
+    <div class="offers">
+      <article class="offer o1"><h3>Mock Ur Funeral</h3><p>A three-act party for someone still very much alive: Toast, Roast, Prost. Say it while they can hear it.</p><p class="tag">give your flowers while you live</p></article>
+      <article class="offer o2"><h3>Sound baths</h3><p>Lie down, breathe out, and let the bowls do the talking. Grief relief you can feel in your bones.</p><p class="tag">best rest since nap time</p></article>
+      <article class="offer o3"><h3>Soul Nature Row'd Map</h3><p>The talk you just saw, for your community group, faith home, workplace, or care team.</p><p class="tag">we're all walking each other home</p></article>
+      <article class="offer o4"><h3>The Ultimate Sidequest</h3><p>Our festival tent: Solve 4 D. Twerkshop, drumming, sound bath, fire flow, and Crack Yolks open mic.</p><p class="tag">death, dying, drama, darlings</p></article>
+      <article class="offer o5"><h3>The Talk Deck</h3><p>Conversation cards to get The Talk started at the kitchen table.</p><p class="tag">coming soon</p></article>
+      <article class="offer o6"><h3>Palliative Pals</h3><p>An online course for family caregivers: safety first, then teamwork.</p><p class="tag">together, we're a nurse</p></article>
+    </div>
+  </section>
+
+  <footer>
+    <p class="sign">Life gives grief. <span>We can give grace.</span></p>
+    <p>Find Golden Soul Circus on Instagram and TikTok, or catch us at the tent.</p>
+    <p>We're hospice nurses sharing what we've learned at the bedside, not your medical team. For care decisions, talk with your doctor or hospice. If grief feels like too much to carry alone, call or text <strong>988</strong> any time, day or night (US).</p>
+    <p>Golden Soul Circus, Nashville, Tennessee</p>
+  </footer>
+</main>
+
+<script>
+document.documentElement.lang = "en";
+const STOPS = {
+  earth: {
+    title:"Earth", nick:"ready to go",
+    quote:"The first obstacle isn't fear. It's accepting help.",
+    notice:[
+      "Sleeping more, moving less, a heaviness in the body",
+      "Restlessness, or talk of needing to go somewhere: “ready to go,” even without a destination",
+      "Less say in the everyday things they used to handle themselves"
+    ],
+    helps:[
+      "Let yourself be helped, and let them be helped. Carrying the tray is love",
+      "Calm, plain presence beats correcting them about where they're going",
+      "Ask the hospice team what to expect next, out loud and early"
+    ]
+  },
+  water: {
+    title:"Water", nick:"swim, don't stand",
+    quote:"There's no right or wrong way to grieve. Only right here, right now.",
+    notice:[
+      "Less interest in food and drink. The body is getting lighter on purpose",
+      "Big feelings coming up, for the person and for everyone in the room",
+      "Old memories, unfinished business, the stuff below the surface"
+    ],
+    helps:[
+      "Don't force food. Ask the care team about mouth care and comfort",
+      "Let the tears come. Crying is one of the ways a body lets stress go",
+      "Visit the five gates below. You can stand at more than one"
+    ]
+  },
+  fire: {
+    title:"Fire", nick:"the Hot Mess Express",
+    quote:"Being a mess is a judgment, and it's not ours to make.",
+    notice:[
+      "Agitation, restlessness, reaching or picking at things",
+      "Sounds you've never heard them make. Often harder on the family than on them",
+      "Moments that swing from sweet and goofy to scared or confused"
+    ],
+    helps:[
+      "Tell the hospice team. Comfort medicines work best with someone paying attention: medicine with mindfulness",
+      "You are always You, no matter the medicine",
+      "Say the hard thing with warm candor. Not brutal, not silent. Love attached"
+    ]
+  },
+  air: {
+    title:"Air", nick:"fart out my heart",
+    quote:"Letting go isn't losing. It's the last, bravest exhale.",
+    notice:[
+      "Breathing changes: longer pauses, a different rhythm",
+      "Less awake, more far away",
+      "After death, many families say the room feels lighter"
+    ],
+    helps:[
+      "Breathe with them. Slow your own breath to meet theirs",
+      "Say what you need to say now. Hearing may stay longer than you think",
+      "Wear your heart on your sleeve. That's the strongest thing in the room"
+    ]
+  }
+};
+
+const tabs = [...document.querySelectorAll('.stop')];
+const panel = document.getElementById('panel');
+function fill(list, id){
+  const ul = document.getElementById(id);
+  ul.textContent = '';
+  list.forEach(t => { const li = document.createElement('li'); li.textContent = t; ul.appendChild(li); });
+}
+function select(tab, focus){
+  tabs.forEach(t => { const on = t === tab; t.setAttribute('aria-selected', String(on)); t.tabIndex = on ? 0 : -1; });
+  const s = STOPS[tab.dataset.el];
+  document.getElementById('p-title').textContent = s.title;
+  document.getElementById('p-nick').textContent = s.nick;
+  document.getElementById('p-quote').textContent = s.quote;
+  fill(s.notice, 'p-notice'); fill(s.helps, 'p-helps');
+  panel.setAttribute('aria-labelledby', tab.id);
+  if (focus) tab.focus();
+}
+tabs.forEach((t, i) => {
+  t.addEventListener('click', () => select(t));
+  t.addEventListener('keydown', e => {
+    let j = null;
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown') j = (i + 1) % tabs.length;
+    if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') j = (i - 1 + tabs.length) % tabs.length;
+    if (e.key === 'Home') j = 0;
+    if (e.key === 'End') j = tabs.length - 1;
+    if (j !== null){ e.preventDefault(); select(tabs[j], true); }
+  });
+});
+select(tabs[0]);
+
+// ---- balloons ----
+const COLORS = ['var(--rouge)','var(--blue)','var(--amber)','var(--ember)'];
+let ci = 0;
+const sky = document.getElementById('sky');
+function makeBalloon(word, color){
+  const ns = 'http://www.w3.org/2000/svg';
+  const svg = document.createElementNS(ns, 'svg');
+  svg.setAttribute('viewBox', '0 0 120 190');
+  svg.setAttribute('class', 'balloon');
+  const safe = word.replace(/[<>&"]/g, '');
+  const size = safe.length > 9 ? 17 : safe.length > 6 ? 21 : 25;
+  const fg = color === 'var(--ember)' ? '#ffffff' : '#1c1a33';
+  svg.innerHTML =
+    `<path d="M60 128 C 54 142, 68 156, 58 186" fill="none" stroke="#1c1a33" stroke-width="2.5" stroke-linecap="round"/>` +
+    `<ellipse cx="60" cy="64" rx="50" ry="60" fill="${color}" stroke="#1c1a33" stroke-width="3"/>` +
+    `<path d="M53 122 L67 122 L60 130 Z" fill="${color}" stroke="#1c1a33" stroke-width="2.5" stroke-linejoin="round"/>` +
+    `<path d="M32 36 C 37 24, 46 18, 54 17" fill="none" stroke="#ffffff" stroke-width="6" stroke-linecap="round" opacity="0.8"/>` +
+    `<text x="60" y="70" text-anchor="middle" font-size="${size}" fill="${fg}"></text>`;
+  svg.querySelector('text').textContent = safe;
+  return svg;
+}
+function restingBalloon(){
+  sky.textContent = '';
+  sky.appendChild(makeBalloon('should', COLORS[ci % COLORS.length]));
+}
+restingBalloon();
+
+document.getElementById('balloonForm').addEventListener('submit', e => {
+  e.preventDefault();
+  const input = document.getElementById('baggage');
+  const word = (input.value.trim() || 'should').slice(0, 14);
+  ci++;
+  sky.textContent = '';
+  const b = makeBalloon(word, COLORS[ci % COLORS.length]);
+  sky.appendChild(b);
+  requestAnimationFrame(() => b.classList.add('flying'));
+  document.getElementById('released').textContent = `“${word}” is floating off. Lighter already.`;
+  input.value = '';
+  setTimeout(() => { if (b.isConnected) restingBalloon(); }, 3800);
+});
+
+// ---- copy questions ----
+document.getElementById('copyQs').addEventListener('click', () => {
+  const qs = [...document.querySelectorAll('#questions li')].map((li, i) => `${i+1}. ${li.textContent}`).join('\n');
+  const text = `Questions for The Talk (from Golden Soul Circus)\n\n${qs}`;
+  const msg = document.getElementById('copyMsg');
+  const fallback = () => {
+    const r = document.createRange(); r.selectNodeContents(document.getElementById('questions'));
+    const sel = getSelection(); sel.removeAllRanges(); sel.addRange(r);
+    msg.textContent = 'Selected. Use your copy command to grab them.';
+  };
+  try {
+    navigator.clipboard.writeText(text).then(() => { msg.textContent = 'Copied. Paste them into a text to your people.'; }, fallback);
+  } catch(err){ fallback(); }
+});
+</script>
+
+<aside id="gsc-next" style="margin:40px auto 0;max-width:780px;padding:20px 16px 28px;font:500 16px/1.5 'Work Sans',-apple-system,'Segoe UI',sans-serif;color:#14213D;background:#D5F9DE;border-top:2px dashed rgba(20,33,61,.3);display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between"><span>Want word when something new opens, or to book us?</span><span style="display:flex;flex-wrap:wrap;gap:8px"><a href="https://tally.so/r/je6qB4?interest=rowd-map&amp;source=page" style="display:inline-block;padding:10px 18px;border-radius:999px;background:#14213D;color:#F5B700;text-decoration:none;font-weight:600">Join the email list</a><a href="../catalog/" style="display:inline-block;padding:10px 18px;border-radius:999px;border:1.5px solid #14213D;color:#14213D;text-decoration:none;font-weight:600">See everything we offer</a></span></aside>
+</body></html>
