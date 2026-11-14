@@ -1,0 +1,347 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Book the Row'd Map Talk</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<style>
+/* Layout: Golden Soul Circus design system v2. Blue header band → page (at a glance, the four stops, who books it, callout) → page (questions, accordions) → rouge booking band (request form + request card) → page footer. One left edge, 780px column. Tokens below are generated from the system's tokens.json. */
+:root{
+  --blue:#4392F1; --amber:#F5B700; --brick:#D00000; --mint:#D5F9DE; --rouge:#E87EA1; --rouge-deep:#B02E5E; --aqua:#5BC5CB;
+  --ink:#14213D; --white:#FFFFFF;
+  --ink-18:rgba(20,33,61,.18); --ink-70:rgba(20,33,61,.70); --ink-75:rgba(20,33,61,.75);
+  --white-28:rgba(255,255,255,.28); --white-50:rgba(255,255,255,.50); --white-55:rgba(255,255,255,.55);
+  --page:#D5F9DE; --surface:#FFFFFF; --text:#14213D; --text-soft:rgba(20,33,61,.74); --line:rgba(20,33,61,.18);
+  --accent-text:#B02E5E; --focus:#14213D; --btn-bg:#14213D; --btn-fg:#F5B700;
+  --field-bg:#FFFFFF; --field-fg:#14213D; --field-line:rgba(20,33,61,.55); --field-placeholder:rgba(20,33,61,.75);
+  --font-display:Fraunces, Georgia, "Times New Roman", serif;
+  --font-body:"Work Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-script:Caveat, "Comic Sans MS", cursive;
+  --font-mono:"IBM Plex Mono", ui-monospace, monospace;
+  --space-1:4px; --space-2:8px; --space-3:12px; --space-4:16px; --space-5:24px; --space-6:32px; --space-7:48px; --space-8:64px;
+  --section-y:80px; --section-y-tight:56px; --content-max:780px; --gutter:24px;
+  --r-xs:2px; --r-sm:10px; --r-md:14px; --r-pill:999px; --r-round:50%;
+  --bw-hair:1px; --bw:1.5px; --bw-strong:2px;
+  --shadow-card:0 1px 0 rgba(20,33,61,.18), 0 10px 26px -18px rgba(20,33,61,.5);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --page:#101B2E; --surface:#1A2842; --text:#E4F8E9; --text-soft:rgba(228,248,233,.78); --line:rgba(228,248,233,.2);
+    --accent-text:#F4A3BE; --focus:#F5B700; --btn-bg:#E4F8E9; --btn-fg:#101B2E;
+    --field-bg:#1A2842; --field-fg:#E4F8E9; --field-line:rgba(228,248,233,.45); --field-placeholder:rgba(228,248,233,.7);
+    --shadow-card:0 1px 0 rgba(228,248,233,.2), 0 10px 26px -18px rgba(0,0,0,.6);
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+    --page:#101B2E; --surface:#1A2842; --text:#E4F8E9; --text-soft:rgba(228,248,233,.78); --line:rgba(228,248,233,.2);
+    --accent-text:#F4A3BE; --focus:#F5B700; --btn-bg:#E4F8E9; --btn-fg:#101B2E;
+    --field-bg:#1A2842; --field-fg:#E4F8E9; --field-line:rgba(228,248,233,.45); --field-placeholder:rgba(228,248,233,.7);
+    --shadow-card:0 1px 0 rgba(228,248,233,.2), 0 10px 26px -18px rgba(0,0,0,.6);
+    color-scheme:dark;
+}
+</style>
+<link rel="stylesheet" href="../../find-your-words/bundle.css">
+<style>
+body{background:var(--page); color:var(--text);}
+.col{
+  max-width:calc(var(--content-max) + 2 * var(--gutter));
+  margin:0 auto;
+  padding-left:max(var(--gutter), env(safe-area-inset-left, 0px));
+  padding-right:max(var(--gutter), env(safe-area-inset-right, 0px));
+}
+@media (max-width:440px){ .col{ padding-left:max(16px, env(safe-area-inset-left, 0px)); padding-right:max(16px, env(safe-area-inset-right, 0px)); } }
+.band{padding-left:0; padding-right:0;}
+.band > .col{padding-block:0;}
+.title{text-wrap:balance;}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;}
+
+/* top bar */
+.topbar{display:flex; align-items:center; justify-content:space-between; gap:var(--space-3); padding-block:var(--space-3);}
+.topbar .wordmark{font-size:var(--fs-md);}
+.topbar .btn{flex:0 0 auto;}
+
+/* hero band */
+.hero{padding-block:var(--space-7) var(--space-7);}
+.hero .title--display{max-width:16ch; margin-bottom:var(--space-4);}
+.hero .lede{max-width:58ch;}
+.hero .script{margin:0 0 var(--space-5); color:var(--ink);}
+.actions{display:flex; gap:var(--space-3); flex-wrap:wrap; align-items:center;}
+
+/* page sections */
+.section{padding-block:var(--section-y) 0;}
+.section + .section{padding-top:var(--space-8);}
+.section:last-of-type{padding-bottom:var(--section-y);}
+.section .lede{max-width:62ch;}
+.after-band{padding-top:calc(var(--section-y) - 8px);}
+
+/* at a glance */
+.glance{margin:var(--space-5) 0 0; display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); gap:0 var(--space-6);}
+.glance > div{padding-block:var(--space-4); border-top:var(--bw-hair) solid var(--line); min-width:0;}
+.glance dt{font-family:var(--font-mono); font-size:var(--fs-xs); letter-spacing:.04em; color:var(--text-soft); margin:0 0 var(--space-1);}
+.glance dd{margin:0; font-weight:var(--fw-medium);}
+.glance dd small{display:block; font-size:var(--fs-sm); font-weight:400; color:var(--text-soft);}
+
+/* the four stops */
+.stops{list-style:none; margin:var(--space-5) 0 0; padding:0; display:flex; flex-direction:column; gap:0;}
+.stops li{display:grid; grid-template-columns:7.5rem minmax(0,1fr); gap:var(--space-4); padding-block:var(--space-4); border-top:var(--bw-hair) solid var(--line);}
+.stops li:last-child{border-bottom:var(--bw-hair) solid var(--line);}
+.stops .el{font-family:var(--font-display); font-style:italic; font-size:var(--fs-lg); line-height:var(--lh-tight);}
+.stops p{margin:0;}
+.stops .what{font-weight:var(--fw-medium);}
+.stops .why{color:var(--text-soft); font-size:var(--fs-sm); margin-top:var(--space-1);}
+
+/* who books */
+.who{list-style:none; margin:var(--space-5) 0 0; padding:0; display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); gap:var(--space-3) var(--space-6);}
+.who li{padding-left:var(--space-5); position:relative; min-width:0;}
+.who li::before{content:""; position:absolute; left:0; top:.6em; width:9px; height:9px; border-radius:var(--r-round); background:var(--accent-text);}
+.who strong{display:block; font-weight:var(--fw-bold);}
+.who span{color:var(--text-soft); font-size:var(--fs-sm);}
+.callout{margin-top:var(--space-7);}
+
+/* questions */
+.faq{list-style:none; margin:var(--space-5) 0 0; padding:0;}
+.faq > li{border-top:var(--bw-hair) solid var(--line); padding-block:var(--space-4);}
+.faq > li:last-child{border-bottom:var(--bw-hair) solid var(--line);}
+.q-row{display:flex; align-items:center; justify-content:space-between; gap:var(--space-4);}
+.q-row h3{margin:0; font-size:var(--fs-md); line-height:var(--lh-snug);}
+.accordion-panel{max-width:62ch;}
+.accordion-panel p{margin:0 0 .8em; color:var(--text-soft);}
+.accordion-panel p:last-child{margin-bottom:0;}
+
+/* booking band */
+.book{padding-block:var(--section-y) var(--space-8);}
+.book .title--display{margin-bottom:var(--space-3);}
+.book form{display:flex; flex-direction:column; gap:var(--space-6); margin-top:var(--space-6);}
+.grid2{display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); gap:var(--space-4);}
+.grid2 .wide{grid-column:1 / -1;}
+.grid2 > *{min-width:0;}
+.submit-row{display:flex; gap:var(--space-4); align-items:center; flex-wrap:wrap;}
+.form-msg{font-size:var(--fs-sm); font-weight:var(--fw-bold); margin:0;}
+.request-card{margin-top:var(--space-6);}
+.request-card h3:focus{outline:none;}
+.request-card h3:focus-visible{outline:3px solid var(--ink); outline-offset:3px;}
+.request-actions{display:flex; gap:var(--space-3); flex-wrap:wrap; align-items:center; margin-top:var(--space-4);}
+.request-card .btn--outline{color:var(--ink); border-color:var(--ink);}
+.request-card .btn--outline:hover{background:var(--ink); color:var(--amber); border-color:var(--ink);}
+.request-card .btn--primary{background:var(--ink); color:var(--amber); border-color:var(--ink);}
+.send-to{font-size:var(--fs-sm); margin:var(--space-3) 0 0;}
+.send-to b{font-weight:var(--fw-bold); user-select:all; overflow-wrap:anywhere;}
+
+/* footer */
+.foot{padding-block:var(--space-8);}
+.foot .cup-dots{margin-bottom:var(--space-4);}
+.foot .wordmark{font-size:var(--fs-md);}
+.foot p{margin:var(--space-2) 0 0; color:var(--text-soft); font-size:var(--fs-sm); max-width:62ch;}
+.foot .script{margin:var(--space-3) 0 0; font-size:var(--fs-script-sm);}
+
+/* meet the speaker */
+.meet{display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1.15fr); gap:var(--space-7); align-items:center;}
+.photos{display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); gap:var(--space-4); padding:var(--space-2) var(--space-2) var(--space-4);}
+.meet-copy{min-width:0;}
+.meet-copy p{margin:0 0 .9em; max-width:58ch;}
+.meet-copy .script{margin:0;}
+
+/* questions: the whole row is the button */
+.q-btn{all:unset; box-sizing:border-box; width:100%; display:flex; align-items:center; justify-content:space-between; gap:var(--space-4); min-height:44px; cursor:pointer; border-radius:var(--r-sm);}
+.q-btn:focus-visible{outline:3px solid var(--focus); outline-offset:4px;}
+.q-btn .q-text{font-family:var(--font-display); font-weight:var(--fw-medium); font-size:var(--fs-md); line-height:var(--lh-snug);}
+.q-btn .accordion-toggle{pointer-events:none;}
+.q-btn:hover .accordion-toggle, .q-btn[aria-expanded="true"] .accordion-toggle{background:var(--accordion-fill); border-color:var(--accordion-fill); border-style:solid;}
+.q-btn:hover .accordion-bar, .q-btn[aria-expanded="true"] .accordion-bar{background:var(--accordion-bar-on);}
+.q-btn[aria-expanded="true"] .accordion-bar--v{transform:translate(-50%,-50%) rotate(90deg);}
+.faq h3{margin:0;}
+
+/* booking band */
+.rates{list-style:none; margin:var(--space-6) 0; padding:0; display:grid; grid-template-columns:repeat(3, minmax(0,1fr)); gap:var(--space-4);}
+.rates li{background:var(--white-55); border:var(--bw) solid var(--ink-70); border-radius:var(--r-md); padding:var(--space-4) var(--space-4) var(--space-5); min-width:0;}
+.rates .eyebrow{display:block; margin:0;}
+.rates .amt{display:block; font-family:var(--font-display); font-size:var(--fs-xl); line-height:1.1; margin:var(--space-1) 0 var(--space-2);}
+.rates .for{font-size:var(--fs-sm);}
+.book .fine{font-size:var(--fs-sm); margin:var(--space-4) 0 0; max-width:58ch;}
+
+@media (max-width:600px){
+  .meet{grid-template-columns:minmax(0,1fr); gap:var(--space-5);}
+  .rates{grid-template-columns:minmax(0,1fr);}
+  .glance, .who, .grid2{grid-template-columns:minmax(0,1fr);}
+  .stops li{grid-template-columns:minmax(0,1fr); gap:var(--space-1);}
+  .topbar .btn{padding:10px 14px;}
+  .section{padding-top:var(--section-y-tight);}
+}
+</style>
+
+<header class="col topbar">
+  <div class="wordmark">Golden Soul <span>Circus</span></div>
+  <a class="btn btn--primary btn--tilt" href="#book">Book this talk</a>
+</header>
+
+<main>
+  <section class="band band--blue on-bright valance hero" aria-labelledby="hero-h">
+    <div class="col">
+      <p class="eyebrow">A TALK BY HOSPICE NURSE BRAD BURNS</p>
+      <h1 class="title title--display" id="hero-h">Where we're going, we need no row.</h1>
+      <p class="script">But it could help to have a map.</p>
+      <p class="lede">Soul Nature Row'd Map is a 40-minute talk about how we die, from a hospice nurse who's been in the room hundreds of times. It's honest about what happens at the end of a life, and funny enough that people stay in their seats for it.</p>
+      <div class="actions">
+        <a class="btn btn--primary btn--lg" href="#book">Book this talk</a>
+        <a class="btn btn--outline" href="#questions">Read the questions first</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section after-band" aria-labelledby="glance-h">
+    <div class="col">
+      <h2 class="title" id="glance-h">At a glance</h2>
+      <p class="lede lede--soft">Everything a planner usually asks before the first email.</p>
+      <dl class="glance">
+        <div><dt>LENGTH</dt><dd>40 minutes, plus 10 to 15 for questions<small>A 30-minute version fits festival slots</small></dd></div>
+        <div><dt>ROOM</dt><dd>Seated rows or in the round<small>Indoors or out, living room to amphitheater</small></dd></div>
+        <div><dt>STYLE</dt><dd>Interactive, never put-you-on-the-spot<small>Nobody gets called on</small></dd></div>
+        <div><dt>SPEAKER</dt><dd>Brad Burns, hospice nurse<small>Co-founder of Golden Soul Circus with Cass Burns</small></dd></div>
+        <div><dt>COST</dt><dd>From $750, on a sliding scale<small>$350 community rate, and pay it forward for groups who can't pay</small></dd></div>
+        <div><dt>BASED IN</dt><dd>Nashville, Tennessee<small>We travel. Tell us where you are</small></dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="meet-h">
+    <div class="col meet">
+      <div class="photos">
+        <figure class="photo"><img src="photos/brad-tree.jpg" width="720" height="720" alt="Brad Burns smiling, long curly hair, leaning against a tree outdoors"><figcaption>sacred</figcaption></figure>
+        <figure class="photo"><img src="photos/brad-costume.jpg" width="720" height="720" alt="Brad Burns in a green leopard-print head scarf and round gold glasses, holding up both hands with fingers spread"><figcaption>silly</figcaption></figure>
+      </div>
+      <div class="meet-copy">
+        <p class="eyebrow">YOUR SPEAKER</p>
+        <h2 class="title" id="meet-h">Meet Brad</h2>
+        <p>Brad Burns is a hospice nurse and co-founder of Golden Soul Circus with his wife, Cass, also a hospice nurse. His decade of nursing runs from med/surg, ICU, float pool and COVID units to the bedside of the dying.</p>
+        <p>He was raised on singing telegrams and trained in stage acting and improv, so the talk moves like a show. He meets people where the ground is shifting under them, and helps them find something to smile about while it does.</p>
+        <p class="script">Both, always.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="map-h">
+    <div class="col">
+      <h2 class="title" id="map-h">What the talk covers</h2>
+      <p class="lede lede--soft">Four stops most bodies pass through at the end of life, named for the elements. Your people leave knowing what they might see at a bedside, and what helps.</p>
+      <ol class="stops">
+        <li><span class="el">Earth</span><div><p class="what">Getting ready to go.</p><p class="why">Restlessness, sleeping more, and the first hard step: accepting help.</p></div></li>
+        <li><span class="el">Water</span><div><p class="what">The big feelings.</p><p class="why">Five gates of grief, and why there's no wrong way through them.</p></div></li>
+        <li><span class="el">Fire</span><div><p class="what">The messy middle.</p><p class="why">Agitation, strange sounds, and comfort medicine used with care.</p></div></li>
+        <li><span class="el">Air</span><div><p class="what">Letting go.</p><p class="why">Breathing changes, and why the room so often feels lighter afterward.</p></div></li>
+      </ol>
+      <p class="note" style="margin-top:var(--space-4)">Everyone gets a take-home page by QR code: the four stops, the five gates, and starter questions for “The Talk.” <a class="link-accent" href="../" target="_blank" rel="noopener">See the take-home page<span class="sr-only"> (opens in a new tab)</span></a></p>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="who-h">
+    <div class="col">
+      <h2 class="title" id="who-h">Who books it</h2>
+      <ul class="who">
+        <li><strong>Community and faith groups</strong><span>Congregations, libraries, neighborhood circles</span></li>
+        <li><strong>Hospice and care teams</strong><span>Staff gatherings, volunteer training, family nights</span></li>
+        <li><strong>Caregiver and grief groups</strong><span>People in the middle of it, or just after</span></li>
+        <li><strong>Workplaces</strong><span>Wellness days and teams carrying a loss</span></li>
+        <li><strong>Festivals and wellness events</strong><span>Stage slots, tents, and workshop tracks</span></li>
+        <li><strong>Anyone curious about dying</strong><span>Which, sooner or later, is all of us</span></li>
+      </ul>
+      <div class="callout">
+        <div class="cup-dots cup-dots--sm" aria-hidden="true"><span></span><span></span><span></span></div>
+        <p class="script callout-lead">That's why we started Golden Soul Circus:</p>
+        <p class="callout-text">to rehearse “The Talk” with you, calmly and kindly, with room to laugh, before “later” becomes an emergency room.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="questions" aria-labelledby="faq-h">
+    <div class="col">
+      <h2 class="title" id="faq-h">Questions before you book</h2>
+      <p class="lede lede--soft">Tap a question for the answer.</p>
+      <ul class="faq" id="faq"></ul>
+    </div>
+  </section>
+
+  <section class="band band--rouge on-bright valance book" id="book" aria-labelledby="book-h">
+    <div class="col">
+      <p class="eyebrow">BOOK THE TALK</p>
+      <h2 class="title title--display" id="book-h">Give your flowers while you live.</h2>
+      <p class="lede">Tell us about your group and we'll write back to plan the details together. The booking form takes about three minutes.</p>
+
+      <ul class="rates" aria-label="Rates">
+        <li><span class="eyebrow">FULL RATE</span><span class="amt">$750</span><span class="for">Hospices, healthcare, workplaces and conferences</span></li>
+        <li><span class="eyebrow">COMMUNITY RATE</span><span class="amt">$350</span><span class="for">Nonprofits, faith groups and libraries</span></li>
+        <li><span class="eyebrow">PAY IT FORWARD</span><span class="amt">What you can</span><span class="for">Grief groups and hospice families, including nothing at all</span></li>
+      </ul>
+
+      <a class="btn btn--primary btn--lg" href="https://tally.so/r/xVXq8J" target="_blank" rel="noopener">Book this talk<span class="sr-only">: open the booking form in a new tab</span></a>
+      <p class="fine">Opens our booking form in a new tab. Full-rate bookings help pay for the pay-it-forward ones. Travel more than an hour from Nashville adds mileage.</p>
+    </div>
+  </section>
+
+  <footer class="col foot">
+    <div class="cup-dots" aria-hidden="true"><span></span><span></span><span></span></div>
+    <div class="wordmark">Golden Soul <span>Circus</span></div>
+    <p class="script">We're all walking each other home.</p>
+    <p>A Nashville nonprofit founded by hospice nurses Brad and Cass Burns. This talk is education about the dying process, not medical care or medical advice. For decisions about someone's care, talk with their doctor or hospice team.</p>
+  </footer>
+</main>
+
+<script>
+document.documentElement.lang = "en";
+const FAQ = [
+  { q: "Isn't a talk about dying going to be sad?",
+    a: ["Some of it is tender. Most people are surprised by how much they laugh. Sacred and silly, always both: the jokes are never at the expense of anyone who's dying, and the hard parts are said plainly so nobody has to guess.",
+        "Everybody dies. Let's live first."] },
+  { q: "Who gives the talk?",
+    a: ["Brad Burns, a hospice nurse who co-founded Golden Soul Circus with his wife, Cass, also a hospice nurse. Brad's decade of nursing runs from med/surg, ICU, float pool, COVID units and wound care to hospice.",
+        "He also grew up in singing telegrams and trained in stage acting and improv, which is why this feels more like a show than a lecture."] },
+  { q: "Is it okay if someone in the room is grieving right now?",
+    a: ["Yes, and they're often the people who get the most from it. Nobody is called on or asked to share. Anyone can step out and come back, and we stay afterward for anyone who wants to talk one-on-one."] },
+  { q: "How graphic does it get?",
+    a: ["We describe what happens at the end of life in plain words: breathing changes, restlessness, the moment after. There are no medical photos and no gore. If your group needs a gentler version, tell us in the booking form."] },
+  { q: "Is this medical advice?",
+    a: ["No. It's education about the dying process from people who've been at a lot of bedsides. We'll always send people back to their own doctor or hospice team for decisions about care."] },
+  { q: "Is it religious?",
+    a: ["Brad draws on Buddhist teaching and his own Christian roots, and the talk welcomes every belief or none. Nobody is asked to pray, believe, or join anything."] },
+  { q: "What do you need from us on the day?",
+    a: ["A microphone (handheld or clip-on), a little open space up front to move, and about 15 minutes to set up. One balloon gets blown up and let go during the talk. No helium, nothing to clean up but the balloon.",
+        "Brad sometimes lights a single candle. If your venue doesn't allow flame, we skip it."] },
+  { q: "What does it cost?",
+    a: ["The full rate is $750, for hospices, healthcare groups, workplaces and conferences. The community rate is $350, for nonprofits, faith groups and libraries. Grief groups and hospice families pay what they can, including nothing.", "Full-rate bookings help pay for the pay-it-forward ones. Travel more than an hour from Nashville adds mileage. Cost should never be the reason a group goes without."] },
+  { q: "Can you pair it with something else?",
+    a: ["Yes. Groups often add a sound bath afterward for a slow landing, or a short demo of a Mock UR Funeral, our flagship: a three-act party (Toast, Roast, Prost) for someone still very much alive. Mention it in your note."] }
+];
+
+// ---- questions (design-system accordion) ----
+const faqEl = document.getElementById('faq');
+const reduce = matchMedia('(prefers-reduced-motion: reduce)');
+FAQ.forEach((item, i) => {
+  const li = document.createElement('li');
+  const pid = 'faq-p' + i, hid = 'faq-h' + i;
+  li.innerHTML =
+    `<h3><button class="q-btn" type="button" id="${hid}" aria-expanded="false" aria-controls="${pid}"><span class="q-text"></span>` +
+    `<span class="accordion-toggle" aria-hidden="true"><span class="accordion-bar accordion-bar--h"></span><span class="accordion-bar accordion-bar--v"></span></span></button></h3>` +
+    `<div class="accordion-panel" id="${pid}" role="region" aria-labelledby="${hid}" inert></div>`;
+  li.querySelector('.q-text').textContent = item.q;
+  const panel = li.querySelector('.accordion-panel');
+  item.a.forEach(t => { const p = document.createElement('p'); p.textContent = t; panel.appendChild(p); });
+  faqEl.appendChild(li);
+});
+faqEl.addEventListener('click', e => {
+  const b = e.target.closest('.q-btn'); if (!b) return;
+  const p = document.getElementById(b.getAttribute('aria-controls'));
+  const open = b.getAttribute('aria-expanded') === 'true';
+  b.setAttribute('aria-expanded', String(!open));
+  if (open){
+    p.style.maxHeight = p.scrollHeight + 'px';
+    requestAnimationFrame(() => { p.style.maxHeight = '0px'; });
+    p.inert = true;
+  } else {
+    p.inert = false;
+    if (reduce.matches){ p.style.maxHeight = 'none'; return; }
+    p.style.maxHeight = p.scrollHeight + 'px';
+    const done = () => { if (b.getAttribute('aria-expanded') === 'true') p.style.maxHeight = 'none'; p.removeEventListener('transitionend', done); };
+    p.addEventListener('transitionend', done);
+  }
+});
+</script>
+
+<aside id="gsc-next" style="margin:40px auto 0;max-width:780px;padding:20px 16px 28px;font:500 16px/1.5 'Work Sans',-apple-system,'Segoe UI',sans-serif;color:#14213D;background:#D5F9DE;border-top:2px dashed rgba(20,33,61,.3);display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between"><span>Want word when something new opens, or to book us?</span><span style="display:flex;flex-wrap:wrap;gap:8px"><a href="https://tally.so/r/je6qB4?interest=rowd-map-book&amp;source=page" style="display:inline-block;padding:10px 18px;border-radius:999px;background:#14213D;color:#F5B700;text-decoration:none;font-weight:600">Join the email list</a><a href="../../catalog/" style="display:inline-block;padding:10px 18px;border-radius:999px;border:1.5px solid #14213D;color:#14213D;text-decoration:none;font-weight:600">See everything we offer</a></span></aside>
+</body></html>
