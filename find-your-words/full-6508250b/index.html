@@ -1,0 +1,580 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Find Your Words</title>
+<meta name="robots" content="noindex, nofollow">
+<meta name="claude:viewport-fit-sides" content="cover">
+<style>
+  /* Golden Soul Circus design system, palette v2 (tokens.json). Layout: rouge header band with valance → five-stop ribbon → one act ticket + one question card per stop; a full-screen reader for saying it aloud. */
+  :root{
+    --blue:#4392F1; --amber:#F5B700; --brick:#D00000; --mint:#D5F9DE; --rouge:#E87EA1; --rouge-deep:#B02E5E; --aqua:#5BC5CB;
+    --ink:#14213D; --white:#FFFFFF;
+    --ink-18:rgba(20,33,61,.18); --ink-70:rgba(20,33,61,.70); --ink-75:rgba(20,33,61,.75);
+    --white-28:rgba(255,255,255,.28); --white-50:rgba(255,255,255,.50); --white-55:rgba(255,255,255,.55);
+    --page:var(--mint); --surface:var(--white); --text:var(--ink); --text-soft:rgba(20,33,61,.74); --line:var(--ink-18);
+    --accent-text:var(--rouge-deep); --focus:var(--ink); --btn-bg:var(--ink); --btn-fg:var(--amber);
+    --field-bg:var(--white); --field-fg:var(--ink); --field-line:rgba(20,33,61,.55); --field-placeholder:var(--ink-75);
+    --shadow-card:0 1px 0 rgba(20,33,61,.18), 0 10px 26px -18px rgba(20,33,61,.5);
+    --font-display:Fraunces, Georgia, "Times New Roman", serif;
+    --font-body:"Work Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    --font-script:Caveat, "Comic Sans MS", cursive;
+    --font-mono:"IBM Plex Mono", ui-monospace, monospace;
+    --space-1:4px; --space-2:8px; --space-3:12px; --space-4:16px; --space-5:24px; --space-6:32px; --space-7:48px; --space-8:64px;
+    --section-y:80px; --section-y-tight:56px; --content-max:780px; --gutter:24px;
+    --r-xs:2px; --r-sm:10px; --r-md:14px; --r-pill:999px; --r-round:50%;
+    --bw-hair:1px; --bw:1.5px; --bw-strong:2px;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --page:#101B2E; --surface:#1A2842; --text:#E4F8E9; --text-soft:rgba(228,248,233,.78); --line:rgba(228,248,233,.2);
+      --accent-text:#F4A3BE; --focus:var(--amber); --btn-bg:#E4F8E9; --btn-fg:#101B2E;
+      --field-bg:#1A2842; --field-fg:#E4F8E9; --field-line:rgba(228,248,233,.45); --field-placeholder:rgba(228,248,233,.7);
+      --shadow-card:0 1px 0 rgba(228,248,233,.2), 0 10px 26px -18px rgba(0,0,0,.6);
+      color-scheme:dark;
+    }
+  }
+  :root[data-theme="dark"]{
+    --page:#101B2E; --surface:#1A2842; --text:#E4F8E9; --text-soft:rgba(228,248,233,.78); --line:rgba(228,248,233,.2);
+    --accent-text:#F4A3BE; --focus:var(--amber); --btn-bg:#E4F8E9; --btn-fg:#101B2E;
+    --field-bg:#1A2842; --field-fg:#E4F8E9; --field-line:rgba(228,248,233,.45); --field-placeholder:rgba(228,248,233,.7);
+    --shadow-card:0 1px 0 rgba(228,248,233,.2), 0 10px 26px -18px rgba(0,0,0,.6);
+    color-scheme:dark;
+  }
+</style>
+<link rel="stylesheet" href="../bundle.css">
+<style>
+  *,*::before,*::after{box-sizing:border-box; -webkit-tap-highlight-color:transparent;}
+  body{background:var(--page); color:var(--text);}
+  [tabindex="-1"]:focus{outline:none;}
+  .sr-only{position:absolute!important; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap;}
+  .col{max-width:var(--content-max); margin:0 auto; padding-left:max(var(--gutter), env(safe-area-inset-left, 0px)); padding-right:max(var(--gutter), env(safe-area-inset-right, 0px));}
+
+  /* header band */
+  .top{padding-block:var(--space-4) var(--space-5);}
+  .top .col{display:flex; align-items:center; justify-content:space-between; gap:var(--space-3);}
+  .top .eyebrow{margin:0 0 var(--space-1); display:flex; align-items:center; gap:var(--space-2);}
+  .top .title{margin:0; font-size:var(--fs-lg);}
+  .top .btn{flex:none;}
+
+  /* ribbon */
+  .ribbon{list-style:none; display:flex; gap:var(--space-1); margin:var(--space-6) 0 var(--space-2); padding:0;}
+  .ribbon li{flex:1; min-width:0;}
+  .stop{width:100%; min-height:44px; background:none; border:0; border-bottom:4px solid var(--line); color:var(--text-soft); font-family:var(--font-mono); font-size:.7rem; letter-spacing:.04em; cursor:pointer; padding:6px 0 8px;}
+  .stop.done{border-bottom-color:var(--c);}
+  .stop.done::before{content:"✓ ";}
+  .stop[aria-current="step"]{color:var(--text); font-weight:500; border-bottom-color:var(--text);}
+
+  .stack{display:flex; flex-direction:column; gap:var(--space-5); margin:var(--space-5) 0;}
+  .card{background:var(--surface); border-radius:var(--r-md); box-shadow:var(--shadow-card); padding:var(--space-5);}
+  .ticket .title--card{margin-bottom:0;}
+  .ticket .script{margin:var(--space-1) 0 var(--space-3);}
+  .stub-num{font-family:var(--font-display); font-style:italic; font-weight:600; font-size:1.7rem; line-height:1; transform:rotate(-6deg);}
+  .gift{margin:0; font-size:var(--fs-sm); line-height:1.5; padding-left:var(--space-3); border-left:4px solid var(--act);}
+  .gift b, .label{display:block; font-family:var(--font-mono); font-weight:400; font-size:var(--fs-xs); letter-spacing:.06em; color:var(--text-soft); margin-bottom:2px;}
+  .about-row{display:flex; align-items:center; gap:var(--space-3); margin-top:var(--space-4);}
+  .about-row span{font-size:var(--fs-sm); font-weight:600;}
+  .accordion-panel p{font-size:var(--fs-sm); color:var(--text-soft); margin:0 0 var(--space-3);}
+
+  .face{margin:0 0 var(--space-5); padding:var(--space-2) var(--space-3); border:var(--bw-strong) dashed var(--line); border-radius:var(--r-sm); font-size:var(--fs-sm); font-weight:500;}
+  .prompts{display:flex; flex-direction:column; gap:var(--space-6);}
+  .prompt .field-label{font-size:var(--fs-base); line-height:1.4;}
+  .hint{font-weight:400; color:var(--text-soft); font-size:var(--fs-sm);}
+  .nudges{list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:2px;}
+  .nudges li{font-size:var(--fs-sm); line-height:1.45; color:var(--text-soft); padding-left:14px; position:relative;}
+  .nudges li::before{content:"›"; position:absolute; left:2px;}
+  .field{font-size:var(--fs-base);}
+  textarea.field{min-height:88px; overflow:hidden; resize:none;}
+  .starters{display:flex; flex-wrap:wrap; gap:var(--space-2); margin-top:var(--space-1);}
+  .starter{min-height:44px; padding:8px 14px; border-radius:var(--r-pill); border:var(--bw) dashed var(--field-line); background:transparent; color:var(--text); font-family:var(--font-body); font-size:var(--fs-sm); cursor:pointer; transition:border-color 160ms ease;}
+  .starter:hover{border-color:var(--text); border-style:solid;}
+  .warn{display:none; margin:var(--space-1) 0 0; font-size:var(--fs-sm); line-height:1.45; padding:var(--space-2) var(--space-3); border-radius:var(--r-sm); border:var(--bw) solid var(--text); }
+  .warn.show{display:block;}
+  .preview{border:var(--bw-strong) dashed var(--line); border-radius:var(--r-md); padding:var(--space-4);}
+  .preview p{margin:0 0 var(--space-2); line-height:1.6;}
+  .preview p:last-child{margin-bottom:0;}
+  .preview .empty{color:var(--text-soft); font-style:italic;}
+  .flag{display:inline-block; margin-top:var(--space-3); font-family:var(--font-mono); font-size:var(--fs-xs); letter-spacing:.04em; padding:3px 9px; border-radius:var(--r-pill); border:var(--bw) solid var(--text);}
+  .guard{margin-top:var(--space-5);}
+  .checks{display:flex; flex-direction:column; gap:var(--space-2); margin-top:var(--space-3);}
+  .check{display:flex; gap:var(--space-3); align-items:center; min-height:44px; padding:6px var(--space-3); border:var(--bw) solid var(--field-line); border-radius:var(--r-sm); cursor:pointer; font-size:var(--fs-sm);}
+  .check input{width:20px; height:20px; flex:none; accent-color:var(--ink);}
+  hr.tear{border:0; border-top:var(--bw-strong) dashed var(--line); margin:var(--space-6) 0;}
+
+  .choices{display:grid; gap:var(--space-3); margin:0 0 var(--space-5);}
+  .choice{text-align:left; font:inherit; color:var(--text); background:var(--surface); border:var(--bw) solid var(--field-line); border-radius:var(--r-md); padding:var(--space-3) var(--space-4); cursor:pointer; min-height:44px;}
+  .choice b{display:block;}
+  .choice span{display:block; font-size:var(--fs-sm); line-height:1.45; color:var(--text-soft); margin-top:2px;}
+  .choice[aria-pressed="true"]{border-color:var(--text); box-shadow:inset 0 0 0 1.5px var(--text);}
+  .field-wrap{margin-bottom:var(--space-5);}
+  .group-label{display:block; font-size:var(--fs-sm); font-weight:600; margin:0 0 var(--space-2);}
+  .callout{margin-top:var(--space-5);}
+  .care{font-size:var(--fs-sm); line-height:1.5; padding:var(--space-3) var(--space-4); border:var(--bw-strong) dashed var(--line); border-radius:var(--r-md); margin:var(--space-5) 0 0;}
+
+  .nav{display:flex; flex-wrap:wrap; gap:var(--space-3);}
+  .nav .btn{flex:1 1 160px;}
+  .linkish{background:none; border:none; padding:0 4px; min-height:44px; font-family:var(--font-body); font-size:var(--fs-sm); font-weight:600; color:var(--text); text-decoration:underline; text-underline-offset:3px; cursor:pointer;}
+  .linkish.danger{color:var(--text-soft); font-weight:500;}
+
+  .program{display:flex; flex-direction:column; gap:var(--space-5);}
+  .act-out{border:var(--bw) solid var(--line); border-top:6px solid var(--act); border-radius:var(--r-md); padding:var(--space-4);}
+  .act-out-head{display:flex; align-items:center; justify-content:space-between; gap:var(--space-3); margin-bottom:var(--space-3);}
+  .act-out-head .title--card{margin:0;}
+  .act-out textarea.field{min-height:120px;}
+  .meta{display:flex; flex-wrap:wrap; justify-content:space-between; gap:var(--space-2); align-items:center; margin-top:var(--space-2); font-family:var(--font-mono); font-size:var(--fs-xs); color:var(--text-soft); font-variant-numeric:tabular-nums;}
+  .reminder{margin:var(--space-2) 0 0; font-size:var(--fs-sm); color:var(--text-soft);}
+  .status{min-height:1.4em; font-size:var(--fs-sm); color:var(--text-soft); margin:var(--space-3) 0 0;}
+  .copyfallback{display:none; width:100%; min-height:160px; margin-top:var(--space-3); font-family:var(--font-mono); font-size:.85rem;}
+  .copyfallback.show{display:block;}
+  footer{margin:var(--space-7) 0 var(--space-6); font-size:var(--fs-sm); color:var(--text-soft); text-align:center;}
+
+  /* reader */
+  .reader{position:fixed; inset:0; z-index:30; display:none; flex-direction:column; background:var(--page);}
+  .reader.open{display:flex;}
+  .reader .band{padding-block:calc(env(safe-area-inset-top, 0px) + var(--space-4)) var(--space-4);}
+  .reader-head{display:flex; align-items:center; justify-content:space-between; gap:var(--space-3);}
+  .reader-head .title{margin:0; font-size:var(--fs-xl);}
+  .reader-body{flex:1; overflow:auto; padding-block:var(--space-7) var(--space-6);}
+  .reader-body p{font-family:var(--font-display); font-weight:500; font-size:clamp(1.55rem, 6.2vw, 2.3rem); line-height:1.35; margin:0 0 .8em; max-width:28ch; text-wrap:pretty;}
+  .reader-body p.pass{color:var(--text-soft); font-style:italic;}
+  .reader-foot{padding-block:var(--space-3) calc(env(safe-area-inset-bottom, 0px) + var(--space-4)); border-top:var(--bw-hair) solid var(--line); background:var(--page);}
+  .reader-foot .col{display:flex; align-items:center; gap:var(--space-3);}
+  .reader-foot .btn{flex:1;}
+  .reader-count{font-family:var(--font-mono); font-size:var(--fs-xs); color:var(--text-soft); white-space:nowrap;}
+
+  /* pause */
+  .overlay{position:fixed; inset:0; z-index:40; display:none; flex-direction:column; align-items:center; justify-content:center; gap:var(--space-5); padding:var(--space-5) max(var(--gutter), env(safe-area-inset-right, 0px)) var(--space-5) max(var(--gutter), env(safe-area-inset-left, 0px)); background:var(--page);}
+  .overlay.open{display:flex;}
+  .orb{width:170px; height:170px; border-radius:var(--r-round); background:var(--amber); border:6px solid var(--rouge); transform:scale(.55); transition:transform 4s ease-in-out;}
+  .orb.in{transform:scale(1);}
+  .breath{margin:0;}
+  .overlay p{margin:0; max-width:34ch; text-align:center; line-height:1.5; color:var(--text-soft);}
+  @media (prefers-reduced-motion: reduce){ .orb,.orb.in{transition:none; transform:scale(.8);} }
+  @media (max-width:440px){ .top .title{font-size:1.25rem;} }
+</style>
+
+<header class="band band--rouge valance on-bright top">
+  <div class="col">
+    <div>
+      <p class="eyebrow"><span class="cup-dots cup-dots--sm" aria-hidden="true"><span></span><span></span><span></span></span><a href="../../" aria-label="Golden Soul Circus home" style="color:inherit;text-decoration:none">GOLDEN SOUL CIRCUS</a></p>
+      <p class="title title--tagline">Find Your Words</p>
+    </div>
+    <button type="button" class="btn btn--outline" id="pauseBtn">Pause</button>
+  </div>
+</header>
+
+<div class="col">
+  <nav aria-label="Steps"><ol class="ribbon" id="ribbon"></ol></nav>
+  <main id="screen"></main>
+  <p class="sr-only" id="live" aria-live="polite"></p>
+  <footer>This is ceremony, not therapy. Your answers stay in this browser on this device; nothing is sent anywhere.</footer>
+</div>
+
+<div class="reader" id="reader" role="dialog" aria-modal="true" aria-labelledby="readerTitle">
+  <div class="band valance on-bright" id="readerBand">
+    <div class="col reader-head">
+      <div><p class="eyebrow" id="readerBadge" style="margin:0"></p><h2 class="title" id="readerTitle" tabindex="-1"></h2></div>
+      <button type="button" class="btn btn--outline" id="readerClose">Done</button>
+    </div>
+  </div>
+  <div class="reader-body"><div class="col" id="readerText"></div></div>
+  <div class="reader-foot"><div class="col">
+    <button type="button" class="btn btn--outline" id="readerPrev">‹ Back</button>
+    <span class="reader-count" id="readerCount"></span>
+    <button type="button" class="btn btn--primary" id="readerNext">Next act ›</button>
+  </div></div>
+</div>
+
+<div class="overlay" id="overlay" role="dialog" aria-modal="true" aria-label="Pause and breathe">
+  <div class="orb" id="orb"></div>
+  <p class="title title--quiet breath" id="breathWord">Breathe in</p>
+  <p>Take all the time you need. Your answers will be right here.</p>
+  <p>If this feels like too much, you can stop. In the US, call or text 988 anytime to talk with someone.</p>
+  <button type="button" class="btn btn--primary btn--lg" id="resumeBtn">I'm ready</button>
+</div>
+
+<script>
+const ACTS = [
+  { id:'toast', num:'I', badge:'ACT I', name:'Toast', sub:'Give your flowers while you live',
+    gift:'Being truly seen, before it’s too late to receive it.', c:'var(--amber)', band:'band--amber',
+    lead:{ other:'Everyone closes their eyes and goes around the room. You name a quality you see in {N}: something you might not feel free to say while they’re “in the room.”',
+           self:'This is your turn to receive. If you speak at all, toast yourself: name a quality you’re proud of and rarely say out loud.' },
+    guard:'Intrinsic values are qualities. Extrinsic values are quantities. Let that definition be your guardrail.',
+    prompts:{
+      other:[
+        {k:'quality', core:true, short:true, q:'What quality shines in {N} when they’re at their best?', nudge:['Steady, fearless, tender, ridiculous.','A quality, not a job, a house, or a trophy.'], ph:'fearless'},
+        {k:'moment', core:true, q:'Tell one quick moment when you saw that quality in action.', nudge:['Where were you? What did they do or say?'], starters:['The time you…','I’ll never forget when you…']},
+        {k:'gift', core:true, q:'What has that quality given you?', starters:['Because of you, I…','You taught me…']},
+        {k:'unsaid', q:'What have you never said out loud because they were in the room?', nudge:['Eyes are closed. Nobody is looking at you.'], starters:['I’ve never told you…']}
+      ],
+      self:[
+        {k:'quality', core:true, short:true, q:'What quality are you proud of in yourself that you rarely say out loud?', nudge:['A quality, not a job, a house, or a trophy.'], ph:'stubbornly kind'},
+        {k:'moment', core:true, q:'When did you feel most like yourself?', starters:['I felt most like me when…']},
+        {k:'gift', core:true, q:'Who brought that quality out in you?', starters:['I learned it from…','Thank you to…']},
+        {k:'unsaid', q:'What do you hope the people in this room see in you?', starters:['I hope you see…']}
+      ]
+    },
+    compose(a, x){
+      const out=[];
+      if (x.role==='self'){ if(a.quality) out.push(`Here’s something I rarely say out loud: I’m ${trimEnd(a.quality)}.`); }
+      else if(a.quality) out.push(`${x.N}, the quality I see in you is ${trimEnd(a.quality)}.`);
+      [a.moment, a.gift, a.unsaid].forEach(s=>{ if(s && s.trim()) out.push(finish(s)); });
+      return out;
+    }
+  },
+  { id:'roast', num:'II', badge:'ACT II', name:'Roast', sub:'Hold cold feet to the fire. Bless your heart, forget the rest.',
+    gift:'Being challenged by people who love you enough to bother.', c:'var(--aqua)', band:'band--aqua',
+    lead:{ other:'You answer the open question: what do you see {N} doing best, and what do the people who love them most want from them? The goal is to retrieve the soul while skirting the ego.',
+           self:'Roast yourself before anyone else can. Name what you do best, own the glorious flaw, and say out loud what the people who love you keep asking of you.' },
+    guard:'Laugh with them, never at them. If a line wouldn’t feel kind the night after a death, leave it out.',
+    prompts:{
+      other:[
+        {k:'best', core:true, q:'What do you see {N} doing best, the thing that gives the people what they want?', starters:['Nobody does … like you.','You’re the one we call when…']},
+        {k:'flaw', core:true, q:'What’s their glorious flaw, the one everyone teases them about?', nudge:['Always late, always loud, packs for a week to go overnight.','Skip this one if the loss is fresh or the relationship was hard.']},
+        {k:'want', core:true, q:'What do the people who love them most want from them?', nudge:['The honest, loving challenge: the thing they avoid while playing their vital role.'], starters:['We want you to…','It’s time you…']},
+        {k:'coldfeet', q:'Where does {N} get cold feet?', nudge:['What do they put off, dodge, or downplay?']}
+      ],
+      self:[
+        {k:'best', core:true, q:'What do you do best, the thing people come to you for?', starters:['People call me when…']},
+        {k:'flaw', core:true, q:'What’s your most glorious flaw?', starters:['I will absolutely…']},
+        {k:'want', core:true, q:'What do the people who love you keep asking of you?', starters:['You keep asking me to…']},
+        {k:'coldfeet', q:'Where do you get cold feet?', starters:['I get cold feet when…']}
+      ]
+    },
+    checks:['It’s true.','They would laugh with me, not flinch.','The challenge comes from love.'],
+    compose(a, x){
+      const has=k=>a[k] && a[k].trim(); const out=[];
+      if(!(has('best')||has('flaw')||has('want')||has('coldfeet'))) return out;
+      out.push(x.role==='self' ? 'Let me roast myself before you do.' : `Bless your heart, ${x.N}.`);
+      if(has('best')) out.push(finish(a.best));
+      if(has('flaw')) out.push(x.role==='self' ? `My glorious flaw? ${finish(a.flaw)}` : `And we have to talk about this. ${finish(a.flaw)}`);
+      if(has('want')) out.push(x.role==='self' ? `I hear you. ${finish(a.want)}` : `Here’s what we want, because we love you enough to bother. ${finish(a.want)}`);
+      if(has('coldfeet')) out.push(finish(a.coldfeet));
+      return out;
+    }
+  },
+  { id:'prost', num:'III', badge:'ACT III', name:'Prost', sub:'Rip sleeves off grief',
+    gift:'Saying the unsayable, while there’s still time.', c:'var(--blue)', band:'band--blue',
+    lead:{ other:'What would you say if you knew it was the last thing you’d ever say to {N}? Say it too late, say it too much. Let the thing you “can’t handle” be a trust fall into their heart.',
+           self:'What would you say if you knew it was the last thing you’d ever say to this room? Be too much. Wear your grief on your sleeve.' },
+    guard:'Let your heart break, to save your soul. Anything here can stay off the page and still be said out loud.',
+    prompts:{
+      other:[
+        {k:'last', core:true, q:'If you knew this was the last thing you’d ever say to {N}, what would it be?', nudge:['Say it too late, say it too much. That’s the point.'], starters:['If this is the last thing I say…','I love you because…']},
+        {k:'cant', core:true, q:'What’s the part you think you “can’t handle” saying?', nudge:['Let it be a trust fall into their heart.','Leave the box empty if it should only be said out loud.']},
+        {k:'letgo', q:'What do you want to let go of, or ask them to let go of?', starters:['I’m letting go of…','You can let go of…']},
+        {k:'prost', core:true, short:true, q:'What do you want to raise a glass to?', ph:'the way you laugh at your own jokes'}
+      ],
+      self:[
+        {k:'last', core:true, q:'If this were the last thing you said to everyone in this room, what would it be?', starters:['If this is the last thing I say…']},
+        {k:'old', core:true, short:true, q:'Which old version of you are you laying to rest today?', nudge:['A chapter, a habit, a costume you’ve outgrown.'], ph:'the people-pleaser'},
+        {k:'carry', q:'What do you want to carry forward into the next chapter?', starters:['I’m taking with me…']},
+        {k:'prost', core:true, short:true, q:'What do you want to raise a glass to?', ph:'second chances'}
+      ]
+    },
+    compose(a, x){
+      const out=[], has=k=>a[k] && a[k].trim();
+      ['last','cant','letgo'].forEach(k=>{ if(has(k)) out.push(finish(a[k])); });
+      if(has('old')) out.push(`Today I’m laying to rest ${lowerFirst(trimEnd(a.old))}.`);
+      if(has('carry')) out.push(finish(a.carry));
+      if(has('prost')) out.push(`So here’s to ${lowerFirst(trimEnd(a.prost))}. Prost!`);
+      return out;
+    }
+  }
+];
+const STOPS = [
+  {id:'start', label:'START', c:'var(--text)'},
+  {id:'toast', label:'TOAST', c:'var(--amber)'},
+  {id:'roast', label:'ROAST', c:'var(--aqua)'},
+  {id:'prost', label:'PROST', c:'var(--blue)'},
+  {id:'words', label:'YOUR WORDS', c:'var(--rouge)'}
+];
+const BOOK_URL = 'https://tally.so/r/GexGO2?source=find-your-words';
+const EXTRINSIC = /\b(money|rich|salary|paid|paycheck|income|job|career|title|promotion|boss|ceo|house|houses|car|cars|truck|boat|degree|grades|gpa|weight|pounds|followers|likes|trophy|trophies|award|awards|bought|buys|dollars?|millionaire|net worth)\b|\$\s?\d/i;
+const WPM = 130;
+
+function trimEnd(s){ return String(s).trim().replace(/[\s.!?…,;:]+$/,''); }
+function lowerFirst(s){ return s && /^[A-Z][a-z]/.test(s) && !/^I\b/.test(s) ? s[0].toLowerCase()+s.slice(1) : s; }
+function finish(s){ s=String(s).trim().replace(/…$/,'').trim(); if(!s) return ''; s=s[0].toUpperCase()+s.slice(1); return /[.!?"”’)]$/.test(s) ? s : s+'.'; }
+function esc(t){ return String(t).replace(/[&<>"]/g, m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[m])); }
+function words(t){ return (t.trim().match(/\S+/g)||[]).length; }
+function timeLabel(n){ if(!n) return 'nothing yet'; const s=Math.max(5, Math.round(n/WPM*60/5)*5); return s<60 ? `about ${s} seconds aloud` : `about ${Math.floor(s/60)} min ${s%60 ? (s%60)+' sec ' : ''}aloud`; }
+function title(l){ return l[0]+l.slice(1).toLowerCase(); }
+
+const KEY='gsc-find-your-words-v1';
+const fresh=()=>({step:0, role:'other', name:'', old:'', depth:'core', ans:{toast:{},roast:{},prost:{}}, drafts:{}, edited:{}, checks:{}, visited:[0]});
+let st=fresh();
+try{ const s=JSON.parse(localStorage.getItem(KEY)); if(s && typeof s==='object'){ st=Object.assign(st,s); st.ans=Object.assign({toast:{},roast:{},prost:{}}, s.ans||{}); } }catch(e){}
+function save(){ try{ localStorage.setItem(KEY, JSON.stringify(st)); }catch(e){} }
+const ctx=()=>({role:st.role, N: st.role==='self' ? 'you' : (st.name.trim()||'them')});
+const fill=t=>t.replace(/\{N\}/g, ctx().N);
+const draftFor=act=>act.compose(st.ans[act.id], ctx()).filter(Boolean);
+const currentDraft=act=>st.edited[act.id] ? (st.drafts[act.id]||'') : draftFor(act).join('\n\n');
+const toastFlagged=()=>Object.values(st.ans.toast||{}).some(v=>EXTRINSIC.test(v||''));
+const answered=id=>Object.values(st.ans[id]||{}).some(v=>v && v.trim());
+
+const $=id=>document.getElementById(id);
+const screen=$('screen');
+
+function grow(t){ t.style.height='auto'; t.style.height=(t.scrollHeight+3)+'px'; }
+function growAll(){ screen.querySelectorAll('textarea.field').forEach(grow); }
+
+function renderRibbon(){
+  $('ribbon').innerHTML = STOPS.map((s,i)=>{
+    const done = (s.id==='start' && st.visited.includes(1)) || (ACTS.some(a=>a.id===s.id) && answered(s.id));
+    return `<li><button type="button" class="stop${done?' done':''}" data-go="${i}" style="--c:${s.c}"${i===st.step?' aria-current="step"':''}>${s.label}${done?'<span class="sr-only"> (done)</span>':''}</button></li>`;
+  }).join('');
+}
+
+function go(i, focus=true){
+  st.step=i; if(!st.visited.includes(i)) st.visited.push(i);
+  save(); render();
+  window.scrollTo({top:0, behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto':'smooth'});
+  if(focus){ const h=screen.querySelector('h2'); if(h) h.focus({preventScroll:true}); }
+}
+
+function renderStart(){
+  const self=st.role==='self';
+  screen.innerHTML = `
+  <div class="stack">
+    <div class="card">
+      <p class="eyebrow">BEFORE THE CURTAIN</p>
+      <h2 class="title title--display" tabindex="-1">Say what only you can say</h2>
+      <p class="lede lede--soft">A few questions for each act of the Mock (ur) Funeral. Answer in your own words and this page shapes them into something you can read aloud. Skip anything. “Pass” is always allowed.</p>
+      <span class="group-label" id="roleLabel">Whose Mock (ur) Funeral is it?</span>
+      <div class="choices" role="group" aria-labelledby="roleLabel">
+        <button type="button" class="choice" data-role="other" aria-pressed="${!self}"><b>I’m speaking for someone I love</b><span>You’re a guest giving flowers, a loving roast, and a last word.</span></button>
+        <button type="button" class="choice" data-role="self" aria-pressed="${self}"><b>It’s mine. I’m the guest of honor</b><span>You’re laying an old version of yourself to rest.</span></button>
+      </div>
+      ${self ? '' : `<div class="field-wrap"><label class="field-label" for="nameIn">What do you call them?</label><input class="field" type="text" id="nameIn" value="${esc(st.name)}" placeholder="Grandma Jo" autocomplete="off"></div>`}
+      <div class="field-wrap"><label class="field-label" for="oldIn">Which old version is being laid to rest? <span class="req">(optional)</span></label><input class="field" type="text" id="oldIn" value="${esc(st.old)}" placeholder="${self?'the people-pleaser':'her workaholic era'}" autocomplete="off"></div>
+      <span class="group-label" id="depthLabel">How much time do you have?</span>
+      <div class="choices" role="group" aria-labelledby="depthLabel">
+        <button type="button" class="choice" data-depth="core" aria-pressed="${st.depth==='core'}"><b>Quick</b><span>Three questions per act.</span></button>
+        <button type="button" class="choice" data-depth="deep" aria-pressed="${st.depth==='deep'}"><b>Deep dive</b><span>Four questions per act, including the hard ones.</span></button>
+      </div>
+      <div class="callout">
+        <span class="cup-dots cup-dots--sm" aria-hidden="true"><span></span><span></span><span></span></span>
+        <p class="eyebrow callout-lead">EXAMPLE · WHAT YOU’LL LEAVE WITH</p>
+        <p class="callout-text">“Jo, the quality I see in you is fearless. I’ll never forget when you drove four hours in a snowstorm for my recital. Because of you, I sing out loud.”</p>
+      </div>
+      <p class="care">This is ceremony, not therapy. If something comes up that feels like too much, tap Pause. You can stop at any time.</p>
+    </div>
+    <div class="nav"><button type="button" class="btn btn--primary btn--lg" data-go="1">Begin with the Toast →</button></div>
+  </div>`;
+}
+
+function renderAct(act){
+  const x=ctx(), list=act.prompts[st.role].filter(p=>st.depth==='deep'||p.core);
+  if(st.role==='self' && act.id==='prost' && st.old && !st.ans.prost.old) st.ans.prost.old=st.old;
+  const idx=STOPS.findIndex(s=>s.id===act.id), a=st.ans[act.id];
+  const face = x.role==='self' ? 'Write it the way you’d say it to the room, in your own voice.' : `Write it the way you’d say it to ${x.N}, face to face: “you,” not “she” or “he.”`;
+  screen.innerHTML = `
+  <div class="stack" style="--act:${act.c}">
+    <article class="ticket" style="--stub:${act.c}">
+      <div class="ticket-stub"><span class="stub-num" aria-hidden="true">${act.num}</span></div>
+      <div class="ticket-body">
+        <p class="eyebrow" style="margin:0">${act.badge}</p>
+        <h2 class="title title--card" tabindex="-1">${act.name}</h2>
+        <p class="script script--sm">${esc(act.sub)}</p>
+        <p class="gift"><b>THE GIFT</b>${esc(act.gift)}</p>
+        <div class="about-row">
+          <button type="button" class="accordion-toggle" id="aboutBtn" aria-expanded="false" aria-controls="aboutPanel" aria-label="About this act"><span class="accordion-bar accordion-bar--h"></span><span class="accordion-bar accordion-bar--v"></span></button>
+          <span aria-hidden="true">About this act</span>
+        </div>
+        <div class="accordion-panel" id="aboutPanel" hidden>
+          <p>${esc(fill(act.lead[st.role]))}</p>
+          <p>${esc(act.guard)}</p>
+        </div>
+      </div>
+    </article>
+
+    <section class="card" aria-label="${act.name} questions">
+      <p class="face">${esc(face)}</p>
+      <div class="prompts">
+        ${list.map(p=>`
+        <div class="prompt field-wrap" style="margin:0">
+          <label class="field-label" for="q-${act.id}-${p.k}">${esc(fill(p.q))}${p.short?' <span class="hint">(a word or two)</span>':''}${p.core?'':' <span class="hint">· deep dive</span>'}</label>
+          ${p.nudge?`<ul class="nudges">${p.nudge.map(n=>`<li>${esc(fill(n))}</li>`).join('')}</ul>`:''}
+          ${p.short
+            ? `<input class="field" type="text" id="q-${act.id}-${p.k}" data-k="${p.k}" value="${esc(a[p.k]||'')}" placeholder="${esc(p.ph||'')}" autocomplete="off">`
+            : `<textarea class="field" id="q-${act.id}-${p.k}" data-k="${p.k}" placeholder="Write it the way you’d say it.">${esc(a[p.k]||'')}</textarea>`}
+          ${p.starters?`<div class="starters">${p.starters.map(s=>`<button type="button" class="starter" data-for="q-${act.id}-${p.k}" data-text="${esc(s)}">${esc(s)}</button>`).join('')}</div>`:''}
+          ${act.id==='toast'?`<p class="warn" id="w-${p.k}" role="status">That sounds like a quantity, something counted or owned. Act One is for qualities. What does it say about who ${x.role==='self'?'you are':'they are'}?</p>`:''}
+        </div>`).join('')}
+      </div>
+      <hr class="tear">
+      <span class="label">YOUR WORDS SO FAR</span>
+      <div class="preview" id="preview"></div>
+      ${act.checks?`<div class="guard"><span class="label">ROAST CHECK</span><div class="checks">${act.checks.map((c,i)=>`<label class="check"><input type="checkbox" data-chk="${i}"${st.checks[i]?' checked':''}> ${esc(c)}</label>`).join('')}</div></div>`:''}
+    </section>
+
+    <div class="nav">
+      <button type="button" class="btn btn--outline" data-go="${idx-1}">← ${title(STOPS[idx-1].label)}</button>
+      <button type="button" class="btn btn--primary" data-go="${idx+1}">${idx===3?'See your words':'On to the '+title(STOPS[idx+1].label)} →</button>
+    </div>
+  </div>`;
+  updatePreview(act);
+  if(act.id==='toast') list.forEach(p=>checkExtrinsic(p.k, a[p.k]||''));
+}
+
+function updatePreview(act){
+  const el=$('preview'); if(!el) return;
+  const lines=draftFor(act);
+  el.innerHTML = (lines.length ? lines.map(l=>`<p>${esc(l)}</p>`).join('') : `<p class="empty">Your answers will start to form a few sentences here.</p>`)
+    + (act.id==='toast' && toastFlagged() ? `<span class="flag">CHECK: ONE ANSWER READS LIKE A QUANTITY</span>` : '');
+}
+function checkExtrinsic(k, v){ const w=$('w-'+k); if(w) w.classList.toggle('show', EXTRINSIC.test(v)); }
+
+function renderWords(){
+  const x=ctx(), unchecked = ACTS[1].checks.some((c,i)=>!st.checks[i]) && answered('roast');
+  screen.innerHTML = `
+  <div class="stack">
+    <div class="card">
+      <p class="eyebrow">CURTAIN CALL</p>
+      <h2 class="title" tabindex="-1">Your words</h2>
+      <p class="lede lede--soft">${x.role==='self'?'Your three acts, ready to say.':`What you’ll say for ${esc(x.N)}, act by act.`} Edit anything, then read it aloud once before the day. A few sentences is plenty.</p>
+      <div class="nav" style="margin-bottom:var(--space-5)"><button type="button" class="btn btn--primary btn--lg" id="readBtn">Read it aloud</button></div>
+      <div class="program">
+        ${ACTS.map(act=>`
+        <section class="act-out" style="--act:${act.c}" aria-labelledby="h3-${act.id}">
+          <div class="act-out-head"><h3 class="title title--card" id="h3-${act.id}"><span class="sr-only">${act.badge}: </span>${act.name}</h3>
+            <button type="button" class="btn btn--outline" data-copy="${act.id}">Copy</button></div>
+          <label class="sr-only" for="d-${act.id}">${act.name} draft</label>
+          <textarea class="field" id="d-${act.id}" data-draft="${act.id}" placeholder="Nothing yet. Go back to the ${act.name} to answer a question, or write it straight here.">${esc(currentDraft(act))}</textarea>
+          <div class="meta"><span id="t-${act.id}">${timeLabel(words(currentDraft(act)))}</span>
+            ${st.edited[act.id]?`<button type="button" class="linkish" data-rebuild="${act.id}">Rebuild from my answers</button>`:''}</div>
+          ${act.id==='toast' && toastFlagged() ? `<p class="reminder">One Toast answer reads like a quantity. Read it once more: is it a quality?</p>`:''}
+          ${act.id==='roast' && unchecked ? `<p class="reminder">Roast check: is it true, would they laugh with you, and does it come from love?</p>`:''}
+        </section>`).join('')}
+      </div>
+      <p class="status" id="copyStatus" role="status"></p>
+      <textarea class="copyfallback field" id="copyFallback" aria-label="Your words, ready to copy" readonly></textarea>
+      <p class="care">Bring this with you, read it, or say it from memory. You can still say “pass” in the moment. Bringing it to a session? <a class="link-accent" href="${BOOK_URL}" target="_blank" rel="noopener">Share it with Brad and Cass when you book</a>.</p>
+    </div>
+    <div class="nav">
+      <button type="button" class="btn btn--outline" data-go="3">← Prost</button>
+      <button type="button" class="btn btn--outline" id="copyAll">Copy all three acts</button>
+    </div>
+    <p style="text-align:center; margin:0"><button type="button" class="linkish danger" id="resetBtn">Start over</button></p>
+  </div>`;
+}
+
+function render(){
+  renderRibbon();
+  const s=STOPS[st.step].id;
+  if(s==='start') renderStart();
+  else if(s==='words') renderWords();
+  else renderAct(ACTS.find(a=>a.id===s));
+  growAll();
+  $('live').textContent = title(STOPS[st.step].label);
+}
+
+/* reader */
+let rIdx=0, wakeLock=null, readerReturn=null;
+function renderReader(){
+  const act=ACTS[rIdx], band=$('readerBand');
+  band.className=`band ${act.band} valance on-bright`;
+  $('readerBadge').textContent=act.badge;
+  $('readerTitle').textContent=act.name;
+  const box=$('d-'+act.id), text=(box?box.value:currentDraft(act)).trim();
+  $('readerText').innerHTML = text ? text.split(/\n\s*\n/).map(p=>`<p>${esc(p.trim()).replace(/\n/g,'<br>')}</p>`).join('') : `<p class="pass">Pass. Nothing written for this act, and that’s allowed.</p>`;
+  $('readerCount').textContent=`${rIdx+1} of 3`;
+  $('readerPrev').disabled = rIdx===0;
+  $('readerNext').textContent = rIdx===2 ? 'Done' : 'Next act ›';
+  document.querySelector('.reader-body').scrollTop=0;
+  $('readerTitle').focus({preventScroll:true});
+}
+async function openReader(){
+  readerReturn=document.activeElement; rIdx=0; $('reader').classList.add('open'); document.body.style.overflow='hidden'; renderReader();
+  try{ if('wakeLock' in navigator) wakeLock = await navigator.wakeLock.request('screen'); }catch(e){ wakeLock=null; }
+}
+function closeReader(){
+  $('reader').classList.remove('open'); document.body.style.overflow='';
+  try{ wakeLock && wakeLock.release(); }catch(e){} wakeLock=null;
+  (readerReturn||$('readBtn')||document.body).focus && (readerReturn||$('readBtn')).focus();
+}
+function readerStep(d){ const n=rIdx+d; if(n>2){ closeReader(); return; } if(n<0) return; rIdx=n; renderReader(); }
+$('readerClose').onclick=closeReader;
+$('readerPrev').onclick=()=>readerStep(-1);
+$('readerNext').onclick=()=>readerStep(1);
+let sx=0, sy=0;
+$('reader').addEventListener('touchstart',e=>{ sx=e.touches[0].clientX; sy=e.touches[0].clientY; },{passive:true});
+$('reader').addEventListener('touchend',e=>{ const dx=e.changedTouches[0].clientX-sx, dy=e.changedTouches[0].clientY-sy; if(Math.abs(dx)>60 && Math.abs(dx)>Math.abs(dy)*1.4) readerStep(dx<0?1:-1); });
+document.addEventListener('visibilitychange', async ()=>{ if(document.visibilityState==='visible' && $('reader').classList.contains('open') && !wakeLock){ try{ wakeLock=await navigator.wakeLock.request('screen'); }catch(e){} } });
+
+/* events */
+document.addEventListener('click', e=>{
+  const b=e.target.closest('button'); if(!b) return;
+  if(b.dataset.go!==undefined){ go(+b.dataset.go); return; }
+  if(b.dataset.role){ st.role=b.dataset.role; save(); renderStart(); return; }
+  if(b.dataset.depth){ st.depth=b.dataset.depth; save(); renderStart(); return; }
+  if(b.id==='aboutBtn'){
+    const p=$('aboutPanel'), open=b.getAttribute('aria-expanded')!=='true';
+    b.setAttribute('aria-expanded', open);
+    if(open){ p.hidden=false; p.style.maxHeight=p.scrollHeight+40+'px'; } else { p.style.maxHeight='0'; setTimeout(()=>{ if(b.getAttribute('aria-expanded')!=='true') p.hidden=true; },330); }
+    return;
+  }
+  if(b.dataset.for){
+    const t=$(b.dataset.for); const add=b.dataset.text.replace(/…$/,' ');
+    t.value = t.value.trim() ? t.value.trimEnd()+' '+add : add;
+    t.dispatchEvent(new Event('input',{bubbles:true}));
+    t.focus(); t.setSelectionRange(t.value.length, t.value.length); return;
+  }
+  if(b.id==='readBtn'){ openReader(); return; }
+  if(b.dataset.rebuild){ const id=b.dataset.rebuild; st.edited[id]=false; delete st.drafts[id]; save(); renderWords(); growAll(); return; }
+  if(b.dataset.copy){ const act=ACTS.find(a=>a.id===b.dataset.copy); copyText(`${act.badge} · ${act.name}\n\n${$('d-'+act.id).value.trim()}`, `${act.name} copied.`); return; }
+  if(b.id==='copyAll'){ copyText(ACTS.map(a=>`${a.badge} · ${a.name}\n\n${($('d-'+a.id).value.trim()||'(pass)')}`).join('\n\n— — —\n\n'), 'All three acts copied.'); return; }
+  if(b.id==='resetBtn'){
+    if(b.dataset.armed){ st=fresh(); save(); go(0); return; }
+    b.dataset.armed='1'; b.textContent='Tap again to clear every answer';
+    setTimeout(()=>{ if(document.body.contains(b)){ delete b.dataset.armed; b.textContent='Start over'; } }, 4000); return;
+  }
+});
+
+document.addEventListener('input', e=>{
+  const t=e.target;
+  if(t.tagName==='TEXTAREA' && t.classList.contains('field')) grow(t);
+  if(t.id==='nameIn'){ st.name=t.value; save(); return; }
+  if(t.id==='oldIn'){ st.old=t.value; save(); return; }
+  if(t.dataset.k){
+    const act=ACTS.find(a=>a.id===STOPS[st.step].id); st.ans[act.id][t.dataset.k]=t.value; save(); updatePreview(act);
+    if(act.id==='toast') checkExtrinsic(t.dataset.k, t.value);
+    renderRibbon(); return;
+  }
+  if(t.dataset.draft){
+    const id=t.dataset.draft; st.drafts[id]=t.value;
+    if(!st.edited[id]){ st.edited[id]=true; const m=t.parentElement.querySelector('.meta'); if(m && !m.querySelector('[data-rebuild]')) m.insertAdjacentHTML('beforeend', `<button type="button" class="linkish" data-rebuild="${id}">Rebuild from my answers</button>`); }
+    save(); $('t-'+id).textContent=timeLabel(words(t.value)); return;
+  }
+});
+document.addEventListener('change', e=>{ const t=e.target; if(t.dataset.chk!==undefined){ st.checks[t.dataset.chk]=t.checked; save(); } });
+window.addEventListener('resize', ()=>requestAnimationFrame(growAll));
+
+function copyText(text, msg){
+  const status=$('copyStatus'), fb=$('copyFallback');
+  const fallback=()=>{ fb.value=text; fb.classList.add('show'); fb.focus(); fb.select(); status.textContent='Select the text below and copy it.'; };
+  try{ navigator.clipboard.writeText(text).then(()=>{ fb.classList.remove('show'); status.textContent=msg; }, fallback); }catch(err){ fallback(); }
+}
+
+/* pause */
+let breathTimer=null, lastFocus=null;
+function breathe(){
+  const steps=[['Breathe in',true,4000],['Hold',true,2000],['Breathe out',false,4000]]; let i=0;
+  const step=()=>{ const [w,on,ms]=steps[i%3]; $('breathWord').textContent=w; $('orb').classList.toggle('in',on); i++; breathTimer=setTimeout(step,ms); };
+  requestAnimationFrame(()=>requestAnimationFrame(step));
+}
+$('pauseBtn').onclick=()=>{ lastFocus=document.activeElement; $('overlay').classList.add('open'); breathe(); $('resumeBtn').focus(); };
+function closePause(){ $('overlay').classList.remove('open'); clearTimeout(breathTimer); $('orb').classList.remove('in'); $('breathWord').textContent='Breathe in'; (lastFocus||$('pauseBtn')).focus(); }
+$('resumeBtn').onclick=closePause;
+document.addEventListener('keydown', e=>{
+  if($('overlay').classList.contains('open')){ if(e.key==='Escape') closePause(); return; }
+  if($('reader').classList.contains('open')){
+    if(e.key==='Escape') closeReader();
+    else if(e.key==='ArrowRight') readerStep(1);
+    else if(e.key==='ArrowLeft') readerStep(-1);
+  }
+});
+
+if(!(st.step>=0 && st.step<STOPS.length)) st.step=0;
+render();
+</script>
+
+</body></html>
