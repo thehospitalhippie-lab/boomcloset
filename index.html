@@ -522,7 +522,8 @@
     body{padding-top:var(--header-h, 131px);}
     html{scroll-padding-top:calc(env(safe-area-inset-top, 0px) + var(--header-h, 131px));}
     .site-tabs{max-height:56px; transition:max-height var(--dur-med) var(--ease), margin var(--dur-med) var(--ease), opacity var(--dur-fast) var(--ease);}
-    .topbar--compact .site-tabs{max-height:0; margin-top:0; opacity:0; visibility:hidden;}
+    .topbar--compact .site-tabs{max-height:0; margin-top:0; opacity:0; visibility:hidden; overflow:hidden; padding-top:0; padding-bottom:0;}
+    header.topbar.topbar--compact{row-gap:0!important;}
     /* soft fade on whichever edge has more tabs hidden behind it */
     .site-tabs.has-more-right{-webkit-mask-image:linear-gradient(to right, #000 80%, transparent); mask-image:linear-gradient(to right, #000 80%, transparent);}
     .site-tabs.has-more-left{-webkit-mask-image:linear-gradient(to left, #000 80%, transparent); mask-image:linear-gradient(to left, #000 80%, transparent);}
