@@ -48,7 +48,8 @@ p{margin:0 0 .8em; max-width:62ch}
 .small{font-size:.92rem}
 
 /* hero */
-.hero{background:var(--blue); color:var(--ink); position:relative; padding:56px 0 44px}
+.hero{background:var(--blue); color:var(--ink); position:relative; padding:40px 0 28px}
+@media (max-width:520px){.hero .script{display:none} .hero h1{font-size:1.9rem}}
 .hero::after{content:""; position:absolute; left:0; right:0; top:100%; height:14px; background:radial-gradient(circle at 14px 0, var(--blue) 13.5px, transparent 14px) 0 0/28px 14px repeat-x}
 .hero h1{font-size:clamp(2rem,6vw,3.1rem); font-style:italic; max-width:16ch; margin-bottom:12px}
 .hero .lede{font-weight:500; max-width:54ch}
@@ -62,10 +63,12 @@ p{margin:0 0 .8em; max-width:62ch}
 .hero .btn--primary{background:var(--ink); color:var(--amber); border-color:var(--ink)}
 .hero .btn--outline{color:var(--ink)}
 .hero .btn--outline:hover{background:var(--ink); color:var(--amber)}
-.btn--sm{min-height:38px; padding:7px 14px; font-size:.85rem}
+.btn--sm{min-height:44px; padding:9px 16px; font-size:.88rem}
 
 /* toolbar */
-.tools{display:flex; flex-wrap:wrap; gap:10px; align-items:center; margin:36px 0 18px}
+.tools{display:flex; flex-wrap:wrap; gap:10px; align-items:center; margin:28px 0 18px}
+#availBtn[aria-pressed="true"]{background:var(--btn-bg); color:var(--btn-fg); border-color:var(--btn-bg)}
+.shelf-peek{display:block; font-family:var(--f-body); font-weight:400; font-size:.85rem; color:var(--text-soft); margin-top:2px}
 .search{flex:1 1 240px; min-height:44px; padding:10px 14px; border-radius:var(--r-sm); border:1.5px solid var(--line); background:var(--surface); color:var(--text); font:400 1rem var(--f-body)}
 .search::placeholder{color:var(--text-soft)}
 .legend{display:flex; flex-wrap:wrap; gap:8px; margin:0 0 24px; padding:0; list-style:none}
@@ -104,7 +107,7 @@ details[open] > summary .plus::after{transform:translate(-50%,-50%) rotate(0)}
 .shelf{border-bottom:1.5px dashed var(--line)}
 .shelf:last-child{border-bottom:0}
 .shelf > summary{display:flex; align-items:center; gap:12px; padding:14px 2px; min-height:52px}
-.shelf h3{font-size:1.1rem; font-weight:600; flex:1}
+.shelf h3{font-size:1.1rem; font-weight:600; flex:1; min-width:0}
 .shelf .plus{width:26px; height:26px}
 .shelf-body{padding:0 0 16px; display:flex; flex-direction:column; gap:10px}
 .shelf-note{font-size:.9rem; color:var(--text-soft); margin:0 0 4px}
@@ -118,10 +121,12 @@ details[open] > summary .plus::after{transform:translate(-50%,-50%) rotate(0)}
 .offer-body{padding:0 14px 14px}
 .offer-body ul{margin:0 0 12px; padding-left:1.2em}
 .offer-body li{margin-bottom:4px; font-size:.95rem}
-.offer-body .facts{display:flex; flex-wrap:wrap; gap:6px 16px; font-family:var(--f-mono); font-size:.78rem; color:var(--text-soft); margin:0 0 12px; padding:0; list-style:none}
+.offer-body .facts{display:flex; flex-wrap:wrap; gap:8px; font-family:var(--f-body); font-size:.95rem; font-weight:600; color:var(--text); margin:0 0 12px; padding:0; list-style:none}
+.offer-body .facts li{margin:0; padding:4px 12px; border-radius:var(--pill); background:var(--surface); border:1.5px solid var(--line)}
+.offer-body .facts li.price{background:var(--amber); color:var(--ink); border-color:var(--amber)}
 .actions{display:flex; flex-wrap:wrap; gap:8px; align-items:center}
 .how{font-size:.88rem; color:var(--text-soft); margin:10px 0 0}
-.hidden{display:none!important}
+.hidden,.off{display:none!important}
 .empty{padding:16px; text-align:center; color:var(--text-soft)}
 
 /* list band */
@@ -153,12 +158,8 @@ code{font-family:var(--f-mono); font-size:.85em}
   <div class="wrap">
     <p class="eyebrow">Golden Soul Circus · The full catalog</p>
     <h1>A circus with a purpose.</h1>
-    <p class="lede">Two hospice nurses making palliative care more palatable with mock funerals, sound baths, grief-relief workshops, advocacy tools and more. Open a tent below to see what's inside.</p>
+    <p class="lede">Two hospice nurses making palliative care more palatable: mock funerals, sound baths, grief relief, advocacy tools and more.</p>
     <p class="script">Give your flowers while you live.</p>
-    <div class="hero-actions">
-      <a class="btn btn--primary" href="#catalog">Browse the catalog</a>
-      <a class="btn btn--outline" id="heroList" href="#">Get word when things open</a>
-    </div>
   </div>
 </header>
 
@@ -166,16 +167,9 @@ code{font-family:var(--f-mono); font-size:.85em}
   <div class="tools">
     <label class="sr" for="q" style="position:absolute;left:-9999px">Search offerings</label>
     <input class="search" id="q" type="search" placeholder="Search: funeral, caregiver, deck, free…" autocomplete="off">
+    <button class="btn btn--outline btn--sm" type="button" id="availBtn" aria-pressed="false">Available now</button>
     <button class="btn btn--outline btn--sm" type="button" id="openAll">Open all</button>
-    <button class="btn btn--outline btn--sm" type="button" id="closeAll">Close all</button>
   </div>
-  <ul class="legend" aria-label="What the labels mean">
-    <li><span class="chip st-open">Open now</span></li>
-    <li><span class="chip st-book">Bookable</span></li>
-    <li><span class="chip st-preview">Preview</span></li>
-    <li><span class="chip st-soon">Coming soon</span></li>
-  </ul>
-  <p class="small soft" style="margin-top:-12px">Anything not open yet has a <strong>Get it by email</strong> button. Tell us what you're waiting for and we'll write when it's ready.</p>
 
   <div id="cats"></div>
   <p class="empty hidden" id="empty">Nothing matches that yet. Try another word, or <a id="emptyList" href="#">ask us by email</a>.</p>
@@ -204,7 +198,7 @@ var SETTINGS = {
   mode: "site",
   emailList: "https://tally.so/r/je6qB4",   // Tally form "Golden Soul Circus — Get it when it's ready"
   siteBase: "../",                            // where repo paths start, relative to this catalog file
-  live: ["mock-ur-funeral/","find-your-words/","take-me-seriously-kit/","kit-n-kaboodle/","advocates-act/","rowd-map/","rowd-map/book/","palliative-pal/","palliative-pal/companion/","root-breath-atlas/","7-magic-secrets/"],                             // site mode: only these paths get links; anything else uses the email list
+  live: ["mock-ur-funeral/", "find-your-words/", "take-me-seriously-kit/", "kit-n-kaboodle/", "advocates-act/", "rowd-map/", "rowd-map/book/", "palliative-pal/", "palliative-pal/companion/", "root-breath-atlas/", "7-magic-secrets/"],                             // site mode: only these paths get links; anything else uses the email list
   showTeamNotes: false                      // the "Before GitHub" checklist; false on the public site
 };
 var A = "https://claude.ai/artifact/";
@@ -352,7 +346,7 @@ function actionsFor(it){
     var u = ext(x[1]) ? x[1] : linkFor(x[2], null, x[1]);
     if (u) out.push('<a class="btn btn--outline btn--sm" href="'+esc(u)+'">'+esc(x[0])+'</a>');
   });
-  if (it.book) out.unshift('<a class="btn btn--primary btn--sm" href="'+esc(it.book+"?source=catalog")+'">Book now</a>');
+  if (it.book) out.unshift('<a class="btn btn--primary btn--sm" href="'+esc(it.book+"?source=catalog")+'">Send a request</a>');
   else if (it.status === "book") out.push('<a class="btn '+(main?'btn--outline':'btn--primary')+' btn--sm" href="'+esc(listUrl("book-"+it.id))+'">Ask about dates</a>');
   else if (it.status !== "open" || !main) out.push('<a class="btn '+(main && it.status!=="soon"?'btn--outline':'btn--primary')+' btn--sm" href="'+esc(listUrl(it.id))+'">Get it by email</a>');
   else out.push('<a class="btn btn--outline btn--sm" href="'+esc(listUrl(it.id))+'">Get updates by email</a>');
@@ -361,9 +355,9 @@ function actionsFor(it){
 function howFor(it){
   var main = linkFor(it.site, it.preview);
   if (it.status === "soon") return "Still in the oven. Get it by email and we'll write when it opens.";
-  if (it.status === "preview" && it.book) return "Try the Toast free. Book a Mock (ur) Funeral and we'll send your private link to the full version.";
+  if (it.status === "preview" && it.book) return "Try the Toast free. Send a request for a Mock (ur) Funeral and we'll send your private link to the full version once it's booked.";
   if (it.status === "preview") return main ? "A preview while we finish it. Join the email list to hear when the full version opens." : "Get it by email and we'll write when it opens.";
-  if (it.status === "book") return it.book ? "Book now opens a three-minute request form. We'll write back to plan it together." : "Leave your email under Ask about dates and we'll write to find a date.";
+  if (it.status === "book") return it.book ? "Send a request opens a three-minute form. We'll write back to plan it together." : "Leave your email under Ask about dates and we'll write to find a date.";
   return main ? "" : "Get it by email and we'll send the link.";
 }
 
@@ -373,20 +367,22 @@ function render(){
     s.items = s.items.filter(function(it){ return it.publicSite !== false; });
     s.items.forEach(function(it){ if ((it.status === "open" || it.status === "preview") && !linkFor(it.site, it.preview)) it.status = "soon"; });
   }); });
-  CATALOG.forEach(function(c){
+  var RANK = {open:0, book:1, preview:2, soon:3};
+  CATALOG.forEach(function(c){ c.shelves.forEach(function(s){ s.items = s.items.map(function(it,i){ return [it,i]; }).sort(function(a,b){ return (RANK[a[0].status]-RANK[b[0].status]) || (a[1]-b[1]); }).map(function(x){ return x[0]; }); }); });
+  CATALOG.forEach(function(c, ci){
     var n = c.shelves.reduce(function(a,s){ return a + s.items.length; }, 0);
-    html += '<details class="cat" id="'+c.id+'" style="--c:'+c.color+'"><summary>'+
+    html += '<details class="cat" id="'+c.id+'"'+(ci===0?' open':'')+' style="--c:'+c.color+'"><summary>'+
       '<span class="cat-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="#14213D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">'+ICONS[c.icon]+'</svg></span>'+
       '<span><h2>'+esc(c.name)+'</h2><p class="sub">'+esc(c.sub)+'</p></span>'+
       '<span class="cat-right"><span class="count">'+n+' offering'+(n>1?'s':'')+'</span><span class="plus" aria-hidden="true"></span></span></summary><div class="cat-body">';
     c.shelves.forEach(function(s){
-      html += '<details class="shelf"><summary><h3>'+esc(s.name)+'</h3><span class="count">'+s.items.length+'</span><span class="plus" aria-hidden="true"></span></summary><div class="shelf-body">';
+      html += '<details class="shelf"'+(ci===0?' open':'')+'><summary><h3>'+esc(s.name)+'<span class="shelf-peek">'+esc(s.items.map(function(it){return it.name;}).join(' · '))+'</span></h3><span class="count">'+s.items.length+'</span><span class="plus" aria-hidden="true"></span></summary><div class="shelf-body">';
       if (s.note) html += '<p class="shelf-note">'+esc(s.note)+'</p>';
       s.items.forEach(function(it){
         var st = STATUS[it.status], how = howFor(it);
         var text = [it.name, it.line, (it.facts||[]).join(" "), (it.points||[]).join(" "), c.name, s.name, st[1]].join(" ").toLowerCase();
         html += '<details class="offer" id="'+it.id+'" data-text="'+esc(text)+'"><summary><h4>'+esc(it.name)+'</h4><span class="chip '+st[0]+'">'+st[1]+'</span><p class="line">'+esc(it.line)+'</p></summary><div class="offer-body">'+
-          (it.facts ? '<ul class="facts">'+it.facts.map(function(f){return '<li>'+esc(f)+'</li>';}).join("")+'</ul>' : '')+
+          (it.facts ? '<ul class="facts">'+it.facts.map(function(f){return '<li'+(/\$/.test(f)?' class="price"':'')+'>'+esc(f)+'</li>';}).join("")+'</ul>' : '')+
           (it.points ? '<ul>'+it.points.map(function(p){return '<li>'+esc(p)+'</li>';}).join("")+'</ul>' : '')+
           '<div class="actions">'+actionsFor(it)+'</div>'+(how ? '<p class="how">'+esc(how)+'</p>' : '')+'</div></details>';
       });
@@ -398,7 +394,7 @@ function render(){
 }
 render();
 
-["heroList","bandList","emptyList"].forEach(function(id){ document.getElementById(id).href = listUrl("general"); });
+["bandList","emptyList"].forEach(function(id){ document.getElementById(id).href = listUrl("general"); });
 
 /* search: filters offerings, opens the tents that hold matches */
 var q = document.getElementById("q"), saved = null;
@@ -419,8 +415,16 @@ q.addEventListener("input", function(){
   document.getElementById("empty").classList.toggle("hidden", any);
 });
 function setAll(open){ document.querySelectorAll(".cat, .shelf").forEach(function(d){ d.open = open; }); }
-document.getElementById("openAll").addEventListener("click", function(){ setAll(true); });
-document.getElementById("closeAll").addEventListener("click", function(){ setAll(false); });
+var openBtn = document.getElementById("openAll"), allOpen = false;
+openBtn.addEventListener("click", function(){ allOpen = !allOpen; setAll(allOpen); openBtn.textContent = allOpen ? "Close all" : "Open all"; });
+var availBtn = document.getElementById("availBtn");
+availBtn.addEventListener("click", function(){
+  var on = availBtn.getAttribute("aria-pressed") !== "true";
+  availBtn.setAttribute("aria-pressed", String(on));
+  document.querySelectorAll(".offer").forEach(function(o){ o.classList.toggle("off", on && o.querySelector(".chip.st-soon") !== null); });
+  document.querySelectorAll(".shelf").forEach(function(s){ var any = s.querySelector(".offer:not(.off)"); s.classList.toggle("off", !any); if (on && any) s.open = true; });
+  document.querySelectorAll(".cat").forEach(function(c){ var any = c.querySelector(".offer:not(.off)"); c.classList.toggle("off", !any); if (on && any) c.open = true; });
+});
 
 /* open a deep link like #advocates-act */
 function openHash(){
@@ -442,7 +446,7 @@ if (SETTINGS.showTeamNotes){
   '<p class="small">This box only shows while <code>showTeamNotes</code> is true. The GitHub copy has it switched off.</p>'+
   '<h3>Done</h3><ul>'+
   '<li>Email list live at <a href="'+SETTINGS.emailList+'">tally.so/r/je6qB4</a>, with signup emails to you turned on.</li>'+
-  '<li>Booking forms published with signup emails on: <a href="https://tally.so/r/GexGO2">Mock (ur) Funeral</a> and <a href="https://tally.so/r/xVXq8J">Row\'d Map talk</a>. Both are wired to Book now.</li>'+
+  '<li>Booking forms published with signup emails on: <a href="https://tally.so/r/GexGO2">Mock (ur) Funeral</a> and <a href="https://tally.so/r/xVXq8J">Row\'d Map talk</a>. Both are wired to Send a request.</li>'+
   '<li>Telegram priced at $77.</li></ul>'+
   '<h3>Your final say on prices</h3><div class="tablewrap"><table><thead><tr><th>Offering</th><th>Range</th><th>Suggested</th></tr></thead><tbody>'+
   '<tr><td>House party, 45 min</td><td>$177–$250</td><td>$222</td></tr>'+
