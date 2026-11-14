@@ -107,7 +107,9 @@ details[open] > summary .plus::after{transform:translate(-50%,-50%) rotate(0)}
 .shelf{border-bottom:1.5px dashed var(--line)}
 .shelf:last-child{border-bottom:0}
 .shelf > summary{display:flex; align-items:center; gap:12px; padding:14px 2px; min-height:52px}
-.shelf h3{font-size:1.1rem; font-weight:600; flex:1; min-width:0}
+.shelf h3{font-size:1.1rem; font-weight:600}
+.shelf-title{flex:1; min-width:0}
+.vh{position:absolute!important; width:1px; height:1px; margin:-1px; padding:0; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; border:0}
 .shelf .plus{width:26px; height:26px}
 .shelf-body{padding:0 0 16px; display:flex; flex-direction:column; gap:10px}
 .shelf-note{font-size:.9rem; color:var(--text-soft); margin:0 0 4px}
@@ -150,9 +152,25 @@ th,td{text-align:left; padding:6px 8px; border-bottom:1px solid var(--line); ver
 th{font-family:var(--f-mono); font-weight:500; font-size:.74rem; text-transform:uppercase; letter-spacing:.04em}
 .tablewrap{overflow-x:auto}
 code{font-family:var(--f-mono); font-size:.85em}
+.sitebar{position:sticky; top:0; z-index:20; background:var(--page); border-bottom:1.5px solid var(--line)}
+.sitebar .wrap{display:flex; align-items:center; justify-content:space-between; gap:12px; min-height:60px}
+.sitebar-brand{font-family:var(--f-display); font-weight:600; font-size:1.15rem; color:var(--ink); text-decoration:none; display:inline-flex; align-items:center; min-height:44px}
+.sitebar-brand span{color:var(--rouge-deep)}
+.sitebar-brand:hover{text-decoration:underline; text-underline-offset:4px}
+.sitebar-home{min-height:44px}
+.cat, .offer{scroll-margin-top:72px}
+.homelink{display:inline-flex; align-items:center; min-height:44px; color:inherit; font-weight:600}
+@media (max-width:380px){.sitebar-brand{font-size:1rem}}
 </style>
 </head>
 <body>
+
+<nav class="sitebar" aria-label="Site">
+  <div class="wrap">
+    <a class="sitebar-brand" href="https://goldensoulcircus.org/">Golden Soul&nbsp;<span>Circus</span></a>
+    <a class="btn btn--outline btn--sm sitebar-home" href="https://goldensoulcircus.org/"><span aria-hidden="true">←</span>&nbsp;Home</a>
+  </div>
+</nav>
 
 <header class="hero">
   <div class="wrap">
@@ -171,20 +189,22 @@ code{font-family:var(--f-mono); font-size:.85em}
     <button class="btn btn--outline btn--sm" type="button" id="openAll">Open all</button>
   </div>
 
+  <p class="vh" id="status" role="status" aria-live="polite"></p>
   <div id="cats"></div>
   <p class="empty hidden" id="empty">Nothing matches that yet. Try another word, or <a id="emptyList" href="#">ask us by email</a>.</p>
 
   <div id="team"></div>
 </main>
 
-<section class="band" id="list">
+<section class="band" id="list" aria-labelledby="listHeading">
   <div class="wrap">
     <p class="eyebrow">The email list</p>
-    <h2>Waiting on something? We'll write.</h2>
+    <h2 id="listHeading">Waiting on something? We'll write.</h2>
     <p>Pick the offerings you care about and we'll send word when they open. No sales-pitch blasts, and you can leave anytime.</p>
     <a class="btn btn--primary" id="bandList" href="#">Join the list</a>
     <p class="fine">Golden Soul Circus is a Tennessee nonprofit in formation; gifts aren't tax-deductible until our 501(c)(3) is approved. Our offerings are education, ceremony and play, not medical or legal advice, and we don't practice under our nursing licenses in them. If you're in crisis, call or text 988.</p>
     <p class="wordmark">Golden Soul Circus · Nashville</p>
+    <p><a class="homelink" href="https://goldensoulcircus.org/">← Back to the home page</a></p>
   </div>
 </section>
 
@@ -376,7 +396,7 @@ function render(){
       '<span><h2>'+esc(c.name)+'</h2><p class="sub">'+esc(c.sub)+'</p></span>'+
       '<span class="cat-right"><span class="count">'+n+' offering'+(n>1?'s':'')+'</span><span class="plus" aria-hidden="true"></span></span></summary><div class="cat-body">';
     c.shelves.forEach(function(s){
-      html += '<details class="shelf"'+(ci===0?' open':'')+'><summary><h3>'+esc(s.name)+'<span class="shelf-peek">'+esc(s.items.map(function(it){return it.name;}).join(' · '))+'</span></h3><span class="count">'+s.items.length+'</span><span class="plus" aria-hidden="true"></span></summary><div class="shelf-body">';
+      html += '<details class="shelf"'+(ci===0?' open':'')+'><summary><span class="shelf-title"><h3>'+esc(s.name)+'</h3><span class="shelf-peek">'+esc(s.items.map(function(it){return it.name;}).join(' · '))+'</span></span><span class="count">'+s.items.length+'</span><span class="plus" aria-hidden="true"></span></summary><div class="shelf-body">';
       if (s.note) html += '<p class="shelf-note">'+esc(s.note)+'</p>';
       s.items.forEach(function(it){
         var st = STATUS[it.status], how = howFor(it);
@@ -413,7 +433,16 @@ q.addEventListener("input", function(){
     cat.classList.toggle("hidden", !catHit); if (v) cat.open = catHit; if (catHit) any = true;
   });
   document.getElementById("empty").classList.toggle("hidden", any);
+  announce();
 });
+var statusTimer = null;
+function announce(){
+  clearTimeout(statusTimer);
+  statusTimer = setTimeout(function(){
+    var n = Array.prototype.filter.call(document.querySelectorAll(".offer"), function(o){ return !o.closest(".hidden, .off"); }).length;
+    document.getElementById("status").textContent = n ? n + (n === 1 ? " offering" : " offerings") + " shown" : "Nothing matches that yet.";
+  }, 400);
+}
 function setAll(open){ document.querySelectorAll(".cat, .shelf").forEach(function(d){ d.open = open; }); }
 var openBtn = document.getElementById("openAll"), allOpen = false;
 openBtn.addEventListener("click", function(){ allOpen = !allOpen; setAll(allOpen); openBtn.textContent = allOpen ? "Close all" : "Open all"; });
@@ -424,6 +453,7 @@ availBtn.addEventListener("click", function(){
   document.querySelectorAll(".offer").forEach(function(o){ o.classList.toggle("off", on && o.querySelector(".chip.st-soon") !== null); });
   document.querySelectorAll(".shelf").forEach(function(s){ var any = s.querySelector(".offer:not(.off)"); s.classList.toggle("off", !any); if (on && any) s.open = true; });
   document.querySelectorAll(".cat").forEach(function(c){ var any = c.querySelector(".offer:not(.off)"); c.classList.toggle("off", !any); if (on && any) c.open = true; });
+  announce();
 });
 
 /* open a deep link like #advocates-act */
