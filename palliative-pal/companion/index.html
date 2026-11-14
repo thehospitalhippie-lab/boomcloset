@@ -1,0 +1,994 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Palliative PAL Companion</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Shrikhand&family=Comic+Neue:wght@700&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,700;1,9..40,400&display=swap">
+<style>
+/* Layout: a mint "big top" header band with the petal flower, then a module rail beside one module at a time. Thick navy outlines, poster-bright fills. */
+:root {
+  --bg: #F3FAF5;
+  --surface: #FFFFFF;
+  --band: #D5F9DE;
+  --ink: #141B3C;
+  --ink-soft: #3B4468;
+  --line: #141B3C;
+  --blue: #4392F1;
+  --amber: #F5B700;
+  --rouge: #E87EA1;
+  --brick: #D00000;
+  --on-accent: #141B3C;
+  --on-brick: #FFFFFF;
+  --blue-tint: #DCEAFD;
+  --amber-tint: #FEF0BF;
+  --rouge-tint: #FADDE8;
+  --ok: #1B6A38;
+  --bad: #A80000;
+  --focus: #D00000;
+  --font-display: 'Shrikhand', 'Cooper Black', Georgia, serif;
+  --font-body: 'DM Sans', 'Helvetica Neue', Arial, sans-serif;
+  --radius: 18px;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0E1330; --surface: #171E45; --band: #1C2A57; --ink: #EAFBEF; --ink-soft: #BAC5E0; --line: #AEB9DD;
+    --blue-tint: #1F3468; --amber-tint: #3A3116; --rouge-tint: #3E2238;
+    --ok: #7FE3A4; --bad: #FFA3A3; --focus: #F5B700; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0E1330; --surface: #171E45; --band: #1C2A57; --ink: #EAFBEF; --ink-soft: #BAC5E0; --line: #AEB9DD;
+  --blue-tint: #1F3468; --amber-tint: #3A3116; --rouge-tint: #3E2238;
+  --ok: #7FE3A4; --bad: #FFA3A3; --focus: #F5B700; color-scheme: dark;
+}
+
+html { font-size: 100%; }
+body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--font-body); font-size: 1.0625rem; line-height: 1.6; }
+*, *::before, *::after { box-sizing: border-box; }
+.wrap { max-width: 1180px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+h1, h2, h3, h4 { text-wrap: balance; line-height: 1.15; margin: 0; }
+h1, h2 { font-family: var(--font-display); font-weight: 400; }
+h3 { font-size: 1.3rem; font-weight: 700; }
+p { margin: 0; }
+a { color: inherit; }
+:focus-visible { outline: 3px solid var(--focus); outline-offset: 3px; border-radius: 6px; }
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+
+.skip { position: absolute; left: max(16px, env(safe-area-inset-left, 0px)); top: -100px; z-index: 20; background: var(--amber); color: var(--on-accent); font-weight: 700; padding: 12px 18px; border: 2px solid var(--line); border-radius: 12px; text-decoration: none; }
+.skip:focus { top: 12px; }
+
+/* Header band */
+.band { background: var(--band); border-bottom: 2px solid var(--line); }
+.band .wrap { padding-block: 28px 24px; display: grid; grid-template-columns: 1fr auto; gap: 20px 32px; align-items: center; }
+.eyebrow { font-size: 0.8rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink-soft); }
+.title { font-size: clamp(2.1rem, 5vw, 3.4rem); text-shadow: 3px 3px 0 var(--rouge); margin-top: 4px; }
+.lede { margin-top: 10px; max-width: 58ch; font-size: 1.1rem; }
+.toolbar { display: flex; flex-wrap: wrap; gap: 12px 24px; margin-top: 18px; align-items: center; }
+.seg { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+.seg-label { font-weight: 700; font-size: 0.95rem; margin-right: 4px; }
+.seg button { min-height: 44px; padding: 0 14px; border: 2px solid var(--line); background: var(--surface); color: var(--ink); border-radius: 999px; font: inherit; font-size: 0.95rem; cursor: pointer; }
+.seg button[aria-pressed="true"] { background: var(--ink); color: var(--bg); font-weight: 700; }
+.privacy { font-size: 0.92rem; color: var(--ink-soft); max-width: 40ch; }
+.flowerbox { display: flex; flex-direction: column; align-items: center; gap: 6px; text-align: center; }
+.flowerbox svg { width: 132px; height: auto; }
+.flower-label { font-weight: 700; font-size: 0.95rem; max-width: 18ch; }
+
+/* Shell */
+.shell { display: grid; grid-template-columns: 290px minmax(0, 1fr); gap: 28px; padding-block: 28px 56px; align-items: start; }
+nav.rail h2 { font-family: var(--font-body); font-weight: 700; font-size: 0.85rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink-soft); margin-bottom: 10px; }
+.rail ol { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px; }
+.modbtn { width: 100%; display: grid; grid-template-columns: 40px 1fr; gap: 12px; align-items: center; text-align: left; padding: 10px 12px; min-height: 56px; border: 2px solid var(--line); border-radius: 14px; background: var(--surface); color: var(--ink); font: inherit; cursor: pointer; }
+@media (hover: hover) { .modbtn:hover { background: var(--blue-tint); } }
+.modbtn[aria-current="page"] { background: var(--blue-tint); box-shadow: 4px 4px 0 var(--line); }
+.modnum { width: 40px; height: 40px; border-radius: 999px; border: 2px solid var(--line); display: flex; align-items: center; justify-content: center; font-weight: 700; color: var(--on-accent); }
+.modname { font-weight: 700; line-height: 1.25; display: block; }
+.modstat { font-size: 0.88rem; color: var(--ink-soft); display: block; margin-top: 2px; }
+.modstat.done { color: var(--ok); font-weight: 700; }
+
+/* Module panel */
+main { min-width: 0; }
+.panel { display: flex; flex-direction: column; gap: 28px; }
+.mhead { display: flex; flex-direction: column; gap: 8px; }
+.mhead h2 { font-size: clamp(1.9rem, 4vw, 2.6rem); }
+.mhead h2:focus { outline: none; }
+.mhead h2:focus-visible { outline: 3px solid var(--focus); }
+.meta { font-weight: 700; color: var(--ink-soft); }
+.tagline { font-style: italic; font-size: 1.15rem; border-left: 4px solid var(--amber); padding-left: 14px; max-width: 60ch; }
+section.ring { background: var(--surface); border: 2px solid var(--line); border-radius: var(--radius); padding: 22px clamp(16px, 3vw, 28px); display: flex; flex-direction: column; gap: 16px; }
+.ringhead { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 14px; }
+.ringtag { display: inline-block; font-size: 0.8rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; padding: 4px 12px; border-radius: 999px; border: 2px solid var(--line); color: var(--on-accent); }
+.r1 .ringtag { background: var(--blue); } .r2 .ringtag { background: var(--rouge); } .r3 .ringtag { background: var(--amber); }
+.prose { max-width: 66ch; }
+.prose ul, ul.prose { margin: 0; padding-left: 1.3em; display: flex; flex-direction: column; gap: 6px; }
+
+.episode { display: flex; gap: 14px; align-items: center; padding: 14px 16px; border-radius: 14px; background: var(--blue-tint); }
+.episode svg { flex-shrink: 0; }
+.episode strong { display: block; }
+.episode span { font-size: 0.92rem; color: var(--ink-soft); }
+
+.field { display: flex; flex-direction: column; gap: 6px; }
+.field label, .lbl { font-weight: 700; }
+.hint { font-size: 0.9rem; color: var(--ink-soft); }
+input[type="text"], textarea, select { font: inherit; color: var(--ink); background: var(--bg); border: 2px solid var(--line); border-radius: 12px; padding: 10px 12px; min-height: 48px; width: 100%; }
+textarea { min-height: 96px; resize: vertical; }
+input[aria-invalid="true"] { border-color: var(--bad); border-width: 3px; }
+.errtext { color: var(--bad); font-weight: 700; font-size: 0.95rem; }
+.grid2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px; }
+
+.lessons { display: flex; flex-direction: column; gap: 10px; }
+.lesson { border: 2px solid var(--line); border-radius: 14px; background: var(--bg); }
+.lesson summary { cursor: pointer; padding: 12px 16px; min-height: 52px; display: flex; gap: 12px; align-items: center; font-weight: 700; list-style: none; }
+.lesson summary::-webkit-details-marker { display: none; }
+.lesson summary::before { content: "+"; content: "+" / ""; width: 28px; height: 28px; flex-shrink: 0; border: 2px solid var(--line); border-radius: 999px; display: flex; align-items: center; justify-content: center; font-weight: 700; }
+.lesson[open] summary::before { content: "\2212"; content: "\2212" / ""; }
+.lnum { color: var(--ink-soft); font-variant-numeric: tabular-nums; }
+.lbody { padding: 0 16px 16px 56px; display: flex; flex-direction: column; gap: 12px; }
+.lessons-tools { display: flex; justify-content: flex-end; }
+
+.balloon { border: 2px solid var(--brick); border-radius: 14px; overflow: hidden; background: var(--surface); max-width: 66ch; }
+.balloon-label { background: var(--brick); color: var(--on-brick); font-weight: 700; padding: 6px 14px; display: flex; align-items: center; gap: 8px; }
+.balloon p:last-child { padding: 10px 14px 12px; }
+.rntip { border: 2px solid var(--line); border-radius: 14px; overflow: hidden; background: var(--blue-tint); max-width: 66ch; box-shadow: 4px 4px 0 var(--blue); }
+.rntip-label { background: var(--blue); color: var(--on-accent); font-weight: 700; padding: 7px 14px; display: flex; align-items: center; gap: 8px; border-bottom: 2px solid var(--line); }
+.rntip-body { padding: 14px 16px 16px; display: flex; flex-direction: column; gap: 10px; }
+.rntip h5 { margin: 0; font-size: 1.1rem; }
+.rights { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 10px; counter-reset: right; }
+.rights li { counter-increment: right; display: grid; grid-template-columns: 2rem minmax(9.5rem, max-content) minmax(0, 1fr); gap: 4px 10px; align-items: start; }
+.rights li::before { content: counter(right); width: 2rem; height: 2rem; border-radius: 999px; border: 2px solid var(--line); background: var(--surface); display: flex; align-items: center; justify-content: center; font-weight: 700; }
+.right-name { background: var(--blue); color: var(--on-accent); border: 2px solid var(--line); border-radius: 999px; padding: 2px 12px; font-weight: 700; text-align: center; white-space: nowrap; }
+@media (max-width: 560px) { .rights li { grid-template-columns: 2rem minmax(0, 1fr); } .rights li > span:last-child { grid-column: 2; } .right-name { justify-self: start; } }
+.cnote { background: var(--amber-tint); border: 2px dashed var(--line); border-radius: 14px; padding: 10px 14px; max-width: 66ch; }
+.clown { background: var(--rouge-tint); border: 2px dashed var(--line); border-radius: 14px; padding: 16px 18px 18px; }
+.clown h4 { font-family: var(--font-display); font-weight: 400; font-size: 1.35rem; margin-bottom: 12px; }
+.clown ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 14px; max-width: 60ch; }
+.clown li { position: relative; padding-left: 34px; font-family: 'Comic Neue', 'Comic Sans MS', 'Chalkboard SE', var(--font-body); font-weight: 700; font-size: 1.2rem; line-height: 1.4; letter-spacing: 0.01em; }
+.clown li::before { content: ""; position: absolute; left: 0; top: 0.28em; width: 20px; height: 20px; border-radius: 999px; background: var(--brick); border: 2px solid var(--line); box-shadow: inset -4px -4px 0 rgba(0,0,0,0.18); }
+
+.btn { min-height: 48px; padding: 0 20px; border-radius: 999px; border: 2px solid var(--line); background: var(--surface); color: var(--ink); font: inherit; font-weight: 700; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; gap: 8px; }
+.btn.primary { background: var(--amber); color: var(--on-accent); }
+.btn.small { min-height: 44px; padding: 0 14px; font-size: 0.95rem; }
+.btn:disabled { opacity: 0.55; cursor: not-allowed; }
+@media (hover: hover) { .btn:hover:not(:disabled) { box-shadow: 3px 3px 0 var(--line); } }
+.scorebox:focus { outline: 3px solid var(--focus); outline-offset: 3px; }
+.quiz fieldset { overflow-anchor: none; }
+.row { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+
+.drill { display: flex; flex-direction: column; gap: 16px; background: var(--bg); border-radius: 14px; padding: 18px; border: 2px dashed var(--line); }
+.drill h4 { font-size: 1.15rem; }
+.bigread { font-family: var(--font-display); font-size: clamp(2.4rem, 7vw, 3.6rem); line-height: 1.1; min-height: 1.2em; text-align: center; }
+.tapbtn { width: 100%; max-width: 360px; min-height: 120px; align-self: center; border-radius: 28px; border: 3px solid var(--line); background: var(--rouge); color: var(--on-accent); font: inherit; font-size: 1.4rem; font-weight: 700; cursor: pointer; touch-action: manipulation; }
+.tapbtn:disabled { opacity: 0.5; cursor: not-allowed; }
+.countline { text-align: center; font-weight: 700; font-variant-numeric: tabular-nums; font-size: 1.15rem; }
+.result { font-weight: 700; max-width: 60ch; }
+
+fieldset { border: 0; padding: 0; margin: 0; min-width: 0; }
+legend { font-weight: 700; padding: 0; margin-bottom: 8px; }
+.opts { display: flex; flex-direction: column; gap: 8px; }
+.opt { display: flex; gap: 12px; align-items: flex-start; padding: 10px 14px; min-height: 48px; border: 2px solid var(--line); border-radius: 12px; background: var(--surface); cursor: pointer; }
+.opt input { width: 22px; height: 22px; margin: 2px 0 0; flex-shrink: 0; accent-color: var(--ink); }
+.opt:has(input:checked) { background: var(--blue-tint); }
+.scale { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 8px; }
+.scale .opt { flex-direction: column; align-items: center; text-align: center; gap: 6px; padding: 10px 6px; font-size: 0.92rem; }
+.scale .opt input { margin: 0; }
+.inline-opts { display: flex; flex-wrap: wrap; gap: 8px; }
+.inline-opts .opt { align-items: center; }
+
+.quiz { display: flex; flex-direction: column; gap: 22px; }
+.quiz fieldset { padding-top: 4px; }
+.qnum { display: block; font-size: 0.85rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-soft); }
+.fb { margin-top: 10px; padding: 10px 14px; border-radius: 12px; border: 2px solid var(--line); max-width: 66ch; }
+.fb.ok { background: var(--surface); border-color: var(--ok); }
+.fb.no { background: var(--surface); border-color: var(--bad); }
+.fb strong.okt { color: var(--ok); } .fb strong.not { color: var(--bad); }
+.errsum { border: 3px solid var(--bad); border-radius: 14px; padding: 12px 16px; background: var(--surface); }
+.errsum ul { margin: 6px 0 0; padding-left: 1.2em; }
+.scorebox { padding: 14px 16px; border-radius: 14px; border: 2px solid var(--line); background: var(--amber-tint); font-weight: 700; }
+.scorebox:empty { display: none; }
+
+table.log { width: 100%; border-collapse: collapse; font-size: 0.95rem; min-width: 560px; }
+.log th, .log td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--line); vertical-align: top; }
+.log th { font-size: 0.85rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-soft); }
+.log td.num { font-variant-numeric: tabular-nums; }
+.tablewrap { overflow-x: auto; }
+.empty { color: var(--ink-soft); font-style: italic; }
+
+.breath { width: 170px; height: 250px; align-self: center; display: flex; justify-content: center; }
+.breath svg { width: 170px; height: 250px; overflow: visible; }
+.balloon-body { transform-box: view-box; transform-origin: 85px 150px; transform: scale(0.62); transition-property: transform; transition-timing-function: ease-in-out; }
+.breath.in .balloon-body { transform: scale(1); }
+.breath.hold .balloon-body { transform: scale(0.8); }
+progress { width: 100%; height: 18px; accent-color: var(--blue); }
+
+.checks { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 8px; }
+
+.binder { display: flex; flex-direction: column; gap: 14px; }
+.binder-page { border: 2px solid var(--line); border-radius: 14px; padding: 14px 16px; background: var(--bg); display: flex; flex-direction: column; gap: 8px; }
+.binder-page h4 { font-size: 1.05rem; display: flex; justify-content: space-between; gap: 10px; flex-wrap: wrap; align-items: center; }
+.kv { display: grid; grid-template-columns: minmax(120px, 34%) 1fr; gap: 4px 14px; font-size: 0.97rem; }
+.kv dt { font-weight: 700; } .kv dd { margin: 0; overflow-wrap: anywhere; }
+
+.cert { border: 3px solid var(--line); border-radius: 24px; padding: 28px clamp(16px, 4vw, 40px); background: var(--band); text-align: center; display: flex; flex-direction: column; align-items: center; gap: 10px; box-shadow: 6px 6px 0 var(--rouge); }
+.cert h3 { font-family: var(--font-display); font-weight: 400; font-size: clamp(1.6rem, 4vw, 2.2rem); }
+.cert .who { font-family: var(--font-display); font-size: clamp(1.8rem, 5vw, 2.6rem); }
+.cert .fine { font-size: 0.88rem; color: var(--ink-soft); max-width: 52ch; }
+
+.pager { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+footer.foot { border-top: 2px solid var(--line); }
+footer.foot .wrap { padding-block: 20px 32px; display: flex; flex-direction: column; gap: 12px; font-size: 0.92rem; color: var(--ink-soft); }
+
+@media (max-width: 900px) {
+  .shell { grid-template-columns: minmax(0, 1fr); }
+  .shell { gap: 18px; padding-block: 18px 48px; }
+  nav.rail { min-width: 0; max-width: 100%; }
+  nav.rail h2 { margin-bottom: 6px; }
+  .rail ol { position: relative; flex-direction: row; overflow-x: auto; scroll-snap-type: x proximity; padding: 2px 2px 10px; gap: 8px; }
+  .rail li { flex: 0 0 auto; scroll-snap-align: start; }
+  .modbtn { width: auto; min-width: 210px; max-width: 250px; min-height: 52px; padding: 8px 12px; }
+  .modbtn[aria-current="page"] { box-shadow: 3px 3px 0 var(--line); }
+  .modstat { font-size: 0.82rem; }
+}
+.continue-row { margin-top: 16px; }
+@media (max-width: 620px) {
+  .band .wrap { grid-template-columns: minmax(0, 1fr); }
+  .flowerbox { flex-direction: row; text-align: left; }
+  .flowerbox svg { width: 84px; }
+  .lbody { padding-left: 16px; }
+  .scale { grid-template-columns: repeat(auto-fit, minmax(96px, 1fr)); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .balloon-body { transform: scale(0.84); }
+  .breath.in .balloon-body { transform: scale(1); }
+  .breath.hold .balloon-body { transform: scale(0.92); }
+  html { scroll-behavior: auto; }
+}
+</style>
+
+<a class="skip" href="#main" id="skiplink">Skip to the module</a>
+
+<header class="band">
+  <div class="wrap">
+    <div>
+      <p class="eyebrow">Golden Soul Circus · Harm Redux</p>
+      <h1 class="title">Palliative PAL Companion</h1>
+      <p class="lede">Practice tools, Flower Checks, and your Care Binder for each module of the caregiver course. Real hospice skills, sacred-clown delivery.</p>
+      <div class="row continue-row"><button type="button" class="btn primary" id="continuebtn">Start with Module 0</button></div>
+      <div class="toolbar">
+        <div class="seg" role="group" aria-labelledby="sizelbl">
+          <span class="seg-label" id="sizelbl">Text size</span>
+          <button type="button" id="size-0" data-size="0" aria-pressed="true">Standard</button>
+          <button type="button" id="size-1" data-size="1" aria-pressed="false">Larger</button>
+          <button type="button" id="size-2" data-size="2" aria-pressed="false">Largest</button>
+        </div>
+        <p class="privacy">Your answers save only in this browser on this device. Nothing is sent anywhere.</p>
+      </div>
+    </div>
+    <div class="flowerbox">
+      <div id="flower"></div>
+      <p class="flower-label" id="flowerlabel"></p>
+    </div>
+  </div>
+</header>
+
+<div class="wrap shell">
+  <nav class="rail" aria-labelledby="railhead">
+    <h2 id="railhead">Modules</h2>
+    <ol id="modlist" role="list"></ol>
+  </nav>
+  <main id="main" tabindex="-1"></main>
+</div>
+
+<footer class="foot">
+  <div class="wrap">
+    <p><strong>Disclaimer.</strong> Our views are our own, and we're unaffiliated with any institution. We advocate for all Patients of Earth. This is educational information only. We're licensed nurses, but this is not medical advice, diagnosis, or treatment, and we're not practicing under our nursing licenses here. Always ask your own healthcare provider. The certificate is not a professional certification.</p>
+    <div class="row" id="clearrow">
+      <button type="button" class="btn small" id="clearbtn">Clear everything on this device</button>
+    </div>
+    <div class="row" id="confirmrow" hidden>
+      <p><strong>This deletes your Care Binder, logs, and petals from this browser.</strong></p>
+      <button type="button" class="btn small" id="clearyes">Yes, clear everything</button>
+      <button type="button" class="btn small" id="clearno">Keep my work</button>
+    </div>
+  </div>
+</footer>
+
+<div class="sr-only" aria-live="polite" id="announcer"></div>
+
+<script>
+(function () {
+  "use strict";
+  document.documentElement.lang = "en";
+  var KEY = "palpal-companion-v1";
+
+  /* ---------- storage ---------- */
+  function defaults() {
+    return { cur: 0, size: 0, done: {}, text: {}, team: {}, doris: "", meds: [], log: [], circle: [], comfort: "", soul: {}, s3: {}, spots: {}, moments: {}, cert: "" };
+  }
+  function load() {
+    try { var raw = localStorage.getItem(KEY); if (raw) return Object.assign(defaults(), JSON.parse(raw)); } catch (e) {}
+    return defaults();
+  }
+  var S = load();
+  function save() { try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) {} }
+
+  function esc(s) { return String(s == null ? "" : s).replace(/[&<>"']/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]; }); }
+  function getPath(p) { return p.split(".").reduce(function (o, k) { return o == null ? undefined : o[k]; }, S); }
+  function setPath(p, v) { var ks = p.split("."), o = S; for (var i = 0; i < ks.length - 1; i++) { if (o[ks[i]] == null || typeof o[ks[i]] !== "object") o[ks[i]] = {}; o = o[ks[i]]; } o[ks[ks.length - 1]] = v; }
+  var announcer = document.getElementById("announcer");
+  function say(msg) { announcer.textContent = ""; setTimeout(function () { announcer.textContent = msg; }, 60); }
+
+  /* ---------- content ---------- */
+  var CALL = "Call the care team";
+  var M = [
+    { n: 0, name: "Welcome to the Big Top", time: "About 30 minutes", earns: "your flower stem", color: "band",
+      tagline: "Everybody dies. Let's learn to care first.",
+      ep: "Episode 0 · Solve for D",
+      warm: "What made you sign up? Who are you caring for, or getting ready to care for?",
+      lessons: [
+        { t: "How this course works", b: ["Every module has three rings: the Moment, the Action, and the Payoff.", "Every video has captions, a transcript, and an audio-only version. You can change playback speed and text size.", "This companion has a text-size control at the top of the page."] },
+        { t: "Your role and the care team", b: ["<strong>Your person</strong> means whoever you're caring for. <strong>The care team</strong> means their doctor, nurse, hospice, home health, or pharmacist.", "You give daily care and notice changes. The care team diagnoses, prescribes, and guides.", "“I'm not sure, let me call” is always a correct answer."] },
+        { t: "Build your Know Your Team page", b: ["This is page 1 of your Care Binder. Fill it in with the Doris Drill below."], balloon: { l: CALL, t: "If your person is on hospice, ask the hospice team today who to call in an emergency. Many hospice plans ask families to call the hospice line first instead of 911. Write their answer on your Know Your Team page." } },
+        { t: "Set up your care corner", b: ["Clear walkways, good lighting, a chair beside the bed, and supplies within reach."] },
+        { t: "Community agreements", b: ["Share only what you want to.", "Protect your person's privacy: no faces, names, or identifying details in photos or posts.", "Don't give each other medical advice. Be kind, always."] }
+      ],
+      reflect: "What are you most nervous about? You'll come back to it in Module 6.",
+      drill: "team" },
+    { n: 1, name: "Empowered Essentials", time: "About 75 minutes", earns: "Petal 1", color: "blue",
+      tagline: "Together, we are a nurse. Fast is slow, slow is fast.",
+      ep: "Episode 1 · Fast Is Slow",
+      warm: "Think of a time you rushed and something went wrong. What would slow have looked like?",
+      lessons: [
+        { t: "Protect your own body first", b: ["Feet wide, knees bent, back straight. Keep your person close to your body.", "Turn by moving your feet, not by twisting your back.", "Use help or equipment (a draw sheet, slide sheet, or gait belt). Never lift your person's full weight alone.", "Tell your person what you're about to do, then count out loud together."] },
+        { t: "Repositioning and protecting skin", b: ["If your person spends most of the day in bed, help them change position regularly, often about every 2 hours, or as the care team recommends.", "Pillows between the knees and behind the back. Rest the calves on a pillow so the heels float.", "Check the bony spots: tailbone, hips, heels, elbows, shoulder blades, and the backs of the ears."], balloon: { l: CALL, t: "Redness that doesn't fade after pressure has been off for a few minutes, or any open skin or blister." } },
+        { t: "Bathing with dignity", b: ["Gather everything first. Warm the room. Test the water on the inside of your wrist.", "Uncover only the part you're washing. Keep the rest covered with a towel.", "Wash from the cleanest areas to the less clean ones. Pat dry, especially in skin folds and between the toes.", "Offer choices: “Would you like to wash your face yourself?”", "Care for the mouth: a soft toothbrush or moist mouth swab, and lip balm."] },
+        { t: "Feeding and fluids", note: "This lesson mentions changes in eating near the end of life.", b: ["Help your person sit as upright as possible, and keep them upright for about 30 minutes after eating.", "Sit at eye level. Small bites and sips. Let them set the pace.", "Near the end of life, appetite and thirst naturally fade as the body slows down. This is normal and isn't anyone's failure. Offer favorite tastes and mouth comfort, and follow the care team's guidance."], balloon: { l: CALL, t: "Coughing or choking while eating, a wet or gurgly voice after swallowing, or food staying in the mouth." } },
+        { t: "Transfers: bed to chair", b: ["Explain the plan. Help your person sit at the edge of the bed, feet flat on the floor.", "Use a gait belt if the care team gave you one. Count together, stand, pivot on your feet, and sit.", "<strong>If they start to fall:</strong> don't try to catch them. Keep them close, bend your knees, and guide them slowly to the floor while protecting their head. Then get help."], balloon: { l: CALL, t: "After any fall, even if your person seems fine." } }
+      ],
+      clown: "Lifting with your back. Pulling on arms or under the armpits. Feeding someone who's lying flat. Uncovering the whole body at once. Trying to catch a fall.",
+      reflect: "Which of these skills will you ask the care team to show you in person?",
+      drill: "count",
+      quiz: [
+        { q: "When you help someone move, how should you turn?", o: ["Twist at the waist", "Move your feet", "Lean forward"], a: 1, w: "Moving your feet keeps your spine straight. Twisting while holding weight is how backs get hurt." },
+        { q: "After eating, how long should your person stay sitting upright?", o: ["About 2 minutes", "About 30 minutes", "It doesn't matter"], a: 1, w: "About 30 minutes upright helps food go down and lowers the risk of choking." },
+        { q: "Your person's voice sounds wet and gurgly after swallowing. What do you do?", o: ["Offer more water", "Keep going slowly", "Stop and call the care team"], a: 2, w: "A wet or gurgly voice can mean food or drink went the wrong way. That's a Red Balloon." },
+        { q: "Your person starts to fall while standing. What do you do?", o: ["Catch them under the arms", "Guide them slowly to the floor, protecting their head", "Step back"], a: 1, w: "Catching a falling person often hurts you both. Guide them down, protect their head, then get help." },
+        { q: "Eating and drinking less near the end of life is:", o: ["A normal part of the body slowing down", "Always an emergency", "A sign you're doing something wrong"], a: 0, w: "It's an expected change. Offer favorite tastes and mouth comfort instead of full meals." }
+      ] },
+    { n: 2, name: "Mindful Medicine", time: "About 60 minutes", earns: "Petal 2", color: "rouge",
+      tagline: "Laughter is the best medicine. Why? Because if you had to pick one for life, which one would it be?",
+      ep: "Episode 2 · Stop Freestyling",
+      scope: "This module teaches you how to organize, track, and ask questions about medicines. It never gives dosing advice. Always follow the prescriber and the pharmacist.",
+      warm: "How many medicines does your person take? Could you name what each one is for?",
+      lessons: [
+        { t: "The Three Questions", b: ["<strong>What's it for?</strong>", "<strong>When, and how much?</strong>", "<strong>What do I watch for afterward?</strong>", "Ask again whenever a medicine is new or changed. Pharmacists and nurses are glad you asked."] },
+        { t: "Build your Med Map", b: ["Page 2 of your Care Binder: one up-to-date list with each medicine's name, what it's for, how much, when, how it's taken, and who prescribed it.", "Include over-the-counter medicines, whether taken daily or just now and then (pain relievers, sleep aids, antacids, laxatives, allergy pills), plus vitamins, supplements, creams, patches, and inhalers. Update it the same day anything changes."] },
+        { t: "The Five Rights", tip: { h: "The Five Rights of medication safety", lead: "Registered nurses check all five every single time they give a medicine. Check them too.", items: [["Right person", "The medicine is for your person, by name on the label."], ["Right medicine", "The name on the label matches your Med Map."], ["Right amount", "Exactly the dose on the label, measured with the cup or syringe that came with it."], ["Right time", "When it's due, as the label or the care team says."], ["Right way", "By mouth, patch, under the tongue, or however it's prescribed."]] }, b: ["Fill a weekly pill organizer at the same time each week, with your Med Map in front of you.", "Never crush, split, or open a pill without asking the pharmacist first."] },
+        { t: "Watching, tracking, and comfort medicines", b: ["Keep one shared log of what you gave, when, and anything you noticed.", "For pain, ask for a 0 to 10 rating or a face on a faces scale. If your person can't speak, watch for grimacing, moaning, restlessness, or protecting one part of the body.", "Use a hospice comfort kit only as the hospice nurse instructs."], balloon: { l: CALL, t: "A missed or doubled dose, a new rash, unusual sleepiness or confusion, or pain that isn't under control." } },
+        { t: "Safe storage and disposal", b: ["Original labeled containers, out of reach of children, pets, and visitors, and locked if possible.", "Ask the pharmacy or hospice how to safely get rid of medicines that are no longer needed."] }
+      ],
+      clown: "“About” doses. Guessing what a pill is for. Crushing without asking. Two people giving the same dose because nobody wrote it down. A Med Map three changes out of date.",
+      reflect: "Which of the Three Questions can't you answer yet for your person's medicines? Who will you ask?",
+      drill: "medmap",
+      quiz: [
+        { q: "Which is one of the Three Questions?", o: ["What brand is it?", "What's it for?", "Is it expensive?"], a: 1, w: "The Three Questions: What's it for? When, and how much? What do I watch for afterward?" },
+        { q: "Before crushing or splitting a pill, you should:", o: ["Ask the pharmacist", "Make sure it's small", "Only do it at night"], a: 0, w: "Some pills release slowly on purpose. Crushing them can change how they work." },
+        { q: "Your Med Map should include:", o: ["Prescriptions only", "Prescriptions, over-the-counter medicines, vitamins, supplements, creams, and patches", "Only new medicines"], a: 1, w: "Everything your person takes or applies can interact, including over-the-counter medicines taken only now and then, so it all belongs on one list." },
+        { q: "Your person can't speak. Which could be a sign of pain?", o: ["Grimacing or restlessness", "A relaxed face", "Steady, calm sleep"], a: 0, w: "Grimacing, moaning, restlessness, or guarding a body part can all signal pain." },
+        { q: "Hospice comfort-kit medicines are used:", o: ["Whenever you think best", "As the hospice nurse instructs", "Only on weekends"], a: 1, w: "Comfort kits hold strong medicines. The hospice nurse tells you when and how." }
+      ] },
+    { n: 3, name: "Vital Signs and Vibes", time: "About 60 minutes", earns: "Petal 3", color: "amber",
+      tagline: "Treat the soul. Numbers make us numb-er. We are human be-ings, not human do-ings.",
+      ep: "Episode 3 · Take the Pulse, Read the Room",
+      warm: "Without looking at a number, how can you tell someone you love isn't feeling well?",
+      lessons: [
+        { t: "Taking a pulse", b: ["Two fingers on the thumb side of the inner wrist. Not your thumb: it has a pulse of its own.", "Count for 30 seconds and double it. A typical resting adult pulse is about 60 to 100 beats per minute.", "Notice whether it feels steady or uneven."] },
+        { t: "Counting breaths", b: ["Count each rise of the chest for 30 seconds and double it. A typical resting adult rate is about 12 to 20 breaths per minute.", "Count quietly, with your fingers still on the wrist. People breathe differently when they know they're watched."] },
+        { t: "Home devices", b: ["Follow the instructions that came with each device.", "Blood pressure: seated and resting for 5 minutes, feet flat, arm supported at heart level, no talking.", "Fingertip oxygen clip: warm hands, a still hand, no dark nail polish. These can read less accurately on darker skin, so never rely on the number alone.", "Ask the care team which numbers they want to hear about for your person."] },
+        { t: "Reading the vibe", b: ["Use the 1 to 5 comfort scale in the drill below.", "Notice <strong>face</strong>, <strong>breathing</strong>, <strong>movement</strong>, and <strong>connection</strong>.", "The number tells you what. The vibe tells you who."] },
+        { t: "Normal changes near the end of life", note: "This lesson describes physical changes that often happen as death approaches.", b: ["More sleep, less eating and drinking, changes in breathing (including pauses or noisy breathing), cooler hands and feet, and blotchy color on the legs are common and expected.", "The hospice team can guide you through each one. Knowing them ahead of time can make them less frightening."], balloon: { l: CALL, t: "Sudden changes, trouble breathing, chest pain, a fall, or not being able to wake your person. If your person is on hospice, follow the emergency plan on your Know Your Team page." } },
+        { t: "Your Vitals and Vibes log", b: ["Page 3 of your Care Binder. Each entry gets the date and time, the pulse, the breaths, any device readings, the comfort score, and one line about the vibe, in your own words.", "Use the drill below: count, pick a comfort score, then add it to your log.", "Over a week, those lines tell a story the care team can use."] }
+      ],
+      clown: "A thumb on the pulse. Counting breaths out loud. Chasing a perfect number. Ignoring the vibe because the numbers look fine.",
+      reflect: "What does “comfortable” look like for your person, specifically?",
+      drill: "pulse",
+      quiz: [
+        { q: "What do you use to feel for a pulse?", o: ["Your thumb", "Two fingers", "Your palm"], a: 1, w: "Your thumb has its own pulse, which can confuse the count." },
+        { q: "A typical resting adult breathing rate is about:", o: ["12 to 20 breaths per minute", "40 to 60", "2 to 5"], a: 0, w: "About 12 to 20 breaths per minute is typical at rest." },
+        { q: "Why count breaths without announcing it?", o: ["It's faster", "People breathe differently when they're watched", "It's more polite"], a: 1, w: "Knowing they're being counted changes how people breathe." },
+        { q: "Cooler hands and feet near the end of life can be:", o: ["An expected change", "Always an emergency", "Only caused by a cold room"], a: 0, w: "Cooler hands and feet are common as the body slows down. The hospice team can guide you." },
+        { q: "Who decides which blood pressure numbers matter for your person?", o: ["An internet search", "Their care team", "The device"], a: 1, w: "Targets differ for everyone. Ask the care team which numbers they want to hear about." }
+      ] },
+    { n: 4, name: "Sacred Space and Heavenly Hygiene", time: "About 60 minutes", earns: "Petal 4", color: "blue",
+      tagline: "The only solution to pollution is dilution. Clean, dry, and re-apply.",
+      ep: "Episode 4 · The Portal",
+      warm: "What's one thing that makes a room feel peaceful to you?",
+      lessons: [
+        { t: "The four hand-washing moments", b: ["Wash <strong>before entering, before touching, after touching,</strong> and <strong>after taking off gloves</strong>.", "Soap and water for at least 20 seconds. Sing the chant twice.", "Sanitizer works when hands don't look dirty. Use soap and water when they do, and always after toilet help or diarrhea."] },
+        { t: "Gloves", b: ["Wear gloves around body fluids, broken skin, and toilet or incontinence care.", "Pull from the wrist so they turn inside out, then wash your hands. Gloves never replace hand washing."] },
+        { t: "Cleaning the care space", b: ["Wipe high-touch spots daily: bed rails, remotes, phones, doorknobs, light switches.", "Carry dirty linens away from your body. Don't shake them. Wash in warm water.", "Body-fluid spills: gloves on, clean up, then disinfect."] },
+        { t: "Skin care: clean, dry, re-apply", b: ["<strong>Clean</strong> gently. Pat, don't rub.", "<strong>Dry</strong> thoroughly, especially in skin folds.", "<strong>Re-apply</strong> moisturizer, plus barrier cream if the care team recommends it. Moisturize your own hands too."] },
+        { t: "Making the room a sacred space", b: ["Soft light, familiar photos, favorite music played softly, fresh air, fewer beeps. Go easy on strong scents.", "Ask your person what they want in the room.", "<strong>Oxygen safety:</strong> if oxygen is used, no candles, smoking, or open flames, ever. Battery candles give the glow."] },
+        { t: "The threshold ritual", b: ["Pause at the doorway. Take one breath. Leave the rest of your day outside. Pause again on the way out."], balloon: { l: CALL, t: "A fever, skin that's red, warm, swollen, or draining, or a new rash." } }
+      ],
+      clown: "The quick rinse. Shaking out dirty sheets. Wearing the same gloves from room to room. Designing a sacred space without asking the person who lives in it.",
+      reflect: "Design your person's sacred space. What would they want to see, hear, and hold?",
+      drill: "wash",
+      quiz: [
+        { q: "Which is one of the four hand-washing moments?", o: ["Before touching your person", "Only at mealtimes", "Once a day"], a: 0, w: "Before entering, before touching, after touching, and after taking off gloves." },
+        { q: "Wash with soap and water for at least:", o: ["5 seconds", "20 seconds", "2 minutes"], a: 1, w: "At least 20 seconds. Sing the chant twice." },
+        { q: "Right after you take off gloves, you should:", o: ["Put on new gloves", "Wash your hands", "Nothing, the gloves kept your hands clean"], a: 1, w: "Gloves can tear, and hands get dirty taking them off. Wash right after." },
+        { q: "Dirty linens should be:", o: ["Shaken out first", "Carried away from your body", "Held close so nothing drops"], a: 1, w: "Holding linens away from you keeps germs off your clothes." },
+        { q: "In a room where oxygen is in use:", o: ["Small candles are fine", "No candles, smoking, or open flames", "Only scented candles"], a: 1, w: "Oxygen makes fire spread fast. Battery candles are the safe glow." }
+      ] },
+    { n: 5, name: "Soul Care as Self-Care", time: "About 60 minutes", earns: "Petal 5", color: "rouge",
+      tagline: "Remember what you like to remember what you are like.",
+      ep: "Episode 5 · The Empty Watering Can",
+      modNote: "This module talks about grief and caregiver stress. Every ritual is optional. Skip, pause, or come back any time.",
+      warm: "When did you last do something just because you liked it?",
+      lessons: [
+        { t: "Recognizing burnout", b: ["Tiredness sleep doesn't fix, a short temper, pulling away from people, getting sick more often, feeling numb, or losing interest in things you loved.", "Burnout isn't weakness. It's a sign the well needs refilling."] },
+        { t: "The 3-S Check", b: ["Once a week, rate <strong>Sleep</strong>, <strong>Support</strong>, and <strong>Spark</strong> from 1 to 5.", "Anything under 3 gets your attention this week, not someday."] },
+        { t: "The 60-Second Reset", b: ["<strong>Breathe:</strong> in for 4, out for 6, three times.", "<strong>Shake:</strong> hands, shoulders, then your whole body.", "<strong>Heart:</strong> hand on your heart. Name one thing you like."] },
+        { t: "Building your Care Circle", b: ["List people who can help and match each to a specific ask: dinner on Tuesday, an hour of sitting with your person, a prescription pickup.", "Specific asks get yeses. Ask your hospice about volunteers and respite care (short breaks for caregivers)."] },
+        { t: "Grief before and after", b: ["Grieving while your person is still alive is called anticipatory grief, and it's normal.", "Many hospices offer families grief support for about a year after a death. Find out what yours offers now."], balloon: { l: "Get support now", t: "If you feel hopeless, overwhelmed, or unsafe, reach out to someone today. In the U.S., call or text <strong>988</strong> to reach the Suicide &amp; Crisis Lifeline. Outside the U.S., look up your local crisis line and add it to your Know Your Team page." } }
+      ],
+      clown: "“I'll rest when this is over.” Saying “let me know if you need anything” instead of a specific ask. Skipping meals. Believing good caregivers never need a break.",
+      reflect: "What would make this week 10 percent easier?",
+      drill: "reset",
+      quiz: [
+        { q: "What are the three S's?", o: ["Sleep, Support, Spark", "Salt, Sugar, Snacks", "Sit, Stand, Stretch"], a: 0, w: "Sleep, Support, and Spark. Rate each from 1 to 5 once a week." },
+        { q: "When one of your scores is under 3, you should:", o: ["Wait until caregiving is over", "Give it attention this week", "Ignore it"], a: 1, w: "Under 3 means the well is running low. Give it attention this week, not someday." },
+        { q: "Which ask is most likely to get a yes?", o: ["“Let me know if you need anything.”", "“Can you bring dinner on Tuesday?”", "“Help me out sometime.”"], a: 1, w: "A specific ask is easy to say yes to." },
+        { q: "Grieving while your person is still alive is:", o: ["Normal", "A sign you've given up", "Very rare"], a: 0, w: "It's called anticipatory grief, and it's normal." },
+        { q: "What are the three steps of the 60-Second Reset?", o: ["Breathe, shake, hand on heart", "Run, rest, repeat", "Call, text, email"], a: 0, w: "Breathe, shake, then hand on heart and name one thing you like." }
+      ] },
+    { n: 6, name: "Walking Each Other Home", time: "About 45 minutes", earns: "Petal 6 and your certificate", color: "amber",
+      tagline: "We're all walking each other home.",
+      ep: "Episode 6 · Walking Each Other Home",
+      modNote: "The walkthrough in this module includes end-of-life care.",
+      warm: "Look back at what you wrote in Module 0 about what made you nervous. How does it feel now?",
+      lessons: [
+        { t: "A day in care", b: ["One full caregiving day: the threshold ritual, a vibe check, medicines by the Med Map, repositioning, a bed bath, lunch sitting upright, a Red Balloon moment and the phone call that follows, and a 60-Second Reset to close the day."] },
+        { t: "Complete your Care Binder", b: ["Your binder pages fill in automatically from the drills in each module. Review them below and add your Comfort Plan."] },
+        { t: "Talking with the care team", b: ["Share what you notice in three short parts: <strong>what you saw</strong>, <strong>when it started</strong>, and <strong>what you've already tried</strong>."] }
+      ],
+      reflect: "What's one thing you'll do differently tomorrow because of this course?",
+      drill: "binder" }
+  ];
+  var FINAL = [];
+  [1, 2, 3, 4, 5].forEach(function (m) { [0, 2, 4].forEach(function (i) { FINAL.push(M[m].quiz[i]); }); });
+
+  /* ---------- helpers ---------- */
+  function petals() { var c = 0; for (var i = 1; i <= 6; i++) if (S.done[i]) c++; return c; }
+  function canFinal() { for (var i = 1; i <= 5; i++) if (!S.done[i]) return false; return true; }
+  var COL = { blue: "var(--blue)", rouge: "var(--rouge)", amber: "var(--amber)", band: "var(--band)" };
+
+  function flowerSVG(n, stem, w) {
+    var cols = ["var(--rouge)", "var(--amber)", "var(--blue)", "var(--rouge)", "var(--amber)", "var(--blue)"];
+    var p = "";
+    for (var i = 0; i < 6; i++) {
+      var on = i < n;
+      p += '<ellipse cx="100" cy="52" rx="24" ry="40" transform="rotate(' + (i * 60) + ' 100 92)" style="fill:' + (on ? cols[i] : "var(--surface)") + ';stroke:var(--line);stroke-width:3.5' + (on ? "" : ";stroke-dasharray:6 6") + '"></ellipse>';
+    }
+    var dash = stem ? "" : ";stroke-dasharray:7 7";
+    return '<svg viewBox="0 0 200 270" width="' + w + '" aria-hidden="true" focusable="false">' +
+      '<path d="M100 120 C 98 170, 104 210, 100 262" style="fill:none;stroke:var(--line);stroke-width:5;stroke-linecap:round' + dash + '"></path>' +
+      '<path d="M101 200 C 120 180, 150 180, 162 192 C 146 208, 118 210, 101 200 Z" style="fill:' + (stem ? "var(--blue)" : "var(--surface)") + ';stroke:var(--line);stroke-width:3.5' + dash + '"></path>' +
+      '<path d="M99 228 C 80 208, 50 208, 38 220 C 54 236, 82 238, 99 228 Z" style="fill:' + (stem ? "var(--amber)" : "var(--surface)") + ';stroke:var(--line);stroke-width:3.5' + dash + '"></path>' +
+      p + '<circle cx="100" cy="92" r="22" style="fill:var(--ink);stroke:var(--line);stroke-width:3"></circle><circle cx="100" cy="92" r="8" style="fill:var(--amber)"></circle></svg>';
+  }
+  function flowerText() {
+    var n = petals();
+    if (!S.done[0] && n === 0) return "No stem yet. Start with Module 0.";
+    return (S.done[0] ? "Stem grown. " : "Stem not grown yet. ") + n + " of 6 petals.";
+  }
+  function renderHeader() {
+    document.getElementById("flower").innerHTML = flowerSVG(petals(), !!S.done[0], 132);
+    document.getElementById("flowerlabel").textContent = flowerText();
+    for (var i = 0; i < 3; i++) document.getElementById("size-" + i).setAttribute("aria-pressed", String(S.size === i));
+    document.documentElement.style.fontSize = ["100%", "118.75%", "137.5%"][S.size] || "100%";
+    var nx = nextModule(), cb = document.getElementById("continuebtn");
+    if (cb) cb.textContent = nx === null ? "Review your certificate" : (petals() === 0 && !S.done[0] ? "Start with Module 0" : "Continue: Module " + nx + ", " + M[nx].name);
+  }
+  function nextModule() {
+    for (var i = 0; i <= 5; i++) if (!S.done[i]) return i;
+    return S.done[6] ? null : 6;
+  }
+  var EPLINKS = {}; /* add each episode's link at launch, e.g. EPLINKS[1] = "https://..." */
+  function renderNav() {
+    var html = "";
+    M.forEach(function (m) {
+      var stat, cls = "modstat";
+      if (S.done[m.n]) { stat = m.n === 0 ? "Done · stem grown" : "Done · petal earned"; cls += " done"; }
+      else if (m.n === 6 && !canFinal()) stat = "Final check opens after Modules 1 to 5";
+      else stat = m.time;
+      html += '<li><button type="button" class="modbtn" data-go="' + m.n + '"' + (S.cur === m.n ? ' aria-current="page"' : "") + '>' +
+        '<span class="modnum" style="background:' + COL[m.color] + (m.color === "band" ? ";color:var(--ink)" : "") + '" aria-hidden="true">' + m.n + '</span>' +
+        '<span><span class="modname"><span class="sr-only">Module ' + m.n + ': </span>' + esc(m.name) + '</span><span class="' + cls + '">' + esc(stat) + '</span></span></button></li>';
+    });
+    document.getElementById("modlist").innerHTML = html;
+  }
+
+  function balloonHTML(b) {
+    return '<div class="balloon" role="note"><p class="balloon-label"><svg width="18" height="22" viewBox="0 0 18 22" aria-hidden="true" focusable="false"><ellipse cx="9" cy="8" rx="7" ry="7.5" style="fill:var(--on-brick)"></ellipse><path d="M9 15.5 L7.5 17.5 H10.5 Z M9 17.5 C 8 19, 10 20, 9 21.5" style="fill:var(--on-brick);stroke:var(--on-brick);stroke-width:1.2"></path></svg>Red Balloon · ' + b.l + '</p><p>' + b.t + '</p></div>';
+  }
+  function tipHTML(t) {
+    return '<div class="rntip" role="note"><p class="rntip-label"><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 3 V9 A5 5 0 0 0 15 9 V3 M10 14 V16 A4 4 0 0 0 18 16 V13" style="fill:none;stroke:var(--on-accent);stroke-width:2.2;stroke-linecap:round"></path><circle cx="18" cy="11" r="2.4" style="fill:none;stroke:var(--on-accent);stroke-width:2.2"></circle></svg>Nurse’s Tip · Registered nursing standard</p>' +
+      '<div class="rntip-body"><h5>' + t.h + '</h5><p>' + t.lead + '</p><ol class="rights" role="list">' +
+      t.items.map(function (it) { return '<li><span class="right-name">' + it[0] + '</span><span>' + it[1] + '</span></li>'; }).join("") + '</ol></div></div>';
+  }
+  function textField(id, bind, label, hint, area) {
+    var v = esc(getPath(bind) || "");
+    return '<div class="field"><label for="' + id + '">' + label + '</label>' + (hint ? '<p class="hint" id="' + id + '-h">' + hint + '</p>' : "") +
+      (area ? '<textarea id="' + id + '" data-bind="' + bind + '"' + (hint ? ' aria-describedby="' + id + '-h"' : "") + '>' + v + '</textarea>'
+            : '<input type="text" id="' + id + '" data-bind="' + bind + '" value="' + v + '"' + (hint ? ' aria-describedby="' + id + '-h"' : "") + '>') + '</div>';
+  }
+  function quizHTML(key, qs, need) {
+    var h = '<form class="quiz" data-form="quiz" data-key="' + key + '" novalidate>' +
+      '<div class="errsum" id="err-' + key + '" tabindex="-1" hidden></div>';
+    qs.forEach(function (q, i) {
+      var fid = "q-" + key + "-" + i;
+      h += '<fieldset id="' + fid + '"><legend><span class="qnum">Question ' + (i + 1) + ' of ' + qs.length + '</span>' + esc(q.q) + '</legend><div class="opts">';
+      q.o.forEach(function (o, j) {
+        h += '<label class="opt" for="' + fid + '-' + j + '"><input type="radio" id="' + fid + '-' + j + '" name="' + fid + '" value="' + j + '"><span>' + esc(o) + '</span></label>';
+      });
+      h += '</div><div class="fb" id="fb-' + key + '-' + i + '" hidden></div></fieldset>';
+    });
+    h += '<div class="row"><button type="submit" class="btn primary" id="check-' + key + '">Check my answers</button><button type="button" class="btn" data-act="retake" data-key="' + key + '" id="retake-' + key + '" hidden>Start over</button></div>' +
+      '<p class="hint">Untimed. Get ' + need + ' of ' + qs.length + ' right to earn the petal. Retake as often as you like.</p>' +
+      '<div class="scorebox" role="status" tabindex="-1" id="res-' + key + '"></div></form>';
+    return h;
+  }
+
+  /* ---------- drills ---------- */
+  function drillHTML(m) {
+    switch (m.drill) {
+      case "team": return '<div class="drill"><h4>Doris Drill: name your Doris, then fill in Know Your Team</h4>' +
+        textField("doris", "doris", "Your Doris's name", "The pillow or stuffed animal you'll practice on.") +
+        '<div class="grid2">' + textField("t-doc", "team.doctor", "Your person's main doctor") + textField("t-hosp", "team.hospice", "Hospice or home health 24/7 number") +
+        textField("t-pharm", "team.pharmacy", "Pharmacy") + textField("t-emerg", "team.emergency", "Emergency contact") + '</div>' +
+        textField("t-plan", "team.plan", "What the care plan says to do in an emergency", "If your person is on hospice, ask the hospice team and write their answer here.", true) +
+        textField("t-crisis", "team.crisis", "A crisis line for you", "In the U.S., call or text 988. Outside the U.S., add your local line.") + '</div>';
+      case "count": var spots = ["Tailbone", "Hips", "Heels", "Elbows", "Shoulder blades", "Backs of the ears"];
+        return '<div class="drill"><h4>Doris Drill: the slow count</h4><p class="prose">Lay your Doris on a bed or couch and practice a draw-sheet slide. Start the count and move only on “Move.” Seated? Practice the grip and count at a table. Watching only? Say each step out loud.</p>' +
+          '<div class="field"><label for="pace">Pace</label><select id="pace"><option value="1500">Slow (1.5 seconds per count)</option><option value="1000">Steady (1 second per count)</option></select></div>' +
+          '<p class="bigread" id="countread" aria-hidden="true">Ready</p>' +
+          '<div class="row"><button type="button" class="btn primary" data-act="count" id="countbtn">Start the count</button></div>' +
+          '<fieldset><legend>Skin check: tick each bony spot you checked today</legend><div class="checks">' +
+          spots.map(function (s, i) { return '<label class="opt" for="spot-' + i + '"><input type="checkbox" id="spot-' + i + '" data-bind="spots.s' + i + '"' + (S.spots["s" + i] ? " checked" : "") + '><span>' + s + '</span></label>'; }).join("") +
+          '</div></fieldset></div>';
+      case "medmap": return '<div class="drill"><h4>Doris Drill: build your Med Map</h4><p class="prose">Copy each medicine from its pharmacy label. If you can’t fill a box, that’s a question for the pharmacist.</p>' +
+          '<form data-form="med" class="binder" novalidate><div class="grid2">' +
+          '<div class="field"><label for="med-name">Medicine name (required)</label><input type="text" id="med-name" aria-describedby="med-name-err"><p class="errtext" id="med-name-err" hidden>Add the medicine name from the label.</p></div>' +
+          '<div class="field"><label for="med-for">What it’s for</label><input type="text" id="med-for"></div>' +
+          '<div class="field"><label for="med-amt">How much (from the label)</label><input type="text" id="med-amt"></div>' +
+          '<div class="field"><label for="med-when">When</label><input type="text" id="med-when"></div>' +
+          '<div class="field"><label for="med-how">How it’s taken</label><input type="text" id="med-how"></div>' +
+          '<div class="field"><label for="med-who">Prescribed by</label><input type="text" id="med-who"></div></div>' +
+          '<div class="row"><button type="submit" class="btn primary">Add to my Med Map</button></div></form>' +
+          '<div class="tablewrap" id="medtable">' + medTable() + '</div></div>';
+      case "pulse": var faces = ["Very uncomfortable", "Uncomfortable", "Okay", "Comfortable", "Very comfortable"];
+        return '<div class="drill"><h4>Doris Drill: count, then read the vibe</h4><p class="prose">Practice on yourself first. Pick what to count, press Start, then tap the big button once for each beat or breath for 30 seconds.</p>' +
+          '<fieldset><legend>What are you counting?</legend><div class="inline-opts">' +
+          '<label class="opt" for="mode-p"><input type="radio" name="mode" id="mode-p" value="pulse" checked><span>Pulse beats</span></label>' +
+          '<label class="opt" for="mode-b"><input type="radio" name="mode" id="mode-b" value="breaths"><span>Breaths</span></label></div></fieldset>' +
+          '<p class="countline" id="pulsetime">30 seconds</p>' +
+          '<button type="button" class="tapbtn" id="tapbtn" data-act="tap" disabled>Tap for each beat</button>' +
+          '<p class="countline" id="tapcount" aria-hidden="true">0 counted</p>' +
+          '<div class="row"><button type="button" class="btn primary" data-act="pstart" id="pstart">Start 30 seconds</button><button type="button" class="btn" data-act="pstop" id="pstop" disabled>Stop</button></div>' +
+          '<p class="result" id="presult" role="status"></p>' +
+          '<div class="field"><label for="ptyped">Or type the number you counted in 30 seconds</label><p class="hint" id="ptyped-h">Count in your head or out loud, then enter the total. No tapping needed.</p><div class="row"><input type="text" inputmode="numeric" id="ptyped" aria-describedby="ptyped-h ptyped-err" style="max-width: 10rem"><button type="button" class="btn" data-act="ptype">Use this count</button></div><p class="errtext" id="ptyped-err" hidden>Enter a number from 1 to 150.</p></div>' +
+          '<fieldset><legend>Comfort right now (the vibe check)</legend><div class="scale">' +
+          faces.map(function (f, i) { return '<label class="opt" for="cf-' + (i + 1) + '">' + faceSVG(i) + '<input type="radio" name="comfort" id="cf-' + (i + 1) + '" value="' + (i + 1) + '"><span><strong>' + (i + 1) + '</strong> ' + f + '</span></label>'; }).join("") +
+          '</div></fieldset>' +
+          '<div class="field"><label for="vibe">One line about the vibe</label><input type="text" id="vibe" aria-describedby="vibe-h"><p class="hint" id="vibe-h">Face, breathing, movement, connection.</p></div>' +
+          '<div class="row"><button type="button" class="btn primary" data-act="logadd">Add to my Vitals and Vibes log</button></div>' +
+          '<p class="hint" id="logmsg" role="status"></p>' +
+          '<div class="tablewrap" id="logtable">' + logTable() + '</div></div>';
+      case "wash": var moments = ["Before entering", "Before touching", "After touching", "After taking off gloves"];
+        return '<div class="drill"><h4>Doris Drill: the 20-second wash</h4><p class="prose">Start the timer when the soap goes on. Sing the chant twice. One hand only? Practice with sanitizer.</p>' +
+          '<p class="bigread" id="washread" aria-hidden="true">Palms, backs, thumbs, tips</p>' +
+          '<p class="countline">Wrists and in-betweens, that’s it!</p>' +
+          '<label class="lbl" for="washbar">Time washed</label><progress id="washbar" max="20" value="0">0 of 20 seconds</progress>' +
+          '<p class="countline" id="washtime">20 seconds left</p>' +
+          '<div class="row"><button type="button" class="btn primary" data-act="wstart" id="wstart">Start the 20 seconds</button><button type="button" class="btn" data-act="wstop" id="wstop" disabled>Stop</button></div>' +
+          '<fieldset><legend>The four moments: tick each one you hit today</legend><div class="checks">' +
+          moments.map(function (s, i) { return '<label class="opt" for="mom-' + i + '"><input type="checkbox" id="mom-' + i + '" data-bind="moments.m' + i + '"' + (S.moments["m" + i] ? " checked" : "") + '><span>' + s + '</span></label>'; }).join("") +
+          '</div></fieldset></div>';
+      case "reset": var S3 = [["sleep", "Sleep"], ["support", "Support"], ["spark", "Spark"]];
+        return '<div class="drill"><h4>Doris Drill: the 3-S Check</h4><p class="prose">Rate each from 1 (running on empty) to 5 (well filled).</p>' +
+          S3.map(function (s) {
+            return '<fieldset><legend>' + s[1] + '</legend><div class="inline-opts">' + [1, 2, 3, 4, 5].map(function (v) {
+              return '<label class="opt" for="s3-' + s[0] + '-' + v + '"><input type="radio" name="s3-' + s[0] + '" id="s3-' + s[0] + '-' + v + '" value="' + v + '" data-bind="s3.' + s[0] + '"' + (String(S.s3[s[0]]) === String(v) ? " checked" : "") + '><span>' + v + '</span></label>';
+            }).join("") + '</div></fieldset>';
+          }).join("") +
+          '<p class="result" id="s3result" role="status">' + s3Text() + '</p></div>' +
+          '<div class="drill"><h4>Doris Drill: the 60-Second Reset</h4><p class="prose">Follow the words. The golden balloon fills as you breathe in and empties as you breathe out. Seated? Shake just your hands and shoulders.</p>' +
+          '<div class="breath" id="breath" aria-hidden="true"><svg viewBox="0 0 170 250" focusable="false"><path d="M85 160 C 78 180, 96 192, 86 210 C 78 226, 94 236, 88 248" style="fill:none;stroke:var(--line);stroke-width:2.5;stroke-linecap:round"></path><g class="balloon-body"><path d="M85 8 C 40 8, 14 44, 14 82 C 14 118, 46 146, 79 152 L 76 162 L 94 162 L 91 152 C 124 146, 156 118, 156 82 C 156 44, 130 8, 85 8 Z" style="fill:var(--amber);stroke:var(--line);stroke-width:3.5;stroke-linejoin:round"></path><path d="M52 40 C 40 52, 36 66, 38 80" style="fill:none;stroke:#FFF6D6;stroke-width:9;stroke-linecap:round"></path><circle cx="56" cy="98" r="4" style="fill:#FFF6D6"></circle><path d="M118 112 C 126 102, 130 92, 131 80" style="fill:none;stroke:#C98F00;stroke-width:5;stroke-linecap:round"></path></g></svg></div>' +
+          '<p class="bigread" id="resetread">Ready when you are</p>' +
+          '<p class="countline" id="resettime">60 seconds</p>' +
+          '<div class="row"><button type="button" class="btn primary" data-act="rstart" id="rstart">Start the reset</button><button type="button" class="btn" data-act="rpause" id="rpause" disabled>Pause</button><button type="button" class="btn" data-act="rstop" id="rstop" disabled>Stop</button></div>' +
+          textField("like", "soul.like", "One thing you like") + '</div>' +
+          '<div class="drill"><h4>Your Care Circle</h4><p class="prose">Match each person to one specific ask.</p>' +
+          '<form data-form="circle" novalidate><div class="grid2">' +
+          '<div class="field"><label for="cc-name">Name (required)</label><input type="text" id="cc-name" aria-describedby="cc-name-err"><p class="errtext" id="cc-name-err" hidden>Add a name.</p></div>' +
+          '<div class="field"><label for="cc-ask">Specific ask (required)</label><input type="text" id="cc-ask" aria-describedby="cc-ask-h cc-ask-err"><p class="hint" id="cc-ask-h">For example: dinner on Tuesday.</p><p class="errtext" id="cc-ask-err" hidden>Add one specific ask.</p></div>' +
+          '</div><div class="row"><button type="submit" class="btn primary">Add to my Care Circle</button></div></form>' +
+          '<div id="circlelist">' + circleList() + '</div></div>' +
+          '<div class="drill"><h4>Your Soul Care Plan</h4>' +
+          '<div class="grid2">' + textField("sc-r1", "soul.r1", "Daily micro-ritual 1") + textField("sc-r2", "soul.r2", "Daily micro-ritual 2") + '</div>' +
+          textField("sc-ask", "soul.ask", "One person you'll ask for help this week") + '</div>';
+      case "binder": return binderHTML();
+    }
+    return "";
+  }
+  function faceSVG(i) {
+    var mouths = ["M14 31 Q24 22 34 31", "M15 30 Q24 25 33 30", "M15 28 H33", "M15 27 Q24 32 33 27", "M14 26 Q24 36 34 26"];
+    return '<svg width="44" height="44" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><circle cx="24" cy="24" r="20" style="fill:var(--amber);stroke:var(--line);stroke-width:2.5"></circle><circle cx="17" cy="19" r="2.6" style="fill:var(--on-accent)"></circle><circle cx="31" cy="19" r="2.6" style="fill:var(--on-accent)"></circle><path d="' + mouths[i] + '" style="fill:none;stroke:var(--on-accent);stroke-width:2.8;stroke-linecap:round"></path></svg>';
+  }
+  function medTable() {
+    if (!S.meds.length) return '<p class="empty">No medicines yet. Add the first one from its pharmacy label.</p>';
+    return '<table class="log"><caption class="sr-only">Med Map</caption><thead><tr><th scope="col">Medicine</th><th scope="col">For</th><th scope="col">How much</th><th scope="col">When</th><th scope="col">How taken</th><th scope="col">Prescriber</th><th scope="col"><span class="sr-only">Actions</span></th></tr></thead><tbody>' +
+      S.meds.map(function (r, i) { return '<tr><th scope="row">' + esc(r.name) + '</th><td>' + esc(r.for) + '</td><td>' + esc(r.amt) + '</td><td>' + esc(r.when) + '</td><td>' + esc(r.how) + '</td><td>' + esc(r.who) + '</td><td><button type="button" class="btn small" data-act="medrm" data-i="' + i + '">Remove<span class="sr-only"> ' + esc(r.name) + '</span></button></td></tr>'; }).join("") + '</tbody></table>';
+  }
+  function logTable() {
+    if (!S.log.length) return '<p class="empty">No log entries yet. Count, pick a comfort score, then add your first entry.</p>';
+    return '<table class="log"><caption class="sr-only">Vitals and Vibes log</caption><thead><tr><th scope="col">When</th><th scope="col">Pulse</th><th scope="col">Breaths</th><th scope="col">Comfort</th><th scope="col">Vibe</th><th scope="col"><span class="sr-only">Actions</span></th></tr></thead><tbody>' +
+      S.log.map(function (r, i) { return '<tr><th scope="row">' + esc(r.when) + '</th><td class="num">' + esc(r.pulse || "—") + '</td><td class="num">' + esc(r.breaths || "—") + '</td><td class="num">' + esc(r.comfort ? r.comfort + " of 5" : "—") + '</td><td>' + esc(r.vibe) + '</td><td><button type="button" class="btn small" data-act="logrm" data-i="' + i + '">Remove<span class="sr-only"> entry from ' + esc(r.when) + '</span></button></td></tr>'; }).join("") + '</tbody></table>';
+  }
+  function circleList() {
+    if (!S.circle.length) return '<p class="empty">No one in your circle yet. Add the first person and one specific ask.</p>';
+    return '<ul class="prose">' + S.circle.map(function (r, i) { return '<li class="row"><span><strong>' + esc(r.name) + ':</strong> ' + esc(r.ask) + '</span><button type="button" class="btn small" data-act="ccrm" data-i="' + i + '">Remove<span class="sr-only"> ' + esc(r.name) + '</span></button></li>'; }).join("") + '</ul>';
+  }
+  function s3Text() {
+    var names = { sleep: "Sleep", support: "Support", spark: "Spark" }, low = [], rated = 0;
+    Object.keys(names).forEach(function (k) { var v = Number(S.s3[k]); if (v) { rated++; if (v < 3) low.push(names[k]); } });
+    if (!rated) return "";
+    if (rated < 3) return "Rate all three to see your check.";
+    if (!low.length) return "All three are at 3 or above. Keep filling the well.";
+    return "Give " + low.join(" and ") + " attention this week, not someday. Pick one specific ask from your Care Circle.";
+  }
+
+  function kv(pairs) {
+    var rows = pairs.filter(function (p) { return p[1]; });
+    if (!rows.length) return '<p class="empty">Nothing here yet.</p>';
+    return '<dl class="kv">' + rows.map(function (p) { return '<dt>' + p[0] + '</dt><dd>' + esc(p[1]) + '</dd>'; }).join("") + '</dl>';
+  }
+  function binderHTML() {
+    var t = S.team, s = S.soul;
+    var page = function (num, title, mod, body) { return '<div class="binder-page"><h4><span>Page ' + num + ' · ' + title + '</span>' + (mod != null ? '<button type="button" class="btn small" data-go="' + mod + '">Edit in Module ' + mod + '</button>' : "") + '</h4>' + body + '</div>'; };
+    return '<div class="drill"><h4>Your Care Binder</h4><p class="prose">These pages fill in from the drills in each module.</p><div class="binder">' +
+      page(1, "Know Your Team", 0, kv([["Main doctor", t.doctor], ["Hospice or home health 24/7", t.hospice], ["Pharmacy", t.pharmacy], ["Emergency contact", t.emergency], ["Emergency plan", t.plan], ["Crisis line for you", t.crisis]])) +
+      page(2, "Med Map", 2, '<div class="tablewrap">' + (S.meds.length ? medTableRO() : '<p class="empty">Nothing here yet.</p>') + '</div>') +
+      page(3, "Vitals and Vibes Log", 3, S.log.length ? '<p>' + S.log.length + ' entr' + (S.log.length === 1 ? "y" : "ies") + '. Latest: ' + esc(S.log[0].when) + (S.log[0].comfort ? ", comfort " + S.log[0].comfort + " of 5" : "") + '.</p>' : '<p class="empty">Nothing here yet.</p>') +
+      page(4, "Care Circle", 5, S.circle.length ? '<ul class="prose">' + S.circle.map(function (r) { return '<li><strong>' + esc(r.name) + ':</strong> ' + esc(r.ask) + '</li>'; }).join("") + '</ul>' : '<p class="empty">Nothing here yet.</p>') +
+      page(5, "Comfort Plan", null, textField("comfort", "comfort", "What comfort looks like for your person", "Their favorite music, light, objects, people, and words. What they want in the room.", true)) +
+      page(6, "Soul Care Plan", 5, kv([["Micro-ritual 1", s.r1], ["Micro-ritual 2", s.r2], ["Asking for help this week", s.ask], ["One thing I like", s.like]])) +
+      '</div><div class="row"><button type="button" class="btn primary" data-act="copybinder">Copy my Care Binder as text</button></div>' +
+      '<p class="hint" id="copymsg" role="status"></p><div class="field" id="copywrap" hidden><label for="copybox">Your Care Binder as text. Select it all and copy.</label><textarea id="copybox" readonly></textarea></div></div>';
+  }
+  function medTableRO() {
+    return '<table class="log"><caption class="sr-only">Med Map</caption><thead><tr><th scope="col">Medicine</th><th scope="col">For</th><th scope="col">How much</th><th scope="col">When</th><th scope="col">How taken</th><th scope="col">Prescriber</th></tr></thead><tbody>' +
+      S.meds.map(function (r) { return '<tr><th scope="row">' + esc(r.name) + '</th><td>' + esc(r.for) + '</td><td>' + esc(r.amt) + '</td><td>' + esc(r.when) + '</td><td>' + esc(r.how) + '</td><td>' + esc(r.who) + '</td></tr>'; }).join("") + '</tbody></table>';
+  }
+  function binderText() {
+    var t = S.team, s = S.soul, L = [];
+    L.push("MY CARE BINDER", "Palliative PAL · Golden Soul Circus", "");
+    L.push("1. KNOW YOUR TEAM", "Main doctor: " + (t.doctor || ""), "Hospice or home health 24/7: " + (t.hospice || ""), "Pharmacy: " + (t.pharmacy || ""), "Emergency contact: " + (t.emergency || ""), "Emergency plan: " + (t.plan || ""), "Crisis line for me: " + (t.crisis || ""), "");
+    L.push("2. MED MAP");
+    S.meds.forEach(function (r) { L.push("- " + r.name + " | for: " + (r.for || "") + " | how much: " + (r.amt || "") + " | when: " + (r.when || "") + " | how: " + (r.how || "") + " | prescriber: " + (r.who || "")); });
+    L.push("", "3. VITALS AND VIBES LOG");
+    S.log.forEach(function (r) { L.push("- " + r.when + " | pulse " + (r.pulse || "-") + " | breaths " + (r.breaths || "-") + " | comfort " + (r.comfort || "-") + " of 5 | " + (r.vibe || "")); });
+    L.push("", "4. CARE CIRCLE");
+    S.circle.forEach(function (r) { L.push("- " + r.name + ": " + r.ask); });
+    L.push("", "5. COMFORT PLAN", S.comfort || "", "", "6. SOUL CARE PLAN", "Ritual 1: " + (s.r1 || ""), "Ritual 2: " + (s.r2 || ""), "Asking for help: " + (s.ask || ""), "One thing I like: " + (s.like || ""));
+    return L.join("\n");
+  }
+  function certHTML() {
+    var name = S.cert ? esc(S.cert) : "Your name here";
+    return '<div class="cert" id="cert"><p class="eyebrow">Golden Soul Circus · Harm Redux</p><h3>Palliative PAL</h3><p>Certificate of Completion awarded to</p><p class="who" id="certname">' + name + '</p>' +
+      flowerSVG(6, true, 110) + '<p>for completing all seven modules of caregiver training: Empowered Essentials, Mindful Medicine, Vital Signs and Vibes, Sacred Space and Heavenly Hygiene, and Soul Care as Self-Care.</p>' +
+      '<p><strong>' + esc(S.done.date6 || "") + '</strong></p><p class="fine">Caregiver education created by hospice nurses. Not a nursing license or professional certification.</p></div>';
+  }
+
+  /* ---------- module render ---------- */
+  function renderModule(focus) {
+    stopAll();
+    var m = M[S.cur], h = "";
+    h += '<article class="panel" aria-labelledby="mtitle">';
+    h += '<div class="mhead"><p class="eyebrow">Module ' + m.n + ' of 6</p><h2 id="mtitle" tabindex="-1">' + esc(m.name) + '</h2>' +
+      '<p class="meta">' + m.time + ' · Earns: ' + m.earns + '</p><p class="tagline">' + esc(m.tagline) + '</p></div>';
+    if (m.modNote) h += '<p class="cnote" role="note"><strong>Content note:</strong> ' + m.modNote + '</p>';
+    if (m.scope) h += '<p class="cnote" role="note"><strong>Scope note:</strong> ' + m.scope + '</p>';
+    /* Ring 1 */
+    h += '<section class="ring r1" aria-labelledby="r1h"><div class="ringhead"><span class="ringtag">Ring 1</span><h3 id="r1h">The Moment</h3></div>' +
+      '<div class="episode"><svg width="40" height="40" viewBox="0 0 40 40" aria-hidden="true" focusable="false"><circle cx="20" cy="20" r="18" style="fill:var(--blue);stroke:var(--line);stroke-width:2.5"></circle><path d="M16 12 L29 20 L16 28 Z" style="fill:var(--on-accent)"></path></svg><div><strong>' + esc(m.ep) + '</strong><span>Under 1 minute, with captions and a transcript. ' + (EPLINKS[m.n] ? '<a href="' + EPLINKS[m.n] + '">Watch the episode</a>' : 'Episode coming soon.') + '</span></div></div>' +
+      textField("warm-" + m.n, "text.warm" + m.n, "Warm-up: " + esc(m.warm), "Private. Saved only in this browser.", true) + '</section>';
+    /* Ring 2 */
+    h += '<section class="ring r2" aria-labelledby="r2h"><div class="ringhead"><span class="ringtag">Ring 2</span><h3 id="r2h">The Action</h3></div>' +
+      '<div class="lessons-tools"><button type="button" class="btn small" data-act="openall" id="openall">Open all lessons</button></div><div class="lessons" id="lessons">';
+    m.lessons.forEach(function (l, i) {
+      h += '<details class="lesson"><summary><span class="lnum">' + m.n + '.' + (i + 1) + '</span><span>' + esc(l.t) + '</span></summary><div class="lbody">' +
+        (l.note ? '<p class="cnote" role="note"><strong>Content note:</strong> ' + l.note + '</p>' : "") +
+        (l.tip ? tipHTML(l.tip) : "") + '<ul class="prose">' + l.b.map(function (b) { return "<li>" + b + "</li>"; }).join("") + '</ul>' + (l.balloon ? balloonHTML(l.balloon) : "") + '</div></details>';
+    });
+    h += '</div>';
+    if (m.clown) h += '<div class="clown"><h4>Clown Car: what piles out when you rush</h4><ul role="list">' + (m.clown.match(/[^.!?]+[.!?]+[”"]?/g) || [m.clown]).map(function (s) { return '<li>' + s.trim() + '</li>'; }).join('') + '</ul></div>';
+    h += '</section>';
+    /* Ring 3 */
+    h += '<section class="ring r3" aria-labelledby="r3h"><div class="ringhead"><span class="ringtag">Ring 3</span><h3 id="r3h">The Payoff</h3></div>';
+    h += drillHTML(m);
+    h += textField("refl-" + m.n, "text.refl" + m.n, "Reflect: " + esc(m.reflect), "Private. Saved only in this browser.", true);
+    if (m.n === 0) {
+      h += '<div class="row">' + (S.done[0] ? '<p class="result">Module 0 is done. Your stem has grown.</p>' : '<button type="button" class="btn primary" data-act="done0" id="done0">Mark Module 0 done and grow my stem</button>') + '</div>';
+    } else if (m.quiz) {
+      h += '<h4 class="lbl" style="font-size:1.2rem">Flower Check</h4>' + quizHTML("m" + m.n, m.quiz, 4);
+    } else {
+      h += '<h4 class="lbl" style="font-size:1.2rem">Final Flower Check</h4>';
+      if (canFinal()) h += quizHTML("final", FINAL, 12);
+      else {
+        var left = [1, 2, 3, 4, 5].filter(function (i) { return !S.done[i]; });
+        h += '<p class="cnote" role="note">The Final Flower Check opens after you finish the Flower Checks in Modules 1 to 5. Still to go: ' + left.map(function (i) { return "Module " + i; }).join(", ") + '.</p>';
+      }
+      if (S.done[6]) {
+        h += '<div class="field"><label for="certin">Name for your certificate</label><input type="text" id="certin" data-bind="cert" value="' + esc(S.cert) + '"></div>' + certHTML();
+      }
+    }
+    h += '</section>';
+    /* pager */
+    h += '<div class="pager">' + (m.n > 0 ? '<button type="button" class="btn" data-go="' + (m.n - 1) + '">Previous: Module ' + (m.n - 1) + '</button>' : "<span></span>") +
+      (m.n < 6 ? '<button type="button" class="btn" data-go="' + (m.n + 1) + '">Next: Module ' + (m.n + 1) + '</button>' : "") + '</div>';
+    h += '</article>';
+    var main = document.getElementById("main");
+    main.innerHTML = h;
+    if (focus) { var t = document.getElementById("mtitle"); t.focus(); t.scrollIntoView({ block: "start" }); }
+  }
+  function go(n, focus) {
+    n = Math.max(0, Math.min(6, Number(n)));
+    S.cur = n; save(); renderNav(); renderModule(focus);
+  }
+
+  /* ---------- quiz grading ---------- */
+  function grade(form) {
+    var key = form.dataset.key, qs = key === "final" ? FINAL : M[Number(key.slice(1))].quiz, need = key === "final" ? 12 : 4;
+    var missing = [], score = 0;
+    qs.forEach(function (q, i) { if (!form.querySelector('input[name="q-' + key + "-" + i + '"]:checked')) missing.push(i); });
+    var err = document.getElementById("err-" + key);
+    qs.forEach(function (q, i) { var fs = document.getElementById("q-" + key + "-" + i); fs.removeAttribute("aria-describedby"); });
+    if (missing.length) {
+      err.innerHTML = '<p><strong>' + missing.length + ' question' + (missing.length > 1 ? "s need" : " needs") + ' an answer.</strong></p><ul>' +
+        missing.map(function (i) { return '<li><a href="#q-' + key + "-" + i + '" data-jump="q-' + key + "-" + i + '">Question ' + (i + 1) + '</a></li>'; }).join("") + '</ul>';
+      err.hidden = false; err.focus(); return;
+    }
+    err.hidden = true;
+    qs.forEach(function (q, i) {
+      var v = Number(form.querySelector('input[name="q-' + key + "-" + i + '"]:checked').value), fb = document.getElementById("fb-" + key + "-" + i), ok = v === q.a;
+      if (ok) score++;
+      fb.className = "fb " + (ok ? "ok" : "no");
+      fb.innerHTML = ok ? '<strong class="okt">Correct.</strong> ' + esc(q.w) : '<strong class="not">Not quite.</strong> The answer is: ' + esc(q.o[q.a]) + '. ' + esc(q.w);
+      fb.hidden = false;
+      document.getElementById("q-" + key + "-" + i).setAttribute("aria-describedby", fb.id);
+    });
+    var res = document.getElementById("res-" + key), mod = key === "final" ? 6 : Number(key.slice(1));
+    var msg = "You got " + score + " of " + qs.length + ". ";
+    if (score >= need) {
+      var first = !S.done[mod];
+      S.done[mod] = true;
+      if (mod === 6 && !S.done.date6) S.done.date6 = new Date().toLocaleDateString(undefined, { year: "numeric", month: "long", day: "numeric" });
+      save(); renderHeader(); renderNav();
+      msg += first ? (mod === 6 ? "Petal 6 earned. Your flower is complete and your certificate is ready." : "Petal " + mod + " earned.") : "Petal already earned. Nice review.";
+      if (mod === 6 && first) { res.textContent = msg; showResult(res); setTimeout(function () { renderModule(false); var c = document.getElementById("certin"); if (c) c.focus(); }, 1600); return; }
+    } else {
+      msg += "You need " + need + " to earn the petal. Read the notes under each question and try again.";
+    }
+    res.textContent = msg;
+    showResult(res);
+    document.getElementById("retake-" + key).hidden = false;
+  }
+  function showResult(res) {
+    requestAnimationFrame(function () {
+      try { res.scrollIntoView({ block: "center", behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" }); } catch (e) { res.scrollIntoView(); }
+      res.focus({ preventScroll: true });
+    });
+  }
+  function retake(key) {
+    var form = document.querySelector('form[data-key="' + key + '"]');
+    form.reset();
+    form.querySelectorAll(".fb").forEach(function (f) { f.hidden = true; f.innerHTML = ""; });
+    form.querySelectorAll("fieldset").forEach(function (f) { f.removeAttribute("aria-describedby"); });
+    document.getElementById("res-" + key).textContent = "";
+    document.getElementById("retake-" + key).hidden = true;
+    var first = form.querySelector('input[type="radio"]'); if (first) first.focus();
+  }
+
+  /* ---------- timers ---------- */
+  var T = { count: null, pulse: null, wash: null, reset: null };
+  var P = { n: 0, left: 30, mode: "pulse", last: {} };
+  var R = { i: 0, left: 0, paused: false, steps: [] };
+  function stopAll() {
+    Object.keys(T).forEach(function (k) { if (T[k]) { clearInterval(T[k]); clearTimeout(T[k]); T[k] = null; } });
+  }
+  function el(id) { return document.getElementById(id); }
+
+  function startCount() {
+    var words = ["One", "Two", "Three", "Move"], i = 0, pace = Number(el("pace").value), btn = el("countbtn");
+    btn.disabled = true;
+    var step = function () {
+      if (i < words.length) { el("countread").textContent = words[i] + (i === 3 ? "!" : "…"); say(words[i]); i++; T.count = setTimeout(step, pace); }
+      else { el("countread").textContent = "Slow is fast."; say("Done. Slow is fast."); btn.disabled = false; btn.textContent = "Count again"; T.count = null; }
+    };
+    step();
+  }
+  function pulseStart() {
+    var modeIn = document.querySelector('input[name="mode"]:checked'); P.mode = modeIn ? modeIn.value : "pulse";
+    P.n = 0; P.left = 30;
+    el("tapcount").textContent = "0 counted"; el("presult").textContent = "";
+    el("tapbtn").disabled = false; el("tapbtn").textContent = P.mode === "pulse" ? "Tap for each beat" : "Tap for each breath";
+    el("pstart").disabled = true; el("pstop").disabled = false;
+    el("pulsetime").textContent = "30 seconds left";
+    say("Counting started. 30 seconds."); el("tapbtn").focus();
+    T.pulse = setInterval(function () {
+      P.left--; el("pulsetime").textContent = P.left + " seconds left";
+      if (P.left === 10) say("10 seconds left");
+      if (P.left <= 0) pulseEnd(true);
+    }, 1000);
+  }
+  function pulseEnd(finished) {
+    clearInterval(T.pulse); T.pulse = null;
+    el("tapbtn").disabled = true; el("pstart").disabled = false; el("pstop").disabled = true; el("pstart").textContent = "Start again";
+    if (!finished) { el("pulsetime").textContent = "Stopped"; el("presult").textContent = "Stopped. Start again when you're ready."; el("pstart").focus(); return; }
+    var per = P.n * 2, isP = P.mode === "pulse", lo = isP ? 60 : 12, hi = isP ? 100 : 20, unit = isP ? "beats per minute" : "breaths per minute";
+    P.last[P.mode] = per;
+    var range = per >= lo && per <= hi ? "That's within the typical resting adult range of about " + lo + " to " + hi + "." :
+      "That's outside the typical resting adult range of about " + lo + " to " + hi + ". Count once more. If it's still outside and new for your person, tell the care team.";
+    el("pulsetime").textContent = "Time";
+    el("presult").textContent = P.n + " in 30 seconds, so about " + per + " " + unit + ". " + range;
+    el("pstart").focus();
+  }
+  function startWash() {
+    var left = 20, bar = el("washbar"), chant = ["Palms, backs, thumbs, tips", "Round 2: palms, backs, thumbs, tips"];
+    el("wstart").disabled = true; el("wstop").disabled = false; bar.value = 0;
+    el("washread").textContent = chant[0]; say("Scrub. Round 1 of the chant.");
+    T.wash = setInterval(function () {
+      left--; bar.value = 20 - left; bar.textContent = (20 - left) + " of 20 seconds";
+      el("washtime").textContent = left + " seconds left";
+      if (left === 10) { el("washread").textContent = chant[1]; say("Round 2 of the chant."); }
+      if (left <= 0) { clearInterval(T.wash); T.wash = null; el("washread").textContent = "Rinse and pat dry."; el("washtime").textContent = "20 seconds done"; say("20 seconds done. Rinse and pat dry."); el("wstart").disabled = false; el("wstop").disabled = true; el("wstart").textContent = "Wash again"; el("wstart").focus(); }
+    }, 1000);
+  }
+  function stopWash() {
+    clearInterval(T.wash); T.wash = null; el("washread").textContent = "Stopped."; el("washtime").textContent = "Stopped"; el("wstart").disabled = false; el("wstop").disabled = true; el("wstart").focus();
+  }
+  function resetSteps() {
+    var s = [];
+    for (var i = 0; i < 3; i++) { s.push({ t: "Breathe in", s: 4, c: "in" }); s.push({ t: "Breathe out", s: 6, c: "out" }); }
+    s.push({ t: "Shake it out", s: 15, c: "hold", sub: "Hands, shoulders, then your whole body." });
+    s.push({ t: "Hand on heart", s: 15, c: "hold", sub: "Name one thing you like." });
+    return s;
+  }
+  function totalLeft() { var t = R.left; for (var j = R.i + 1; j < R.steps.length; j++) t += R.steps[j].s; return t; }
+  function showStep() {
+    var st = R.steps[R.i], b = el("breath");
+    el("resetread").textContent = st.t;
+    var body = b.querySelector(".balloon-body");
+    if (body) body.style.transitionDuration = (st.c === "hold" ? 1.5 : st.s) + "s";
+    b.classList.toggle("in", st.c === "in");
+    b.classList.toggle("hold", st.c === "hold");
+    say(st.t + (st.sub ? ". " + st.sub : ""));
+  }
+  function resetTick() {
+    if (R.paused) return;
+    R.left--;
+    el("resettime").textContent = totalLeft() + " seconds";
+    if (R.left <= 0) {
+      R.i++;
+      if (R.i >= R.steps.length) { resetEnd(true); return; }
+      R.left = R.steps[R.i].s; showStep();
+    }
+  }
+  function startReset() {
+    R.steps = resetSteps(); R.i = 0; R.left = R.steps[0].s; R.paused = false;
+    el("rstart").disabled = true; el("rpause").disabled = false; el("rstop").disabled = false; el("rpause").textContent = "Pause";
+    el("resettime").textContent = "60 seconds"; showStep();
+    T.reset = setInterval(resetTick, 1000);
+  }
+  function pauseReset() {
+    R.paused = !R.paused; el("rpause").textContent = R.paused ? "Resume" : "Pause";
+    el("resetread").textContent = R.paused ? "Paused" : R.steps[R.i].t; say(R.paused ? "Paused" : "Resumed");
+  }
+  function resetEnd(finished) {
+    clearInterval(T.reset); T.reset = null;
+    el("breath").classList.remove("in", "hold");
+    el("resetread").textContent = finished ? "Welcome back." : "Stopped.";
+    el("resettime").textContent = finished ? "60 seconds done" : "Stopped";
+    say(finished ? "Reset done. Welcome back." : "Stopped.");
+    el("rstart").disabled = false; el("rpause").disabled = true; el("rstop").disabled = true; el("rstart").textContent = "Start again"; el("rstart").focus();
+  }
+
+  /* ---------- events ---------- */
+  var main = document.getElementById("main");
+  document.getElementById("modlist").addEventListener("click", function (e) { var b = e.target.closest("[data-go]"); if (b) go(b.dataset.go, true); });
+  main.addEventListener("click", function (e) {
+    var g = e.target.closest("[data-go]"); if (g) { go(g.dataset.go, true); return; }
+    var j = e.target.closest("[data-jump]");
+    if (j) { e.preventDefault(); var fs = document.getElementById(j.dataset.jump); var r = fs.querySelector("input"); fs.scrollIntoView({ block: "center" }); if (r) r.focus(); return; }
+    var b = e.target.closest("[data-act]"); if (!b) return;
+    var a = b.dataset.act;
+    if (a === "openall") { var ds = main.querySelectorAll("#lessons details"), anyClosed = Array.prototype.some.call(ds, function (d) { return !d.open; }); ds.forEach(function (d) { d.open = anyClosed; }); b.textContent = anyClosed ? "Close all lessons" : "Open all lessons"; }
+    else if (a === "done0") { S.done[0] = true; save(); renderHeader(); renderNav(); say("Module 0 done. Your stem has grown."); renderModule(false); var nx = main.querySelector('.pager [data-go="1"]'); if (nx) nx.focus(); }
+    else if (a === "retake") retake(b.dataset.key);
+    else if (a === "count") startCount();
+    else if (a === "tap") { P.n++; el("tapcount").textContent = P.n + " counted"; }
+    else if (a === "pstart") pulseStart();
+    else if (a === "pstop") pulseEnd(false);
+    else if (a === "ptype") {
+      var tin = el("ptyped"), tv = parseInt(tin.value, 10), terr = el("ptyped-err");
+      if (!(tv >= 1 && tv <= 150)) { tin.setAttribute("aria-invalid", "true"); terr.hidden = false; tin.focus(); return; }
+      tin.removeAttribute("aria-invalid"); terr.hidden = true;
+      var tm = document.querySelector('input[name="mode"]:checked'); P.mode = tm ? tm.value : "pulse";
+      P.n = tv; el("tapcount").textContent = tv + " counted"; pulseEnd(true);
+    }
+    else if (a === "wstart") startWash();
+    else if (a === "wstop") stopWash();
+    else if (a === "rstart") startReset();
+    else if (a === "rpause") pauseReset();
+    else if (a === "rstop") resetEnd(false);
+    else if (a === "logadd") {
+      var c = document.querySelector('input[name="comfort"]:checked'), vibe = el("vibe").value.trim();
+      if (!P.last.pulse && !P.last.breaths && !c && !vibe) { el("logmsg").textContent = "Count a pulse or breaths, or pick a comfort score, before adding an entry."; return; }
+      S.log.unshift({ when: new Date().toLocaleString(undefined, { month: "short", day: "numeric", hour: "numeric", minute: "2-digit" }), pulse: P.last.pulse || "", breaths: P.last.breaths || "", comfort: c ? c.value : "", vibe: vibe });
+      save(); P.last = {}; el("vibe").value = ""; if (c) c.checked = false;
+      el("logtable").innerHTML = logTable(); el("logmsg").textContent = "Added to your Vitals and Vibes log.";
+    }
+    else if (a === "logrm") { S.log.splice(Number(b.dataset.i), 1); save(); el("logtable").innerHTML = logTable(); say("Entry removed."); var lt = el("logtable").querySelector("button") || main.querySelector('[data-act="logadd"]'); lt.focus(); }
+    else if (a === "medrm") { S.meds.splice(Number(b.dataset.i), 1); save(); el("medtable").innerHTML = medTable(); say("Medicine removed."); (el("medtable").querySelector("button") || el("med-name")).focus(); }
+    else if (a === "ccrm") { S.circle.splice(Number(b.dataset.i), 1); save(); el("circlelist").innerHTML = circleList(); say("Removed from your Care Circle."); (el("circlelist").querySelector("button") || el("cc-name")).focus(); }
+    else if (a === "copybinder") {
+      var txt = binderText(), msg = el("copymsg"), showBox = function () { el("copywrap").hidden = false; var tb = el("copybox"); tb.value = txt; tb.focus(); tb.select(); msg.textContent = "Copying isn't available here. The text is selected below; copy it with your device's copy command."; };
+      try { navigator.clipboard.writeText(txt).then(function () { msg.textContent = "Copied. Paste it into a note, email, or document."; }, showBox); } catch (err) { showBox(); }
+    }
+  });
+  main.addEventListener("input", function (e) {
+    var t = e.target; if (!t.dataset || !t.dataset.bind) return;
+    var v = t.type === "checkbox" ? t.checked : t.value;
+    setPath(t.dataset.bind, v); save();
+    if (t.dataset.bind.indexOf("s3.") === 0) el("s3result").textContent = s3Text();
+    if (t.dataset.bind === "cert") { var cn = el("certname"); if (cn) cn.textContent = t.value || "Your name here"; }
+  });
+  main.addEventListener("submit", function (e) {
+    e.preventDefault();
+    var f = e.target, kind = f.dataset.form;
+    if (kind === "quiz") grade(f);
+    else if (kind === "med") {
+      var nm = el("med-name"), err = el("med-name-err");
+      if (!nm.value.trim()) { nm.setAttribute("aria-invalid", "true"); err.hidden = false; nm.focus(); return; }
+      nm.removeAttribute("aria-invalid"); err.hidden = true;
+      S.meds.push({ name: nm.value.trim(), for: el("med-for").value.trim(), amt: el("med-amt").value.trim(), when: el("med-when").value.trim(), how: el("med-how").value.trim(), who: el("med-who").value.trim() });
+      save(); f.reset(); el("medtable").innerHTML = medTable(); say("Added to your Med Map."); nm.focus();
+    } else if (kind === "circle") {
+      var n = el("cc-name"), k = el("cc-ask"), bad = null;
+      [[n, "cc-name-err"], [k, "cc-ask-err"]].forEach(function (p) { var empty = !p[0].value.trim(); if (empty) p[0].setAttribute("aria-invalid", "true"); else p[0].removeAttribute("aria-invalid"); el(p[1]).hidden = !empty; if (empty && !bad) bad = p[0]; });
+      if (bad) { bad.focus(); return; }
+      S.circle.push({ name: n.value.trim(), ask: k.value.trim() }); save(); f.reset(); el("circlelist").innerHTML = circleList(); say("Added to your Care Circle."); n.focus();
+    }
+  });
+  document.querySelector(".seg").addEventListener("click", function (e) { var b = e.target.closest("[data-size]"); if (!b) return; S.size = Number(b.dataset.size); save(); renderHeader(); });
+  el("clearbtn").addEventListener("click", function () { el("clearrow").hidden = true; el("confirmrow").hidden = false; el("clearno").focus(); });
+  el("clearno").addEventListener("click", function () { el("confirmrow").hidden = true; el("clearrow").hidden = false; el("clearbtn").focus(); });
+  el("clearyes").addEventListener("click", function () {
+    try { localStorage.removeItem(KEY); } catch (e) {}
+    var size = S.size; S = defaults(); S.size = size; save();
+    el("confirmrow").hidden = true; el("clearrow").hidden = false;
+    renderHeader(); renderNav(); renderModule(true); say("Everything on this device was cleared.");
+  });
+  el("skiplink").addEventListener("click", function (e) { e.preventDefault(); var t = el("mtitle") || main; t.focus(); t.scrollIntoView({ block: "start" }); });
+  function fromHash() { var m = /^#m([0-6])$/.exec(location.hash); return m ? Number(m[1]) : null; }
+  window.addEventListener("hashchange", function () { var n = fromHash(); if (n != null) go(n, true); });
+
+  /* ---------- boot ---------- */
+  var h0 = fromHash(); if (h0 != null) S.cur = h0;
+  document.getElementById("continuebtn").addEventListener("click", function () { var nx = nextModule(); go(nx === null ? 6 : nx, true); });
+  renderHeader(); renderNav(); renderModule(false);
+})();
+</script>
+
+<aside id="gsc-next" style="margin:40px auto 0;max-width:780px;padding:20px 16px 28px;font:500 16px/1.5 'Work Sans',-apple-system,'Segoe UI',sans-serif;color:#14213D;background:#D5F9DE;border-top:2px dashed rgba(20,33,61,.3);display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between"><span>Want word when something new opens, or to book us?</span><span style="display:flex;flex-wrap:wrap;gap:8px"><a href="https://tally.so/r/je6qB4?interest=palliative-pal-companion&amp;source=page" style="display:inline-block;padding:10px 18px;border-radius:999px;background:#14213D;color:#F5B700;text-decoration:none;font-weight:600">Join the email list</a><a href="../../catalog/" style="display:inline-block;padding:10px 18px;border-radius:999px;border:1.5px solid #14213D;color:#14213D;text-decoration:none;font-weight:600">See everything we offer</a></span></aside>
+</body></html>
