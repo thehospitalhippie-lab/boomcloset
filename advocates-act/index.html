@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Advocate's Act</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,500;0,600;1,500;1,600&family=Work+Sans:wght@400;500;600&family=Caveat:wght@500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* Golden Soul Circus palette v2 ("stacking cups"). Layout: one 780px left-aligned column; bright scalloped bands alternate with mint breathing room. */
+:root{
+  --blue:#4392F1; --amber:#F5B700; --brick:#D00000; --mint:#D5F9DE; --rouge:#E87EA1; --rouge-deep:#B02E5E; --aqua:#5BC5CB; --ink:#14213D; --white:#FFFFFF;
+  --ink-18:rgba(20,33,61,.18); --ink-70:rgba(20,33,61,.70); --ink-75:rgba(20,33,61,.75);
+  --white-28:rgba(255,255,255,.28); --white-50:rgba(255,255,255,.50); --white-55:rgba(255,255,255,.55);
+  --page:var(--mint); --surface:var(--white); --text:var(--ink); --text-soft:rgba(20,33,61,.74); --line:var(--ink-18);
+  --accent-text:var(--rouge-deep); --focus:var(--ink); --btn-bg:var(--ink); --btn-fg:var(--amber);
+  --field-bg:var(--surface); --field-fg:var(--text); --field-line:rgba(20,33,61,.55); --field-placeholder:var(--ink-75);
+  --shadow-card:0 1px 0 rgba(20,33,61,.18), 0 10px 26px -18px rgba(20,33,61,.5);
+  --font-display:Fraunces, Georgia, "Times New Roman", serif;
+  --font-body:"Work Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-script:Caveat, "Comic Sans MS", cursive;
+  --font-mono:"IBM Plex Mono", ui-monospace, monospace;
+  --space-1:4px; --space-2:8px; --space-3:12px; --space-4:16px; --space-5:24px; --space-6:32px; --space-7:48px; --space-8:64px;
+  --section-y:80px; --section-y-tight:56px; --content-max:780px; --gutter:24px;
+  --r-xs:2px; --r-sm:10px; --r-md:14px; --r-pill:999px; --r-round:50%;
+  --bw-hair:1px; --bw:1.5px; --bw-strong:2px;
+  --fs-xs:.8rem; --fs-sm:.92rem; --fs-base:1.06rem; --fs-md:1.25rem;
+  --fs-lg:clamp(1.3rem, 3.5vw, 1.65rem); --fs-xl:clamp(1.8rem, 4.4vw, 2.4rem); --fs-2xl:clamp(2rem, 5.5vw, 3.1rem);
+  --fs-script:1.55rem; --fs-script-sm:1.35rem;
+  --dur-fast:160ms; --dur-med:320ms;
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --page:#101B2E; --surface:#1A2842; --text:#E4F8E9; --text-soft:rgba(228,248,233,.78); --line:rgba(228,248,233,.2);
+    --accent-text:#F4A3BE; --focus:var(--amber); --btn-bg:#E4F8E9; --btn-fg:#101B2E;
+    --field-line:rgba(228,248,233,.45); --field-placeholder:rgba(228,248,233,.7);
+    --shadow-card:0 1px 0 rgba(228,248,233,.2), 0 10px 26px -18px rgba(0,0,0,.6);
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --page:#101B2E; --surface:#1A2842; --text:#E4F8E9; --text-soft:rgba(228,248,233,.78); --line:rgba(228,248,233,.2);
+  --accent-text:#F4A3BE; --focus:var(--amber); --btn-bg:#E4F8E9; --btn-fg:#101B2E;
+  --field-line:rgba(228,248,233,.45); --field-placeholder:rgba(228,248,233,.7);
+  --shadow-card:0 1px 0 rgba(228,248,233,.2), 0 10px 26px -18px rgba(0,0,0,.6);
+  color-scheme:dark;
+}
+
+*{box-sizing:border-box;}
+html,body{margin:0;}
+body{background:var(--page); color:var(--text); font-family:var(--font-body); font-size:17px; line-height:1.55;}
+:focus-visible{outline:3px solid var(--focus); outline-offset:3px;}
+@media (prefers-reduced-motion: reduce){ *,*::before,*::after{animation:none !important; transition:none !important;} }
+a{color:inherit;}
+.wrap{max-width:var(--content-max); margin:0 auto; padding:0 var(--gutter);}
+section{padding:var(--section-y-tight) 0;}
+
+/* Type */
+h1,h2,h3{font-family:var(--font-display); font-weight:500; line-height:1.15; letter-spacing:-.01em; text-wrap:balance; margin:0 0 .5em;}
+h1{font-size:var(--fs-2xl); font-style:italic; max-width:15ch;}
+h2{font-size:var(--fs-xl);}
+h3{font-size:var(--fs-md);}
+p{margin:0 0 1em; max-width:62ch;}
+.lede{font-size:var(--fs-base); font-weight:500;}
+.soft{color:var(--text-soft);}
+.script{font-family:var(--font-script); font-size:var(--fs-script); line-height:1.25; color:var(--accent-text); margin:0 0 1em;}
+.script--sm{font-size:var(--fs-script-sm);}
+.eyebrow{font-family:var(--font-mono); font-size:var(--fs-xs); letter-spacing:.04em; text-transform:uppercase; margin:0 0 var(--space-3);}
+.small{font-size:var(--fs-sm);}
+
+/* Bands with the valance (tent hem) */
+.on-bright{color:var(--ink); --focus:var(--ink); --btn-bg:var(--ink); --btn-fg:var(--amber); --accent-text:var(--rouge-deep);
+  --field-bg:var(--white-55); --field-fg:var(--ink); --field-line:var(--ink-70); --field-placeholder:var(--ink-75);}
+.band{position:relative; z-index:1;}
+.band--blue{--valance:var(--blue); background:var(--blue);}
+.band--amber{--valance:var(--amber); background:var(--amber);}
+.band--rouge{--valance:var(--rouge); background:var(--rouge);}
+.band::after{content:""; position:absolute; left:0; right:0; top:100%; height:14px; pointer-events:none;
+  background:radial-gradient(circle at 14px 0, var(--valance) 13.5px, transparent 14px) 0 0/28px 14px repeat-x;}
+.band + section{padding-top:calc(var(--section-y-tight) + 14px);}
+
+/* Hero */
+.hero{padding-top:var(--space-8); padding-bottom:var(--space-7);}
+.hero .lede{max-width:52ch;}
+.hero-actions{display:flex; flex-wrap:wrap; gap:var(--space-3); margin-top:var(--space-5);}
+.sun{position:absolute; right:max(var(--gutter), calc((100% - var(--content-max))/2 + var(--gutter))); top:40px; width:96px; height:96px; opacity:.95;}
+@media (max-width:640px){ .sun{width:64px; height:64px; top:24px;} }
+
+/* Safety strip */
+.safety{background:var(--surface); border-left:6px solid var(--brick); border-radius:var(--r-md); box-shadow:var(--shadow-card); padding:var(--space-4) var(--space-5); display:flex; gap:var(--space-4); align-items:flex-start; margin-top:var(--space-6);}
+.safety p{margin:0;}
+@media (max-width:520px){ .safety{flex-direction:column; gap:var(--space-2);} }
+.safety strong{font-weight:600;}
+.tag{display:inline-block; font-family:var(--font-mono); font-size:var(--fs-xs); letter-spacing:.06em; padding:3px 9px; border-radius:var(--r-pill); white-space:nowrap;}
+.tag--brick{background:var(--brick); color:var(--white);}
+.tag--ink{background:var(--ink); color:var(--mint);}
+
+/* Buttons */
+.btn{display:inline-flex; align-items:center; justify-content:center; gap:var(--space-2); min-height:44px; padding:10px 18px;
+  border:var(--bw) solid transparent; border-radius:var(--r-pill); font-family:var(--font-body); font-size:var(--fs-sm); font-weight:600; line-height:1.2;
+  text-decoration:none; cursor:pointer; transition:background var(--dur-fast), color var(--dur-fast), border-color var(--dur-fast), transform var(--dur-fast);}
+.btn--primary{background:var(--btn-bg); color:var(--btn-fg); border-color:var(--btn-bg);}
+.btn--primary:hover{background:var(--amber); color:var(--ink); border-color:var(--amber);}
+.btn--outline{background:transparent; color:var(--text); border-color:var(--text);}
+.on-bright .btn--outline{color:var(--ink); border-color:var(--ink);}
+.btn--outline:hover{background:var(--btn-bg); color:var(--btn-fg); border-color:var(--btn-bg);}
+.btn--lg{padding:15px 28px; font-size:var(--fs-base);}
+.btn--tilt{transform:rotate(-1.5deg);}
+.btn--tilt:hover{transform:rotate(0) scale(1.03);}
+.btn--sm{min-height:36px; padding:6px 14px; font-size:var(--fs-xs);}
+
+/* Breathe */
+.breathe{display:grid; grid-template-columns:auto 1fr; gap:var(--space-6); align-items:center; margin-top:var(--space-5);}
+@media (max-width:560px){ .breathe{grid-template-columns:1fr; justify-items:start;} }
+.breath-ring{width:150px; height:150px; border-radius:var(--r-round); border:var(--bw-strong) dashed var(--text); display:grid; place-items:center; position:relative;}
+.breath-ball{width:56px; height:56px; border-radius:var(--r-round); background:var(--aqua); transition:transform 4s ease-in-out;}
+.breath-ball.in{transform:scale(2.3); transition-duration:4s;}
+.breath-ball.out{transform:scale(1); transition-duration:6s;}
+.breath-word{position:absolute; inset:0; display:grid; place-items:center; font-family:var(--font-display); font-style:italic; font-size:var(--fs-md); color:var(--ink); pointer-events:none;}
+.grounding{display:grid; grid-template-columns:repeat(3,1fr); gap:var(--space-3); margin-top:var(--space-6);}
+@media (max-width:640px){ .grounding{grid-template-columns:1fr;} }
+.ground-card{background:var(--surface); border-radius:var(--r-md); box-shadow:var(--shadow-card); padding:var(--space-4) var(--space-5); border-top:6px solid var(--c);}
+.ground-card h3{font-size:var(--fs-base); font-weight:600; margin-bottom:var(--space-1);}
+.ground-card p{font-size:var(--fs-sm); margin:0; color:var(--text-soft);}
+
+/* Triage */
+.pill-row{display:flex; flex-wrap:wrap; gap:10px;}
+.pill{min-height:44px; padding:10px 17px; background:var(--white-28); color:var(--ink); border:var(--bw) solid var(--ink-70); border-radius:var(--r-pill);
+  font-family:var(--font-body); font-size:var(--fs-sm); font-weight:500; cursor:pointer; text-align:left; transition:background var(--dur-fast), border-color var(--dur-fast), color var(--dur-fast);}
+.pill:hover{border-color:var(--ink); background:var(--white-50);}
+.pill[aria-pressed="true"]{background:var(--ink); border-color:var(--ink); color:var(--mint); font-weight:600;}
+.route{margin-top:var(--space-5); background:var(--white); color:var(--ink); border:var(--bw-strong) dashed var(--ink); border-radius:var(--r-md); padding:var(--space-5);}
+.route h3{color:var(--rouge-deep); margin-bottom:var(--space-2);}
+.route p{margin-bottom:var(--space-3);}
+.route ol{margin:0 0 var(--space-3); padding-left:1.2em;}
+.route li{margin-bottom:var(--space-1);}
+
+/* Progress */
+.progress{display:flex; align-items:center; gap:var(--space-4); flex-wrap:wrap; margin:var(--space-5) 0 var(--space-6); background:var(--surface); border-radius:var(--r-pill); padding:10px 20px; box-shadow:var(--shadow-card); width:fit-content; max-width:100%;}
+.cups{display:flex; gap:6px;}
+.cups span{width:16px; height:16px; border-radius:var(--r-round); border:var(--bw) solid var(--text); background:transparent; transition:background var(--dur-med);}
+.cups span.on:nth-child(3n+1){background:var(--rouge); border-color:var(--rouge);}
+.cups span.on:nth-child(3n+2){background:var(--aqua); border-color:var(--aqua);}
+.cups span.on:nth-child(3n){background:var(--amber); border-color:var(--amber);}
+.progress-text{font-size:var(--fs-sm); font-weight:600; font-variant-numeric:tabular-nums;}
+
+/* Ticket acts */
+.acts{display:flex; flex-direction:column; gap:var(--space-5);}
+.ticket{--stub-w:78px; position:relative; display:grid; grid-template-columns:var(--stub-w) 1fr; background:var(--surface); border-radius:var(--r-md); box-shadow:var(--shadow-card); scroll-margin-top:24px;}
+.ticket::before,.ticket::after{content:""; position:absolute; left:calc(var(--stub-w) - 10px); width:20px; height:20px; border-radius:var(--r-round); background:var(--page); z-index:2;}
+.ticket::before{top:-10px;} .ticket::after{bottom:-10px;}
+.ticket-stub{background:var(--stub); color:var(--ink); border-radius:var(--r-md) 0 0 var(--r-md); display:flex; flex-direction:column; align-items:center; gap:var(--space-2); padding-top:var(--space-5);}
+.ticket-stub svg{width:36px; height:36px; transform:rotate(-6deg);}
+.stub-num{font-family:var(--font-mono); font-size:var(--fs-xs); font-weight:500;}
+.ticket-body{min-width:0; padding:22px 22px 22px var(--space-5); border-left:var(--bw-strong) dashed var(--line);}
+.ticket h3{margin-bottom:var(--space-1);}
+.ticket .when{font-family:var(--font-mono); font-size:var(--fs-xs); letter-spacing:.04em; text-transform:uppercase; color:var(--text-soft); margin:0 0 var(--space-2);}
+.ticket .script{margin:0 0 var(--space-2);}
+.ticket-actions{display:flex; align-items:center; gap:var(--space-3); margin-top:var(--space-3); flex-wrap:wrap;}
+.ticket.done .ticket-stub{box-shadow:inset 0 0 0 3px var(--ink);}
+.done-badge{display:none;}
+.ticket.done .done-badge{display:inline-block;}
+.t0{--stub:var(--aqua);} .t1{--stub:var(--amber);} .t2{--stub:var(--rouge);} .t3{--stub:var(--blue);} .t4{--stub:var(--aqua);} .t5{--stub:var(--rouge);}
+@media (max-width:440px){ .ticket{--stub-w:56px;} .ticket-stub svg{width:28px; height:28px;} .ticket-body{padding:20px 16px 20px 18px;} }
+
+.acc-btn{display:inline-flex; align-items:center; gap:10px; background:none; border:0; padding:0; font:inherit; font-weight:600; font-size:var(--fs-sm); color:var(--text); cursor:pointer; min-height:44px;}
+.acc-ring{position:relative; width:36px; height:36px; border:var(--bw) dashed var(--text); border-radius:var(--r-round); flex:0 0 auto; transition:background var(--dur-fast), border-color var(--dur-fast);}
+.acc-ring::before,.acc-ring::after{content:""; position:absolute; top:50%; left:50%; background:var(--text); border-radius:2px; transform:translate(-50%,-50%); transition:transform 260ms;}
+.acc-ring::before{width:13px; height:2.5px;} .acc-ring::after{width:2.5px; height:13px;}
+.acc-btn[aria-expanded="true"] .acc-ring{background:var(--amber); border:var(--bw) solid var(--amber);}
+.acc-btn[aria-expanded="true"] .acc-ring::before,.acc-btn[aria-expanded="true"] .acc-ring::after{background:var(--ink);}
+.acc-btn[aria-expanded="true"] .acc-ring::after{transform:translate(-50%,-50%) rotate(90deg);}
+.acc-btn:hover .acc-ring{background:var(--amber); border-color:var(--amber);}
+.acc-btn:hover .acc-ring::before,.acc-btn:hover .acc-ring::after{background:var(--ink);}
+.panel{margin-top:var(--space-3);}
+.panel[hidden]{display:none;}
+
+.checks{list-style:none; margin:0 0 var(--space-4); padding:0; display:flex; flex-direction:column; gap:var(--space-2);}
+.checks label{display:grid; grid-template-columns:24px 1fr; gap:10px; align-items:start; cursor:pointer; font-size:var(--fs-sm);}
+.checks input{width:20px; height:20px; margin:2px 0 0; accent-color:var(--rouge-deep);}
+.checks input:checked + span{color:var(--text-soft); text-decoration:line-through; text-decoration-thickness:1px;}
+.say{background:var(--page); border:var(--bw) dashed var(--line); border-radius:var(--r-sm); padding:var(--space-3) var(--space-4); margin:0 0 var(--space-3);}
+.say .eyebrow{margin-bottom:var(--space-1);}
+.say p{font-family:var(--font-display); font-size:var(--fs-base); line-height:1.45; margin:0 0 var(--space-2);}
+.cheer{font-family:var(--font-script); font-size:var(--fs-script-sm); color:var(--accent-text); margin:var(--space-2) 0 0; min-height:1.2em;}
+
+/* Clock */
+.clock-grid{display:grid; grid-template-columns:1fr 1fr; gap:var(--space-4); margin-top:var(--space-5);}
+@media (max-width:600px){ .clock-grid{grid-template-columns:1fr;} }
+.field-wrap{display:flex; flex-direction:column; gap:5px;}
+.field-label{font-size:var(--fs-sm); font-weight:600;}
+.field{min-height:44px; padding:10px 14px; background:var(--field-bg); color:var(--field-fg); border:var(--bw) solid var(--field-line); border-radius:var(--r-sm); font-family:var(--font-body); font-size:var(--fs-sm); width:100%;}
+.on-bright .field{color-scheme:light;}
+.field::placeholder{color:var(--field-placeholder);}
+textarea.field{resize:vertical; line-height:1.45; min-height:96px;}
+.clock-out{margin-top:var(--space-5); display:grid; grid-template-columns:repeat(2,1fr); gap:var(--space-3);}
+@media (max-width:600px){ .clock-out{grid-template-columns:1fr;} }
+.clock-tile{background:var(--white-55); border:var(--bw-strong) dashed var(--ink-70); border-radius:var(--r-md); padding:var(--space-4);}
+.clock-tile .eyebrow{margin-bottom:var(--space-1);}
+.clock-tile .big{font-family:var(--font-display); font-size:var(--fs-lg); font-weight:600; line-height:1.2; margin:0; font-variant-numeric:tabular-nums;}
+.clock-tile .small{margin:var(--space-1) 0 0;}
+.clock-tile--hot{background:var(--ink); color:var(--mint); border:var(--bw-strong) solid var(--ink);}
+.clock-tile--hot .small{color:rgba(213,249,222,.85);}
+
+/* Letter builder */
+.builder{display:grid; grid-template-columns:1fr 1fr; gap:var(--space-4); margin-top:var(--space-5);}
+.builder .full{grid-column:1 / -1;}
+@media (max-width:600px){ .builder{grid-template-columns:1fr;} }
+.letter{margin-top:var(--space-5); background:var(--white); color:var(--ink); border:var(--bw-strong) dashed var(--ink); border-radius:var(--r-md); padding:var(--space-5);}
+.letter pre{white-space:pre-wrap; word-wrap:break-word; font-family:var(--font-body); font-size:var(--fs-sm); line-height:1.55; margin:0 0 var(--space-4);}
+.letter .btn--primary{--btn-bg:var(--ink); --btn-fg:var(--amber);}
+
+/* Directory */
+.dir{display:grid; grid-template-columns:repeat(2,1fr); gap:var(--space-4); margin-top:var(--space-5);}
+@media (max-width:600px){ .dir{grid-template-columns:1fr;} }
+.dir-card{background:var(--surface); border-radius:var(--r-md); box-shadow:var(--shadow-card); padding:var(--space-4) var(--space-5);}
+.dir-card h3{font-size:var(--fs-base); font-weight:600; margin-bottom:var(--space-1);}
+.dir-card p{font-size:var(--fs-sm); margin:0 0 var(--space-2); color:var(--text-soft);}
+.dir-card .how{color:var(--text); font-weight:500; margin:0;}
+.dir-card a{color:var(--accent-text); font-weight:600;}
+
+/* Footer */
+.foot{padding:var(--section-y-tight) 0 var(--space-8);}
+.foot h2{font-style:italic;}
+.foot .fine{font-size:var(--fs-xs); font-style:italic; color:var(--ink-75); margin-top:var(--space-5);}
+.wordmark{font-family:var(--font-display); font-weight:600; font-size:var(--fs-base);}
+.wordmark span{color:var(--rouge-deep);}
+
+.sr-only{position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); border:0;}
+.toast{position:fixed; left:50%; bottom:20px; transform:translateX(-50%) translateY(140%); background:var(--ink); color:var(--mint); padding:12px 20px; border-radius:var(--r-pill); font-weight:600; font-size:var(--fs-sm); box-shadow:var(--shadow-card); transition:transform var(--dur-med), visibility var(--dur-med); visibility:hidden; z-index:10; max-width:calc(100% - 32px); text-align:center;}
+.toast.show{transform:translateX(-50%) translateY(0); visibility:visible;}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<header class="band band--blue on-bright">
+  <svg class="sun" viewBox="0 0 100 100" aria-hidden="true">
+    <g stroke="#14213D" stroke-width="3" stroke-linecap="round">
+      <path d="M50 6v12M50 82v12M6 50h12M82 50h12M19 19l8 8M73 73l8 8M19 81l8-8M73 27l8-8"/>
+    </g>
+    <circle cx="50" cy="50" r="22" fill="#F5B700" stroke="#14213D" stroke-width="3"/>
+    <circle cx="42" cy="47" r="2.5" fill="#14213D"/><circle cx="58" cy="47" r="2.5" fill="#14213D"/>
+    <path d="M42 56q8 7 16 0" fill="none" stroke="#14213D" stroke-width="3" stroke-linecap="round"/>
+    <circle cx="37" cy="55" r="3" fill="#E87EA1"/><circle cx="63" cy="55" r="3" fill="#E87EA1"/>
+  </svg>
+  <div class="wrap hero">
+    <p class="eyebrow">Golden Soul Circus · The Advocate's Act</p>
+    <h1>Your person needs a ringleader. Today, that's you.</h1>
+    <p class="lede">A step-by-step guide for patients and caregivers in Tennessee who need to complain about medical care, from the bedside all the way to a lawyer. One act at a time. Shaky hands welcome.</p>
+    <p class="script">You don't have to be calm. You just have to be next.</p>
+    <div class="hero-actions">
+      <a class="btn btn--primary btn--lg btn--tilt" href="#breathe">Start with one breath</a>
+      <a class="btn btn--outline btn--lg" href="#where">Skip to where I am</a>
+    </div>
+  </div>
+</header>
+
+<!-- BREATHE -->
+<section id="breathe">
+  <div class="wrap">
+    <div class="safety" role="note">
+      <span class="tag tag--brick">RIGHT NOW</span>
+      <p><strong>If your person is in danger this minute,</strong> skip the guide. Ask any staff member for the <strong>rapid response team</strong>, or call <strong>911</strong> if you're not in a hospital.</p>
+    </div>
+
+    <h2 style="margin-top:var(--space-7)">First, put your own oxygen mask on.</h2>
+    <p>When you're scared or furious about someone you love, your body floods. Your heart races, your words scramble, and the thinking part of your brain goes quiet. That's biology, not weakness. It also makes it hard to argue for anybody.</p>
+    <p class="soft">Two minutes here buys you a clearer voice for the next hour. Nobody is going to fire you from caregiving for taking them.</p>
+
+    <div class="breathe">
+      <div class="breath-ring" aria-hidden="true">
+        <div class="breath-ball" id="ball"></div>
+        <div class="breath-word" id="breathWord">ready</div>
+      </div>
+      <div>
+        <h3>Breathe with the big top</h3>
+        <p class="small soft">Six slow rounds: in for 4, out for 6. A longer out-breath tells your body the lion is back in its cage.</p>
+        <button class="btn btn--primary" id="breatheBtn" type="button">Breathe with me (1 minute)</button>
+        <p class="small soft" id="breathStatus" role="status" aria-live="polite" style="margin-top:var(--space-2)"></p>
+      </div>
+    </div>
+
+    <div class="grounding">
+      <div class="ground-card" style="--c:var(--rouge)">
+        <h3>Feet on the floor</h3>
+        <p>Press both feet down and name three things you can see. You're here, in this room.</p>
+      </div>
+      <div class="ground-card" style="--c:var(--aqua)">
+        <h3>Water, then words</h3>
+        <p>A sip of water and one sentence written down: the single thing you need fixed most.</p>
+      </div>
+      <div class="ground-card" style="--c:var(--amber)">
+        <h3>Call in a sidekick</h3>
+        <p>Text one person to come or stay on the phone. They take notes; you do the talking.</p>
+      </div>
+    </div>
+    <p class="small soft" style="margin-top:var(--space-4)">Caregiver comfort, not medical advice. If the flood doesn't settle or you feel unsafe, reach out to your own doctor or call or text 988.</p>
+  </div>
+</section>
+
+<!-- WHERE ARE YOU -->
+<header class="band band--amber on-bright" id="where">
+  <div class="wrap" style="padding-top:var(--section-y-tight); padding-bottom:var(--space-7);">
+    <p class="eyebrow">Where are you in the show?</p>
+    <h2>Pick the one that sounds like today.</h2>
+    <p>We'll point you to your first act. You can always come back for the others.</p>
+    <div class="pill-row" role="group" aria-label="Where are you right now">
+      <button class="pill" type="button" data-route="now" aria-pressed="true">It's happening right now</button>
+      <button class="pill" type="button" data-route="after" aria-pressed="false">It happened and I'm upset</button>
+      <button class="pill" type="button" data-route="stuck" aria-pressed="false">I complained and got nowhere</button>
+      <button class="pill" type="button" data-route="harm" aria-pressed="false">Someone was seriously hurt or died</button>
+    </div>
+    <div class="route" id="route" role="status" aria-live="polite"></div>
+  </div>
+</header>
+
+<!-- ACTS -->
+<section id="acts">
+  <div class="wrap">
+    <p class="eyebrow">The six acts</p>
+    <h2>Climb one rung at a time.</h2>
+    <p>Each act opens with a plus. Tick the boxes as you go. Your progress stays on this device only.</p>
+    <p class="script script--sm">The lawsuit clock runs from day one, so if someone was badly hurt, work Acts 4 and 5 alongside the rest.</p>
+
+    <div class="progress" aria-label="Acts completed">
+      <div class="cups" id="cups"><span></span><span></span><span></span><span></span><span></span><span></span></div>
+      <span class="progress-text" id="progressText">0 of 6 acts done</span>
+    </div>
+    <p class="sr-only" id="cheerLive" role="status" aria-live="polite"></p>
+
+    <div class="acts" id="actList"></div>
+  </div>
+</section>
+
+<!-- CLOCK -->
+<header class="band band--rouge on-bright" id="clock">
+  <div class="wrap" style="padding-top:var(--section-y-tight); padding-bottom:var(--space-7);">
+    <p class="eyebrow">The lawsuit clock</p>
+    <h2>Know your dates before you need them.</h2>
+    <p>In Tennessee you generally have <strong>one year</strong> from an injury, or from when you found it, to start a health care lawsuit. Complaints and grievances don't pause it. Put in the date and see your rough timeline.</p>
+    <div class="clock-grid">
+      <div class="field-wrap">
+        <label class="field-label" for="injDate">Date of the injury or the bad care</label>
+        <input class="field" type="date" id="injDate" value="2026-10-01">
+      </div>
+      <div class="field-wrap">
+        <label class="field-label" for="discDate">Date you found out, if later (optional)</label>
+        <input class="field" type="date" id="discDate">
+      </div>
+    </div>
+    <div class="clock-out" id="clockOut" aria-live="polite"></div>
+    <p class="small" style="margin-top:var(--space-4)">A rough guide from Tenn. Code Ann. § 29-26-116 and -121, not legal advice. Exceptions exist (minors, hidden errors, government hospitals). Let a Tennessee lawyer confirm your real dates.</p>
+  </div>
+</header>
+
+<!-- LETTER -->
+<section id="letter">
+  <div class="wrap">
+    <p class="eyebrow">Act 2 helper</p>
+    <h2>Write the grievance letter in five minutes.</h2>
+    <p>Fill in what you can. Short and factual wins. The letter updates as you type, then copy it into an email or the patient portal.</p>
+    <form class="builder" id="builder" onsubmit="return false">
+      <div class="field-wrap"><label class="field-label" for="fYou">Your name</label><input class="field" id="fYou" placeholder="Sam Rivera"></div>
+      <div class="field-wrap"><label class="field-label" for="fRel">You are the patient's…</label><input class="field" id="fRel" placeholder="daughter and health care agent"></div>
+      <div class="field-wrap"><label class="field-label" for="fPt">Patient's name</label><input class="field" id="fPt" placeholder="June Rivera"></div>
+      <div class="field-wrap"><label class="field-label" for="fFac">Facility and unit</label><input class="field" id="fFac" placeholder="Riverside Hospital, 4 West, room 412"></div>
+      <div class="field-wrap full"><label class="field-label" for="fWhat">What happened (dates, times, names)</label><textarea class="field" id="fWhat" placeholder="On Nov. 3 at about 9 pm, Mom's call light went unanswered for 50 minutes and she fell trying to reach the bathroom. Nurse T. said they were short-staffed."></textarea></div>
+      <div class="field-wrap full"><label class="field-label" for="fAsk">What you want them to do</label><textarea class="field" id="fAsk" placeholder="A care conference with the charge nurse and attending by Friday; a fall-prevention plan in writing; a review of the call-light delay."></textarea></div>
+    </form>
+    <div class="letter">
+      <p class="eyebrow">Your letter</p>
+      <pre id="letterOut"></pre>
+      <button class="btn btn--primary" type="button" id="copyLetter">Copy the letter</button>
+    </div>
+  </div>
+</section>
+
+<!-- DIRECTORY -->
+<section id="who" style="padding-top:0">
+  <div class="wrap">
+    <p class="eyebrow">Who to call in Tennessee</p>
+    <h2>The referees.</h2>
+    <p>They can investigate, cite and discipline. They can't award money, so pair them with a lawyer if someone was really hurt.</p>
+    <div class="dir">
+      <div class="dir-card"><h3>Health Facilities Commission</h3><p>Hospitals, nursing homes, assisted living, home health and hospice.</p><p class="how"><a href="https://www.tn.gov/hfc/division-of-licensure-and-regulation/filing-a-complaint.html">File a complaint online</a> or mail 502 Deaderick St., 9th Floor, Nashville 37243</p></div>
+      <div class="dir-card"><h3>Dept. of Health licensing boards</h3><p>A specific doctor, nurse, pharmacist or therapist. You can file anonymously.</p><p class="how"><a href="https://www.tn.gov/health/health-program-areas/health-professional-boards/report-a-concern.html">Report a concern</a> · 1-800-852-2187</p></div>
+      <div class="dir-card"><h3>Acentra Health (Medicare)</h3><p>Medicare patients: doctors review whether care met standards; fast appeals if discharged too soon.</p><p class="how"><a href="https://acentraqio.com/bene/qualityofcarecomp">Quality-of-care complaint</a> · they'll help you write it</p></div>
+      <div class="dir-card"><h3>The Joint Commission</h3><p>Safety concerns at accredited hospitals and agencies. Can be anonymous.</p><p class="how"><a href="https://www.jointcommission.org/resources/patient-safety-topics/report-a-patient-safety-concern-or-complaint/">Online form</a>, about two pages max</p></div>
+      <div class="dir-card"><h3>Long-Term Care Ombudsman</h3><p>A free advocate for residents of nursing homes and assisted living.</p><p class="how">877-236-0013 routes you to your district</p></div>
+      <div class="dir-card"><h3>HHS Office for Civil Rights</h3><p>Privacy breaches, records requests ignored, or discrimination.</p><p class="how">hhs.gov/ocr, usually within 180 days</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="band band--rouge on-bright">
+  <div class="wrap foot">
+    <h2>Everybody dies. Let's live first, and get good care while we do.</h2>
+    <p>You showed up for your person while your own heart was on fire. That's the whole act. Give yourself your flowers too.</p>
+    <p class="script">We're all walking each other home.</p>
+    <p class="wordmark">Golden Soul <span>Circus</span></p>
+    <p class="fine">Caregiver education from Nashville hospice nurses. Not legal or medical advice. Agency contacts and laws change; confirm deadlines with a Tennessee-licensed attorney. Checked November 2026.</p>
+  </div>
+</footer>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+(function(){
+  var store = {
+    get: function(){ try { return JSON.parse(localStorage.getItem('gsc-advocate-act') || '{}'); } catch(e){ return {}; } },
+    set: function(v){ try { localStorage.setItem('gsc-advocate-act', JSON.stringify(v)); } catch(e){} }
+  };
+
+  var icons = {
+    notebook:'<rect x="9" y="6" width="22" height="28" rx="3"/><path d="M14 13h12M14 19h12M14 25h7"/>',
+    megaphone:'<path d="M7 16v8h6l13 7V9l-13 7z"/><path d="M13 24l2 8h4l-1.5-6"/><path d="M30 15c2.5 2.5 2.5 7.5 0 10"/>',
+    envelope:'<rect x="6" y="10" width="28" height="20" rx="3"/><path d="M7 12l13 10 13-10"/>',
+    card:'<rect x="6" y="10" width="28" height="20" rx="3"/><path d="M6 16h28M11 24h8"/>',
+    lens:'<circle cx="17" cy="17" r="9"/><path d="M24 24l9 9"/>',
+    scales:'<path d="M20 7v26M13 33h14M8 12h24"/><path d="M8 12l-4 9h8zM32 12l-4 9h8z"/>'
+  };
+
+  var acts = [
+    { n:0, cls:'t0', icon:'notebook', title:'Start the paper trail', when:'Today, and every day after',
+      line:'Everything later runs on what you write down now.',
+      checks:['Start a log: date, time, who was there, what was said, what you asked for',
+              'Ask in writing for the complete medical record (they have 30 days)',
+              'Photograph injuries, conditions, whiteboards and name badges',
+              'Save discharge papers, bills, portal messages and texts in one folder',
+              'Write down witnesses: family, roommates, kind staff'],
+      say:'I\'m requesting a complete copy of [patient]\'s medical record, including nursing notes, the medication record and the audit trail, under the HIPAA right of access.',
+      cheer:'Paper trail started. Future-you just exhaled.' },
+    { n:1, cls:'t1', icon:'megaphone', title:'Speak up at the bedside', when:'Same day, same shift',
+      line:'Go up the chain one rung at a time: nurse, charge nurse, attending, house supervisor.',
+      checks:['Tell the bedside nurse the problem and the one thing you need',
+              'If it\'s not fixed soon, ask for the charge nurse',
+              'For a clinical disagreement, ask for the attending or provider on call',
+              'In a hospital, ask for the house supervisor (on duty 24/7)',
+              'Say "Please document that I asked" and note names and times'],
+      say:'I\'m worried about [patient]. I\'m seeing [what\'s wrong]. I need [specific thing] by [time]. Please document in the chart that I asked.',
+      cheer:'You spoke up in the room. That takes guts with a capital G.' },
+    { n:2, cls:'t2', icon:'envelope', title:'File a formal grievance', when:'Within a few days',
+      line:'Put it in writing to the patient advocate. A written complaint must get a written answer.',
+      checks:['Get the patient advocate\'s name and email',
+              'Send a one- or two-page letter (use the helper below)',
+              'Ask for a written response and a copy of their grievance policy',
+              'Mark your calendar 7 days out: that\'s the CMS norm for a reply or update',
+              'Keep a copy of everything you sent'],
+      say:'I\'d like to file this as a formal grievance, and I\'m requesting a written response.',
+      cheer:'It\'s in writing now. They have to write back.', link:'#letter', linkText:'Open the letter helper' },
+    { n:3, cls:'t3', icon:'card', title:'Pull the insurance lever', when:'Alongside Act 2',
+      line:'The insurer pays the bills, so it has leverage. Use it.',
+      checks:['Call member services on the insurance card and file a grievance or appeal',
+              'Medicare patient being discharged too soon? Call the number on the notice before leaving',
+              'TennCare? File with the plan named on the card',
+              'Billing mess? Ask for an itemized bill and dispute line by line in writing'],
+      say:'I want to file a grievance about the quality of care [patient] received at [facility] on [date]. Please send me a written response.',
+      cheer:'You pulled the money lever. Insurers listen.' },
+    { n:4, cls:'t4', icon:'lens', title:'Call in the referees', when:'When the facility stalls, or right away for serious harm',
+      line:'State agencies and accreditors can investigate, cite and discipline.',
+      checks:['Facility problem: file with the Health Facilities Commission',
+              'A specific clinician: file with the Department of Health board',
+              'On Medicare: file a quality-of-care complaint with Acentra Health',
+              'Nursing home or assisted living: call the long-term care ombudsman',
+              'Write down every complaint number you get'],
+      say:'I\'m filing a complaint about care at [facility] on [date]. I\'ve attached my timeline and the facility\'s response. Could you give me a complaint number?',
+      cheer:'The referees are watching. Nice juggling.', link:'#who', linkText:'See who to call' },
+    { n:5, cls:'t5', icon:'scales', title:'Talk to a lawyer', when:'Early. The clock runs from day one.',
+      line:'Tennessee usually gives you one year, with strict steps before you can sue.',
+      checks:['Check your dates with the lawsuit clock below',
+              'Book a free consult with a plaintiff-side health care liability lawyer',
+              'Bring your log, records, bills, grievance letter and any replies',
+              'Ask: What is my exact deadline? What\'s your fee and who pays case costs?',
+              'If they say no, ask in writing what deadline they see, then get a second opinion'],
+      say:'I need a consult about a possible health care liability claim in Tennessee. The injury happened on [date]. I have records and a timeline.',
+      cheer:'You protected the clock. That\'s love with a deadline.', link:'#clock', linkText:'Open the lawsuit clock' }
+  ];
+
+  var state = store.get();
+  var list = document.getElementById('actList');
+
+  function esc(s){ return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+
+  acts.forEach(function(a){
+    var art = document.createElement('article');
+    art.className = 'ticket ' + a.cls;
+    art.id = 'act-' + a.n;
+    var checks = a.checks.map(function(c, i){
+      var id = 'c' + a.n + '-' + i;
+      return '<li><label for="' + id + '"><input type="checkbox" id="' + id + '" data-act="' + a.n + '" data-i="' + i + '"><span>' + esc(c) + '</span></label></li>';
+    }).join('');
+    art.innerHTML =
+      '<div class="ticket-stub" aria-hidden="true"><svg viewBox="0 0 40 40" fill="none" stroke="#14213D" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">' + icons[a.icon] + '</svg><span class="stub-num">ACT ' + a.n + '</span></div>' +
+      '<div class="ticket-body">' +
+        '<p class="when">' + esc(a.when) + ' <span class="tag tag--ink done-badge">DONE</span></p>' +
+        '<h3>' + esc(a.title) + '</h3>' +
+        '<p class="soft" style="margin-bottom:0">' + esc(a.line) + '</p>' +
+        '<div class="ticket-actions"><button class="acc-btn" type="button" aria-expanded="false" aria-controls="p' + a.n + '"><span class="acc-ring" aria-hidden="true"></span>Steps and what to say</button>' +
+        (a.link ? '<a class="btn btn--outline btn--sm" href="' + a.link + '">' + esc(a.linkText) + '</a>' : '') + '</div>' +
+        '<div class="panel" id="p' + a.n + '" hidden>' +
+          '<ul class="checks">' + checks + '</ul>' +
+          '<div class="say"><p class="eyebrow">Say it like this</p><p>"' + esc(a.say) + '"</p><button class="btn btn--outline btn--sm" type="button" data-copy="' + a.n + '">Copy the words</button></div>' +
+        '</div>' +
+        '<p class="cheer" id="cheer' + a.n + '"></p>' +
+      '</div>';
+    list.appendChild(art);
+  });
+
+  function actDone(n){ var s = state[n] || []; return acts[n].checks.every(function(_, i){ return s[i]; }); }
+
+  function render(){
+    var count = 0;
+    acts.forEach(function(a){
+      var done = actDone(a.n);
+      if (done) count++;
+      document.getElementById('act-' + a.n).classList.toggle('done', done);
+      document.getElementById('cheer' + a.n).textContent = done ? a.cheer : '';
+      (state[a.n] || []).forEach(function(v, i){ var el = document.getElementById('c' + a.n + '-' + i); if (el) el.checked = !!v; });
+    });
+    var dots = document.querySelectorAll('#cups span');
+    dots.forEach(function(d, i){ d.classList.toggle('on', i < count); });
+    document.getElementById('progressText').textContent = count === 6 ? 'All 6 acts done. Take a bow.' : count + ' of 6 acts done';
+  }
+
+  list.addEventListener('change', function(e){
+    var t = e.target; if (!t.matches('input[type=checkbox]')) return;
+    var n = +t.dataset.act, i = +t.dataset.i;
+    var was = actDone(n);
+    state[n] = state[n] || []; state[n][i] = t.checked; store.set(state);
+    render();
+    if (!was && actDone(n)) { document.getElementById('cheerLive').textContent = acts[n].cheer; toast(acts[n].cheer); }
+  });
+
+  list.addEventListener('click', function(e){
+    var b = e.target.closest('.acc-btn');
+    if (b){ var p = document.getElementById(b.getAttribute('aria-controls')); var open = b.getAttribute('aria-expanded') === 'true'; b.setAttribute('aria-expanded', String(!open)); p.hidden = open; return; }
+    var c = e.target.closest('[data-copy]');
+    if (c){ copy(acts[+c.dataset.copy].say, 'Copied. Fill in the brackets and go.'); }
+  });
+
+  var toastEl = document.getElementById('toast'), tt;
+  function toast(msg){ toastEl.textContent = msg; toastEl.classList.add('show'); clearTimeout(tt); tt = setTimeout(function(){ toastEl.classList.remove('show'); }, 3200); }
+  function copy(text, msg){
+    try { navigator.clipboard.writeText(text).then(function(){ toast(msg); }, function(){ toast('Copy was blocked. Select the text and copy it by hand.'); }); }
+    catch(e){ toast('Copy was blocked. Select the text and copy it by hand.'); }
+  }
+
+  render();
+
+  /* Breathing */
+  var ball = document.getElementById('ball'), word = document.getElementById('breathWord'), bStatus = document.getElementById('breathStatus'), bBtn = document.getElementById('breatheBtn');
+  var timers = [];
+  bBtn.addEventListener('click', function(){
+    timers.forEach(clearTimeout); timers = [];
+    bBtn.disabled = true;
+    var t = 0;
+    for (var r = 0; r < 6; r++){
+      (function(r){
+        timers.push(setTimeout(function(){ ball.className = 'breath-ball in'; word.textContent = 'in'; bStatus.textContent = 'Round ' + (r + 1) + ' of 6. Breathe in for 4.'; }, t));
+        t += 4000;
+        timers.push(setTimeout(function(){ ball.className = 'breath-ball out'; word.textContent = 'out'; bStatus.textContent = 'Round ' + (r + 1) + ' of 6. Breathe out for 6.'; }, t));
+        t += 6000;
+      })(r);
+    }
+    timers.push(setTimeout(function(){ ball.className = 'breath-ball'; word.textContent = 'ready'; bStatus.textContent = 'That\'s six. You\'re back in the ring.'; bBtn.disabled = false; bBtn.textContent = 'Go again'; }, t));
+  });
+
+  /* Triage */
+  var routes = {
+    now:{ h:'Start with Act 1, right now.', steps:['Take three of those slow breaths.','Find the nurse or charge nurse and say the one thing you need.','Jot the time and names in your phone as you go (Act 0).','Not fixed? Ask for the house supervisor, or the rapid response team if they\'re getting worse.'], go:'#act-1', label:'Go to Act 1' },
+    after:{ h:'Start with Act 0, then Act 2.', steps:['Write down what happened while it\'s fresh.','Request the medical records in writing.','Send a formal grievance letter to the patient advocate.','File with the insurer at the same time (Act 3).'], go:'#act-0', label:'Go to Act 0' },
+    stuck:{ h:'Jump to Act 4. You\'ve earned a referee.', steps:['Gather your log and the facility\'s reply (or the silence).','File with the agency that fits: facility, clinician, Medicare or ombudsman.','Get a complaint number from each.','If there was real harm, check the lawsuit clock today.'], go:'#act-4', label:'Go to Act 4' },
+    harm:{ h:'Work Acts 0, 4 and 5 together, starting this week.', steps:['I\'m so sorry. Take this at the pace your heart allows, and bring a sidekick.','Request the full records now, including the audit trail.','Check the lawsuit clock and call a health care liability lawyer this week.','File with the state agencies too. They don\'t pause your deadline, but they matter.'], go:'#clock', label:'Check the lawsuit clock' }
+  };
+  var routeEl = document.getElementById('route');
+  function showRoute(key){
+    var r = routes[key];
+    routeEl.innerHTML = '<h3>' + esc(r.h) + '</h3><ol>' + r.steps.map(function(s){ return '<li>' + esc(s) + '</li>'; }).join('') + '</ol><a class="btn btn--primary" href="' + r.go + '">' + esc(r.label) + '</a>';
+  }
+  document.querySelectorAll('.pill[data-route]').forEach(function(p){
+    p.addEventListener('click', function(){
+      document.querySelectorAll('.pill[data-route]').forEach(function(q){ q.setAttribute('aria-pressed', String(q === p)); });
+      showRoute(p.dataset.route);
+    });
+  });
+  showRoute('now');
+
+  /* Open an act when jumped to */
+  document.addEventListener('click', function(e){
+    var a = e.target.closest('a[href^="#act-"]'); if (!a) return;
+    var art = document.querySelector(a.getAttribute('href')); if (!art) return;
+    var b = art.querySelector('.acc-btn'); if (b && b.getAttribute('aria-expanded') !== 'true') b.click();
+  });
+
+  /* Lawsuit clock */
+  function parse(v){ if (!v) return null; var p = v.split('-'); if (p.length !== 3) return null; var d = new Date(Date.UTC(+p[0], +p[1] - 1, +p[2])); return isNaN(d) ? null : d; }
+  function addYears(d, y){ var x = new Date(d.getTime()); x.setUTCFullYear(x.getUTCFullYear() + y); return x; }
+  function addDays(d, n){ return new Date(d.getTime() + n * 864e5); }
+  function fmt(d){ return d.toLocaleDateString('en-US', { timeZone:'UTC', month:'long', day:'numeric', year:'numeric' }); }
+  function today(){ var n = new Date(); return new Date(Date.UTC(n.getFullYear(), n.getMonth(), n.getDate())); }
+  function daysLeft(d){ return Math.round((d - today()) / 864e5); }
+  function leftText(d){ var n = daysLeft(d); return n > 1 ? n + ' days from today' : n === 1 ? 'Tomorrow' : n === 0 ? 'Today' : 'Already passed'; }
+
+  var clockOut = document.getElementById('clockOut');
+  function renderClock(){
+    var inj = parse(document.getElementById('injDate').value);
+    var disc = parse(document.getElementById('discDate').value);
+    if (!inj){ clockOut.innerHTML = '<div class="clock-tile"><p class="big">Pick a date</p><p class="small">Enter the date of the injury to see your timeline.</p></div>'; return; }
+    var start = (disc && disc > inj) ? disc : inj;
+    var sol = addYears(start, 1);
+    var repose = addYears(inj, 3);
+    if (sol > repose) sol = repose;
+    var seeLawyer = addDays(sol, -120);
+    var extended = addDays(sol, 120);
+    var hot = daysLeft(sol) <= 120;
+    clockOut.innerHTML =
+      '<div class="clock-tile' + (hot ? ' clock-tile--hot' : '') + '"><p class="eyebrow">Send the 60-day notice before</p><p class="big">' + fmt(sol) + '</p><p class="small">' + leftText(sol) + '. Your lawyer sends this, so call well before.</p></div>' +
+      '<div class="clock-tile"><p class="eyebrow">Aim to see a lawyer by</p><p class="big">' + fmt(seeLawyer) + '</p><p class="small">' + leftText(seeLawyer) + '. Expert review takes weeks.</p></div>' +
+      '<div class="clock-tile"><p class="eyebrow">If notice is sent in time, file by about</p><p class="big">' + fmt(extended) + '</p><p class="small">Proper notice adds 120 days.</p></div>' +
+      '<div class="clock-tile"><p class="eyebrow">Hard stop (3-year repose)</p><p class="big">' + fmt(repose) + '</p><p class="small">The outer limit, even if found late, with narrow exceptions.</p></div>';
+  }
+  document.getElementById('injDate').addEventListener('input', renderClock);
+  document.getElementById('discDate').addEventListener('input', renderClock);
+  renderClock();
+
+  /* Letter builder */
+  var ids = ['fYou','fRel','fPt','fFac','fWhat','fAsk'];
+  function val(id, fallback){ var v = document.getElementById(id).value.trim(); return v || fallback; }
+  function renderLetter(){
+    var d = new Date(); var due = new Date(d.getTime() + 7 * 864e5);
+    var f = function(x){ return x.toLocaleDateString('en-US', { month:'long', day:'numeric', year:'numeric' }); };
+    var txt =
+      f(d) + '\n\n' +
+      'To: Patient Advocate / Patient Relations, ' + val('fFac', '[Facility and unit]') + '\n' +
+      'Cc: Chief Nursing Officer; Chief Medical Officer\n\n' +
+      'Re: Formal grievance for ' + val('fPt', '[Patient name]') + '\n\n' +
+      'I am filing this as a formal grievance and request a written response.\n\n' +
+      'What happened:\n' + val('fWhat', '[3 to 6 short factual sentences with dates, times and names.]') + '\n\n' +
+      'What I am asking for:\n' + val('fAsk', '[The specific things you want them to do, and by when.]') + '\n\n' +
+      'Please send your written response, including the name of the contact person, the steps taken to investigate, and the results, by ' + f(due) + '. Please also send a copy of your grievance policy.\n\n' +
+      'Thank you,\n' + val('fYou', '[Your name]') + '\n' + val('fRel', '[Your relationship to the patient]') + '\n[Phone] · [Email]\nAttached: timeline' ;
+    document.getElementById('letterOut').textContent = txt;
+  }
+  ids.forEach(function(id){ document.getElementById(id).addEventListener('input', renderLetter); });
+  renderLetter();
+  document.getElementById('copyLetter').addEventListener('click', function(){ copy(document.getElementById('letterOut').textContent, 'Letter copied. Breathe, paste, send.'); });
+})();
+</script>
+<aside id="gsc-next" style="margin:40px auto 0;max-width:780px;padding:20px 16px 28px;font:500 16px/1.5 'Work Sans',-apple-system,'Segoe UI',sans-serif;color:#14213D;background:#D5F9DE;border-top:2px dashed rgba(20,33,61,.3);display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between"><span>Want word when something new opens, or to book us?</span><span style="display:flex;flex-wrap:wrap;gap:8px"><a href="https://tally.so/r/je6qB4?interest=advocates-act&amp;source=page" style="display:inline-block;padding:10px 18px;border-radius:999px;background:#14213D;color:#F5B700;text-decoration:none;font-weight:600">Join the email list</a><a href="../catalog/" style="display:inline-block;padding:10px 18px;border-radius:999px;border:1.5px solid #14213D;color:#14213D;text-decoration:none;font-weight:600">See everything we offer</a></span></aside>
+</body>
+</html>
