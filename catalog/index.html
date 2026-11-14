@@ -391,12 +391,12 @@ function render(){
   CATALOG.forEach(function(c){ c.shelves.forEach(function(s){ s.items = s.items.map(function(it,i){ return [it,i]; }).sort(function(a,b){ return (RANK[a[0].status]-RANK[b[0].status]) || (a[1]-b[1]); }).map(function(x){ return x[0]; }); }); });
   CATALOG.forEach(function(c, ci){
     var n = c.shelves.reduce(function(a,s){ return a + s.items.length; }, 0);
-    html += '<details class="cat" id="'+c.id+'"'+(ci===0?' open':'')+' style="--c:'+c.color+'"><summary>'+
+    html += '<details class="cat" id="'+c.id+'" style="--c:'+c.color+'"><summary>'+
       '<span class="cat-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="#14213D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">'+ICONS[c.icon]+'</svg></span>'+
       '<span><h2>'+esc(c.name)+'</h2><p class="sub">'+esc(c.sub)+'</p></span>'+
       '<span class="cat-right"><span class="count">'+n+' offering'+(n>1?'s':'')+'</span><span class="plus" aria-hidden="true"></span></span></summary><div class="cat-body">';
     c.shelves.forEach(function(s){
-      html += '<details class="shelf"'+(ci===0?' open':'')+'><summary><span class="shelf-title"><h3>'+esc(s.name)+'</h3><span class="shelf-peek">'+esc(s.items.map(function(it){return it.name;}).join(' · '))+'</span></span><span class="count">'+s.items.length+'</span><span class="plus" aria-hidden="true"></span></summary><div class="shelf-body">';
+      html += '<details class="shelf"><summary><span class="shelf-title"><h3>'+esc(s.name)+'</h3><span class="shelf-peek">'+esc(s.items.map(function(it){return it.name;}).join(' · '))+'</span></span><span class="count">'+s.items.length+'</span><span class="plus" aria-hidden="true"></span></summary><div class="shelf-body">';
       if (s.note) html += '<p class="shelf-note">'+esc(s.note)+'</p>';
       s.items.forEach(function(it){
         var st = STATUS[it.status], how = howFor(it);
