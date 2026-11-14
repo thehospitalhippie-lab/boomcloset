@@ -1,0 +1,1118 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Root Breath Atlas</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,560;1,9..144,400&family=IBM+Plex+Mono:wght@400;600&family=Permanent+Marker&display=swap">
+<style>
+/* Root Breath Atlas · Golden Soul Circus
+   Layout: one narrow column. The golden balloon is the constant hero; setup sits under it
+   and folds into a big readout while you breathe. Dark ink first, parchment for daylight. */
+:root{
+  --bg:#15120d;
+  --bg-2:#1e1a13;
+  --line:#3a3125;
+  --ink:#efe6d2;
+  --ink-2:#b5a688;
+  --ink-3:#93866c;
+  --brass:#d3aa5e;
+  --brass-2:#e6c88f;
+  --brass-ink:#1a140b;
+  --brass-tint:rgba(211,170,94,.14);
+  --teal:#80b4ab;
+  --warn:#e09a78;
+  --sky:#b5a688;
+  --string:#c29a52;
+  --halo:#f0be62;
+  --shadow-c:#000000;
+  --shadow-o:.45;
+  --display:'Fraunces','Iowan Old Style','Palatino Linotype',Georgia,serif;
+  --mono:'IBM Plex Mono',ui-monospace,'SF Mono',Menlo,Consolas,monospace;
+  --marker:'Permanent Marker','Marker Felt','Chalkboard SE',cursive;
+  color-scheme:dark;
+}
+@media (prefers-color-scheme: light){
+  :root:not([data-theme="dark"]){
+    --bg:#efe5cd; --bg-2:#f7f0de; --line:#d5c49f;
+    --ink:#271e12; --ink-2:#5c4e36; --ink-3:#6c5d43;
+    --brass:#87601f; --brass-2:#7a5517; --brass-ink:#fdf6e6; --brass-tint:rgba(135,96,31,.12);
+    --teal:#2c6a62; --warn:#9b4527;
+    --sky:#9c8a66; --string:#8a6424; --halo:#e8a94a;
+    --shadow-c:#5a3c10; --shadow-o:.3;
+    color-scheme:light;
+  }
+}
+:root[data-theme="light"]{
+  --bg:#efe5cd; --bg-2:#f7f0de; --line:#d5c49f;
+  --ink:#271e12; --ink-2:#5c4e36; --ink-3:#6c5d43;
+  --brass:#87601f; --brass-2:#7a5517; --brass-ink:#fdf6e6; --brass-tint:rgba(135,96,31,.12);
+  --teal:#2c6a62; --warn:#9b4527;
+  --sky:#9c8a66; --string:#8a6424; --halo:#e8a94a;
+  --shadow-c:#5a3c10; --shadow-o:.3;
+  color-scheme:light;
+}
+
+[hidden]{display:none !important}
+*,*::before,*::after{box-sizing:border-box}
+body{
+  background:var(--bg); color:var(--ink);
+  font-family:var(--mono); font-size:13.5px; line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+}
+button{
+  font:inherit; color:inherit; background:none; border:0; margin:0; padding:0;
+  cursor:pointer; text-align:inherit; touch-action:manipulation;
+  -webkit-appearance:none; appearance:none; -webkit-tap-highlight-color:transparent;
+}
+button:disabled{cursor:default; opacity:.55}
+:focus-visible{outline:2px solid var(--brass); outline-offset:3px}
+::selection{background:var(--brass); color:var(--brass-ink)}
+
+#app{
+  max-width:560px; margin:0 auto;
+  padding-left:max(16px, env(safe-area-inset-left, 0px));
+  padding-right:max(16px, env(safe-area-inset-right, 0px));
+  padding-block:22px 48px;
+  display:flex; flex-direction:column; gap:20px;
+}
+#app[data-view="session"], #app[data-view="done"]{gap:14px; padding-block:12px 32px}
+
+/* ---------- masthead ---------- */
+.masthead{display:flex; flex-direction:column; gap:4px}
+.org{
+  margin:0; display:flex; align-items:center; gap:10px;
+  font-size:11.5px; font-weight:600; letter-spacing:.16em; text-transform:uppercase; color:var(--teal);
+}
+.org-stars{font-size:9.5px; letter-spacing:.35em}
+h1{
+  font-family:var(--display); font-weight:560; font-size:clamp(31px, 8.6vw, 40px);
+  line-height:1.02; letter-spacing:-.01em; margin:6px 0 4px; text-wrap:balance;
+}
+h1 em{font-style:italic; font-weight:400; color:var(--brass-2)}
+.lede{margin:0; color:var(--ink-2); max-width:44ch}
+
+/* ---------- stage ---------- */
+.stage-wrap{display:flex; justify-content:center}
+.stage-wrap.tappable{cursor:pointer}
+#stage{display:block; width:min(100%, 232px); height:auto; overflow:visible; pointer-events:none}
+#app[data-view="session"] #stage, #app[data-view="done"] #stage{width:min(100%, 280px, 30vh)}
+.sky{color:var(--sky)}
+.tw{animation:twinkle 4.6s ease-in-out infinite}
+.b-star{animation:glint 3.8s ease-in-out infinite}
+@keyframes twinkle{0%,100%{opacity:.18} 50%{opacity:.75}}
+@keyframes glint{0%,100%{opacity:.95} 50%{opacity:.5}}
+.string{fill:none; stroke:var(--string); stroke-width:1.3; stroke-linecap:round}
+.b-word{font-family:var(--marker); font-size:30px; fill:#3a2406; opacity:.9}
+#fShadow feDropShadow{flood-color:var(--shadow-c); flood-opacity:var(--shadow-o)}
+
+/* ---------- setup ---------- */
+.setup{display:flex; flex-direction:column; gap:22px}
+.carry{display:flex; flex-direction:column; gap:8px}
+.carry label, .pick{
+  font-family:var(--display); font-weight:400; font-size:23px; line-height:1.2; margin:0;
+}
+#word{
+  width:100%; min-width:0;
+  font-family:var(--marker); font-size:22px; line-height:1.25; color:var(--ink);
+  background:var(--bg-2); border:1px solid var(--line); border-radius:12px; padding:12px 14px;
+}
+#word::placeholder{color:var(--ink-3); opacity:1}
+#word:focus{outline:none; border-color:var(--brass); box-shadow:0 0 0 3px var(--brass-tint)}
+.hint{margin:0; font-size:12px; color:var(--ink-3)}
+
+.moments-block{display:flex; flex-direction:column; gap:12px}
+.moments{list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:8px}
+.m{border:1px solid var(--line); border-radius:14px; background:var(--bg-2); overflow:hidden}
+.m.open{border-color:var(--brass)}
+.m-head{
+  display:grid; grid-template-columns:minmax(0,1fr) auto; column-gap:12px; row-gap:2px;
+  width:100%; padding:14px 16px; align-items:baseline;
+}
+.m-moment{font-family:var(--display); font-style:italic; font-size:20px; line-height:1.2; min-width:0}
+.m-time{font-size:12px; color:var(--ink-2); font-variant-numeric:tabular-nums}
+.m-sub{grid-column:1 / -1; font-size:12px; color:var(--ink-2); min-width:0}
+.m-name{color:var(--ink)}
+.m-head:hover .m-moment, .m.open .m-moment{color:var(--brass-2)}
+.m-panel{padding:0 16px 16px; display:flex; flex-direction:column; gap:16px}
+.m-note{margin:0}
+.m-rate{margin:-8px 0 0; font-size:12px; color:var(--ink-2)}
+.settings{display:flex; flex-wrap:wrap; gap:14px 22px}
+.field{display:flex; flex-direction:column; gap:7px; min-width:0}
+.field-label{font-size:11px; font-weight:600; letter-spacing:.12em; text-transform:uppercase; color:var(--ink-3)}
+.seg{display:inline-flex; flex-wrap:wrap; gap:2px; padding:3px; border:1px solid var(--line); border-radius:999px; align-self:flex-start}
+.seg button{min-height:36px; padding:0 14px; border-radius:999px; font-size:12.5px; color:var(--ink-2); white-space:nowrap}
+.seg button[aria-pressed="true"]{background:var(--brass); color:var(--brass-ink); font-weight:600}
+.cues{display:flex; flex-wrap:wrap; gap:8px}
+.cue{
+  display:inline-flex; align-items:center; gap:8px; min-height:36px; padding:0 14px;
+  border:1px solid var(--line); border-radius:999px; font-size:12.5px; color:var(--ink-2);
+}
+.cue::before{content:""; width:8px; height:8px; border-radius:50%; border:1.5px solid currentColor}
+.cue[aria-pressed="true"]{border-color:var(--brass); background:var(--brass-tint); color:var(--ink)}
+.cue[aria-pressed="true"]::before{background:var(--brass); border-color:var(--brass)}
+.cue-help{margin:0; font-size:12px; color:var(--ink-3)}
+.cue-msg{margin:0; font-size:12px; color:var(--warn); min-height:0}
+.cue-msg:empty{display:none}
+.caution{margin:0; font-size:12.5px; line-height:1.55; color:var(--warn)}
+.caution b{font-weight:600}
+
+.btn{
+  display:inline-flex; align-items:center; justify-content:center; text-align:center;
+  min-height:52px; padding:0 26px; border-radius:999px;
+  font-size:13px; font-weight:600; letter-spacing:.07em; text-transform:uppercase;
+  font-variant-numeric:tabular-nums;
+}
+.btn.primary{background:var(--brass); color:var(--brass-ink)}
+.btn.primary:active{transform:scale(.98)}
+.btn.ghost{border:1px solid var(--line); color:var(--ink-2)}
+.btn.small{min-height:42px; padding:0 18px; font-size:12px}
+.start{width:100%}
+
+details.more{border-top:1px dashed var(--line); padding-top:10px}
+details.more summary{
+  list-style:none; cursor:pointer; min-height:34px; display:flex; align-items:center; justify-content:space-between;
+  font-size:11.5px; font-weight:600; letter-spacing:.12em; text-transform:uppercase; color:var(--brass-2);
+}
+details.more summary::-webkit-details-marker{display:none}
+details.more summary::after{content:"+"; font-size:17px; letter-spacing:0}
+details.more[open] summary::after{content:"−"}
+details.more ol{margin:8px 0 12px; padding-left:20px; display:flex; flex-direction:column; gap:6px}
+details.more li{padding-left:4px}
+details.more li::marker{color:var(--brass-2); font-weight:600}
+details.more p{margin:0; color:var(--ink-2)}
+
+/* ---------- session ---------- */
+.sessionbar{display:flex; align-items:center; justify-content:space-between; gap:8px 12px; flex-wrap:wrap}
+.back{min-height:40px; font-size:12.5px; color:var(--ink-2); white-space:nowrap}
+.back:hover{color:var(--ink)}
+.sessionbar .cues{gap:6px}
+.sessionbar .cue{min-height:34px; padding:0 11px; gap:6px; font-size:12px}
+.s-title{text-align:center; transition:opacity .9s ease}
+#app.is-releasing .s-title{opacity:0}
+.s-moment{margin:0; font-family:var(--display); font-style:italic; font-size:16px; color:var(--brass-2)}
+.s-name{margin:2px 0 0; font-family:var(--display); font-weight:560; font-size:25px; line-height:1.1; text-wrap:balance}
+.session{display:flex; flex-direction:column; gap:14px}
+.readout{display:flex; flex-direction:column; align-items:center; text-align:center}
+.label{margin:0; font-family:var(--display); font-weight:400; font-size:30px; line-height:1.15; text-wrap:balance}
+.how{margin:2px 0 0; min-height:22px; font-size:13px; color:var(--ink-2)}
+.count{
+  margin:4px 0 0; min-height:58px; font-family:var(--display); font-weight:560; font-size:56px; line-height:1;
+  color:var(--brass-2); font-variant-numeric:tabular-nums;
+}
+.progress{display:flex; flex-direction:column; gap:6px}
+.progress-row{display:flex; justify-content:space-between; gap:12px; font-size:12px; color:var(--ink-2); font-variant-numeric:tabular-nums}
+.bar{height:4px; border-radius:4px; background:var(--line); overflow:hidden}
+.bar i{display:block; height:100%; width:0; border-radius:4px; background:var(--brass)}
+.controls{display:flex; flex-direction:column; align-items:center; gap:8px}
+#mainBtn{min-width:min(100%, 230px)}
+.status{margin:0; min-height:20px; font-size:12.5px; color:var(--ink-2); text-align:center}
+
+.done{display:flex; flex-direction:column; align-items:center; gap:10px; text-align:center}
+.done h2{margin:0; font-family:var(--display); font-weight:560; font-size:32px; line-height:1.1}
+.done p{margin:0; max-width:36ch; color:var(--ink-2)}
+.done-actions{display:flex; flex-wrap:wrap; justify-content:center; gap:10px; margin-top:6px}
+
+/* ---------- footer ---------- */
+.foot{
+  margin-top:10px; padding-top:22px; border-top:1px solid var(--line);
+  display:flex; flex-direction:column; align-items:center; gap:8px; text-align:center;
+}
+.safety{margin:0 0 6px; max-width:44ch; font-size:12px; color:var(--ink-2)}
+.foot-mark{color:var(--teal); font-size:10px; letter-spacing:.4em}
+.foot-tag{margin:0; max-width:34ch; font-family:var(--display); font-style:italic; font-size:15px; color:var(--ink-2)}
+.foot-org{margin:0; font-size:11.5px; font-weight:600; letter-spacing:.16em; text-transform:uppercase; color:var(--teal)}
+
+@media (prefers-reduced-motion: reduce){
+  .tw, .b-star{animation:none}
+  .btn.primary:active{transform:none}
+}
+</style>
+
+<div id="app" data-view="setup">
+  <header class="masthead" id="masthead">
+    <p class="org">Golden Soul Circus <span class="org-stars" aria-hidden="true">★★★</span></p>
+    <h1>Root Breath <em>Atlas</em></h1>
+    <p class="lede">Write what you’re carrying. Pick the moment you’re in. Breathe it into the balloon, then let it go.</p>
+  </header>
+
+  <div class="sessionbar" id="sessionbar" hidden>
+    <button type="button" class="back" id="backBtn">← Breaths</button>
+    <div class="cues" data-cues role="group" aria-label="Cues"></div>
+  </div>
+  <div class="s-title" id="stitle" hidden>
+    <p class="s-moment" id="sMoment"></p>
+    <h2 class="s-name" id="sName"></h2>
+  </div>
+
+  <div class="stage-wrap" id="stageWrap">
+    <svg id="stage" viewBox="0 0 240 300" role="img" aria-label="A golden balloon on a string">
+      <defs>
+        <radialGradient id="gGold" cx="0.4" cy="0.34" r="0.78" fx="0.33" fy="0.25">
+          <stop offset="0" stop-color="#fff3cc"/>
+          <stop offset="0.16" stop-color="#f7d27a"/>
+          <stop offset="0.46" stop-color="#e3aa45"/>
+          <stop offset="0.77" stop-color="#b7812e"/>
+          <stop offset="1" stop-color="#7a5218"/>
+        </radialGradient>
+        <radialGradient id="gRim" cx="0.56" cy="0.58" r="0.56">
+          <stop offset="0.7" stop-color="#ffe2a0" stop-opacity="0"/>
+          <stop offset="0.93" stop-color="#ffe2a0" stop-opacity="0.34"/>
+          <stop offset="1" stop-color="#ffe2a0" stop-opacity="0"/>
+        </radialGradient>
+        <radialGradient id="gShine" cx="0.5" cy="0.5" r="0.5">
+          <stop offset="0" stop-color="#ffffff" stop-opacity="0.95"/>
+          <stop offset="1" stop-color="#ffffff" stop-opacity="0"/>
+        </radialGradient>
+        <radialGradient id="gHalo" cx="0.5" cy="0.5" r="0.5">
+          <stop offset="0" style="stop-color:var(--halo)" stop-opacity="0.5"/>
+          <stop offset="0.55" style="stop-color:var(--halo)" stop-opacity="0.14"/>
+          <stop offset="1" style="stop-color:var(--halo)" stop-opacity="0"/>
+        </radialGradient>
+        <clipPath id="cBody">
+          <path d="M120 22 C164 22 198 57 198 101 C198 143 160 184 120 198 C80 184 42 143 42 101 C42 57 76 22 120 22 Z"/>
+        </clipPath>
+        <filter id="fShadow" x="-20%" y="-20%" width="140%" height="150%">
+          <feDropShadow dx="0" dy="7" stdDeviation="7"/>
+        </filter>
+      </defs>
+
+      <g class="sky" fill="currentColor" aria-hidden="true">
+        <circle class="tw" cx="18" cy="36" r="1.2"/>
+        <circle class="tw" cx="224" cy="58" r="1" style="animation-delay:-1.4s"/>
+        <circle class="tw" cx="30" cy="140" r="1.1" style="animation-delay:-2.6s"/>
+        <circle class="tw" cx="214" cy="168" r="1.3" style="animation-delay:-0.7s"/>
+        <circle class="tw" cx="16" cy="236" r="1" style="animation-delay:-3.3s"/>
+        <circle class="tw" cx="226" cy="250" r="1.2" style="animation-delay:-2s"/>
+        <circle class="tw" cx="70" cy="10" r="0.9" style="animation-delay:-3.9s"/>
+        <circle class="tw" cx="178" cy="8" r="1.1" style="animation-delay:-1s"/>
+      </g>
+
+      <g id="gFloat">
+        <path id="bString" class="string" d="M120 208 C122 238 117 270 120 298"/>
+        <g id="gScale" transform="translate(120 200) scale(0.808) translate(-120 -200)">
+          <circle id="bHalo" cx="120" cy="108" r="122" fill="url(#gHalo)" opacity="0.74"/>
+          <path filter="url(#fShadow)" fill="url(#gGold)" d="M120 22 C164 22 198 57 198 101 C198 143 160 184 120 198 C80 184 42 143 42 101 C42 57 76 22 120 22 Z"/>
+          <path fill="url(#gRim)" d="M120 22 C164 22 198 57 198 101 C198 143 160 184 120 198 C80 184 42 143 42 101 C42 57 76 22 120 22 Z"/>
+          <g clip-path="url(#cBody)">
+            <ellipse cx="86" cy="64" rx="27" ry="15" fill="url(#gShine)" opacity="0.72" transform="rotate(-38 86 64)"/>
+            <ellipse cx="77" cy="57" rx="7" ry="4" fill="#ffffff" opacity="0.88" transform="rotate(-38 77 57)"/>
+          </g>
+          <g id="bStars" fill="#fff6d8" aria-hidden="true"></g>
+          <text id="bWord" class="b-word" x="120" y="124" text-anchor="middle" dominant-baseline="central" transform="rotate(-7 120 124)"></text>
+          <path fill="none" stroke="rgba(105,66,12,.55)" stroke-width="1.2" vector-effect="non-scaling-stroke" d="M120 22 C164 22 198 57 198 101 C198 143 160 184 120 198 C80 184 42 143 42 101 C42 57 76 22 120 22 Z"/>
+          <path fill="#a8772a" stroke="#7d5414" stroke-width="0.8" d="M120 195 L128.5 208 Q120 212.5 111.5 208 Z"/>
+        </g>
+      </g>
+    </svg>
+  </div>
+
+  <section class="setup" id="setup">
+    <div class="carry">
+      <label for="word">What are you carrying?</label>
+      <input id="word" type="text" maxlength="18" autocomplete="off" autocapitalize="off" spellcheck="false" enterkeyhint="done" placeholder="One word, like guilt">
+      <p class="hint">One word is plenty. It’s optional and never saved.</p>
+    </div>
+    <div class="moments-block">
+      <h2 class="pick">Pick the moment you’re in</h2>
+      <ul class="moments" id="moments"></ul>
+    </div>
+  </section>
+
+  <section class="session" id="session" hidden>
+    <div class="readout">
+      <p class="label" id="label" aria-live="polite"></p>
+      <p class="how" id="how"></p>
+      <p class="count" id="count" aria-hidden="true"></p>
+    </div>
+    <div class="progress">
+      <div class="progress-row"><span id="pBreath"></span><span id="pLeft"></span></div>
+      <div class="bar" aria-hidden="true"><i id="pBar"></i></div>
+    </div>
+    <div class="controls">
+      <button type="button" class="btn primary" id="mainBtn">Pause</button>
+      <button type="button" class="btn ghost small" id="endBtn" hidden>End session</button>
+      <p class="status" id="status" aria-live="polite"></p>
+    </div>
+  </section>
+
+  <section class="done" id="done" hidden>
+    <h2>Up and away.</h2>
+    <p id="doneSub"></p>
+    <div class="done-actions">
+      <button type="button" class="btn primary" id="againBtn">Breathe again</button>
+      <button type="button" class="btn ghost" id="homeBtn">All breaths</button>
+    </div>
+  </section>
+
+  <footer class="foot" id="foot">
+    <p class="safety">Stop if you feel dizzy, short of breath, or unwell. These breaths support care. They don’t replace it.</p>
+    <div class="foot-mark" aria-hidden="true">★★★</div>
+    <p class="foot-tag">“We’re all nurses — just some of us are registered.”</p>
+    <p class="foot-org">Golden Soul Circus</p>
+  </footer>
+</div>
+
+<script>
+(() => {
+'use strict';
+const $ = (s, r = document) => r.querySelector(s);
+const $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
+
+/* ---------- constants ---------- */
+const KX = 120, KY = 200;            // the knot: balloon grows up and away from it
+const EMPTY = 0.52, FULL = 1, REST = 0.6;
+const LEAD = 3, FILL = 4, RELEASE = 4.2, LETGO_AUTO = 30;
+const HZ = 528;                         // every chime rings at 528 Hz
+const GENTLE = [20];                    // one short, soft pulse at each change
+const BUZZ = { inhale: GENTLE, sip: GENTLE, hold: GENTLE, exhale: GENTLE, hum: GENTLE, letgo: GENTLE };
+
+/* ---------- the six breaths ---------- */
+const TECH = [
+  {
+    id: 'belly', moment: 'Anytime. Start here.', name: 'Belly breathing',
+    note: 'The root under every other breath here. Rest a hand on your belly and let it rise and fall.',
+    cycle: [
+      { type: 'inhale', s: 4, to: 1, word: 'in', label: 'Breathe in', how: 'belly rises, chest stays still', say: 'Breathe in. Let your belly rise.', sayShort: 'In' },
+      { type: 'exhale', s: 6, to: 0, word: 'out', label: 'Breathe out', how: 'belly sinks back', say: 'Breathe out, a little longer.', sayShort: 'Out' }
+    ],
+    lengths: { unit: 'min', values: [1, 3, 5] },
+    steps: [
+      'Sit or lie back. One hand on your chest, one on your belly.',
+      'Breathe in through your nose. The belly hand rises and the chest hand stays still.',
+      'Breathe out a little longer than you breathed in, and let the belly fall.'
+    ],
+    why: 'When the diaphragm does the work, your neck and shoulders get to rest. An out-breath that runs longer than the in-breath nudges your heart rate down and helps the body settle.'
+  },
+  {
+    id: 'sigh', moment: 'When it’s all too much', name: 'Physiological sigh',
+    note: 'Two sips in, one long sigh out. The quickest reset here, small enough to do in a hallway between rooms.',
+    cycle: [
+      { type: 'inhale', s: 2, to: 0.8, word: 'in', label: 'Breathe in', how: 'through your nose', say: 'Breathe in through your nose', sayShort: 'In' },
+      { type: 'sip', s: 1, to: 1, word: 'sip', label: 'Top it up', how: 'one more quick sip', say: 'Sip', sayShort: 'Sip' },
+      { type: 'exhale', s: 6, to: 0, word: 'out', label: 'Sigh it out', how: 'long and slow, through your mouth', say: 'Sigh it all out', sayShort: 'Sigh' }
+    ],
+    lengths: { unit: 'min', values: [1, 3, 5] },
+    steps: [
+      'Breathe in through your nose until you’re nearly full.',
+      'Without breathing out, take one more short sip to top it up.',
+      'Let it all go in a long, slow sigh through your mouth.'
+    ],
+    why: 'The second sip reopens tiny collapsed air sacs in the lungs, and the long sigh out slows the heart. In a 2023 Stanford study, five minutes a day of this cyclic sighing lifted mood more than mindfulness meditation did.'
+  },
+  {
+    id: 'talk', moment: 'Before a hard conversation', name: 'Box breathing',
+    note: 'Four even sides, one count at a time. Something steady to hold on to before you walk in.',
+    cycle: [
+      { type: 'inhale', s: 4, to: 1, word: 'in', label: 'Breathe in', how: 'through your nose', say: 'Breathe in', sayShort: 'In' },
+      { type: 'hold', s: 4, hold: true, word: 'hold', label: 'Hold', how: 'full and soft', say: 'Hold', sayShort: 'Hold' },
+      { type: 'exhale', s: 4, to: 0, word: 'out', label: 'Breathe out', how: 'slow and even', say: 'Breathe out', sayShort: 'Out' },
+      { type: 'hold', s: 4, hold: true, word: 'hold', label: 'Hold', how: 'empty and easy', say: 'Hold', sayShort: 'Hold' }
+    ],
+    lengths: { unit: 'min', values: [1, 3, 5] },
+    caution: 'Sit down for the holds. Turn holds off if they feel uncomfortable, or if you have heart or lung disease.',
+    steps: [
+      'Breathe all the way out to start.',
+      'In through your nose for four, then hold for four.',
+      'Out for four, then hold, empty, for four. Repeat.'
+    ],
+    why: 'Counting gives a racing mind one simple job, and the slow pace brings your breathing rate down before you need your words.'
+  },
+  {
+    id: 'steady', moment: 'Sitting at the bedside', name: 'Coherent breathing',
+    note: 'Slow and quiet enough to do while holding a hand. If their breathing pauses or changes rhythm, you don’t need to match it. This breath is for you.',
+    cycle: [
+      { type: 'inhale', s: 5.5, to: 1, word: 'in', label: 'Breathe in', how: 'smooth and unhurried', say: 'Breathe in, slow and smooth', sayShort: 'In' },
+      { type: 'exhale', s: 5.5, to: 0, word: 'out', label: 'Breathe out', how: 'just as long', say: 'Breathe out, just as long', sayShort: 'Out' }
+    ],
+    lengths: { unit: 'min', values: [3, 5, 10] },
+    steps: [
+      'Breathe in through your nose, smooth and unhurried.',
+      'Breathe out for the same length. No holds and no effort.',
+      'Let it get a little boring. That’s how you know it’s working.'
+    ],
+    why: 'At about five and a half breaths a minute, your heart rate rises and falls the most with each breath. Researchers link that swing, called heart rate variability, to a calmer stress response.'
+  },
+  {
+    id: 'hum', moment: 'When there are no words', name: 'Humming breath',
+    note: 'Breathe in, then hum the whole way out. Any note works, and nobody’s grading.',
+    cycle: [
+      { type: 'inhale', s: 4, to: 1, word: 'in', label: 'Breathe in', how: 'through your nose', say: 'Breathe in', sayShort: 'In' },
+      { type: 'hum', s: 8, to: 0, word: 'hum', label: 'Hum it out', how: 'lips closed, any note', say: 'Hum it out', sayShort: 'Hum' }
+    ],
+    lengths: { unit: 'min', values: [1, 3, 5] },
+    steps: [
+      'Breathe in through your nose.',
+      'Close your lips and hum on the way out, for as long as feels easy.',
+      'Feel the buzz in your chest and face. With Chime on, a low tone hums along with you.'
+    ],
+    why: 'Humming stretches the out-breath without any counting, and the buzz gives your attention somewhere to land. In one study, humming raised nitric oxide in the nose fifteen-fold, which helps air move. In yoga it’s called Bhramari, the bee breath.'
+  },
+  {
+    id: 'sleep', moment: 'When sleep won’t come', name: '4-7-8 breathing',
+    note: 'A long whoosh out, for lying in the dark after a hard day or a hard loss.',
+    cycle: [
+      { type: 'inhale', s: 4, to: 1, word: 'in', label: 'Breathe in', how: 'quietly, through your nose', say: 'Breathe in through your nose', sayShort: 'In' },
+      { type: 'hold', s: 7, hold: true, word: 'hold', label: 'Hold', how: 'easy, no straining', say: 'Hold', sayShort: 'Hold' },
+      { type: 'exhale', s: 8, to: 0, word: 'out', label: 'Whoosh it out', how: 'through your mouth', say: 'Whoosh it out through your mouth', sayShort: 'Out' }
+    ],
+    lengths: { unit: 'breaths', values: [4, 6, 8] },
+    caution: 'Lie down or lean back. Feeling a little lightheaded at first is common. Turn holds off if it bothers you.',
+    steps: [
+      'Rest the tip of your tongue just behind your top front teeth.',
+      'Breathe in quietly through your nose for four, then hold for seven.',
+      'Whoosh out through your mouth for eight. Start with four breaths.'
+    ],
+    why: 'The out-breath runs twice as long as the in-breath, which tips the body toward rest. Dr. Andrew Weil, who popularized it, suggests four breaths at first and no more than eight.'
+  }
+];
+const byId = Object.fromEntries(TECH.map(t => [t.id, t]));
+
+/* ---------- capabilities & storage ---------- */
+const canVoice = 'speechSynthesis' in window && typeof window.SpeechSynthesisUtterance === 'function';
+const canBuzz = typeof navigator.vibrate === 'function';
+const store = {
+  get(k, d) { try { const v = localStorage.getItem(k); return v == null ? d : JSON.parse(v); } catch (e) { return d; } },
+  set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} }
+};
+
+const state = {
+  word: '',
+  open: null,
+  len: {},
+  holds: {},
+  cues: Object.assign({ chime: true, voice: false, buzz: true }, store.get('rba-cues-2', {}))
+};
+if (!canVoice) state.cues.voice = false;
+if (!canBuzz) state.cues.buzz = false;
+
+let reduced = false;
+try {
+  const mq = matchMedia('(prefers-reduced-motion: reduce)');
+  reduced = mq.matches;
+  mq.addEventListener ? mq.addEventListener('change', e => { reduced = e.matches; }) : mq.addListener(e => { reduced = e.matches; });
+} catch (e) {}
+
+/* ---------- technique math ---------- */
+const holdsOn = t => state.holds[t.id] !== false;
+const hasHolds = t => t.cycle.some(p => p.hold);
+const cycleOf = t => t.cycle.filter(p => holdsOn(t) || !p.hold);
+const cycleSecs = t => cycleOf(t).reduce((a, p) => a + p.s, 0);
+function lengthOpts(t) {
+  const c = cycleSecs(t);
+  return t.lengths.values.map(v => t.lengths.unit === 'breaths'
+    ? { label: v + ' breaths', rounds: v }
+    : { label: v + ' min', rounds: Math.max(2, Math.round((v * 60 - LEAD - FILL) / c)) });
+}
+const lenIdx = t => Math.min(state.len[t.id] || 0, t.lengths.values.length - 1);
+const roundsOf = t => lengthOpts(t)[lenIdx(t)].rounds;
+const totalOf = t => LEAD + roundsOf(t) * cycleSecs(t) + FILL;
+const num = n => (n % 1 ? n.toFixed(1) : String(n));
+function fmt(s) { s = Math.max(0, Math.round(s)); return Math.floor(s / 60) + ':' + String(s % 60).padStart(2, '0'); }
+const patternOf = t => cycleOf(t).map(p => num(p.s) + ' ' + p.word).join(' · ');
+function rateOf(t) {
+  const v = Math.round(120 / cycleSecs(t)) / 2;
+  return 'About ' + num(v) + ' breaths a minute. A resting adult takes 12 to 20.';
+}
+
+/* ---------- elements ---------- */
+const app = $('#app');
+const wordInput = $('#word');
+const gFloat = $('#gFloat'), gScale = $('#gScale'), stringEl = $('#bString'), haloEl = $('#bHalo');
+const bWord = $('#bWord');
+const labelEl = $('#label'), howEl = $('#how'), countEl = $('#count');
+const pBreath = $('#pBreath'), pLeft = $('#pLeft'), pBar = $('#pBar');
+const mainBtn = $('#mainBtn'), endBtn = $('#endBtn'), statusEl = $('#status');
+const setText = (el, v) => { if (el.textContent !== v) el.textContent = v; };
+
+/* ---------- balloon decoration ---------- */
+function starPath(cx, cy, R) {
+  const r = R * 0.45; let d = '';
+  for (let i = 0; i < 10; i++) {
+    const a = -Math.PI / 2 + i * Math.PI / 5, rr = i % 2 ? r : R;
+    d += (i ? 'L' : 'M') + (cx + rr * Math.cos(a)).toFixed(2) + ' ' + (cy + rr * Math.sin(a)).toFixed(2);
+  }
+  return d + 'Z';
+}
+$('#bStars').innerHTML = [[160, 64, 7.5, 0], [64, 150, 5, -1.6], [170, 141, 4, -2.7], [127, 43, 3.5, -0.9]]
+  .map(([x, y, R, delay]) => `<path class="b-star" style="animation-delay:${delay}s" d="${starPath(x, y, R)}"/>`).join('');
+
+function fitWord() {
+  bWord.style.fontSize = '30px';
+  if (!bWord.textContent) return;
+  let len = 0;
+  try { len = bWord.getComputedTextLength(); } catch (e) {}
+  const MAX = 124;
+  if (len > MAX) bWord.style.fontSize = (30 * MAX / len).toFixed(2) + 'px';
+}
+function setWord(w) {
+  state.word = w;
+  const clean = w.trim();
+  bWord.textContent = clean;
+  fitWord();
+  $('#stage').setAttribute('aria-label', clean
+    ? `A golden balloon with “${clean}” written on it`
+    : 'A golden balloon on a string');
+}
+if (document.fonts && document.fonts.ready) document.fonts.ready.then(fitWord).catch(() => {});
+
+/* ---------- sound ---------- */
+let actx = null, master = null, droneNodes = null;
+function ensureAudio() {
+  if (!actx) {
+    const AC = window.AudioContext || window.webkitAudioContext;
+    if (!AC) return null;
+    try { actx = new AC(); } catch (e) { actx = null; return null; }
+    master = actx.createGain();
+    master.gain.value = 0.8;
+    const comp = actx.createDynamicsCompressor();
+    master.connect(comp);
+    comp.connect(actx.destination);
+  }
+  if (actx.state !== 'running') { try { const r = actx.resume(); if (r && r.catch) r.catch(() => {}); } catch (e) {} }
+  return actx;
+}
+function bell(freq, t, peak = 0.16, decay = 1.7) {
+  if (!actx) return;
+  const parts = [[1, 1, decay], [2.76, 0.2, decay * 0.45], [5.4, 0.06, decay * 0.25]];
+  for (const [m, g, d] of parts) {
+    const o = actx.createOscillator(), v = actx.createGain();
+    o.type = 'sine';
+    o.frequency.value = freq * m;
+    v.gain.setValueAtTime(0.0001, t);
+    v.gain.exponentialRampToValueAtTime(peak * g, t + 0.015);
+    v.gain.exponentialRampToValueAtTime(0.0001, t + d);
+    o.connect(v); v.connect(master);
+    o.start(t); o.stop(t + d + 0.05);
+  }
+}
+function drone(dur, t0) {
+  stopDrone();
+  if (!actx || dur < 0.8) return;
+  const t = t0 != null ? t0 : actx.currentTime + 0.02;
+  const g = actx.createGain(), peak = 0.07;
+  g.gain.setValueAtTime(0.0001, t);
+  g.gain.exponentialRampToValueAtTime(peak, t + 0.5);
+  g.gain.setValueAtTime(peak, t + Math.max(0.6, dur - 0.8));
+  g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
+  const lp = actx.createBiquadFilter();
+  lp.type = 'lowpass'; lp.frequency.value = 650; lp.Q.value = 0.3;
+  lp.connect(g); g.connect(master);
+  const oscs = [[132, 'triangle', 0.6], [132.6, 'triangle', 0.45], [264, 'sine', 0.25]].map(([f, type, amp]) => {
+    const o = actx.createOscillator(), og = actx.createGain();
+    o.type = type; o.frequency.value = f; og.gain.value = amp;
+    o.connect(og); og.connect(lp);
+    o.start(t); o.stop(t + dur + 0.05);
+    return o;
+  });
+  droneNodes = { g, oscs };
+}
+function stopDrone() {
+  if (!droneNodes || !actx) { droneNodes = null; return; }
+  const { g, oscs } = droneNodes, t = actx.currentTime;
+  try {
+    g.gain.cancelScheduledValues(t);
+    g.gain.setValueAtTime(Math.max(g.gain.value, 0.0001), t);
+    g.gain.exponentialRampToValueAtTime(0.0001, t + 0.25);
+    oscs.forEach(o => o.stop(t + 0.3));
+  } catch (e) {}
+  droneNodes = null;
+}
+
+/* ---------- voice & buzz ---------- */
+let voicePick = null;
+function pickVoice() {
+  if (!canVoice) return;
+  let vs = [];
+  try { vs = speechSynthesis.getVoices(); } catch (e) {}
+  if (!vs.length) return;
+  const pref = ['Samantha', 'Google US English', 'Microsoft Aria', 'Karen', 'Moira', 'Tessa', 'Daniel', 'Google UK English Female'];
+  voicePick = pref.map(n => vs.find(v => v.name.includes(n))).find(Boolean)
+    || vs.find(v => /^en[-_]US/i.test(v.lang)) || vs.find(v => /^en/i.test(v.lang)) || null;
+}
+if (canVoice) {
+  pickVoice();
+  try { speechSynthesis.addEventListener('voiceschanged', pickVoice); } catch (e) {}
+}
+function cancelSpeech() {
+  if (!canVoice) return;
+  try { if (speechSynthesis.speaking || speechSynthesis.pending) speechSynthesis.cancel(); } catch (e) {}
+}
+function speak(text) {
+  if (!canVoice || !text) return;
+  try {
+    cancelSpeech();
+    const u = new SpeechSynthesisUtterance(text);
+    u.rate = 0.88; u.pitch = 1; u.volume = 1;
+    u.lang = voicePick ? voicePick.lang : 'en-US';
+    if (voicePick) u.voice = voicePick;
+    speechSynthesis.speak(u);
+  } catch (e) {}
+}
+function vibrate(p) {
+  if (!canBuzz) return false;
+  try { return navigator.vibrate(p); } catch (e) { return false; }
+}
+
+/* ---------- screen wake lock ---------- */
+let wake = null;
+const wantsWake = () => mode === 'running' || mode === 'letgo' || mode === 'releasing';
+async function lockScreen() {
+  if (wake || !('wakeLock' in navigator)) return;
+  try {
+    const w = await navigator.wakeLock.request('screen');
+    if (!wantsWake()) { w.release().catch(() => {}); return; }
+    wake = w;
+    w.addEventListener('release', () => { if (wake === w) wake = null; });
+  } catch (e) { wake = null; }
+}
+function unlockScreen() {
+  if (wake) { try { wake.release().catch(() => {}); } catch (e) {} }
+  wake = null;
+}
+
+/* ---------- setup UI ---------- */
+function cueChipsHTML() {
+  let h = '<button type="button" class="cue" data-cue="chime" aria-pressed="false">Chime</button>';
+  if (canVoice) h += '<button type="button" class="cue" data-cue="voice" aria-pressed="false">Voice</button>';
+  if (canBuzz) h += '<button type="button" class="cue" data-cue="buzz" aria-pressed="false">Buzz</button>';
+  return h;
+}
+const cueHelp = 'Chime rings at 528 Hz: once to breathe in, softly to hold, twice to breathe out.' + (canBuzz ? ' Buzz is a gentle tap at every change.' : '');
+
+function renderList() {
+  $('#moments').innerHTML = TECH.map(t => `
+    <li class="m" id="m-${t.id}" data-id="${t.id}">
+      <button type="button" class="m-head" id="h-${t.id}" aria-expanded="false" aria-controls="p-${t.id}">
+        <span class="m-moment">${t.moment}</span>
+        <span class="m-time" data-time></span>
+        <span class="m-sub"><span class="m-name">${t.name}</span> · <span data-pattern></span></span>
+      </button>
+      <div class="m-panel" id="p-${t.id}" role="region" aria-labelledby="h-${t.id}" hidden>
+        <p class="m-note">${t.note}</p>
+        <p class="m-rate" data-rate></p>
+        <div class="settings">
+          <div class="field">
+            <span class="field-label" id="len-${t.id}">Length</span>
+            <div class="seg" role="group" aria-labelledby="len-${t.id}" data-len>
+              ${t.lengths.values.map((v, k) => `<button type="button" data-k="${k}" aria-pressed="false">${t.lengths.unit === 'breaths' ? v + ' breaths' : v + ' min'}</button>`).join('')}
+            </div>
+          </div>
+          ${hasHolds(t) ? `
+          <div class="field">
+            <span class="field-label" id="holds-${t.id}">Holds</span>
+            <div class="seg" role="group" aria-labelledby="holds-${t.id}" data-holds>
+              <button type="button" data-v="on" aria-pressed="true">On</button>
+              <button type="button" data-v="off" aria-pressed="false">Off</button>
+            </div>
+          </div>` : ''}
+        </div>
+        <div class="field">
+          <span class="field-label">Cues, for eyes closed</span>
+          <div class="cues" data-cues></div>
+          <p class="cue-help">${cueHelp}</p>
+          <p class="cue-msg" aria-live="polite"></p>
+        </div>
+        ${t.caution ? `<p class="caution"><b>Before you start.</b> ${t.caution}</p>` : ''}
+        <button type="button" class="btn primary start" data-start></button>
+        <details class="more">
+          <summary>How it works</summary>
+          <ol>${t.steps.map(s => `<li>${s}</li>`).join('')}</ol>
+          <p>${t.why}</p>
+        </details>
+      </div>
+    </li>`).join('');
+}
+function updateTech(t) {
+  const li = $('#m-' + t.id);
+  const total = fmt(totalOf(t));
+  setText($('[data-time]', li), total);
+  setText($('[data-pattern]', li), patternOf(t));
+  setText($('[data-rate]', li), rateOf(t));
+  const i = lenIdx(t);
+  $$('[data-len] button', li).forEach(b => b.setAttribute('aria-pressed', String(+b.dataset.k === i)));
+  $$('[data-holds] button', li).forEach(b => b.setAttribute('aria-pressed', String((b.dataset.v === 'on') === holdsOn(t))));
+  setText($('[data-start]', li), 'Start · ' + total);
+}
+function renderCues() {
+  $$('.cue').forEach(b => b.setAttribute('aria-pressed', String(!!state.cues[b.dataset.cue])));
+}
+function openTech(id, opts = {}) {
+  const anchor = opts.anchor || null;
+  const before = anchor ? anchor.getBoundingClientRect().top : 0;
+  state.open = opts.toggle && state.open === id ? null : id;
+  for (const t of TECH) {
+    const li = $('#m-' + t.id), on = state.open === t.id;
+    li.classList.toggle('open', on);
+    $('.m-head', li).setAttribute('aria-expanded', String(on));
+    $('.m-panel', li).hidden = !on;
+  }
+  if (anchor) {
+    const after = anchor.getBoundingClientRect().top;
+    if (Math.abs(after - before) > 1) window.scrollBy(0, after - before);
+  }
+  if (state.open) store.set('rba-last', state.open);
+}
+
+let msgTimer = null;
+function cueMsg(text) {
+  $$('.cue-msg').forEach(el => { el.textContent = text; });
+  if (mode !== 'setup' && text) setStatus(text);
+  clearTimeout(msgTimer);
+  if (text) msgTimer = setTimeout(() => cueMsg(''), 4500);
+}
+function toggleCue(name) {
+  const on = !state.cues[name];
+  if (name === 'buzz' && on && !vibrate(30)) {
+    cueMsg('This browser won’t let the page vibrate.');
+    return;
+  }
+  state.cues[name] = on;
+  if (name === 'chime') {
+    if (on) {
+      ensureAudio();
+      if (actx) bell(HZ, actx.currentTime + 0.02, 0.12, 1.2);
+      const p = seq[idx];
+      if (mode === 'running' && p && p.type === 'hum') drone(p.s - phaseEl);
+    } else stopDrone();
+  }
+  if (name === 'voice') { if (on) speak('Voice on'); else cancelSpeech(); }
+  store.set('rba-cues-2', state.cues);
+  renderCues();
+}
+
+/* ---------- session engine ---------- */
+let mode = 'setup';           // setup | running | paused | letgo | releasing | done
+let current = null;
+let seq = [], cum = [], total = 0, roundsN = 0;
+let idx = 0, phaseStart = 0, phaseEl = 0;
+let fullness = REST, releaseProg = 0, arriveStart = null;
+const ease = p => 0.5 - 0.5 * Math.cos(Math.PI * Math.min(1, Math.max(0, p)));
+const isTimed = p => !(p.open || p.type === 'release');
+
+function build(t) {
+  const cyc = cycleOf(t), R = roundsOf(t);
+  seq = [{ type: 'exhale', s: LEAD, to: 0, round: 0, label: 'Breathe out', how: 'empty out to begin', say: 'Breathe out to begin' }];
+  for (let r = 1; r <= R; r++) for (const p of cyc) seq.push(Object.assign({}, p, { round: r }));
+  seq.push({ type: 'inhale', s: FILL, to: 1, round: -1, label: 'One last fill', how: 'all the way in', say: 'One last breath in. Fill it up.' });
+  seq.push({ type: 'letgo', open: true, round: -1, label: 'Let it go', how: 'tap anywhere when you’re ready', say: 'When you’re ready, let it go.' });
+  seq.push({ type: 'release', s: RELEASE, round: -1, label: 'Breathe out', how: 'and watch it float away', say: '' });
+  cum = []; let acc = 0;
+  for (const p of seq) { cum.push(acc); if (isTimed(p)) acc += p.s; }
+  total = acc; roundsN = R;
+}
+
+function cue(p) {
+  const c = state.cues, first = p.round <= 1;
+  if (c.chime && actx) {
+    const t = actx.currentTime + 0.02;
+    switch (p.type) {
+      case 'inhale': bell(HZ, t); break;
+      case 'sip': bell(HZ, t, 0.09, 0.9); break;
+      case 'hold': bell(HZ, t, 0.07, 1.2); break;
+      case 'exhale': bell(HZ, t); bell(HZ, t + 0.32, 0.12); break;
+      case 'hum': bell(HZ, t); bell(HZ, t + 0.32, 0.12); drone(p.s - 0.5, t + 0.5); break;
+      case 'letgo': bell(HZ, t, 0.1, 2.4); break;
+      case 'release': if (!p.auto) [0, 0.35, 0.7].forEach((d, k) => bell(HZ, t + d, 0.13 - k * 0.03, 2)); break;
+    }
+  }
+  if (c.voice && p.type !== 'release') speak(first ? p.say : (p.sayShort || p.say));
+  if (c.buzz && p.type !== 'release' && BUZZ[p.type]) vibrate(BUZZ[p.type]);
+}
+
+function enter(i) {
+  const p = seq[i];
+  p.from = fullness;
+  p.target = p.to != null ? p.to : fullness;
+  stopDrone();
+  setText(labelEl, p.label);
+  setText(howEl, p.how);
+  if (p.open) mode = 'letgo';
+  cue(p);
+  render();
+}
+
+function advance(now) {
+  let p = seq[idx];
+  if (!p) return;
+  phaseEl = (now - phaseStart) / 1000;
+  if (p.open) {
+    if (phaseEl >= LETGO_AUTO) letGo(true);
+    return;
+  }
+  while (phaseEl >= p.s) {
+    fullness = p.target;
+    if (p.type === 'release') { releaseProg = 1; finish(); return; }
+    phaseStart += p.s * 1000;
+    idx++;
+    enter(idx);
+    p = seq[idx];
+    phaseEl = (now - phaseStart) / 1000;
+    if (p.open) return;
+  }
+  const prog = phaseEl / p.s;
+  if (p.type === 'release') releaseProg = Math.min(1, prog);
+  else fullness = p.from + (p.target - p.from) * ease(prog);
+}
+
+function updateReadout() {
+  const p = seq[idx];
+  if (!p) return;
+  const timed = isTimed(p);
+  setText(countEl, timed ? String(Math.max(1, Math.ceil(p.s - phaseEl - 1e-6))) : '');
+  const elapsed = cum[idx] + (timed ? Math.min(Math.max(phaseEl, 0), p.s) : 0);
+  setText(pLeft, timed ? fmt(Math.ceil(total - elapsed)) + ' left' : '');
+  setText(pBreath,
+    p.round > 0 ? `Breath ${p.round} of ${roundsN}` :
+    p.round === 0 ? 'Getting ready' :
+    p.type === 'release' ? 'Letting go' : 'Last breath');
+  pBar.style.width = (100 * Math.min(1, total ? elapsed / total : 1)).toFixed(2) + '%';
+}
+
+function setStatus(t) { setText(statusEl, t); }
+
+function render() {
+  const view = mode === 'setup' ? 'setup' : mode === 'done' ? 'done' : 'session';
+  app.dataset.view = view;
+  app.classList.toggle('is-releasing', mode === 'releasing');
+  $('#masthead').hidden = view !== 'setup';
+  $('#setup').hidden = view !== 'setup';
+  $('#foot').hidden = view !== 'setup';
+  $('#sessionbar').hidden = view === 'setup';
+  $('#stitle').hidden = view === 'setup';
+  $('#session').hidden = view !== 'session';
+  $('#done').hidden = view !== 'done';
+  const txt = { running: 'Pause', paused: 'Resume', letgo: 'Let go', releasing: 'Let go' }[mode];
+  if (txt) setText(mainBtn, txt);
+  mainBtn.disabled = mode === 'releasing';
+  endBtn.hidden = mode !== 'paused';
+  $('#stageWrap').classList.toggle('tappable', mode === 'letgo');
+  renderCues();
+}
+
+function start(id) {
+  const t = byId[id];
+  if (!t) return;
+  current = t;
+  ensureAudio();
+  build(t);
+  idx = 0; phaseEl = 0; releaseProg = 0;
+  mode = 'running';
+  setText($('#sMoment'), t.moment);
+  setText($('#sName'), t.name);
+  setStatus('');
+  render();
+  window.scrollTo(0, 0);
+  phaseStart = performance.now();
+  enter(0);
+  updateReadout();
+  lockScreen();
+  try { mainBtn.focus({ preventScroll: true }); } catch (e) {}
+}
+
+function pause(screenOff) {
+  if (mode !== 'running') return;
+  phaseEl = (performance.now() - phaseStart) / 1000;
+  mode = 'paused';
+  stopDrone();
+  cancelSpeech();
+  unlockScreen();
+  setStatus(screenOff ? 'Paused while your screen was off.' : 'Paused.');
+  render();
+}
+
+function resume() {
+  if (mode !== 'paused') return;
+  ensureAudio();
+  mode = 'running';
+  phaseStart = performance.now() - phaseEl * 1000;
+  setStatus('');
+  const p = seq[idx];
+  if (p.type === 'hum' && state.cues.chime) drone(p.s - phaseEl);
+  if (state.cues.voice) speak(p.sayShort || p.say);
+  render();
+  lockScreen();
+}
+
+function letGo(auto) {
+  if (mode !== 'letgo') return;
+  idx++;
+  seq[idx].auto = !!auto;
+  mode = 'releasing';
+  phaseStart = performance.now();
+  phaseEl = 0;
+  releaseProg = 0;
+  enter(idx);
+}
+
+function finish() {
+  mode = 'done';
+  stopDrone();
+  unlockScreen();
+  const w = state.word.trim();
+  setText($('#doneSub'), w
+    ? `“${w}” floated off, for now. Breathe like this anytime.`
+    : 'Breathe like this anytime. New word, new balloon.');
+  wordInput.value = '';
+  setWord('');
+  setStatus('');
+  render();
+  try { $('#againBtn').focus({ preventScroll: true }); } catch (e) {}
+}
+
+function newBalloon() {
+  releaseProg = 0;
+  fullness = 0.15;
+  arriveStart = performance.now();
+}
+
+function goHome() {
+  if (mode === 'releasing') { wordInput.value = ''; setWord(''); }
+  if (mode === 'done' || mode === 'releasing') newBalloon();
+  stopDrone();
+  cancelSpeech();
+  unlockScreen();
+  mode = 'setup';
+  seq = []; idx = 0; phaseEl = 0;
+  setStatus('');
+  render();
+  window.scrollTo(0, 0);
+}
+
+function mainAction() {
+  if (mode === 'running') pause(false);
+  else if (mode === 'paused') resume();
+  else if (mode === 'letgo') letGo(false);
+}
+
+/* ---------- drawing ---------- */
+let lastNow = performance.now();
+function draw(now) {
+  const dt = Math.min(0.1, Math.max(0, (now - lastNow) / 1000));
+  lastNow = now;
+  const t = now / 1000, TAU = Math.PI * 2;
+  if (mode === 'setup') fullness += (REST - fullness) * (1 - Math.exp(-dt * 2.2));
+  let s = EMPTY + (FULL - EMPTY) * fullness;
+  let dx = 0, dy = 0, rot = 0, op = 1, sway = 0;
+  const p = seq[idx];
+  if (!reduced) {
+    dy += 2.5 * Math.sin(t * TAU / 6);
+    dx += 1.5 * Math.sin(t * TAU / 9);
+    rot += 0.8 * Math.sin(t * TAU / 7.5);
+    sway = 5 * Math.sin(t * 0.9);
+    if (mode === 'letgo') {
+      rot += 2.2 * Math.sin(t * TAU / 2.3);
+      dy += -4 + 2 * Math.sin(t * TAU / 1.7);
+      sway += 4 * Math.sin(t * 2.7);
+    }
+    if (mode === 'running' && p && p.type === 'hum') {
+      s *= 1 + 0.006 * Math.sin(t * TAU * 9);
+      rot += 0.5 * Math.sin(t * TAU * 6);
+    }
+  }
+  if (arriveStart != null) {
+    const a = Math.min(1, Math.max(0, (now - arriveStart) / 1100));
+    const e = 1 - Math.pow(1 - a, 3);
+    if (!reduced) dy += 150 * (1 - e);
+    op *= Math.min(1, a / 0.35);
+    if (a >= 1) arriveStart = null;
+  }
+  if (mode === 'releasing' || mode === 'done') {
+    // a slow rise that fades out before it can drift over the title or controls
+    const rp = mode === 'done' ? 1 : releaseProg;
+    const fade = Math.min(1, Math.max(0, (rp - 0.25) / 0.7));
+    op *= 1 - fade * fade * (3 - 2 * fade);
+    if (!reduced) {
+      const e = Math.pow(rp, 1.4);
+      dy -= 130 * e;
+      dx += 18 * Math.sin(rp * Math.PI * 1.2);
+      rot += 6 * rp;
+      s *= 1 - 0.25 * e;
+      sway += 8 * rp;
+    }
+  }
+  gScale.setAttribute('transform', `translate(${KX} ${KY}) scale(${s.toFixed(4)}) translate(${-KX} ${-KY})`);
+  gFloat.setAttribute('transform', `translate(${dx.toFixed(2)} ${dy.toFixed(2)}) rotate(${rot.toFixed(2)} ${KX} ${KY})`);
+  gFloat.style.opacity = op.toFixed(3);
+  const y0 = KY + 10 * s;
+  stringEl.setAttribute('d',
+    `M${KX} ${y0.toFixed(2)} C${(KX + sway * 0.4).toFixed(2)} ${(y0 + 30).toFixed(2)} ${(KX - sway * 0.6).toFixed(2)} ${(y0 + 62).toFixed(2)} ${(KX + sway).toFixed(2)} 298`);
+  haloEl.setAttribute('opacity', (0.35 + 0.65 * fullness).toFixed(3));
+}
+
+function loop(now) {
+  if (mode === 'running' || mode === 'letgo' || mode === 'releasing') advance(now);
+  if (mode === 'running' || mode === 'paused' || mode === 'letgo' || mode === 'releasing') updateReadout();
+  draw(now);
+  requestAnimationFrame(loop);
+}
+
+/* ---------- events ---------- */
+$('#moments').addEventListener('click', e => {
+  const li = e.target.closest('.m');
+  if (!li) return;
+  const t = byId[li.dataset.id];
+  const head = e.target.closest('.m-head');
+  if (head) { openTech(t.id, { toggle: true, anchor: head }); return; }
+  const lb = e.target.closest('[data-len] button');
+  if (lb) { state.len[t.id] = +lb.dataset.k; updateTech(t); return; }
+  const hb = e.target.closest('[data-holds] button');
+  if (hb) { state.holds[t.id] = hb.dataset.v === 'on'; updateTech(t); return; }
+  if (e.target.closest('[data-start]')) start(t.id);
+});
+
+document.addEventListener('click', e => {
+  const c = e.target.closest('.cue');
+  if (c) { toggleCue(c.dataset.cue); return; }
+  if (mode === 'letgo' && !e.target.closest('.back, #endBtn')) letGo(false);
+});
+
+mainBtn.addEventListener('click', mainAction);
+endBtn.addEventListener('click', goHome);
+$('#backBtn').addEventListener('click', goHome);
+$('#againBtn').addEventListener('click', () => { newBalloon(); start(current.id); });
+$('#homeBtn').addEventListener('click', goHome);
+
+wordInput.addEventListener('input', () => setWord(wordInput.value));
+wordInput.addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); wordInput.blur(); } });
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape' && mode !== 'setup') { e.preventDefault(); goHome(); return; }
+  const tgt = e.target;
+  if (tgt && tgt.closest && tgt.closest('input, textarea, select, button, summary, a')) return;
+  if ((e.key === ' ' || e.code === 'Space') && (mode === 'running' || mode === 'paused' || mode === 'letgo')) {
+    e.preventDefault();
+    mainAction();
+  }
+});
+
+document.addEventListener('visibilitychange', () => {
+  if (document.hidden) { if (mode === 'running') pause(true); }
+  else if (wantsWake()) lockScreen();
+});
+
+window.addEventListener('hashchange', () => {
+  const h = decodeURIComponent(location.hash.slice(1));
+  if (byId[h] && mode === 'setup') {
+    openTech(h);
+    $('#m-' + h).scrollIntoView({ block: 'start' });
+  }
+});
+
+/* ---------- boot ---------- */
+renderList();
+$$('[data-cues]').forEach(el => { el.innerHTML = cueChipsHTML(); });
+TECH.forEach(updateTech);
+renderCues();
+setWord('');
+const fromHash = decodeURIComponent(location.hash.slice(1));
+const last = store.get('rba-last', null);
+const initial = byId[fromHash] ? fromHash : (byId[last] ? last : 'belly');
+openTech(initial);
+render();
+if (byId[fromHash]) requestAnimationFrame(() => $('#m-' + fromHash).scrollIntoView({ block: 'start' }));
+requestAnimationFrame(loop);
+})();
+</script>
+
+<aside id="gsc-next" style="margin:40px auto 0;max-width:780px;padding:20px 16px 28px;font:500 16px/1.5 'Work Sans',-apple-system,'Segoe UI',sans-serif;color:#14213D;background:#D5F9DE;border-top:2px dashed rgba(20,33,61,.3);display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between"><span>Want word when something new opens, or to book us?</span><span style="display:flex;flex-wrap:wrap;gap:8px"><a href="https://tally.so/r/je6qB4?interest=root-breath-atlas&amp;source=page" style="display:inline-block;padding:10px 18px;border-radius:999px;background:#14213D;color:#F5B700;text-decoration:none;font-weight:600">Join the email list</a><a href="../catalog/" style="display:inline-block;padding:10px 18px;border-radius:999px;border:1.5px solid #14213D;color:#14213D;text-decoration:none;font-weight:600">See everything we offer</a></span></aside>
+</body></html>
