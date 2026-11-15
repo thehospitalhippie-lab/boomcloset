@@ -844,7 +844,7 @@
   .form-status{font-size:var(--fs-sm); margin-top:10px;}
   .form-status:empty{display:none;}
 
-  /* ===== The Talk Starter Deck ===== */
+  /* ===== Know It, Own It, Say No deck ===== */
   .tag--ink{background:var(--ink); color:var(--mint);}
   .tag--free{background:var(--amber); color:var(--ink);}
   .ticket--kit{--stub:var(--amber);}
@@ -855,7 +855,8 @@
   .section-deck{padding:var(--section-y) 0 var(--space-8); border-top:var(--bw-hair) solid var(--line);}
   .section-deck .lede{max-width:52ch; margin-bottom:var(--space-2);}
   .suit-row{list-style:none; margin:var(--space-6) 0 var(--space-7); padding:0; display:grid; grid-template-columns:repeat(2, 1fr); gap:var(--space-4);}
-  @media (min-width:720px){ .suit-row{grid-template-columns:repeat(4, 1fr);} }
+  @media (min-width:600px){ .suit-row{grid-template-columns:repeat(3, 1fr);} }
+  @media (min-width:960px){ .suit-row{grid-template-columns:repeat(5, 1fr);} }
   .talk-card-sample{
     display:flex; flex-direction:column; min-height:220px;
     background:var(--white); color:var(--ink);
@@ -867,6 +868,7 @@
   .talk-card-sample:nth-child(2){transform:rotate(1.5deg) translateY(6px);}
   .talk-card-sample:nth-child(3){transform:rotate(-1deg);}
   .talk-card-sample:nth-child(4){transform:rotate(2deg) translateY(4px);}
+  .talk-card-sample:nth-child(5){transform:rotate(-1.5deg) translateY(2px);}
   .talk-card-sample:hover{transform:rotate(0deg) scale(1.03);}
   .suit-band{display:block; padding:10px 14px; background:var(--suit); color:var(--suit-fg, var(--ink));}
   .suit-name{font-family:var(--font-mono); font-size:var(--fs-xs); letter-spacing:.08em;}
@@ -876,6 +878,7 @@
   .talk-card-sample--water{--suit:var(--blue);}
   .talk-card-sample--fire{--suit:var(--brick); --suit-fg:var(--white);}
   .talk-card-sample--air{--suit:var(--aqua);}
+  .talk-card-sample--star{--suit:var(--rouge);}
   .talk-card-sample[role="button"]{cursor:zoom-in;}
   .talk-card-sample:focus-visible{outline:3px solid var(--focus); outline-offset:4px;}
   .talk-card-sample{position:relative;}
@@ -1153,12 +1156,12 @@
           <div class="accordion-panel" id="kitMore" aria-hidden="true">
             <p>Answer a few quick questions on your phone and get a one-page summary to show your doctor: when it started, what it's stopping you from doing, and the one thing you need today.</p>
             <p>It also gives you calm, word-for-word replies for the classic brush-offs, and a buddy card for the person coming with you. Your answers stay on your phone.</p>
-            <p class="ticket-next">Once you're heard about your health, the next talk is about your wishes. <a href="#deck">That's what The Talk Starter Deck is for &rarr;</a></p>
+            <p class="ticket-next">Once you're heard about your health, the next talk is about your wishes. <a href="#deck">That's what the Know It, Own It, Say No deck is for &rarr;</a></p>
           <div class="panel-funnel"><p class="panel-funnel__lead">Free. No sign-up. About 5 minutes.</p><div class="panel-funnel__actions"><a class="btn btn--primary" href="take-me-seriously-kit/" >Get the free kit</a><a class="btn btn--outline" href="kit-n-kaboodle/" >See what's inside</a></div><button type="button" class="panel-close js-close-panel" aria-label="Close this section">Close <span aria-hidden="true">&times;</span></button></div></div>
         </div>
       </article>
 
-      <!-- 0. The Talk Starter Deck -->
+      <!-- 0. Know It, Own It, Say No deck -->
       <article class="ticket ticket--deck">
         <div class="ticket-stub" aria-hidden="true">
           <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
@@ -1169,15 +1172,15 @@
         </div>
         <div class="ticket-body">
           <span class="tag tag--ink">PRE-ORDER</span>
-          <h3 class="title title--card">The Talk Starter Deck</h3>
-          <p class="script script--sm">Know it. Own it. Say no.</p>
+          <h3 class="title title--card">Know It, Own It, Say No</h3>
+          <p class="script script--sm">The question deck for The Talk.</p>
           <p class="ticket-audience">For anyone ready to start The Talk at home</p>
           <div class="ticket-actions">
-            <button class="accordion-toggle" type="button" aria-expanded="false" aria-controls="deckMore" aria-label="More about The Talk Starter Deck"><span class="accordion-bar accordion-bar--h"></span><span class="accordion-bar accordion-bar--v"></span></button>
-            <a class="btn btn--outline js-deck" href="#deck" aria-label="Pre-order: The Talk Starter Deck">Pre-order</a>
+            <button class="accordion-toggle" type="button" aria-expanded="false" aria-controls="deckMore" aria-label="More about the Know It, Own It, Say No deck"><span class="accordion-bar accordion-bar--h"></span><span class="accordion-bar accordion-bar--v"></span></button>
+            <a class="btn btn--outline js-deck" href="#deck" aria-label="Pre-order: Know It, Own It, Say No">Pre-order</a>
           </div>
           <div class="accordion-panel" id="deckMore" aria-hidden="true">
-            <p>Fifteen hand-painted, handwritten question cards in four element suits: Earth, Water, Fire and Air. Draw one when you're ready to listen deeply, laugh gently, or lean into life's mysteries.</p>
+            <p>Fifteen hand-painted, handwritten question cards in five suits of three: Earth, Water, Fire, Air and Star. Draw one when you're ready to listen deeply, laugh gently, or lean into life's mysteries.</p>
             <p>Answer for yourself, ask someone else, or just sit with it. Small enough to actually use: try one suit a night.</p>
             <p class="script script--sm">For hospital rooms, family dinners, street retreats, grief circles and porch swings.</p>
           <div class="panel-funnel"><p class="panel-funnel__lead">Save your deck now. Pay when it ships.</p><div class="panel-funnel__actions"><a class="btn btn--primary js-deck" href="#deck" >Pre-order my deck</a><button type="button" class="btn btn--outline js-reserve" >Or book a session</button></div><button type="button" class="panel-close js-close-panel" aria-label="Close this section">Close <span aria-hidden="true">&times;</span></button></div></div>
@@ -1379,7 +1382,7 @@
         <div class="accordion-panel" id="lighterMore" aria-hidden="true">
           <p>Start lighter. A sound bath, a comedy night about life and death, or a talk on what the dying process actually looks like.</p>
           <p class="flavor">No forced sharing anywhere. Showing up counts.</p>
-          <p class="talk-links"><a href="take-me-seriously-kit/" target="_blank" rel="noopener">Start with the free Take Me Seriously Kit</a> · <a href="#deck">Then The Talk Starter Deck</a></p>
+          <p class="talk-links"><a href="take-me-seriously-kit/" target="_blank" rel="noopener">Start with the free Take Me Seriously Kit</a> · <a href="#deck">Then the Know It, Own It, Say No deck</a></p>
         <div class="panel-funnel"><p class="panel-funnel__lead">Want to try a lighter event?</p><div class="panel-funnel__actions"><button type="button" class="btn btn--outline js-book" data-program="Event or festival">Ask about lighter events</button></div><button type="button" class="panel-close js-close-panel" aria-label="Close this section">Close <span aria-hidden="true">&times;</span></button></div></div>
       </div>
     </div>
@@ -1489,34 +1492,39 @@
   </div>
 </section>
 
-<!-- THE TALK STARTER DECK: pre-order email funnel -->
+<!-- KNOW IT, OWN IT, SAY NO deck: pre-order email funnel -->
 <section class="section-deck" id="deck" aria-labelledby="deckHeading">
   <div class="wrap">
     <p class="eyebrow">NOT READY TO BOOK? START HERE.</p>
-    <h2 class="title" id="deckHeading" tabindex="-1">The Talk Starter Deck</h2>
+    <h2 class="title" id="deckHeading" tabindex="-1">Know It, Own It, Say No</h2>
     <p class="lede">Fifteen hand-painted, handwritten question cards to help you start The Talk — at the kitchen table, the bedside, or the porch swing.</p>
-    <p class="script">Know it. Own it. Say no.</p>
+    <p class="script">Your wishes. Your choices. Your voice.</p>
 
-    <ul class="suit-row" aria-label="One sample card from each of the four suits">
+    <ul class="suit-row" aria-label="One sample card from each of the five suits">
         <li class="talk-card-sample talk-card-sample--earth">
           <span class="suit-band"><span class="suit-name">EARTH</span></span>
           <span class="suit-sub">Wave away the Forest of Folded Arms</span>
-          <span class="suit-q">What part of your body do you need to say thank you to — before it quits on you?</span>
+          <span class="suit-q">Where in your body do you feel a need to say “thank you” — before asking more from it?</span>
         </li>
         <li class="talk-card-sample talk-card-sample--water">
           <span class="suit-band"><span class="suit-name">WATER</span></span>
           <span class="suit-sub">Doggy-paddle through the Ocean of Emotion</span>
-          <span class="suit-q">If you had a funeral while you were still alive, what would you want it to feel like?</span>
+          <span class="suit-q">Who taught you how to grieve, and who in your family still needs permission to cry?</span>
         </li>
         <li class="talk-card-sample talk-card-sample--fire">
           <span class="suit-band"><span class="suit-name">FIRE</span></span>
           <span class="suit-sub">All aboard the Hot Mess Express</span>
-          <span class="suit-q">What's the difference between being alive and feeling alive?</span>
+          <span class="suit-q">If you had a funeral while you were still alive, how would you want it to feel?</span>
         </li>
         <li class="talk-card-sample talk-card-sample--air">
           <span class="suit-band"><span class="suit-name">AIR</span></span>
           <span class="suit-sub">Air all grievances in grace</span>
-          <span class="suit-q">Is there something unspoken you want to say to someone you love before you — or they — go?</span>
+          <span class="suit-q">If someone had to speak for your soul, how would they know what to say?</span>
+        </li>
+        <li class="talk-card-sample talk-card-sample--star">
+          <span class="suit-band"><span class="suit-name">STAR</span></span>
+          <span class="suit-sub">Wish upon the wonder</span>
+          <span class="suit-q">What’s the difference between being alive and feeling alive?</span>
         </li>
     </ul>
 
@@ -2047,7 +2055,7 @@
     document.getElementById('requestHeading').focus({preventScroll:true});
   });
 
-  /* ----- The Talk Starter Deck: pre-order email funnel (preview) ----- */
+  /* ----- Know It, Own It, Say No deck: pre-order email funnel (preview) ----- */
   const deckSection = document.getElementById('deck');
   const deckForm = document.getElementById('deckForm');
   const dName = document.getElementById('dName');
@@ -2083,7 +2091,7 @@
     document.getElementById('deckThanksHeading').textContent = name ? "You're on the list, " + name + "." : "You're on the list.";
     const what = qty === '1' ? 'your deck' : qty === '2' ? 'your 2 decks' : 'your decks (and group pricing)';
     document.getElementById('deckThanksText').textContent =
-      "We've saved " + what + ". When The Talk Starter Deck is ready to ship, we'll email " + email +
+      "We've saved " + what + ". When Know It, Own It, Say No is ready to ship, we'll email " + email +
       " a link to finish your order." + (extras.length ? " We'll also write " + (extras.length > 1 ? extras.slice(0,-1).join(', ') + ' and ' + extras[extras.length-1] : extras[0]) + "." : '');
     const deckBtn = document.getElementById('deckBtn');
     deckBtn.disabled = true; deckHint.textContent = 'Saving your spot…';
@@ -2243,7 +2251,7 @@
 </script>
 
 <script>
-/* Talk Starter Deck: tap a sample card to read it large (same viewer style as the gallery) */
+/* Know It, Own It, Say No deck: tap a sample card to read it large (same viewer style as the gallery) */
 (function(){
   const cards = Array.from(document.querySelectorAll('.suit-row .talk-card-sample'));
   if(!cards.length || !window.HTMLDialogElement) return;
