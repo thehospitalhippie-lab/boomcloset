@@ -4,6 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Golden Soul Circus Catalog</title>
+<link rel="icon" href="https://goldensoulcircus.org/favicon.ico" sizes="32x32">
+<link rel="icon" href="https://goldensoulcircus.org/assets/gsc-logo.webp" type="image/webp">
 <meta name="description" content="Every Golden Soul Circus offering in one place: ceremonies, talks, festivals, advocacy tools, decks, courses and ways to help. Hospice nurses making palliative care more palatable.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -155,7 +157,10 @@ code{font-family:var(--f-mono); font-size:.85em}
 .sitebar{position:sticky; top:0; z-index:20; background:var(--page); border-bottom:1.5px solid var(--line)}
 .sitebar .wrap{display:flex; align-items:center; justify-content:space-between; gap:12px; min-height:60px}
 .sitebar-brand{font-family:var(--f-display); font-weight:600; font-size:1.15rem; color:var(--ink); text-decoration:none; display:inline-flex; align-items:center; min-height:44px}
-.sitebar-brand span{color:var(--rouge-deep)}
+.sitebar-brand{gap:10px}
+.sitebar-brand .brand-text span{color:var(--rouge-deep)}
+.sitebar-logo{width:40px; height:40px; flex:none; border-radius:50%; object-fit:cover; box-shadow:0 0 0 2px var(--amber); background:#fff}
+.band-logo{display:block; width:104px; height:auto; margin:22px 0 10px; border-radius:16px; box-shadow:0 0 0 3px var(--amber); transform:rotate(-2deg)}
 .sitebar-brand:hover{text-decoration:underline; text-underline-offset:4px}
 .sitebar-home{min-height:44px}
 .cat, .offer{scroll-margin-top:72px}
@@ -167,7 +172,7 @@ code{font-family:var(--f-mono); font-size:.85em}
 
 <nav class="sitebar" aria-label="Site">
   <div class="wrap">
-    <a class="sitebar-brand" href="https://goldensoulcircus.org/">Golden Soul&nbsp;<span>Circus</span></a>
+    <a class="sitebar-brand" href="https://goldensoulcircus.org/"><img class="sitebar-logo" src="https://goldensoulcircus.org/assets/gsc-logo.webp" alt="" width="40" height="40"><span class="brand-text">Golden Soul&nbsp;<span>Circus</span></span></a>
     <a class="btn btn--outline btn--sm sitebar-home" href="https://goldensoulcircus.org/"><span aria-hidden="true">←</span>&nbsp;Home</a>
   </div>
 </nav>
@@ -203,6 +208,7 @@ code{font-family:var(--f-mono); font-size:.85em}
     <p>Pick the offerings you care about and we'll send word when they open. No sales-pitch blasts, and you can leave anytime.</p>
     <a class="btn btn--primary" id="bandList" href="#">Join the list</a>
     <p class="fine">Golden Soul Circus is a Tennessee nonprofit in formation; gifts aren't tax-deductible until our 501(c)(3) is approved. Our offerings are education, ceremony and play, not medical or legal advice, and we don't practice under our nursing licenses in them. If you're in crisis, call or text 988.</p>
+    <img class="band-logo" src="https://goldensoulcircus.org/assets/gsc-logo.webp" alt="Golden Soul Circus, Inc. logo: a gold crescent ring over a hand-painted swirl of blue, green, orange and purple" width="104" height="116" loading="lazy">
     <p class="wordmark">Golden Soul Circus · Nashville</p>
     <p><a class="homelink" href="https://goldensoulcircus.org/">← Back to the home page</a></p>
   </div>
