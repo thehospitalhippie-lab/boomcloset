@@ -501,6 +501,22 @@
   .wordmark-logo{width:40px; height:40px; flex:none; border-radius:50%; object-fit:cover; object-position:50% 50%; box-shadow:0 0 0 2px var(--amber, #F5B700); background:#fff;}
   .footer-logo{display:block; width:120px; height:auto; margin:0 auto 14px; border-radius:18px; box-shadow:0 0 0 3px var(--amber, #F5B700), 0 6px 18px rgba(20,33,61,.18); transform:rotate(-2deg);}
   @media (prefers-reduced-motion:no-preference){ .footer-logo{transition:transform .3s ease;} .footer-logo:hover{transform:rotate(2deg) scale(1.03);} }
+  .swl{padding:56px 16px}
+  .swl-card{position:relative; max-width:760px; margin:0 auto; background:#FFF8E4; color:#14213D; border:3px solid #14213D; border-radius:18px; box-shadow:8px 8px 0 #F5B700; padding:30px 28px 26px; transform:rotate(-.6deg)}
+  .swl-card::before{content:""; position:absolute; inset:9px; border:2px dashed rgba(20,33,61,.35); border-radius:11px; pointer-events:none}
+  .swl-mast{display:flex; align-items:center; justify-content:center; gap:10px; margin:0 0 6px; font-family:"IBM Plex Mono", ui-monospace, monospace; font-size:.78rem; letter-spacing:.14em; text-transform:uppercase; color:#14213D}
+  .swl-mast span[aria-hidden]{color:#B02E5E}
+  .swl-title{font-family:Fraunces, Georgia, serif; font-style:italic; font-weight:600; font-size:clamp(2.1rem,6vw,3.3rem); line-height:1.05; text-align:center; margin:0; padding:10px 0 12px; border-top:3px double #14213D; border-bottom:3px double #14213D; color:#14213D}
+  .swl-tag{font-family:Caveat, cursive; font-size:1.5rem; line-height:1.2; text-align:center; color:#B02E5E; margin:12px 0 6px}
+  .swl-copy{font-family:"Work Sans", system-ui, sans-serif; font-size:1rem; line-height:1.55; text-align:center; max-width:52ch; margin:0 auto 18px; color:#14213D}
+  .swl-act{display:flex; flex-wrap:wrap; justify-content:center; align-items:center; gap:12px}
+  .swl-btn{display:inline-flex; align-items:center; justify-content:center; min-height:48px; padding:12px 24px; border-radius:999px; background:#14213D; color:#F5B700; font:600 1rem/1.2 "Work Sans", system-ui, sans-serif; text-decoration:none; border:2px solid #14213D}
+  .swl-btn:hover{background:#B02E5E; border-color:#B02E5E; color:#fff}
+  .swl-btn:focus-visible{outline:3px solid #B02E5E; outline-offset:3px}
+  .swl-fine{font-family:"Work Sans", system-ui, sans-serif; font-size:.85rem; color:#3A4560; margin:0}
+  .swl-stamp{position:absolute; top:-18px; right:-10px; width:92px; height:92px; border-radius:50%; background:#B02E5E; color:#fff; display:grid; place-items:center; text-align:center; font:700 .72rem/1.15 "IBM Plex Mono", ui-monospace, monospace; letter-spacing:.06em; text-transform:uppercase; transform:rotate(12deg); box-shadow:0 0 0 3px #FFF8E4, 0 0 0 5px #B02E5E}
+  @media (max-width:520px){.swl-card{padding:40px 18px 22px} .swl-stamp{width:66px; height:66px; font-size:.58rem; top:-34px; right:-4px} .swl-mast{letter-spacing:.08em} .swl-fine{text-align:center}}
+  @media (prefers-reduced-motion:no-preference){.swl-card{transition:transform .3s ease} .swl-card:hover{transform:rotate(0deg)}}
   .site-tabs{display:flex; align-items:center; gap:var(--space-1); margin-left:auto;}
   #topReserve{gap:0;}
   .tab{
@@ -1292,6 +1308,21 @@
         </div>
       </article>
 
+    </div>
+  </div>
+</section>
+
+<!-- THE SWAGGER TRAIL NEWSLETTER -->
+<section class="swl" aria-labelledby="swlTitle">
+  <div class="swl-card">
+    <span class="swl-stamp" aria-hidden="true">Extra!<br>Extra!</span>
+    <p class="swl-mast"><span aria-hidden="true">★</span> Q Word Out Loud presents <span aria-hidden="true">★</span></p>
+    <h2 class="swl-title" id="swlTitle">The Swagger Trail</h2>
+    <p class="swl-tag">Change your walk, change your life.</p>
+    <p class="swl-copy">A traveling-circus newsletter from the Hospital Hippie. One body part at a time, head to toe, we swap the hospital shuffle for a little swagger: sacred, silly and straight to your inbox.</p>
+    <div class="swl-act">
+      <a class="swl-btn" href="https://tally.so/r/je6qB4?interest=swagger-trail-letter&amp;source=home">Get the next letter</a>
+      <p class="swl-fine">Part of the Q Word Out Loud family. Leave anytime.</p>
     </div>
   </div>
 </section>
