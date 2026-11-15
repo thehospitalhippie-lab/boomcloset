@@ -17,6 +17,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="color-scheme" content="light dark">
 <title>Golden Soul Circus — We're all nurses, just some of us are registered</title>
+<link rel="icon" href="favicon.ico" sizes="32x32">
+<link rel="icon" href="assets/gsc-logo.webp" type="image/webp">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,500;0,600;1,500;1,600&family=Work+Sans:wght@400;500;600&family=Caveat:wght@500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -494,6 +496,11 @@
   /* ===== Site tabs (top right) ===== */
   .topbar{flex-wrap:wrap;}
   .wordmark{text-decoration:none; display:inline-block; line-height:24px; padding-block:10px;}
+  .wordmark{display:inline-flex; align-items:center; gap:10px; padding-block:2px;}
+  .wordmark .wordmark-text{color:inherit;}
+  .wordmark-logo{width:40px; height:40px; flex:none; border-radius:50%; object-fit:cover; object-position:50% 50%; box-shadow:0 0 0 2px var(--amber, #F5B700); background:#fff;}
+  .footer-logo{display:block; width:120px; height:auto; margin:0 auto 14px; border-radius:18px; box-shadow:0 0 0 3px var(--amber, #F5B700), 0 6px 18px rgba(20,33,61,.18); transform:rotate(-2deg);}
+  @media (prefers-reduced-motion:no-preference){ .footer-logo{transition:transform .3s ease;} .footer-logo:hover{transform:rotate(2deg) scale(1.03);} }
   .site-tabs{display:flex; align-items:center; gap:var(--space-1); margin-left:auto;}
   #topReserve{gap:0;}
   .tab{
@@ -919,7 +926,7 @@
 <a class="btn btn--primary skip-link" href="#book">Skip to booking</a>
 
 <header class="topbar">
-  <a class="wordmark" href="#home">Golden Soul <span>Circus</span></a>
+  <a class="wordmark" href="#home"><img class="wordmark-logo" src="assets/gsc-logo.webp" alt="" width="40" height="40"><span class="wordmark-text">Golden Soul <span>Circus</span></span></a>
   <nav class="site-tabs" aria-label="Pages">
     <a class="tab" href="#home" data-route="home">Home</a>
     <a class="tab" href="#about" data-route="about">About</a>
@@ -1714,6 +1721,7 @@
 <footer>
   <div class="wrap">
     <div class="cup-dots" aria-hidden="true"><span></span><span></span><span></span></div>
+    <img class="footer-logo" src="assets/gsc-logo.webp" alt="Golden Soul Circus, Inc. logo: a gold crescent ring over a hand-painted swirl of blue, green, orange and purple" width="120" height="134" loading="lazy">
     <div class="footer-wordmark">Golden Soul Circus</div>
     <nav class="footer-nav" aria-label="Footer">
       <a href="#home">Home</a><a href="#about">About</a><a href="#mission">Mission</a><a href="#supporters">Donors &amp; Sponsors</a><a href="#gallery">Gallery</a><a href="catalog/">Catalog</a>
