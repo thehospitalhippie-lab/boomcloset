@@ -49,7 +49,6 @@ about the offer. Any outside fact needs a linked source. No medical, legal or gr
 
 ### Guide backlog (take the top one, then delete it from this list)
 
-- mock-funeral-retirement-party — A funeral for your job title: a retirement party twist
 - team-offsite-mock-funeral — A team offsite activity nobody's done: the mock funeral
 - mock-funeral-bachelorette — Saying goodbye to single life, literally
 - what-to-say-at-a-mock-funeral — What to say when it's your turn to toast or roast
